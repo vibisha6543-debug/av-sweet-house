@@ -1,0 +1,298 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wishlist - AV Sweet House</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #fff7fb;
+    }
+
+    /* HEADER */
+    header {
+      background: white;
+      padding: 15px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 700;
+      color: #d63384;
+    }
+
+    /* TITLE */
+    .title {
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    .title h1 {
+      font-size: 40px;
+      color: #d63384;
+    }
+
+    .title p {
+      color: #666;
+      margin-top: 5px;
+    }
+
+    /* CARD */
+    .container {
+      padding: 0 8% 60px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      gap: 20px;
+      padding: 18px;
+      align-items: center;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+      transition: 0.3s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* IMAGE */
+    .card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    /* BADGE */
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: #d63384;
+      color: white;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* INFO */
+    .info {
+      flex: 1;
+    }
+
+    .info h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 600;
+      color: #d63384;
+      margin-bottom: 10px;
+    }
+
+    /* CONTROLS */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    select {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      outline: none;
+    }
+
+    .btn {
+      background: #d63384;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 14px;
+    }
+
+    .btn:hover {
+      background: #b91c68;
+    }
+
+    .remove {
+      background: transparent;
+      border: 1px solid #ccc;
+      color: #555;
+    }
+
+    .remove:hover {
+      border-color: red;
+      color: red;
+    }
+
+    /* SUMMARY */
+    .summary {
+      margin: 20px 8% 50px;
+      background: white;
+      padding: 20px;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .summary h2 {
+      color: #d63384;
+    }
+
+    /* MOBILE */
+    @media(max-width:768px) {
+      .card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .card img {
+        width: 100%;
+        height: 220px;
+      }
+
+      .controls {
+        justify-content: center;
+      }
+
+      .summary {
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">AV Sweet House</div>
+    <a href="index.html">🏠 Home</a>
+  </header>
+
+  <!-- TITLE -->
+  <div class="title">
+    <h1>Your Sweet Wishlist</h1>
+    <p>Save your favorite treats for later</p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="container">
+
+    <!-- ITEM 1 -->
+    <div class="card">
+      <div class="badge">Popular</div>
+      <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587" />
+
+      <div class="info">
+        <h3>Black Forest Cake</h3>
+        <div class="price">₹ 650</div>
+
+        <div class="controls">
+          <select>
+            <option>0.5kg</option>
+            <option>1kg</option>
+            <option>2kg</option>
+          </select>
+
+          <button class="btn">Add to Cart</button>
+          <button class="btn remove">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM 2 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1587734361993-017b8f2a1a3b" />
+
+      <div class="info">
+        <h3>Red Velvet Cup Cake</h3>
+        <div class="price">₹ 89</div>
+
+        <div class="controls">
+          <select>
+            <option>1 Piece</option>
+            <option>2 Pieces</option>
+            <option>4 Pieces</option>
+          </select>
+
+          <button class="btn">Add to Cart</button>
+          <button class="btn remove">Remove All</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM 3 -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b" />
+
+      <div class="info">
+        <h3>Chocolate Shake</h3>
+        <div class="price">₹ 60</div>
+
+        <div class="controls">
+          <select>
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+          </select>
+
+          <button class="btn">Add to Cart</button>
+          <button class="btn remove">Remove</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <h2>Total: ₹ 588</h2>
+
+    <div>
+      <button class="btn">Move All To Cart</button>
+      <a href="empty wishlist.html" class="btn remove">
+  Remove All
+</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

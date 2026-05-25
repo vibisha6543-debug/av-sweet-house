@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Verified - AV Sweet House</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #fff0f6, #ffe4f1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .verified-box {
+      width: 100%;
+      max-width: 480px;
+      background: white;
+      border-radius: 25px;
+      padding: 45px 35px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      animation: popup 0.6s ease;
+    }
+
+    @keyframes popup {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      border-radius: 50%;
+      background: #e8fff0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 55px;
+      color: #28a745;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      color: #d63384;
+      margin-bottom: 12px;
+      font-size: 34px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 30px;
+      font-size: 15px;
+    }
+
+    .details {
+      background: #fff0f6;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 25px;
+    }
+
+    .details p {
+      margin: 5px 0;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      background: #d63384;
+      color: white;
+      padding: 14px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #b91c68;
+    }
+
+    .small-text {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #888;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="verified-box">
+
+    <!-- ICON -->
+    <div class="success-icon">
+      ✔
+    </div>
+
+    <!-- TITLE -->
+    <h1>Account Verified!</h1>
+
+    <!-- MESSAGE -->
+    <p>
+      Congratulations 🎉 Your AV Sweet House account
+      has been successfully verified ❤️
+    </p>
+
+    <!-- DETAILS -->
+    <div class="details">
+      <p><b>Status:</b> Verified Successfully</p>
+      <p><b>Welcome:</b> Sweet Lover 🍰</p>
+      <p><b>Access:</b> Full Website Features Enabled</p>
+    </div>
+
+    <!-- BUTTON -->
+    <a href="login.html" class="btn">
+      Continue To Login
+    </a>
+
+    <!-- FOOTER -->
+    <div class="small-text">
+      Thank you for joining AV Sweet House 💖
+    </div>
+
+  </div>
+
+</body>
+
+</html>

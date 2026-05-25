@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empty Wishlist - AV Sweet House</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #fff5f8, #fffafc);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .wishlist-box {
+      background: white;
+      width: 90%;
+      max-width: 500px;
+      padding: 50px 30px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      animation: fadeIn 1s ease;
+    }
+
+    .wishlist-box img {
+      width: 220px;
+      margin-bottom: 25px;
+    }
+
+    .wishlist-box h1 {
+      font-size: 34px;
+      color: #d63384;
+      margin-bottom: 15px;
+    }
+
+    .wishlist-box p {
+      color: #666;
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #d63384;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 35px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #b91c68;
+      transform: translateY(-3px);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media(max-width:600px) {
+      .wishlist-box {
+        padding: 40px 20px;
+      }
+
+      .wishlist-box h1 {
+        font-size: 28px;
+      }
+
+      .wishlist-box img {
+        width: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wishlist-box">
+
+    <img src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Empty Wishlist">
+
+    <h1>No Sweet Saved Yet 🍰</h1>
+
+    <p>
+      Your Future Cravings Are Waiting To Be Added !
+    </p>
+
+    <a href="index.html" class="btn">
+      Fill My Wishlist
+    </a>
+
+  </div>
+
+</body>
+
+</html>
