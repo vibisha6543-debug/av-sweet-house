@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Edit Product | AV Sweet House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f8;
+}
+
+.header{
+background:linear-gradient(135deg,#ff4d8d,#ff9ec6);
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+}
+
+.back-btn{
+text-decoration:none;
+background:white;
+color:#ff4d8d;
+padding:12px 20px;
+border-radius:30px;
+font-weight:600;
+}
+
+.container{
+max-width:700px;
+margin:50px auto;
+padding:30px;
+background:white;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.container h2{
+text-align:center;
+color:#ff4d8d;
+margin-bottom:25px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+input,
+select{
+width:100%;
+padding:14px;
+border:2px solid #eee;
+border-radius:12px;
+outline:none;
+}
+
+input:focus,
+select:focus{
+border-color:#ff4d8d;
+}
+
+.preview{
+text-align:center;
+margin-top:20px;
+}
+
+.preview img{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:20px;
+border:3px solid #ff4d8d;
+}
+
+.save-btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#ff4d8d;
+color:white;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+margin-top:20px;
+}
+
+.save-btn:hover{
+background:#ff2f78;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>✏️ Edit Product</h1>
+
+<a href="manage-products.html" class="back-btn">
+Back
+</a>
+
+</div>
+
+<div class="container">
+
+<h2>Update Product</h2>
+
+<div class="form-group">
+
+<label>Product Name</label>
+
+<input
+type="text"
+id="name">
+
+</div>
+
+<div class="form-group">
+
+<label>Price</label>
+
+<input
+type="number"
+id="price">
+
+</div>
+
+<div class="form-group">
+
+<label>Image URL</label>
+
+<input
+type="text"
+id="image"
+onkeyup="previewImage()">
+
+</div>
+
+<div class="form-group">
+
+<label>Category</label>
+
+<select id="category">
+
+<option>Cakes</option>
+<option>Birthday Cakes</option>
+<option>Anniversary Cakes</option>
+<option>Occasion Cakes</option>
+<option>Wedding Cakes</option>
+<option>Kids Cakes</option>
+<option>Cup Cakes</option>
+<option>Brownies</option>
+<option>Donuts</option>
+<option>Cheesecakes</option>
+<option>Macarons</option>
+<option>Pastries</option>
+<option>Cookies</option>
+<option>Chocolate Cakes</option>
+<option>Desserts</option>
+<option>Chocolates</option>
+<option>Dark Chocolates</option>
+<option>Milk Chocolates</option>
+<option>White Chocolates</option>
+<option>Nut Chocolates</option>
+<option>Gift Boxes</option>
+<option>Festival</option>
+<option>Juices</option>
+<option>Fresh Juices</option>
+<option>Milkshakes</option>
+<option>Smoothies</option>
+<option>Mocktails</option>
+<option>Cold Coffee</option>
+<option>Healthy Drinks</option>
+<option>Snacks</option>
+<option>Murukku</option>
+<option>Traditional Sweets</option>
+<option>Mixtures & Namkeen</option>
+<option>Biscuits</option>
+<option>Chips</option>
+<option>Evening Snacks</option>
+</select>
+
+</div>
+
+<div class="preview">
+
+<img id="previewImg">
+
+</div>
+
+<button
+class="save-btn"
+onclick="saveProduct()">
+
+💾 Save Changes
+
+</button>
+
+</div>
+
+<script>
+
+/* LOGIN CHECK */
+
+if(
+localStorage.getItem("adminLoggedIn")
+!== "true"
+){
+window.location.href =
+"admin-login.html";
+}
+
+/* LOAD PRODUCT */
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+let index =
+localStorage.getItem("editProductIndex");
+
+let product =
+products[index];
+
+document.getElementById("name").value =
+product.name;
+
+document.getElementById("price").value =
+product.price;
+
+document.getElementById("image").value =
+product.image;
+
+document.getElementById("category").value =
+product.category;
+
+document.getElementById("previewImg").src =
+product.image;
+
+/* PREVIEW */
+
+function previewImage(){
+
+document.getElementById("previewImg").src =
+document.getElementById("image").value;
+
+}
+
+/* SAVE */
+
+function saveProduct(){
+
+products[index] = {
+
+name:
+document.getElementById("name").value,
+
+price:
+Number(document.getElementById("price").value),
+
+image:
+document.getElementById("image").value,
+
+category:
+document.getElementById("category").value
+
+};
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+alert("Product Updated Successfully 🎉");
+
+window.location.href =
+"manage-products.html";
+
+}
+
+</script>
+
+</body>
+</html>

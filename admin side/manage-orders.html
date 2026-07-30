@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Manage Orders | Admin Panel</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f8;
+}
+
+.header{
+background:linear-gradient(135deg,#ff4d8d,#ff8fb3);
+padding:25px;
+color:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header h2{
+font-weight:700;
+}
+
+.logout-btn{
+background:white;
+color:#ff4d8d;
+padding:10px 20px;
+border-radius:30px;
+text-decoration:none;
+font-weight:600;
+}
+
+.container-box{
+padding:40px;
+}
+
+.order-card{
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
+
+.status{
+padding:8px 16px;
+border-radius:20px;
+font-size:14px;
+font-weight:600;
+display:inline-block;
+}
+
+.processing{
+background:#fff3cd;
+color:#856404;
+}
+
+.shipped{
+background:#d1ecf1;
+color:#0c5460;
+}
+
+.delivered{
+background:#d4edda;
+color:#155724;
+}
+
+.action-btn{
+margin-top:10px;
+}
+
+.empty-box{
+text-align:center;
+padding:80px;
+background:white;
+border-radius:20px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="header">
+
+<h2>📦 Manage Orders</h2>
+
+<a href="admin-login.html" class="logout-btn">
+Logout
+</a>
+
+</div>
+
+<div class="container container-box">
+
+<div id="ordersContainer"></div>
+
+</div>
+
+<script>
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let container =
+document.getElementById("ordersContainer");
+
+function loadOrders(){
+
+container.innerHTML = "";
+
+if(orders.length === 0){
+
+container.innerHTML = `
+<div class="empty-box">
+<h3>No Orders Found 📦</h3>
+<p>Customer orders will appear here.</p>
+</div>
+`;
+
+return;
+}
+
+orders.forEach((order,index)=>{
+
+if(!order.status){
+order.status = "Pending";
+}
+
+let statusClass = "";
+
+if(order.status === "Processing"){
+statusClass = "processing";
+}
+
+if(order.status === "Shipped"){
+statusClass = "shipped";
+}
+
+if(order.status === "Delivered"){
+statusClass = "delivered";
+}
+
+container.innerHTML += `
+
+<div class="order-card">
+
+<h4>${order.orderId}</h4>
+
+<p>
+
+<b>Customer :</b>
+
+${order.customerName ? order.customerName : "Guest Customer"}
+
+</p>
+
+<p>
+
+<b>Email :</b>
+
+${order.email ? order.email : "Not Available"}
+
+</p>
+
+<p>
+
+<b>Total :</b>
+
+₹${order.total ? order.total : (order.price * order.qty)}
+
+</p>
+
+<p>
+
+<b>Date :</b>
+
+${order.date}
+
+</p>
+
+<p>
+
+<b>Products :</b>
+
+${order.products ? order.products.length : 1}
+
+Items
+
+</p>
+
+<p>
+
+<b>Status :</b>
+
+<span class="status ${statusClass}">
+
+${order.status}
+
+</span>
+
+</p>
+<select>
+<option ${order.status==="Pending"?"selected":""}>
+Pending
+</option>
+
+<option ${order.status==="Processing"?"selected":""}>
+Processing
+</option>
+
+<option ${order.status==="Shipped"?"selected":""}>
+Shipped
+</option>
+
+<option ${order.status==="Delivered"?"selected":""}>
+Delivered
+</option>
+
+<option ${order.status==="Cancelled"?"selected":""}>
+Cancelled
+</option>
+</select>
+<button
+
+class="btn btn-primary action-btn mt-3"
+
+onclick="viewOrder(${index})">
+
+View Details
+
+</button>
+
+<button
+
+class="btn btn-danger action-btn mt-2"
+
+onclick="deleteOrder(${index})">
+
+Delete Order
+
+</button>
+
+</div>
+
+`;
+});
+
+}
+
+function changeStatus(index,status){
+
+orders[index].status = status;
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+loadOrders();
+
+}
+
+function deleteOrder(index){
+
+if(confirm("Delete this order?")){
+
+orders.splice(index,1);
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+loadOrders();
+
+}
+
+}
+
+function viewOrder(index){
+
+localStorage.setItem(
+"selectedOrder",
+JSON.stringify(orders[index])
+);
+
+window.location.href = "order-details.html";
+
+}
+loadOrders();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AV Sweet House Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:#f8f9fd;
+
+display:flex;
+
+min-height:100vh;
+
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+
+width:260px;
+
+background:#fff;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+padding:25px;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.logo{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#ff4d8d;
+
+margin-bottom:40px;
+
+}
+
+.logo span{
+
+font-size:16px;
+
+display:block;
+
+color:#777;
+
+font-weight:500;
+
+}
+
+.menu{
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.menu a{
+
+text-decoration:none;
+
+padding:14px 18px;
+
+border-radius:14px;
+
+color:#555;
+
+font-weight:600;
+
+transition:.3s;
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+.menu a:hover{
+
+background:#ffe6f0;
+
+color:#ff4d8d;
+
+}
+
+.menu a.active{
+
+background:#ff4d8d;
+
+color:#fff;
+
+}
+
+.logout{
+
+margin-top:auto;
+
+padding-top:30px;
+
+}
+
+.logout a{
+
+background:#fff0f5;
+
+color:#ff4d8d;
+
+}
+
+/* ================= MAIN ================= */
+
+.main{
+
+flex:1;
+
+padding:30px;
+
+}
+
+/* ================= HEADER ================= */
+
+.header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:35px;
+
+}
+
+.header h1{
+
+font-size:34px;
+
+font-weight:700;
+
+color:#333;
+
+}
+
+.search{
+
+width:420px;
+
+position:relative;
+
+}
+
+.search input{
+
+width:100%;
+
+padding:14px 20px;
+
+padding-left:50px;
+
+border-radius:40px;
+
+border:none;
+
+background:white;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+outline:none;
+
+}
+
+.search i{
+
+position:absolute;
+
+left:18px;
+
+top:17px;
+
+color:#999;
+
+}
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.profile img{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+.profile h3{
+
+font-size:18px;
+
+}
+
+.profile p{
+
+font-size:13px;
+
+color:#888;
+
+}
+
+/* ================= DASHBOARD GRID ================= */
+
+.dashboard-grid{
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:25px;
+
+margin-bottom:35px;
+
+}
+
+.sales-card,
+.recent-card{
+
+background:white;
+
+border-radius:22px;
+
+padding:25px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.card-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:20px;
+
+}
+
+.card-header h2{
+
+font-size:22px;
+
+color:#333;
+
+}
+
+.card-header select{
+
+padding:10px 15px;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+outline:none;
+
+}
+
+.card-header a{
+
+text-decoration:none;
+
+color:#ff4d8d;
+
+font-weight:600;
+
+}
+
+.sales-value{
+
+margin-bottom:20px;
+
+}
+
+.sales-value h1{
+
+font-size:40px;
+
+color:#ff4d8d;
+
+}
+
+.sales-value p{
+
+color:#777;
+
+}
+
+#salesChart{
+
+width:100%;
+
+height:280px;
+
+}
+
+.order-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 0;
+
+border-bottom:1px solid #eee;
+
+}
+
+.order-item:last-child{
+
+border-bottom:none;
+
+}
+
+.order-item h4{
+
+font-size:16px;
+
+margin-bottom:5px;
+
+}
+
+.order-item p{
+
+font-size:13px;
+
+color:#888;
+
+}
+
+.pending{
+
+background:#fff4d6;
+
+color:#ff9800;
+
+padding:6px 14px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.completed{
+
+background:#e8fff2;
+
+color:#10b981;
+
+padding:6px 14px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+@media(max-width:1000px){
+
+.dashboard-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+/* ================= BOTTOM GRID ================= */
+
+.bottom-grid{
+
+display:grid;
+
+grid-template-columns:2fr 1fr;
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.products-card,
+.status-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:22px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.product-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:20px;
+
+}
+
+.product-table th{
+
+background:#ff4d8d;
+
+color:white;
+
+padding:15px;
+
+text-align:left;
+
+}
+
+.product-table td{
+
+padding:15px;
+
+border-bottom:1px solid #eee;
+
+}
+
+.product-table tr:hover{
+
+background:#fff6fa;
+
+}
+
+.status-list{
+
+margin-top:25px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+font-weight:600;
+
+}
+
+.dot{
+
+width:12px;
+
+height:12px;
+
+border-radius:50%;
+
+display:inline-block;
+
+margin-right:10px;
+
+}
+
+.pending-dot{
+
+background:#ff9800;
+
+}
+
+.completed-dot{
+
+background:#10b981;
+
+}
+
+.cancelled-dot{
+
+background:#ef4444;
+
+}
+
+#statusChart{
+
+width:100%;
+
+height:250px;
+
+}
+
+@media(max-width:1000px){
+
+.bottom-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+🍰 AV Sweet House
+
+<span>Admin Panel</span>
+
+</div>
+
+<div class="menu">
+
+<a class="active" href="#">
+
+<i class="fas fa-chart-pie"></i>
+
+Dashboard
+
+</a>
+
+<a href="add-product.html">
+
+<i class="fas fa-plus-circle"></i>
+
+Add Product
+
+</a>
+
+<a href="manage-products.html">
+
+<i class="fas fa-box-open"></i>
+
+Manage Products
+
+</a>
+
+<a href="manage-orders.html">
+
+<i class="fas fa-shopping-cart"></i>
+
+Manage Orders
+
+</a>
+
+<a href="order-details.html">
+
+<i class="fas fa-file-invoice"></i>
+
+Order Details
+
+</a>
+
+<a href="#">
+
+<i class="fas fa-users"></i>
+
+Customers
+
+</a>
+
+<a href="#">
+
+<i class="fas fa-chart-line"></i>
+
+Sales Reports
+
+</a>
+
+<a href="#">
+
+<i class="fas fa-star"></i>
+
+Reviews
+
+</a>
+
+</div>
+
+<div class="logout">
+
+<a href="#" onclick="logoutAdmin()">
+
+<i class="fas fa-sign-out-alt"></i>
+
+Logout
+
+</a>
+
+</div>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<div class="header">
+
+<h1>Dashboard</h1>
+
+<div class="search">
+
+<i class="fas fa-search"></i>
+
+<input
+type="text"
+placeholder="Search anything...">
+
+</div>
+
+<div class="profile">
+
+<img src="https://i.pravatar.cc/150?img=12">
+
+<div>
+
+<h3>Admin</h3>
+
+<p>Super Admin</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- ================= STATISTICS CARDS ================= -->
+
+<div class="stats">
+
+<div class="card">
+
+<div class="icon pink">
+<i class="fas fa-users"></i>
+</div>
+
+<div>
+
+<h5>Total Customers</h5>
+
+<h2 id="totalUsers">0</h2>
+
+<p class="up">+12% from last month</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="icon purple">
+<i class="fas fa-shopping-cart"></i>
+</div>
+
+<div>
+
+<h5>Total Orders</h5>
+
+<h2 id="totalOrders">0</h2>
+
+<p class="up">+18% from last month</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="icon green">
+<i class="fas fa-wallet"></i>
+</div>
+
+<div>
+
+<h5>Total Revenue</h5>
+
+<h2 id="totalRevenue">₹0</h2>
+
+<p class="up">+22% from last month</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="icon orange">
+<i class="fas fa-birthday-cake"></i>
+</div>
+
+<div>
+
+<h5>Total Products</h5>
+
+<h2 id="totalProducts">0</h2>
+
+<p class="up">+8% from last month</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="icon blue">
+<i class="fas fa-chart-line"></i>
+</div>
+
+<div>
+
+<h5>Today's Orders</h5>
+
+<h2 id="todayOrders">0</h2>
+
+<p class="up">+14% from yesterday</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- ================= DASHBOARD CONTENT ================= -->
+
+<div class="dashboard-grid">
+
+<!-- SALES OVERVIEW -->
+
+<div class="sales-card">
+
+<div class="card-header">
+
+<h2>Sales Overview</h2>
+
+<select>
+
+<option>This Week</option>
+
+<option>This Month</option>
+
+<option>This Year</option>
+
+</select>
+
+</div>
+
+<div class="sales-value">
+
+<h1 id="salesAmount">₹0</h1>
+
+<p>Total Revenue</p>
+
+</div>
+
+<canvas id="salesChart"></canvas>
+
+</div>
+
+<!-- RECENT ORDERS -->
+
+<div class="recent-card">
+
+<div class="card-header">
+
+<h2>Recent Orders</h2>
+
+<a href="manage-orders.html">
+
+View All
+
+</a>
+
+</div>
+
+<div id="recentOrdersList">
+
+<div class="order-item">
+
+<div>
+
+<h4>No Orders Yet</h4>
+
+<p>Waiting for first order...</p>
+
+</div>
+
+<span class="pending">
+
+Pending
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ================= BOTTOM DASHBOARD ================= -->
+
+<div class="bottom-grid">
+
+<!-- TOP SELLING PRODUCTS -->
+
+<div class="products-card">
+
+<div class="card-header">
+
+<h2>🏆 Top Selling Products</h2>
+
+<a href="manage-products.html">
+
+View All
+
+</a>
+
+</div>
+
+<table class="product-table">
+
+<thead>
+
+<tr>
+
+<th>Product</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+</tr>
+
+</thead>
+
+<tbody id="topProducts">
+
+<tr>
+
+<td colspan="3" style="text-align:center;padding:25px;color:#888;">
+
+No Products Available
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ORDER STATUS -->
+
+<div class="status-card">
+
+<h2>📦 Order Status</h2>
+
+<canvas id="statusChart"></canvas>
+
+<div class="status-list">
+
+<div>
+
+<span class="dot pending-dot"></span>
+
+Pending
+
+</div>
+
+<div>
+
+<span class="dot completed-dot"></span>
+
+Completed
+
+</div>
+
+<div>
+
+<span class="dot cancelled-dot"></span>
+
+Cancelled
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+/* ===========================
+   ADMIN LOGIN CHECK
+=========================== */
+
+if(localStorage.getItem("adminLoggedIn") !== "true"){
+
+    window.location.href="admin-login.html";
+
+}
+
+/* ===========================
+   LOAD DATA
+=========================== */
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+/* ===========================
+   DASHBOARD COUNTERS
+=========================== */
+
+document.getElementById("totalProducts").innerHTML =
+products.length;
+
+document.getElementById("totalOrders").innerHTML =
+orders.length;
+
+document.getElementById("totalUsers").innerHTML =
+users.length;
+
+/* ===========================
+   TODAY ORDERS
+=========================== */
+
+document.getElementById("todayOrders").innerHTML =
+orders.length;
+
+/* ===========================
+   REVENUE
+=========================== */
+
+let revenue = 0;
+
+orders.forEach(order=>{
+
+    revenue += Number(order.total || 0);
+
+});
+
+document.getElementById("totalRevenue").innerHTML =
+"₹"+revenue;
+
+document.getElementById("salesAmount").innerHTML =
+"₹"+revenue;
+
+/* ===========================
+   RECENT ORDERS
+=========================== */
+
+let recent =
+document.getElementById("recentOrdersList");
+
+recent.innerHTML="";
+
+if(orders.length==0){
+
+recent.innerHTML=`
+
+<div class="order-item">
+
+<div>
+
+<h4>No Orders Yet</h4>
+
+<p>Waiting for first order...</p>
+
+</div>
+
+<span class="pending">
+
+Pending
+
+</span>
+
+</div>
+
+`;
+
+}else{
+
+orders.slice(-5).reverse().forEach(order=>{
+
+recent.innerHTML+=`
+
+<div class="order-item">
+
+<div>
+
+<h4>
+
+${order.customerName || "Customer"}
+
+</h4>
+
+<p>
+
+${order.orderId || "Order"}
+
+</p>
+
+</div>
+
+<span class="${
+(order.status=="Delivered")?
+"completed":"pending"
+}">
+
+${order.status || "Pending"}
+
+</span>
+
+</div>
+
+`;
+
+});
+
+}
+
+/* ===========================
+   TOP PRODUCTS
+=========================== */
+
+let table =
+document.getElementById("topProducts");
+
+table.innerHTML="";
+
+if(products.length==0){
+
+table.innerHTML=`
+
+<tr>
+
+<td colspan="3"
+style="padding:20px;text-align:center;">
+
+No Products
+
+</td>
+
+</tr>
+
+`;
+
+}else{
+
+products.slice(0,5).forEach(product=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>
+
+${product.name}
+
+</td>
+
+<td>
+
+${product.category}
+
+</td>
+
+<td>
+
+₹${product.price}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+/* ===========================
+   SALES CHART
+=========================== */
+
+
+let salesData = [0,0,0,0,0,0,0];
+
+orders.forEach(order=>{
+
+    let day = Math.floor(Math.random()*7);
+
+    salesData[day] += Number(order.total || 0);
+
+});
+
+new Chart(
+
+document.getElementById("salesChart"),
+
+{
+
+type:"line",
+
+data:{
+
+labels:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],
+
+datasets:[{
+
+label:"Revenue",
+
+data:salesData,
+
+borderColor:"#ff4d8d",
+
+backgroundColor:"rgba(255,77,141,.15)",
+
+fill:true,
+
+tension:.4
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+}
+
+}
+
+}
+);
+
+/* ===========================
+   STATUS CHART
+=========================== */
+let pendingCount = 0;
+let processingCount = 0;
+let deliveredCount = 0;
+let cancelledCount = 0;
+
+orders.forEach(order=>{
+
+    if(order.status === "Pending"){
+        pendingCount++;
+    }
+
+    else if(order.status === "Processing"){
+        processingCount++;
+    }
+
+    else if(order.status === "Delivered"){
+        deliveredCount++;
+    }
+
+    else if(order.status === "Cancelled"){
+        cancelledCount++;
+    }
+
+});
+
+
+
+
+new Chart(
+
+document.getElementById("statusChart"),
+
+{
+
+type:"doughnut",
+
+data:{
+
+labels:[
+
+"Pending",
+
+"Processing",
+
+"Delivered",
+
+"Cancelled"
+
+],
+
+datasets:[{
+
+data:[
+pendingCount,
+processingCount,
+deliveredCount,
+cancelledCount
+],
+
+backgroundColor:[
+
+"#ff9800",   // Pending
+
+"#3b82f6",   // Processing
+
+"#10b981",   // Delivered
+
+"#ef4444"    // Cancelled
+
+]
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+display:false
+
+}
+
+}
+
+}
+
+}
+
+/* ===========================
+   LOGOUT
+=========================== */
+
+);
+
+function logoutAdmin(){
+
+if(confirm("Logout Admin?")){
+
+localStorage.removeItem("adminLoggedIn");
+
+window.location.href="admin-login.html";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

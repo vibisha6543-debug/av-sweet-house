@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Add Product | AV Sweet House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f8;
+}
+
+/* HEADER */
+
+.header{
+background:linear-gradient(135deg,#ff4d8d,#ff9ec6);
+padding:20px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+}
+
+.header h1{
+font-size:30px;
+}
+
+.back-btn{
+text-decoration:none;
+background:white;
+color:#ff4d8d;
+padding:12px 20px;
+border-radius:30px;
+font-weight:600;
+}
+
+/* FORM */
+
+.container{
+max-width:700px;
+margin:50px auto;
+padding:30px;
+background:white;
+border-radius:25px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.container h2{
+text-align:center;
+color:#ff4d8d;
+margin-bottom:25px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+}
+
+input,
+select{
+width:100%;
+padding:14px;
+border:2px solid #eee;
+border-radius:12px;
+outline:none;
+font-size:15px;
+}
+
+input:focus,
+select:focus{
+border-color:#ff4d8d;
+}
+
+.preview{
+margin-top:20px;
+text-align:center;
+}
+
+.preview img{
+width:220px;
+height:220px;
+object-fit:cover;
+border-radius:20px;
+border:3px solid #ff4d8d;
+display:none;
+}
+
+.add-btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#ff4d8d;
+color:white;
+font-size:17px;
+font-weight:700;
+cursor:pointer;
+margin-top:20px;
+}
+
+.add-btn:hover{
+background:#ff2f78;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>➕ Add Product</h1>
+
+<a href="manage-products.html" class="back-btn">
+Manage Products
+</a>
+
+</div>
+
+<div class="container">
+
+<h2>Add New Product</h2>
+
+<div class="form-group">
+
+<label>Product Name</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter Product Name">
+
+</div>
+
+<div class="form-group">
+
+<label>Price</label>
+
+<input
+type="number"
+id="price"
+placeholder="Enter Price">
+
+</div>
+
+<div class="form-group">
+
+<label>Image URL</label>
+
+<input
+type="text"
+id="image"
+placeholder="Paste Image URL"
+onkeyup="previewImage()">
+
+</div>
+
+<div class="form-group">
+
+<label>Category</label>
+
+<select id="category">
+
+<option value="">Select Category</option>
+
+<option>Cakes</option>
+<option>Birthday Cakes</option>
+<option>Anniversary Cakes</option>
+<option>Occasion Cakes</option>
+<option>Wedding Cakes</option>
+<option>Kids Cakes</option>
+<option>Cup Cakes</option>
+<option>Brownies</option>
+<option>Donuts</option>
+<option>Cheesecakes</option>
+<option>Pastry</option>
+<option>Macarons</option>
+<option>Cookies</option>
+<option>Milk Chocolates</option>
+<option>Desserts</option>
+<option>Chocolates</option>
+<option>Dark Chocolates</option>
+<option>White Chocolates</option>
+<option>Nut Chocolates</option>
+<option>Gift Boxes</option>
+<option>Festival</option>
+<option>Juices</option>
+<option>Fresh Juices</option>
+<option>Milkshakes</option>
+<option>Smoothies</option>
+<option>Mocktails</option>
+<option>Cold Coffee</option>
+<option>Healthy Drinks</option>
+<option>Snacks</option>
+<option>Murukku</option>
+<option>Traditional Sweets</option>
+<option>Mixtures & Namkeen</option>
+<option>Biscuits</option>
+<option>Chips</option>
+<option>Evening Snacks</option>
+
+
+</select>
+
+</div>
+
+<div class="preview">
+
+<img id="previewImg">
+
+</div>
+
+<button
+class="add-btn"
+onclick="addProduct()">
+
+Save Product
+
+</button>
+
+</div>
+
+<script>
+if (localStorage.getItem("adminLoggedIn") !== "true") {
+    window.location.href = "admin-login.html";
+}
+
+function previewImage() {
+    let url = document.getElementById("image").value;
+    let img = document.getElementById("previewImg");
+
+    if (url.trim() !== "") {
+        img.src = url;
+        img.style.display = "block";
+    } else {
+        img.style.display = "none";
+    }
+}
+
+async function addProduct() {
+
+    let name = document.getElementById("name").value;
+    let price = document.getElementById("price").value;
+    let image =
+                 "../users/images/products/" +
+             document.getElementById("image").value;
+    let category = document.getElementById("category").value;
+
+    if (!name || !price || !image || !category) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let product = {
+        name,
+        price: Number(price),
+        image,
+        category
+    };
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(product)
+        });
+
+        const data = await response.json();
+
+        alert(data.message);
+
+        window.location.href = "manage-products.html";
+
+    } catch (error) {
+        console.log(error);
+        alert("Server not running!");
+    }
+}
+</script>
+
+
+
+</body>
+
+</html>

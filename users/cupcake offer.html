@@ -1,0 +1,404 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Special Offers | AV Sweet House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f8;
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#ff4d8d,#ff8fb8);
+color:white;
+text-align:center;
+padding:70px 20px;
+}
+
+.hero h1{
+font-size:45px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+/* FLASH OFFER */
+
+.flash{
+background:#ff1744;
+color:white;
+text-align:center;
+padding:15px;
+font-size:22px;
+font-weight:700;
+}
+
+.timer{
+display:flex;
+justify-content:center;
+gap:20px;
+margin-top:15px;
+}
+
+.time-box{
+background:white;
+color:#ff1744;
+padding:15px;
+width:80px;
+border-radius:15px;
+font-weight:700;
+box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.time-box span{
+display:block;
+font-size:14px;
+margin-top:5px;
+}
+
+/* OFFERS */
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+padding:60px 0;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.offer-card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.4s;
+}
+
+.offer-card:hover{
+transform:translateY(-10px);
+}
+
+.offer-card img{
+width:100%;
+height:230px;
+object-fit:cover;
+}
+
+.offer-content{
+padding:20px;
+text-align:center;
+}
+
+.badge{
+display:inline-block;
+background:#ff1744;
+color:white;
+padding:6px 15px;
+border-radius:30px;
+font-size:14px;
+font-weight:600;
+margin-bottom:12px;
+}
+
+.offer-content h3{
+margin-bottom:10px;
+color:#333;
+}
+
+.price{
+font-size:28px;
+font-weight:700;
+color:#ff4d8d;
+}
+
+.old{
+text-decoration:line-through;
+color:#888;
+font-size:18px;
+margin-left:10px;
+}
+
+.save{
+color:#28a745;
+font-weight:600;
+margin:12px 0;
+}
+
+.btn{
+display:inline-block;
+margin-top:15px;
+padding:12px 30px;
+background:linear-gradient(135deg,#ff4d8d,#ff7ba7);
+color:white;
+text-decoration:none;
+border-radius:40px;
+font-weight:600;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* COUPON */
+
+.coupon{
+margin-top:60px;
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.code{
+display:inline-block;
+margin:20px 0;
+padding:15px 30px;
+border:2px dashed #ff4d8d;
+font-size:24px;
+font-weight:700;
+color:#ff4d8d;
+}
+
+/* FEATURES */
+
+.features{
+margin-top:60px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.feature{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.feature h2{
+font-size:40px;
+margin-bottom:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="flash">
+🔥 FLASH SALE - UP TO 50% OFF 🔥
+
+<div class="timer">
+
+<div class="time-box">
+02
+<span>Days</span>
+</div>
+
+<div class="time-box">
+15
+<span>Hours</span>
+</div>
+
+<div class="time-box">
+30
+<span>Minutes</span>
+</div>
+
+</div>
+
+</div>
+
+<section class="hero">
+
+<h1>🎁 Special Offers</h1>
+
+<p>Enjoy exciting deals on cakes, chocolates, desserts, snacks and beverages.</p>
+
+</section>
+
+<div class="container">
+
+<div class="grid">
+
+<div class="offer-card">
+
+<img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=800">
+
+<div class="offer-content">
+
+<div class="badge">
+BUY 1 GET 1
+</div>
+
+<h3>Cupcake Offer</h3>
+
+<div class="price">
+₹80
+<span class="old">₹120</span>
+</div>
+
+<div class="save">
+Save ₹40
+</div>
+
+<a href="cupcake-offer.html" class="btn">
+View Offer
+</a>
+
+</div>
+
+</div>
+
+<div class="offer-card">
+
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800">
+
+<div class="offer-content">
+
+<div class="badge">
+30% OFF
+</div>
+
+<h3>Cake Combo</h3>
+
+<div class="price">
+₹699
+<span class="old">₹999</span>
+</div>
+
+<div class="save">
+Limited Time
+</div>
+
+<a href="#" class="btn">
+Shop Now
+</a>
+
+</div>
+
+</div>
+
+<div class="offer-card">
+
+<img src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=800">
+
+<div class="offer-content">
+
+<div class="badge">
+Combo Offer
+</div>
+
+<h3>Chocolate Box</h3>
+
+<div class="price">
+₹499
+<span class="old">₹699</span>
+</div>
+
+<div class="save">
+Save ₹200
+</div>
+
+<a href="#" class="btn">
+Grab Deal
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="coupon">
+
+<h2>🎫 Coupon Code</h2>
+
+<div class="code">
+AVSWEET20
+</div>
+
+<p>Use this coupon and get 20% OFF on orders above ₹999.</p>
+
+<a href="#" class="btn">
+Copy Coupon
+</a>
+
+</div>
+
+<div class="features">
+
+<div class="feature">
+
+<h2>🚚</h2>
+
+<h3>Free Delivery</h3>
+
+<p>Orders above ₹499</p>
+
+</div>
+
+<div class="feature">
+
+<h2>🎂</h2>
+
+<h3>Freshly Baked</h3>
+
+<p>Prepared Every Day</p>
+
+</div>
+
+<div class="feature">
+
+<h2>💳</h2>
+
+<h3>Secure Payment</h3>
+
+<p>100% Safe Checkout</p>
+
+</div>
+
+<div class="feature">
+
+<h2>🎁</h2>
+
+<h3>Premium Quality</h3>
+
+<p>Best Ingredients</p>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
+```

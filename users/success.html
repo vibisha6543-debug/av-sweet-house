@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Success - AV Sweet House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  overflow-x:hidden;
+}
+
+body{
+
+  background:
+  radial-gradient(circle at top left,#ffe5ec 0%,transparent 30%),
+  radial-gradient(circle at bottom right,#d6f6ff 0%,transparent 30%),
+  #fffaf7;
+
+  padding:40px 15px;
+}
+
+/* MAIN CARD */
+
+.success-card{
+
+  width:100%;
+  max-width:700px;
+
+  margin:auto;
+
+  background:rgba(255,255,255,0.82);
+
+  backdrop-filter:blur(16px);
+
+  border-radius:35px;
+
+  padding:40px 28px;
+
+  text-align:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+  box-shadow:0 20px 60px rgba(0,0,0,0.08);
+}
+
+/* COLOR FIREWORKS */
+
+/* FULL PINK FIREWORKS */
+
+.blast{
+  position:absolute;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  animation:pinkBlast 2.5s infinite ease-out;
+}
+
+/* DIFFERENT PINK SHADES */
+
+.blast:nth-child(1){
+  top:10%;
+  left:8%;
+  background:#ff4d6d;
+  color:#ff4d6d;
+}
+
+.blast:nth-child(2){
+  top:12%;
+  right:10%;
+  background:#ff758f;
+  color:#ff758f;
+  animation-delay:.4s;
+}
+
+.blast:nth-child(3){
+  bottom:15%;
+  left:12%;
+  background:#ff85a2;
+  color:#ff85a2;
+  animation-delay:.8s;
+}
+
+.blast:nth-child(4){
+  bottom:12%;
+  right:14%;
+  background:#ff5c8a;
+  color:#ff5c8a;
+  animation-delay:1.2s;
+}
+
+.blast:nth-child(5){
+  top:45%;
+  left:5%;
+  background:#ff99ac;
+  color:#ff99ac;
+  animation-delay:1.6s;
+}
+
+.blast:nth-child(6){
+  top:50%;
+  right:5%;
+  background:#ffb3c1;
+  color:#ffb3c1;
+  animation-delay:2s;
+}
+
+/* ANIMATION */
+
+@keyframes pinkBlast{
+
+  0%{
+    transform:scale(0);
+    opacity:1;
+    box-shadow:none;
+  }
+
+  40%{
+
+    opacity:1;
+
+    box-shadow:
+    0 -50px 0 6px currentColor,
+    50px 0 0 6px currentColor,
+    -50px 0 0 6px currentColor,
+    0 50px 0 6px currentColor,
+
+    38px -38px 0 6px currentColor,
+    -38px -38px 0 6px currentColor,
+    38px 38px 0 6px currentColor,
+    -38px 38px 0 6px currentColor;
+  }
+
+  70%{
+
+    opacity:.8;
+
+    box-shadow:
+    0 -75px 0 3px rgba(255,77,109,.8),
+    75px 0 0 3px rgba(255,117,143,.8),
+    -75px 0 0 3px rgba(255,133,162,.8),
+    0 75px 0 3px rgba(255,92,138,.8),
+
+    55px -55px 0 3px rgba(255,153,172,.8),
+    -55px -55px 0 3px rgba(255,179,193,.8),
+    55px 55px 0 3px rgba(255,117,143,.8),
+    -55px 55px 0 3px rgba(255,77,109,.8);
+  }
+
+  100%{
+    transform:scale(2.5);
+    opacity:0;
+    box-shadow:none;
+  }
+
+}
+/* SUCCESS ICON */
+
+.circle{
+
+  width:130px;
+  height:130px;
+
+  margin:auto;
+
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  color:white;
+
+  font-size:60px;
+
+  box-shadow:0 15px 35px rgba(255,77,109,0.35);
+
+  animation:pop .7s ease;
+}
+
+@keyframes pop{
+
+  from{
+    transform:scale(.5);
+    opacity:0;
+  }
+
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+
+}
+
+/* TITLE */
+
+h1{
+
+  margin-top:28px;
+
+  font-size:42px;
+  font-weight:800;
+
+  background:linear-gradient(90deg,#ff4d6d,#ff758f);
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.desc{
+
+  margin-top:16px;
+
+  color:#666;
+
+  line-height:1.9;
+
+  font-size:15px;
+}
+
+/* ORDER DETAILS */
+
+.order-box{
+
+  margin-top:35px;
+
+  background:#fff0f3;
+
+  border-radius:25px;
+
+  padding:25px;
+}
+
+.order-row{
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:18px;
+
+  color:#444;
+
+  flex-wrap:wrap;
+}
+
+.order-row:last-child{
+  margin-bottom:0;
+}
+
+.order-row span:last-child{
+  color:#ff4d6d;
+  font-weight:700;
+}
+
+/* DELIVERY */
+
+.delivery{
+
+  margin-top:28px;
+
+  background:#fff7fa;
+
+  border-radius:25px;
+
+  padding:22px;
+
+  line-height:1.8;
+
+  color:#555;
+}
+
+.delivery i{
+
+  font-size:30px;
+
+  color:#ff4d6d;
+
+  margin-bottom:10px;
+}
+
+/* BUTTONS */
+
+.buttons{
+
+  margin-top:32px;
+
+  display:flex;
+  gap:16px;
+}
+
+.btn{
+
+  flex:1;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:50px;
+
+  font-size:15px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.primary{
+
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+
+  color:white;
+
+  box-shadow:0 10px 25px rgba(255,77,109,0.25);
+}
+
+.primary:hover{
+  transform:translateY(-4px);
+}
+
+.outline{
+
+  background:white;
+
+  border:2px solid #ff4d6d;
+
+  color:#ff4d6d;
+}
+
+.outline:hover{
+
+  background:#ff4d6d;
+  color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  body{
+    padding:20px 12px;
+  }
+
+  .success-card{
+    padding:30px 18px;
+  }
+
+  h1{
+    font-size:30px;
+  }
+
+  .buttons{
+    flex-direction:column;
+  }
+
+  .circle{
+    width:110px;
+    height:110px;
+    font-size:48px;
+  }
+
+  .order-row{
+    font-size:14px;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="success-card">
+
+  <!-- FIREWORKS -->
+
+  <div class="blast"></div>
+  <div class="blast"></div>
+  <div class="blast"></div>
+  <div class="blast"></div>
+  <div class="blast"></div>
+  <div class="blast"></div>
+
+  <!-- SUCCESS ICON -->
+
+  <div class="circle">
+    <i class="fa-solid fa-check"></i>
+  </div>
+
+  <!-- TITLE -->
+
+  <h1>
+    Order Successful!
+  </h1>
+
+  <p class="desc">
+    Thank you for ordering from
+    <strong>AV Sweet House</strong> ❤️
+    <br>
+    Your sweets & cakes are now freshly being prepared.
+  </p>
+
+  <!-- ORDER DETAILS -->
+
+  <div class="order-box">
+
+    <div class="order-row">
+      <span>Order ID</span>
+      <span>#AV45892</span>
+    </div>
+
+    <div class="order-row">
+      <span>Payment Method</span>
+      <span>UPI</span>
+    </div>
+
+    <div class="order-row">
+      <span>Total Paid</span>
+      <span>₹1540</span>
+    </div>
+
+    <div class="order-row">
+      <span>Status</span>
+      <span>Preparing 🍰</span>
+    </div>
+
+  </div>
+
+  <!-- DELIVERY -->
+
+  <div class="delivery">
+
+    <i class="fa-solid fa-motorcycle"></i>
+
+    <h3>
+      Delivery On The Way
+    </h3>
+
+    <p>
+      Estimated Delivery:
+      <strong>30 - 40 mins</strong>
+    </p>
+
+    <p>
+      🎁 FREE Cookie Added To Your Order
+    </p>
+
+  </div>
+
+  <!-- BUTTONS -->
+
+  <div class="buttons">
+
+    <button class="btn primary">
+      Track Order
+    </button>
+
+    <button class="btn outline">
+      Continue Shopping
+    </button>
+
+  </div>
+
+</div>
+
+</body>
+</html>

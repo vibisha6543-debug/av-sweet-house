@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Order Details | AV Sweet House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f8;
+}
+
+/* HEADER */
+
+.header{
+
+background:linear-gradient(135deg,#ff4d8d,#ff9ec6);
+
+padding:20px 40px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+color:white;
+
+box-shadow:0 5px 20px rgba(0,0,0,.1);
+
+}
+
+.header h1{
+font-size:30px;
+}
+
+.back-btn{
+
+text-decoration:none;
+
+background:white;
+
+color:#ff4d8d;
+
+padding:12px 22px;
+
+border-radius:30px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.back-btn:hover{
+
+background:#ffe4ef;
+
+}
+
+/* CONTAINER */
+
+.container{
+
+width:90%;
+
+max-width:1300px;
+
+margin:40px auto;
+
+}
+
+/* CARDS */
+
+.card{
+
+background:white;
+
+padding:30px;
+
+border-radius:25px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+margin-bottom:30px;
+
+}
+
+.card-title{
+
+font-size:26px;
+
+font-weight:700;
+
+color:#ff4d8d;
+
+margin-bottom:25px;
+
+}
+
+/* GRID */
+
+.info-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+}
+
+.info-box{
+
+background:#fff0f5;
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+.info-box h4{
+
+font-size:15px;
+
+color:#666;
+
+margin-bottom:8px;
+
+}
+
+.info-box p{
+
+font-size:18px;
+
+font-weight:600;
+
+color:#333;
+
+}
+
+/* STATUS */
+
+.status{
+
+display:inline-block;
+
+padding:10px 20px;
+
+border-radius:30px;
+
+font-weight:600;
+
+color:white;
+
+background:#ffc107;
+
+}
+
+/* CUSTOMER */
+
+.customer-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+}
+
+.customer-box{
+
+background:#fff8fb;
+
+padding:18px;
+
+border-radius:18px;
+
+}
+
+.customer-box h4{
+
+font-size:15px;
+
+color:#666;
+
+margin-bottom:8px;
+
+}
+
+.customer-box p{
+
+font-size:17px;
+
+font-weight:600;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.info-grid,
+.customer-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.header{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+}
+
+
+/* ===============================
+   PRINT INVOICE
+================================= */
+
+@media print{
+
+body{
+
+background:white;
+
+}
+
+.header,
+.back-btn,
+button,
+#statusSelect{
+
+display:none !important;
+
+}
+
+.card{
+
+box-shadow:none;
+
+border:1px solid #ddd;
+
+margin-bottom:20px;
+
+}
+
+.card-title{
+
+color:black;
+
+}
+
+.status{
+
+background:#28a745 !important;
+
+color:white !important;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<h1>📦 Order Details</h1>
+
+<a href="manage-orders.html" class="back-btn">
+
+← Back to Orders
+
+</a>
+
+</div>
+
+<div class="container">
+
+<!-- ORDER INFO -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+🧾 Order Information
+
+</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+
+<h4>Order ID</h4>
+
+<p id="orderId">
+
+#AV1025
+
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h4>Order Date</h4>
+
+<p id="orderDate">
+
+26 June 2026
+
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h4>Payment Method</h4>
+
+<p id="paymentMethod">
+
+Cash On Delivery
+
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h4>Status</h4>
+
+<p>
+
+<span class="status" id="statusText">
+
+Pending
+
+</span>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- CUSTOMER -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+👤 Customer Details
+
+</h2>
+
+<div class="customer-grid">
+
+<div class="customer-box">
+
+<h4>Customer Name</h4>
+
+<p id="customerName">
+
+Vibi
+
+</p>
+
+</div>
+
+<div class="customer-box">
+
+<h4>Phone Number</h4>
+
+<p id="customerPhone">
+
+9876543210
+
+</p>
+
+</div>
+
+<div class="customer-box">
+
+<h4>Email</h4>
+
+<p id="customerEmail">
+
+vibi@gmail.com
+
+</p>
+
+</div>
+
+<div class="customer-box">
+
+<h4>Delivery Address</h4>
+
+<p id="customerAddress">
+
+Kerala, India
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- ORDERED PRODUCTS -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+🍰 Ordered Products
+
+</h2>
+
+<div style="overflow-x:auto;">
+
+<table style="width:100%;border-collapse:collapse;">
+
+<thead>
+
+<tr style="background:#ff4d8d;color:white;">
+
+<th style="padding:15px;">Image</th>
+
+<th style="padding:15px;">Product</th>
+
+<th style="padding:15px;">Price</th>
+
+<th style="padding:15px;">Qty</th>
+
+<th style="padding:15px;">Total</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productsTable">
+
+<tr>
+
+<td style="padding:15px;text-align:center;">
+
+<img
+src="../assets/images/products/Honey_Cake.webp"
+style="width:70px;height:70px;border-radius:12px;object-fit:cover;">
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+Honey Cake
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+₹450
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+2
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+₹900
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<!-- ORDER SUMMARY -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+💰 Order Summary
+
+</h2>
+
+<div class="info-grid">
+
+<div class="info-box">
+
+<h4>Subtotal</h4>
+
+<p id="subtotal">
+
+₹900
+
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h4>Delivery Charge</h4>
+
+<p id="delivery">
+
+₹50
+
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h4>Discount</h4>
+
+<p id="discount">
+
+₹0
+
+</p>
+
+</div>
+
+<div class="info-box">
+
+<h4>Grand Total</h4>
+
+<p
+id="grandTotal"
+style="color:#ff4d8d;font-size:24px;">
+
+₹950
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- UPDATE STATUS -->
+
+<div class="card">
+
+<h2 class="card-title">
+
+🔄 Update Order Status
+
+</h2>
+
+<select
+id="statusSelect"
+style="
+width:100%;
+padding:15px;
+border-radius:15px;
+border:2px solid #ffd6e5;
+font-size:16px;
+margin-bottom:25px;
+outline:none;
+">
+
+<option>Pending</option>
+<option>Processing</option>
+<option>Shipped</option>
+<option>Delivered</option>
+<option>Cancelled</option>
+
+</select>
+
+<div
+style="
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+">
+
+<button
+onclick="saveStatus()"
+style="
+flex:1;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#ff4d8d;
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+">
+
+💾 Save Status
+
+</button>
+
+<button
+onclick="window.location.href='manage-orders.html'"
+style="
+flex:1;
+padding:15px;
+border:none;
+border-radius:30px;
+background:#555;
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+">
+
+⬅ Back
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* ADMIN LOGIN CHECK */
+
+if(localStorage.getItem("adminLoggedIn") !== "true"){
+
+    window.location.href = "admin-login.html";
+
+}
+
+/* LOAD ORDER */
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+let selectedOrder =
+JSON.parse(localStorage.getItem("selectedOrder"));
+
+if(selectedOrder){
+
+document.getElementById("orderId").innerText =
+selectedOrder.orderId || "#AV1001";
+
+document.getElementById("orderDate").innerText =
+selectedOrder.date || "26 June 2026";
+
+document.getElementById("paymentMethod").innerText =
+"Cash On Delivery";
+
+document.getElementById("statusText").innerText =
+selectedOrder.status || "Pending";
+
+document.getElementById("statusSelect").value =
+selectedOrder.status || "Pending";
+
+document.getElementById("customerName").innerText =
+selectedOrder.customerName || "Customer";
+
+document.getElementById("customerPhone").innerText =
+selectedOrder.phone || "Not Available";
+
+document.getElementById("customerEmail").innerText =
+selectedOrder.email || "customer@gmail.com";
+
+document.getElementById("customerAddress").innerText =
+selectedOrder.address || "Address Not Provided";
+
+/* PRODUCT TABLE */
+
+let table =
+document.getElementById("productsTable");
+
+table.innerHTML = "";
+
+let subtotal = 0;
+
+if(selectedOrder.products){
+
+selectedOrder.products.forEach(item=>{
+
+subtotal += item.price * item.qty;
+
+table.innerHTML += `
+
+<tr>
+
+<td style="padding:15px;text-align:center;">
+
+<img
+src="${item.image}"
+style="width:70px;height:70px;border-radius:12px;object-fit:cover;">
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+${item.name}
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+₹${item.price}
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+${item.qty}
+
+</td>
+
+<td style="padding:15px;text-align:center;">
+
+₹${item.price * item.qty}
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}
+
+let delivery = 50;
+
+let discount = 0;
+
+document.getElementById("subtotal").innerText =
+"₹" + (selectedOrder.total - delivery);
+
+document.getElementById("delivery").innerText =
+"₹" + delivery;
+
+document.getElementById("discount").innerText =
+"₹" + discount;
+
+document.getElementById("grandTotal").innerText =
+"₹" + selectedOrder.total;
+
+}
+
+/* SAVE STATUS */
+
+function saveStatus(){
+
+let newStatus =
+document.getElementById("statusSelect").value;
+
+selectedOrder.status = newStatus;
+
+document.getElementById("statusText").innerText =
+newStatus;
+
+let index =
+orders.findIndex(order => order.orderId === selectedOrder.orderId);
+
+if(index != -1){
+
+orders[index] = selectedOrder;
+
+localStorage.setItem(
+"orders",
+JSON.stringify(orders)
+);
+
+}
+
+localStorage.setItem(
+"selectedOrder",
+JSON.stringify(selectedOrder)
+);
+
+alert("Order Status Updated Successfully 🎉");
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Product Details | AV Sweet House</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fff5f8;
+}
+
+/* ---------- HEADER ---------- */
+
+.top-bar{
+
+background:#fff;
+
+padding:15px;
+
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+position:sticky;
+
+top:0;
+
+z-index:1000;
+
+}
+
+.back-btn{
+
+text-decoration:none;
+
+font-weight:600;
+
+color:#ff4d8d;
+
+font-size:18px;
+
+}
+
+/* ---------- PRODUCT ---------- */
+
+.product-section{
+
+padding:60px 0;
+
+}
+
+.main-image{
+
+width:100%;
+
+height:520px;
+
+object-fit:cover;
+
+border-radius:25px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+}
+
+.product-title{
+
+font-size:40px;
+
+font-weight:700;
+
+margin-bottom:10px;
+
+}
+
+.rating{
+
+color:#ffc107;
+
+font-size:18px;
+
+margin-bottom:15px;
+
+}
+
+.price{
+
+font-size:38px;
+
+font-weight:bold;
+
+color:#ff4d8d;
+
+}
+
+.old-price{
+
+text-decoration:line-through;
+
+color:#999;
+
+margin-left:12px;
+
+}
+
+.offer{
+
+background:#ff4d8d;
+
+color:#fff;
+
+padding:6px 14px;
+
+border-radius:30px;
+
+font-size:13px;
+
+margin-left:12px;
+
+}
+
+.section-title{
+
+font-weight:600;
+
+margin-top:25px;
+
+margin-bottom:10px;
+
+}
+
+/* ---------- BUTTONS ---------- */
+
+.weight-btn{
+
+padding:10px 20px;
+
+border-radius:30px;
+
+border:2px solid #ff4d8d;
+
+background:#fff;
+
+margin-right:10px;
+
+margin-bottom:10px;
+
+transition:.3s;
+
+cursor:pointer;
+
+}
+
+.weight-btn.active{
+
+background:#ff4d8d;
+
+color:#fff;
+
+}
+
+.weight-btn:hover{
+
+background:#ff4d8d;
+
+color:#fff;
+
+}
+
+.form-select{
+
+border-radius:15px;
+
+}
+
+.form-control{
+
+border-radius:15px;
+
+}
+
+/* ---------- QUANTITY ---------- */
+
+.qty-box{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+margin-top:10px;
+
+}
+
+.qty-btn{
+
+width:42px;
+
+height:42px;
+
+border:none;
+
+border-radius:50%;
+
+background:#ff4d8d;
+
+color:#fff;
+
+font-size:22px;
+
+font-weight:bold;
+
+}
+
+.qty-number{
+
+font-size:22px;
+
+font-weight:bold;
+
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+
+.btn-cart{
+
+background:#ff4d8d;
+
+color:white;
+
+padding:14px 35px;
+
+border:none;
+
+border-radius:35px;
+
+font-weight:600;
+
+}
+
+.btn-cart:hover{
+
+background:#ff2f78;
+
+}
+
+.btn-wish{
+
+background:white;
+
+border:2px solid #ff4d8d;
+
+color:#ff4d8d;
+
+padding:14px 35px;
+
+border-radius:35px;
+
+font-weight:600;
+
+}
+
+.btn-wish:hover{
+
+background:#ff4d8d;
+
+color:white;
+
+}
+
+/* ---------- REVIEW ---------- */
+
+.review-card{
+
+background:#fff;
+
+padding:20px;
+
+border-radius:20px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+margin-bottom:15px;
+
+}
+
+/* ---------- RELATED PRODUCTS ---------- */
+
+.related-card{
+
+background:white;
+
+border-radius:20px;
+
+overflow:hidden;
+
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+transition:.3s;
+
+height:100%;
+
+}
+
+.related-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.related-card img{
+
+width:100%;
+
+height:220px;
+
+object-fit:cover;
+
+}
+
+.related-card .card-body{
+
+text-align:center;
+
+}
+
+/* ---------- FOOTER ---------- */
+
+footer{
+
+background:#ff4d8d;
+
+color:white;
+
+padding:25px;
+
+text-align:center;
+
+margin-top:60px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+    <!-- TOP BAR -->
+
+<div class="top-bar">
+
+<div class="container d-flex justify-content-between align-items-center">
+
+<a href="javascript:history.back()" class="back-btn">
+← Back
+</a>
+
+<h4 class="m-0 text-danger">
+🍰 AV Sweet House
+</h4>
+
+<a href="cart.html" class="text-decoration-none fs-4">
+🛒
+</a>
+
+</div>
+
+</div>
+
+
+<!-- PRODUCT SECTION -->
+
+<section class="container product-section">
+
+<div class="row g-5">
+
+<!-- IMAGE -->
+
+<div class="col-lg-6">
+
+<img
+id="productImage"
+class="main-image"
+src="">
+
+</div>
+
+
+<!-- DETAILS -->
+
+<div class="col-lg-6">
+
+<h1
+id="productName"
+class="product-title">
+</h1>
+
+<div
+id="productRating"
+class="rating">
+⭐⭐⭐⭐⭐
+</div>
+
+<div>
+
+<span
+id="productPrice"
+class="price">
+</span>
+
+<span
+id="oldPrice"
+class="old-price">
+</span>
+
+<span class="offer">
+20% OFF
+</span>
+
+</div>
+
+<p
+id="productDescription"
+class="mt-4 text-muted">
+</p>
+
+
+<!-- CAKE OPTIONS -->
+
+<div id="cakeOptions" style="display:none;">
+
+<h5 class="section-title">
+Choose Weight
+</h5>
+
+<button class="weight-btn active">
+0.5 KG
+</button>
+
+<button class="weight-btn">
+1 KG
+</button>
+
+<button class="weight-btn">
+2 KG
+</button>
+
+<h5 class="section-title">
+Flavor
+</h5>
+
+<select
+id="flavor"
+class="form-select">
+
+<option>Chocolate</option>
+<option>Vanilla</option>
+<option>Strawberry</option>
+<option>Butterscotch</option>
+
+</select>
+
+<h5 class="section-title">
+Cake Message
+</h5>
+
+<textarea
+id="cakeMessage"
+class="form-control"
+rows="3"
+placeholder="Write Cake Message"></textarea>
+
+</div>
+
+
+<!-- PACK OPTIONS -->
+
+<div id="packOptions" style="display:none;">
+
+<h5 class="section-title">
+Choose Pack Size
+</h5>
+
+<select
+id="packSize"
+class="form-select">
+
+<option>250 g</option>
+<option>500 g</option>
+<option>1 Kg</option>
+
+</select>
+
+</div>
+
+
+<!-- JUICE OPTIONS -->
+
+<div id="juiceOptions" style="display:none;">
+
+<h5 class="section-title">
+Choose Bottle Size
+</h5>
+
+<select
+id="juiceSize"
+class="form-select">
+
+<option>250 ml</option>
+<option>500 ml</option>
+<option>1 Litre</option>
+
+</select>
+
+</div>
+
+
+<!-- QUANTITY -->
+
+<h5 class="section-title">
+Quantity
+</h5>
+
+<div class="qty-box">
+
+<button
+class="qty-btn"
+onclick="decreaseQty()">
+-
+</button>
+
+<div
+id="qty"
+class="qty-number">
+1
+</div>
+
+<button
+class="qty-btn"
+onclick="increaseQty()">
++
+</button>
+
+</div>
+
+
+<!-- BUTTONS -->
+
+<div class="mt-4">
+
+<button
+class="btn-cart"
+onclick="addToCart()">
+
+🛒 Add To Cart
+
+</button>
+
+<button
+class="btn-wish ms-3"
+onclick="addWishlist()">
+
+❤️ Wishlist
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CUSTOMER REVIEWS -->
+
+<section class="container py-5">
+
+<h2 class="fw-bold mb-4">
+Customer Reviews
+</h2>
+
+<div class="review-card">
+
+<h5>
+⭐⭐⭐⭐⭐ Priya
+</h5>
+
+<p>
+The product was fresh and delicious. I will definitely order again!
+</p>
+
+</div>
+
+<div class="review-card">
+
+<h5>
+⭐⭐⭐⭐⭐ Arun
+</h5>
+
+<p>
+Very good quality and fast delivery.
+</p>
+
+</div>
+
+</section>
+
+
+<!-- RELATED PRODUCTS -->
+
+<section class="container py-5">
+
+<h2 class="fw-bold mb-4">
+Related Products
+</h2>
+
+<div
+class="row"
+id="relatedProducts">
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<h4>
+🍰 AV Sweet House
+</h4>
+
+<p>
+Fresh Cakes • Desserts • Chocolates • Juices • Snacks
+</p>
+
+</footer>
+<script>
+
+let currentProduct = null;
+let quantity = 1;
+
+// ---------------- LOAD PRODUCT ----------------
+
+async function loadProduct(){
+
+    const params = new URLSearchParams(window.location.search);
+
+    const productId = params.get("id");
+
+    const response = await fetch("http://localhost:5000/api/products");
+
+    const products = await response.json();
+
+    currentProduct = products.find(
+        p => String(p.id) === String(productId)
+    );
+
+    if(!currentProduct){
+
+        document.body.innerHTML =
+        "<h1 style='text-align:center;margin-top:100px;'>Product Not Found 😔</h1>";
+
+        return;
+
+    }
+
+    document.getElementById("productName").innerText =
+    currentProduct.name;
+
+    document.getElementById("productPrice").innerText =
+    "₹" + currentProduct.price;
+
+    document.getElementById("productImage").src =
+    currentProduct.image;
+
+    document.getElementById("productDescription").innerText =
+    currentProduct.description ||
+    "Fresh product from AV Sweet House.";
+
+    document.getElementById("productRating").innerHTML =
+    "⭐⭐⭐⭐⭐ (4.9)";
+
+    document.getElementById("oldPrice").innerText =
+    "₹" + Math.round(currentProduct.price * 1.2);
+
+    showProductOptions(currentProduct.category);
+
+    loadRelated(products);
+
+}
+
+loadProduct();
+
+
+// ---------------- QUANTITY ----------------
+
+function increaseQty(){
+
+    quantity++;
+
+    document.getElementById("qty").innerText = quantity;
+
+}
+
+function decreaseQty(){
+
+    if(quantity > 1){
+
+        quantity--;
+
+        document.getElementById("qty").innerText = quantity;
+
+    }
+
+}
+
+
+// ---------------- WEIGHT BUTTON ----------------
+
+document.addEventListener("click", function(e){
+
+    if(e.target.classList.contains("weight-btn")){
+
+        document.querySelectorAll(".weight-btn")
+        .forEach(btn => btn.classList.remove("active"));
+
+        e.target.classList.add("active");
+
+    }
+
+});
+
+
+// ---------------- SHOW OPTIONS ----------------
+
+function showProductOptions(category){
+
+    document.getElementById("cakeOptions").style.display = "none";
+    document.getElementById("packOptions").style.display = "none";
+    document.getElementById("juiceOptions").style.display = "none";
+
+    if(
+
+        category==="Birthday Cakes" ||
+        category==="Anniversary Cakes" ||
+        category==="Occasion Cakes" ||
+        category==="Wedding Cakes" ||
+        category==="Kids Cakes" ||
+        category==="Cup Cakes"
+
+    ){
+
+        document.getElementById("cakeOptions").style.display="block";
+
+    }
+
+    else if(
+
+    category==="Brownies" ||
+    category==="Donuts" ||
+    category==="Cheesecakes" ||
+    category==="Pastry" ||
+    category==="Macarons" ||
+    category==="Cookies" ||
+
+    category==="Dark Chocolates" ||
+    category==="Milk Chocolates" ||
+    category==="White Chocolates" ||
+    category==="Nut Chocolates" ||
+    category==="Gift Boxes" ||
+    category==="Festival Specials" ||
+
+    category==="Murukku" ||
+    category==="Traditional Sweets" ||
+    category==="Mixtures & Namkeen" ||
+    category==="Biscuits" ||
+    category==="Chips"
+
+){
+
+    document.getElementById("packOptions").style.display="block";
+
+}
+
+    else if(
+
+        category==="Fresh Juices" ||
+        category==="Milkshakes" ||
+        category==="Smoothies" ||
+        category==="Mocktails" ||
+        category==="Cold Coffee" ||
+        category==="Healthy Drinks"
+
+    ){
+
+        document.getElementById("juiceOptions").style.display="block";
+
+    }
+
+}
+
+// ---------------- ADD TO CART ----------------
+
+function addToCart() {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let cartItem = {
+        id: currentProduct.id,
+        name: currentProduct.name,
+        price: currentProduct.price,
+        image: currentProduct.image,
+        category: currentProduct.category,
+        quantity: quantity
+    };
+
+    // Cake Options
+    if (document.getElementById("cakeOptions").style.display === "block") {
+
+        cartItem.weight = document.querySelector(".weight-btn.active").innerText;
+        cartItem.flavor = document.getElementById("flavor").value;
+        cartItem.message = document.getElementById("cakeMessage").value;
+
+    }
+
+    // Pack Size
+    if (document.getElementById("packOptions").style.display === "block") {
+
+        cartItem.packSize = document.getElementById("packSize").value;
+
+    }
+
+    // Juice Size
+    if (document.getElementById("juiceOptions").style.display === "block") {
+
+        cartItem.bottleSize = document.getElementById("juiceSize").value;
+
+    }
+
+    let existing = cart.find(item =>
+        item.id === cartItem.id &&
+        item.weight === cartItem.weight &&
+        item.flavor === cartItem.flavor &&
+        item.packSize === cartItem.packSize &&
+        item.bottleSize === cartItem.bottleSize
+    );
+
+    if (existing) {
+        existing.quantity += quantity;
+    } else {
+        cart.push(cartItem);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateCartCount();
+
+    alert("✅ Product Added To Cart");
+
+    window.location.href = "cart.html";
+}
+
+// ---------------- WISHLIST ----------------
+
+function addWishlist(){
+
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    let exist = wishlist.find(item => item.id == currentProduct.id);
+
+    if(!exist){
+
+        wishlist.push(currentProduct);
+
+        localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+    }
+
+    alert("❤️ Added to Wishlist");
+
+}
+
+
+// ---------------- RELATED PRODUCTS ----------------
+
+function loadRelated(products){
+
+    let html = "";
+
+    products.slice(0,4).forEach(product=>{
+
+        if(product.id != currentProduct.id){
+
+            html += `
+
+            <div class="col-md-3 mb-4">
+
+                <div class="related-card">
+
+                    <img src="${product.image}">
+
+                    <div class="card-body">
+
+                        <h5>${product.name}</h5>
+
+                        <p>₹${product.price}</p>
+
+                        <a href="product-detail.html?id=${product.id}"
+                        class="btn btn-danger">
+
+                        View Details
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }
+
+    });
+
+    document.getElementById("relatedProducts").innerHTML = html;
+
+}
+
+</script>
+
+</body>
+
+</html>

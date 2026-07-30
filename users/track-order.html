@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Premium Track Order</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+
+  min-height:100vh;
+
+  overflow-x:hidden;
+
+  background:
+  radial-gradient(circle at top left,#ffd6e0 0%,transparent 30%),
+  radial-gradient(circle at bottom right,#d6f6ff 0%,transparent 30%),
+  linear-gradient(135deg,#fff0f5,#fffaf7);
+
+  position:relative;
+}
+
+/* FLOATING PARTICLES */
+
+.particle{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.5);
+
+  animation:float 10s linear infinite;
+}
+
+.p1{
+  width:120px;
+  height:120px;
+  left:10%;
+  top:10%;
+}
+
+.p2{
+  width:80px;
+  height:80px;
+  right:10%;
+  top:25%;
+}
+
+.p3{
+  width:150px;
+  height:150px;
+  left:20%;
+  bottom:10%;
+}
+
+@keyframes float{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-30px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+
+}
+
+/* MAIN */
+
+.main{
+
+  max-width:1300px;
+
+  margin:auto;
+
+  padding:40px 20px;
+
+  display:grid;
+
+  grid-template-columns:1.4fr .8fr;
+
+  gap:30px;
+}
+
+/* GLASS CARD */
+
+.glass{
+
+  background:rgba(255,255,255,.35);
+
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(255,255,255,.3);
+
+  border-radius:35px;
+
+  padding:35px;
+
+  box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+/* TITLE */
+
+.title{
+
+  font-size:58px;
+
+  font-weight:800;
+
+  background:linear-gradient(90deg,#ff4d6d,#ff85a2);
+
+  -webkit-background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+}
+
+.sub{
+
+  color:#666;
+
+  margin-top:10px;
+
+  font-size:17px;
+}
+
+/* ETA */
+
+.eta{
+
+  margin-top:30px;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff85a2);
+
+  color:white;
+
+  padding:22px;
+
+  border-radius:25px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:15px;
+}
+
+.eta h2{
+
+  font-size:30px;
+}
+
+.timer{
+
+  background:white;
+
+  color:#ff4d6d;
+
+  padding:14px 22px;
+
+  border-radius:18px;
+
+  font-size:26px;
+
+  font-weight:800;
+}
+
+/* TRACKER */
+
+.tracker{
+
+  margin-top:45px;
+
+  position:relative;
+
+  display:flex;
+
+  justify-content:space-between;
+}
+
+.line{
+
+  position:absolute;
+
+  top:35px;
+  left:50px;
+
+  width:78%;
+  height:8px;
+
+  background:#ffd2dc;
+
+  border-radius:20px;
+}
+
+.active-line{
+
+  position:absolute;
+
+  top:35px;
+  left:50px;
+
+  width:56%;
+  height:8px;
+
+  background:linear-gradient(90deg,#ff4d6d,#ff85a2);
+
+  border-radius:20px;
+}
+
+.step{
+
+  position:relative;
+
+  z-index:2;
+
+  text-align:center;
+}
+
+.circle{
+
+  width:70px;
+  height:70px;
+
+  border-radius:50%;
+
+  background:white;
+
+  border:5px solid #ffd2dc;
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  font-size:28px;
+
+  color:#ff4d6d;
+
+  margin:auto;
+}
+
+.done .circle{
+
+  background:linear-gradient(135deg,#ff4d6d,#ff85a2);
+
+  border:none;
+
+  color:white;
+}
+
+.current .circle{
+
+  background:linear-gradient(135deg,#ff4d6d,#ff85a2);
+
+  border:none;
+
+  color:white;
+
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+  0%{
+    box-shadow:0 0 0 0 rgba(255,77,109,.5);
+  }
+
+  70%{
+    box-shadow:0 0 0 22px rgba(255,77,109,0);
+  }
+
+  100%{
+    box-shadow:0 0 0 0 rgba(255,77,109,0);
+  }
+
+}
+
+.step p{
+
+  margin-top:14px;
+
+  color:#555;
+
+  font-weight:600;
+}
+
+/* MAP */
+
+.map{
+
+  margin-top:60px;
+
+  height:300px;
+
+  border-radius:30px;
+
+  background:
+  linear-gradient(rgba(255,255,255,.2),rgba(255,255,255,.2)),
+  #fff0f5;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+/* MAP GRID */
+
+.map::before{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background-image:
+  linear-gradient(#ffd2dc 2px,transparent 2px),
+  linear-gradient(90deg,#ffd2dc 2px,transparent 2px);
+
+  background-size:50px 50px;
+
+  opacity:.5;
+}
+
+/* LOCATION */
+
+.location{
+
+  position:absolute;
+
+  width:25px;
+  height:25px;
+
+  border-radius:50%;
+
+  background:#ff4d6d;
+
+  box-shadow:0 0 0 12px rgba(255,77,109,.2);
+}
+
+.shop{
+  top:18%;
+  left:12%;
+}
+
+.home{
+  right:12%;
+  bottom:18%;
+}
+
+/* ROAD */
+
+.road{
+
+  position:absolute;
+
+  width:65%;
+  height:6px;
+
+  background:#ff85a2;
+
+  top:50%;
+  left:16%;
+
+  transform:rotate(18deg);
+
+  border-radius:20px;
+}
+
+/* BIKE */
+
+.bike{
+
+  position:absolute;
+
+  font-size:60px;
+
+  top:42%;
+
+  left:12%;
+
+  animation:moveBike 5s linear infinite;
+}
+
+@keyframes moveBike{
+
+  0%{
+    left:12%;
+    top:42%;
+  }
+
+  100%{
+    left:72%;
+    top:62%;
+  }
+
+}
+
+/* PRODUCT CARD */
+
+.product{
+
+  margin-top:35px;
+
+  background:rgba(255,255,255,.5);
+
+  border-radius:30px;
+
+  padding:25px;
+
+  display:flex;
+
+  gap:20px;
+
+  align-items:center;
+}
+
+.product-img{
+
+  width:120px;
+  height:120px;
+
+  border-radius:25px;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff85a2);
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  font-size:60px;
+
+  color:white;
+}
+
+.product h2{
+
+  color:#333;
+
+  margin-bottom:10px;
+}
+
+.product p{
+
+  color:#666;
+
+  line-height:1.8;
+}
+
+.price{
+
+  margin-top:10px;
+
+  font-size:30px;
+
+  font-weight:800;
+
+  color:#ff4d6d;
+}
+
+/* RIGHT */
+
+.side-title{
+
+  font-size:34px;
+
+  font-weight:800;
+
+  background:linear-gradient(90deg,#ff4d6d,#ff85a2);
+
+  -webkit-background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+
+  margin-bottom:25px;
+}
+
+/* BOX */
+
+.box{
+
+  background:rgba(255,255,255,.45);
+
+  border-radius:25px;
+
+  padding:24px;
+
+  margin-bottom:22px;
+}
+
+.box h3{
+
+  color:#ff4d6d;
+
+  margin-bottom:14px;
+}
+
+.box p{
+
+  color:#666;
+
+  line-height:1.9;
+}
+
+/* RIDER */
+
+.rider{
+
+  display:flex;
+
+  gap:16px;
+
+  align-items:center;
+}
+
+.avatar{
+
+  width:75px;
+  height:75px;
+
+  border-radius:50%;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff85a2);
+
+  display:flex;
+
+  justify-content:center;
+  align-items:center;
+
+  color:white;
+
+  font-size:30px;
+}
+
+/* BUTTON */
+
+.btn{
+
+  width:100%;
+
+  border:none;
+
+  padding:17px;
+
+  border-radius:50px;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff85a2);
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  margin-top:18px;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  box-shadow:0 10px 25px rgba(255,77,109,.25);
+}
+
+.btn:hover{
+
+  transform:translateY(-4px);
+}
+
+/* SUMMARY */
+
+.row{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  margin-bottom:15px;
+
+  color:#555;
+}
+
+.total{
+
+  border-top:2px dashed #ffd2dc;
+
+  margin-top:15px;
+
+  padding-top:18px;
+
+  font-size:22px;
+
+  font-weight:800;
+}
+
+.total span:last-child{
+
+  color:#ff4d6d;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+  .main{
+    grid-template-columns:1fr;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .title{
+    font-size:38px;
+  }
+
+  .tracker{
+    flex-direction:column;
+    gap:35px;
+  }
+
+  .line,
+  .active-line{
+    display:none;
+  }
+
+  .product{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .eta{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PARTICLES -->
+
+<div class="particle p1"></div>
+<div class="particle p2"></div>
+<div class="particle p3"></div>
+
+<div class="main">
+
+  <!-- LEFT -->
+
+  <div class="glass">
+
+    <h1 class="title">
+      Track Your Sweet Order
+    </h1>
+
+    <p class="sub">
+      Fresh bakery items are on the way 🍰
+    </p>
+
+    <!-- ETA -->
+
+    <div class="eta">
+
+      <div>
+
+        <p>Estimated Delivery</p>
+
+        <h2>
+          Arriving Today
+        </h2>
+
+      </div>
+
+      <div class="timer">
+        18 mins
+      </div>
+
+    </div>
+
+    <!-- TRACKER -->
+
+    <div class="tracker">
+
+      <div class="line"></div>
+      <div class="active-line"></div>
+
+      <div class="step done">
+
+        <div class="circle">
+          <i class="fa-solid fa-check"></i>
+        </div>
+
+        <p>Confirmed</p>
+
+      </div>
+
+      <div class="step done">
+
+        <div class="circle">
+          <i class="fa-solid fa-cake-candles"></i>
+        </div>
+
+        <p>Baking</p>
+
+      </div>
+
+      <div class="step current">
+
+        <div class="circle">
+          <i class="fa-solid fa-motorcycle"></i>
+        </div>
+
+        <p>On The Way</p>
+
+      </div>
+
+      <div class="step">
+
+        <div class="circle">
+          <i class="fa-solid fa-gift"></i>
+        </div>
+
+        <p>Delivered</p>
+
+      </div>
+
+    </div>
+
+    <!-- MAP -->
+
+    <div class="map">
+
+      <div class="location shop"></div>
+
+      <div class="road"></div>
+
+      <div class="location home"></div>
+
+      <div class="bike">
+        🛵
+      </div>
+
+    </div>
+
+    <!-- PRODUCT -->
+
+    <div class="product" id="trackProduct"></div>
+  </div>
+
+  <!-- RIGHT -->
+
+  <div class="glass">
+
+    <h2 class="side-title">
+      Order Details
+    </h2>
+
+    <!-- INFO -->
+
+    <div class="box">
+
+      <h3>
+        🧾 Order Info
+      </h3>
+
+     <p id="orderInfo"></p>
+    </div>
+
+    <!-- ADDRESS -->
+
+    <div class="box">
+
+      <h3>
+        📍 Delivery Address
+      </h3>
+
+      <p>
+        AV Sweet House,<br>
+        Kollam, Kerala,<br>
+        India - 691001
+      </p>
+
+    </div>
+
+    <!-- RIDER -->
+
+    <div class="box">
+
+      <h3>
+        🚚 Delivery Partner
+      </h3>
+
+      <div class="rider">
+
+        <div class="avatar">
+          <i class="fa-solid fa-user"></i>
+        </div>
+
+        <div>
+
+          <strong>
+            Rahul Kumar
+          </strong>
+
+          <p>
+            Delivery Executive
+          </p>
+
+        </div>
+
+      </div>
+
+     <button class="btn"
+onclick="window.location.href='tel:+919930403727'">
+📞 Call Rider
+</button>
+
+    </div>
+
+    <!-- PAYMENT -->
+
+    <div class="box">
+
+      <h3>
+        💳 Payment Summary
+      </h3>
+
+      <div class="row">
+        <span>Subtotal</span>
+        <span id="subtotal">₹0</span>
+      </div>
+
+      <div class="row">
+        <span>Discount</span>
+        <span>- ₹165</span>
+      </div>
+
+      <div class="row">
+        <span>Delivery Fee</span>
+        <span>₹50</span>
+      </div>
+
+      <div class="row total">
+        <span>Total</span>
+        <span id="total">₹0</span>
+      </div>
+
+    </div>
+
+    <button class="btn"
+onclick="window.location.href='index.html'">
+Continue Shopping →
+</button>
+
+  </div>
+
+</div>
+<script>
+
+let orders =
+JSON.parse(localStorage.getItem("orders")) || [];
+
+if(orders.length === 0){
+    window.location.href = "index.html";
+}
+  
+
+if(orders.length > 0){
+
+    let order =
+    orders[orders.length - 1];
+
+    document.getElementById("trackProduct").innerHTML = `
+
+        <div class="product-img">
+            🎂
+        </div>
+
+        <div>
+
+            <h2>${order.name}</h2>
+
+            <p>
+                Qty : ${order.qty}
+            </p>
+
+            <div class="price">
+            ₹${order.price * order.qty}
+           </div>
+
+        </div>
+
+    `;
+
+    document.getElementById("orderInfo").innerHTML = `
+Order ID : #AV1000 <br>
+Payment : UPI Paid <br>
+Items : ${order.qty} <br>
+Ordered On : ${order.date}
+`;
+
+    let amount = order.price * order.qty;
+
+let discount = amount > 1000 ? 165 : 50;
+let deliveryFee = 50;
+
+let total = amount - discount + deliveryFee;
+
+document.getElementById("subtotal").innerText =
+"₹" + amount;
+
+document.getElementById("total").innerText =
+"₹" + total;
+}
+
+</script>
+</body>
+</html>

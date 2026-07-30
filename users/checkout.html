@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout - AV Sweet House</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:
+  radial-gradient(circle at top left,#ffe5ec 0%,transparent 30%),
+  radial-gradient(circle at bottom right,#d6f6ff 0%,transparent 30%),
+  #fffaf7;
+
+  overflow-x:hidden;
+}
+
+/* HEADER */
+
+header{
+  width:100%;
+
+  padding:18px 8%;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  background:rgba(255,255,255,0.7);
+
+  backdrop-filter:blur(14px);
+
+  position:sticky;
+  top:0;
+  z-index:1000;
+
+  box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+.logo{
+  font-size:34px;
+  font-weight:800;
+
+  background:linear-gradient(90deg,#ff4d6d,#ff758f);
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.home-btn{
+  text-decoration:none;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+
+  color:white;
+
+  padding:12px 24px;
+
+  border-radius:50px;
+
+  font-weight:600;
+
+  transition:0.3s;
+}
+
+.home-btn:hover{
+  transform:translateY(-3px);
+}
+
+/* MAIN */
+
+.container{
+  width:100%;
+  padding:40px 8%;
+
+  display:grid;
+  grid-template-columns:1fr 420px;
+  gap:30px;
+}
+
+/* LEFT */
+
+.left{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+}
+
+/* BOX */
+
+.box{
+  background:rgba(255,255,255,0.75);
+
+  backdrop-filter:blur(14px);
+
+  padding:28px;
+
+  border-radius:28px;
+
+  box-shadow:0 15px 40px rgba(0,0,0,0.06);
+}
+
+.box h2{
+  font-size:24px;
+  margin-bottom:22px;
+
+  color:#ff4d6d;
+}
+
+/* INPUTS */
+
+.input-group{
+  margin-bottom:18px;
+}
+
+.input-group label{
+  display:block;
+
+  margin-bottom:8px;
+
+  font-weight:600;
+
+  color:#444;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+
+  padding:15px 18px;
+
+  border:none;
+
+  border-radius:16px;
+
+  background:#fff0f3;
+
+  outline:none;
+
+  font-size:15px;
+
+  transition:0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  background:white;
+
+  box-shadow:0 0 0 3px rgba(255,77,109,0.15);
+}
+
+textarea{
+  resize:none;
+  height:100px;
+}
+
+/* GRID */
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+/* PAYMENT */
+
+.payment-box{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  padding:18px;
+
+  border-radius:20px;
+
+  background:#fff0f3;
+
+  margin-bottom:15px;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  border:2px solid transparent;
+}
+
+.payment-box:hover{
+  border-color:#ff4d6d;
+  transform:translateY(-3px);
+}
+
+.payment-box.active{
+  border-color:#ff4d6d;
+  background:white;
+}
+
+.payment-icon{
+  width:60px;
+  height:60px;
+
+  border-radius:18px;
+
+  background:white;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:24px;
+
+  color:#ff4d6d;
+}
+
+.payment-content h4{
+  font-size:18px;
+}
+
+.payment-content p{
+  color:#777;
+  margin-top:5px;
+}
+
+/* RIGHT */
+
+.right{
+  position:sticky;
+  top:110px;
+  height:fit-content;
+}
+
+/* SUMMARY */
+
+.summary{
+  background:rgba(255,255,255,0.75);
+
+  backdrop-filter:blur(14px);
+
+  padding:30px;
+
+  border-radius:30px;
+
+  box-shadow:0 15px 40px rgba(0,0,0,0.06);
+}
+
+.summary h2{
+  font-size:30px;
+  margin-bottom:25px;
+
+  background:linear-gradient(90deg,#ff4d6d,#ff758f);
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* PRODUCT */
+
+.product{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  margin-bottom:20px;
+}
+
+.product-img{
+  width:75px;
+  height:75px;
+
+  border-radius:20px;
+
+  background:#fff0f3;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:36px;
+}
+
+.product-info{
+  flex:1;
+}
+
+.product-info h4{
+  font-size:17px;
+}
+
+.product-info p{
+  color:#777;
+  margin-top:5px;
+}
+
+.product-price{
+  font-weight:700;
+  color:#ff4d6d;
+}
+
+/* PRICE ROW */
+
+.price-row{
+  display:flex;
+  justify-content:space-between;
+
+  margin-top:16px;
+
+  color:#555;
+}
+
+.total{
+  border-top:2px dashed #ffd2dc;
+
+  margin-top:22px;
+  padding-top:20px;
+
+  font-size:22px;
+  font-weight:700;
+}
+
+.total span:last-child{
+  color:#ff4d6d;
+  font-size:34px;
+}
+
+/* DELIVERY */
+
+.delivery{
+  margin-top:25px;
+
+  background:#fff0f3;
+
+  padding:18px;
+
+  border-radius:22px;
+
+  color:#666;
+
+  line-height:1.8;
+}
+
+/* BUTTONS */
+
+.place-btn{
+  width:100%;
+
+  padding:16px;
+
+  border:none;
+
+  border-radius:50px;
+
+  margin-top:22px;
+
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+
+  color:white;
+
+  font-size:17px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  box-shadow:0 12px 30px rgba(255,77,109,0.25);
+}
+
+.place-btn:hover{
+  transform:translateY(-4px);
+}
+
+.track-btn{
+  width:100%;
+
+  padding:15px;
+
+  border-radius:50px;
+
+  border:2px solid #ff4d6d;
+
+  background:white;
+
+  color:#ff4d6d;
+
+  font-size:16px;
+  font-weight:700;
+
+  margin-top:14px;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+.track-btn:hover{
+  background:#ff4d6d;
+  color:white;
+}
+
+/* OFFER */
+
+.offer{
+  margin-top:20px;
+
+  background:linear-gradient(135deg,#fff0f3,#fff7fa);
+
+  padding:18px;
+
+  border-radius:22px;
+
+  text-align:center;
+
+  color:#ff4d6d;
+
+  font-weight:600;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+  .container{
+    grid-template-columns:1fr;
+  }
+
+  .right{
+    position:relative;
+    top:0;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .container{
+    padding:25px 5%;
+  }
+
+  .logo{
+    font-size:26px;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="logo">
+    🍰 AV Sweet House
+  </div>
+
+  <a href="index.html" class="home-btn">
+🏠 Home
+</a>
+
+</header>
+
+<!-- MAIN -->
+
+<div class="container">
+
+  <!-- LEFT -->
+
+  <div class="left">
+
+    <!-- CUSTOMER -->
+
+    <div class="box">
+
+      <h2>
+        👤 Customer Details
+      </h2>
+
+      <div class="row">
+
+        <div class="input-group">
+
+          <label>Full Name</label>
+
+          <input type="text" placeholder="Enter your name">
+
+        </div>
+
+        <div class="input-group">
+
+          <label>Phone Number</label>
+
+          <input type="text" placeholder="Enter phone number">
+
+        </div>
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Email Address</label>
+
+        <input type="email" placeholder="Enter email">
+
+      </div>
+
+    </div>
+
+    <!-- ADDRESS -->
+
+    <div class="box">
+
+      <h2>
+        📍 Delivery Address
+      </h2>
+
+      <div class="input-group">
+
+        <label>Address</label>
+
+        <textarea placeholder="House no, street, city, landmark"></textarea>
+
+      </div>
+
+      <div class="row">
+
+        <div class="input-group">
+
+          <label>City</label>
+
+          <input type="text" placeholder="Enter city">
+
+        </div>
+
+        <div class="input-group">
+
+          <label>Pincode</label>
+
+          <input type="text" placeholder="Enter pincode">
+
+        </div>
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Delivery Instructions</label>
+
+        <textarea placeholder="Optional instructions"></textarea>
+
+      </div>
+
+    </div>
+
+    <!-- DELIVERY -->
+
+    <div class="box">
+
+      <h2>
+        🚚 Delivery Option
+      </h2>
+
+      <div class="row">
+
+        <div class="input-group">
+
+          <label>Select Option</label>
+
+          <select>
+            <option>Home Delivery</option>
+            <option>Pickup From Store</option>
+          </select>
+
+        </div>
+
+        <div class="input-group">
+
+          <label>Select Date</label>
+
+          <input type="date">
+
+        </div>
+
+      </div>
+
+      <div class="input-group">
+
+        <label>Select Time</label>
+
+        <input type="time">
+
+      </div>
+
+    </div>
+
+    <!-- PAYMENT -->
+
+    <div class="box">
+
+      <h2>
+        💳 Payment Method
+      </h2>
+
+      <div class="payment-box active">
+
+        <div class="payment-icon">
+          <i class="fa-brands fa-google-pay"></i>
+        </div>
+
+        <div class="payment-content">
+
+          <h4>UPI Payment</h4>
+
+          <p>Google Pay, PhonePe, Paytm</p>
+
+        </div>
+
+      </div>
+
+      <div class="payment-box">
+
+        <div class="payment-icon">
+          💳
+        </div>
+
+        <div class="payment-content">
+
+          <h4>Card Payment</h4>
+
+          <p>Visa, MasterCard, RuPay</p>
+
+        </div>
+
+      </div>
+
+      <div class="payment-box">
+
+        <div class="payment-icon">
+          💵
+        </div>
+
+        <div class="payment-content">
+
+          <h4>Cash On Delivery</h4>
+
+          <p>Pay after receiving order</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT -->
+
+  <div class="right">
+
+    <div class="summary">
+
+      <h2>
+        🧾 Order Summary
+      </h2>
+
+      <!-- PRODUCT -->
+
+      
+
+      <!-- PRODUCT -->
+
+      
+      
+      <div id="checkoutItems"></div>
+
+      <!-- PRICE -->
+
+      <div class="price-row">
+
+       <span>Subtotal</span>
+
+        <span id="subtotal">₹0</span>
+
+       </div>
+
+      <div class="price-row">
+    <span>Discount</span>
+    <span id="discount">₹0</span>
+    </div>
+
+      <div class="price-row">
+      <span>Delivery</span>
+      <span id="delivery">₹50</span>
+       </div>
+
+       <div class="price-row total">
+      <span>Total</span>
+      <span id="total">₹0</span>
+       </div>
+
+      
+
+      <!-- DELIVERY -->
+
+      <div class="delivery">
+
+        🚚 Delivery in 30-40 mins <br>
+        🎁 FREE Cookie Included <br>
+        ❤️ Prepared with love by AV Sweet House
+
+      </div>
+
+      <!-- OFFER -->
+
+      <div class="offer">
+
+        ✨ Freshly baked premium desserts made daily ✨
+
+      </div>
+
+      <!-- BUTTON -->
+
+      <button
+class="place-btn"
+onclick="placeOrder()">
+
+  <i class="fa-solid fa-lock"></i>
+
+  Place Secure Order
+
+</button>
+
+      <button class="track-btn">
+
+        Track Order
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<script>
+
+function placeOrder(){
+
+    let currentUser =
+    JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!currentUser){
+
+        alert("Please login first!");
+
+        window.location.href="login.html";
+
+        return;
+
+    }
+
+    let customerName =
+    document.querySelector('input[type="text"]').value;
+
+    if(customerName.trim()===""){
+
+        alert("Please enter your name");
+
+        return;
+
+    }
+
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
+
+    if(cart.length===0){
+
+        alert("Your cart is empty 🛒");
+
+        return;
+
+    }
+
+    let orders =
+    JSON.parse(localStorage.getItem("orders")) || [];
+
+    let subtotal = 0;
+
+    cart.forEach(item=>{
+
+        subtotal += item.price * item.qty;
+
+    });
+
+    let delivery = 50;
+
+    let total = subtotal + delivery;
+
+    let order = {
+
+        orderId:
+        "ORD"+Date.now(),
+
+        customerName:
+        currentUser.firstName + " " + currentUser.lastName,
+
+        email:
+        currentUser.email,
+
+        phone:
+        currentUser.phone,
+
+        products:
+        cart,
+
+        total:
+        total,
+
+        status:
+        "Pending",
+
+        date:
+        new Date().toLocaleDateString()
+
+    };
+
+    orders.push(order);
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
+    localStorage.removeItem("cart");
+    container.innerHTML = "";
+
+    alert("Order Placed Successfully 🎉");
+
+    window.location.href="success.html";
+
+}
+</script>
+<script>
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+let container =
+document.getElementById("checkoutItems");
+
+let subtotal = 0;
+
+cart.forEach(item => {
+
+    subtotal += item.price * item.qty;
+
+    container.innerHTML += `
+
+    <div class="product">
+
+        <div class="product-img">
+            🍰
+        </div>
+
+        <div class="product-info">
+
+            <h4>${item.name}</h4>
+
+            <p>Qty : ${item.qty}</p>
+
+        </div>
+
+        <div class="product-price">
+
+            ₹${item.price * item.qty}
+
+        </div>
+
+    </div>
+
+    `;
+
+});
+
+let discount = 0;
+let delivery = 50;
+
+let finalTotal = subtotal - discount + delivery;
+
+document.getElementById("subtotal").innerText =
+"₹" + subtotal;
+
+document.getElementById("total").innerText =
+"₹" + finalTotal;
+</script>
+</body>
+
+</html>
+</body>
+
+</html>
