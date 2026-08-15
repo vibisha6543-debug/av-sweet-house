@@ -114,195 +114,447 @@ Logout
 
 <script>
 
-let orders =
-JSON.parse(localStorage.getItem("orders")) || [];
+const API_URL = "http://localhost:5000/api/orders";
 
-let container =
-document.getElementById("ordersContainer");
+let orders = [];
 
-function loadOrders(){
+const container =
+    document.getElementById("ordersContainer");
 
-container.innerHTML = "";
 
-if(orders.length === 0){
+/* =========================
+   LOAD ORDERS FROM BACKEND
+========================= */
 
-container.innerHTML = `
-<div class="empty-box">
-<h3>No Orders Found 📦</h3>
-<p>Customer orders will appear here.</p>
-</div>
-`;
+async function loadOrders() {
 
-return;
-}
+    try {
 
-orders.forEach((order,index)=>{
+        const response =
+            await fetch(API_URL);
 
-if(!order.status){
-order.status = "Pending";
-}
+        const data =
+            await response.json();
 
-let statusClass = "";
+        console.log("Admin Orders:", data);
 
-if(order.status === "Processing"){
-statusClass = "processing";
-}
+        /*
+           Backend may return:
+           { success:true, orders:[...] }
+        */
 
-if(order.status === "Shipped"){
-statusClass = "shipped";
-}
+        if (Array.isArray(data)) {
 
-if(order.status === "Delivered"){
-statusClass = "delivered";
-}
+            orders = data;
 
-container.innerHTML += `
+        } else {
 
-<div class="order-card">
+            orders = data.orders || [];
 
-<h4>${order.orderId}</h4>
+        }
 
-<p>
+        renderOrders();
 
-<b>Customer :</b>
+    }
+    catch(error) {
 
-${order.customerName ? order.customerName : "Guest Customer"}
+        console.error("Error loading orders:", error);
 
-</p>
+        container.innerHTML = `
 
-<p>
+            <div class="empty-box">
 
-<b>Email :</b>
+                <h3>❌ Failed to Load Orders</h3>
 
-${order.email ? order.email : "Not Available"}
+                <p>
+                    Please check whether your backend
+                    server is running.
+                </p>
 
-</p>
+            </div>
 
-<p>
+        `;
 
-<b>Total :</b>
-
-₹${order.total ? order.total : (order.price * order.qty)}
-
-</p>
-
-<p>
-
-<b>Date :</b>
-
-${order.date}
-
-</p>
-
-<p>
-
-<b>Products :</b>
-
-${order.products ? order.products.length : 1}
-
-Items
-
-</p>
-
-<p>
-
-<b>Status :</b>
-
-<span class="status ${statusClass}">
-
-${order.status}
-
-</span>
-
-</p>
-<select>
-<option ${order.status==="Pending"?"selected":""}>
-Pending
-</option>
-
-<option ${order.status==="Processing"?"selected":""}>
-Processing
-</option>
-
-<option ${order.status==="Shipped"?"selected":""}>
-Shipped
-</option>
-
-<option ${order.status==="Delivered"?"selected":""}>
-Delivered
-</option>
-
-<option ${order.status==="Cancelled"?"selected":""}>
-Cancelled
-</option>
-</select>
-<button
-
-class="btn btn-primary action-btn mt-3"
-
-onclick="viewOrder(${index})">
-
-View Details
-
-</button>
-
-<button
-
-class="btn btn-danger action-btn mt-2"
-
-onclick="deleteOrder(${index})">
-
-Delete Order
-
-</button>
-
-</div>
-
-`;
-});
+    }
 
 }
 
-function changeStatus(index,status){
 
-orders[index].status = status;
+/* =========================
+   DISPLAY ORDERS
+========================= */
 
-localStorage.setItem(
-"orders",
-JSON.stringify(orders)
-);
+function renderOrders() {
 
-loadOrders();
+    container.innerHTML = "";
+
+
+    if (orders.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="empty-box">
+
+                <h3>
+                    No Orders Found 📦
+                </h3>
+
+                <p>
+                    Customer orders will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    orders.forEach((order, index) => {
+
+
+        let statusClass = "";
+
+
+        if (order.status === "Pending") {
+
+            statusClass = "processing";
+
+        }
+
+        else if (order.status === "Processing") {
+
+            statusClass = "processing";
+
+        }
+
+        else if (order.status === "Shipped") {
+
+            statusClass = "shipped";
+
+        }
+
+        else if (order.status === "Delivered") {
+
+            statusClass = "delivered";
+
+        }
+
+
+        let total =
+            Number(order.totalAmount || 0);
+
+
+        let productCount =
+            order.products
+            ? order.products.length
+            : 0;
+
+
+        container.innerHTML += `
+
+            <div class="order-card">
+
+                <h4>
+                    Order #${order._id}
+                </h4>
+
+
+                <p>
+
+                    <b>Customer :</b>
+
+                    ${order.customerName || "Guest Customer"}
+
+                </p>
+
+
+                <p>
+
+                    <b>Email :</b>
+
+                    ${order.email || "Not Available"}
+
+                </p>
+
+
+                <p>
+
+                    <b>Phone :</b>
+
+                    ${order.phone || "Not Available"}
+
+                </p>
+
+
+                <p>
+
+                    <b>Total :</b>
+
+                    ₹${total.toFixed(2)}
+
+                </p>
+
+
+                <p>
+
+                    <b>Products :</b>
+
+                    ${productCount} Items
+
+                </p>
+
+
+                <p>
+
+                    <b>Date :</b>
+
+                    ${
+                        order.createdAt
+                        ? new Date(order.createdAt).toLocaleString()
+                        : "Not Available"
+                    }
+
+                </p>
+
+
+                <p>
+
+                    <b>Status :</b>
+
+                    <span class="status ${statusClass}">
+
+                        ${order.status || "Pending"}
+
+                    </span>
+
+                </p>
+
+
+                <!-- STATUS -->
+
+                <select
+                    class="form-select mt-3"
+                    onchange="changeStatus('${order._id}', this.value)"
+                >
+
+                    <option
+                        value="Pending"
+                        ${order.status === "Pending" ? "selected" : ""}
+                    >
+                        Pending
+                    </option>
+
+
+                    <option
+                        value="Processing"
+                        ${order.status === "Processing" ? "selected" : ""}
+                    >
+                        Processing
+                    </option>
+
+
+                    <option
+                        value="Shipped"
+                        ${order.status === "Shipped" ? "selected" : ""}
+                    >
+                        Shipped
+                    </option>
+
+
+                    <option
+                        value="Delivered"
+                        ${order.status === "Delivered" ? "selected" : ""}
+                    >
+                        Delivered
+                    </option>
+
+
+                    <option
+                        value="Cancelled"
+                        ${order.status === "Cancelled" ? "selected" : ""}
+                    >
+                        Cancelled
+                    </option>
+
+                </select>
+
+
+                <!-- VIEW -->
+
+                <button
+                    class="btn btn-primary action-btn mt-3"
+                    onclick="viewOrder('${order._id}')"
+                >
+
+                    View Details
+
+                </button>
+
+
+            </div>
+
+        `;
+
+    });
 
 }
 
-function deleteOrder(index){
 
-if(confirm("Delete this order?")){
+/* =========================
+   CHANGE ORDER STATUS
+========================= */
 
-orders.splice(index,1);
+async function changeStatus(orderId, status) {
 
-localStorage.setItem(
-"orders",
-JSON.stringify(orders)
-);
+    try {
 
-loadOrders();
+        console.log(
+            "Changing status:",
+            orderId,
+            status
+        );
+
+
+        const response = await fetch(
+
+            `${API_URL}/${orderId}`,
+
+            {
+
+                method: "PUT",
+
+                headers: {
+
+                    "Content-Type":
+                        "application/json"
+
+                },
+
+                body: JSON.stringify({
+
+                    status: status
+
+                })
+
+            }
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        console.log(
+            "Status update response:",
+            data
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Status update failed"
+            );
+
+        }
+
+
+        alert(
+            "Order status updated to " +
+            status
+        );
+
+
+        loadOrders();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Status update error:",
+            error
+        );
+
+
+        alert(
+            "❌ Could not update order status"
+        );
+
+    }
 
 }
 
+
+/* =========================
+   VIEW ORDER
+========================= */
+
+async function viewOrder(orderId) {
+
+    console.log("Selected Order ID:", orderId);
+
+    if (!orderId) {
+
+        alert("Order ID not found");
+
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            "http://localhost:5000/api/orders/" + orderId
+        );
+
+        const fullOrder = await response.json();
+
+        console.log(
+            "Full Order From Server:",
+            fullOrder
+        );
+
+        if (!response.ok) {
+
+            alert(
+                fullOrder.message ||
+                "Unable to load order"
+            );
+
+            return;
+        }
+
+        localStorage.setItem(
+            "selectedOrder",
+            JSON.stringify(fullOrder)
+        );
+
+        window.location.href =
+            "order-details.html";
+
+    }
+    catch(error) {
+
+        console.error(
+            "View Order Error:",
+            error
+        );
+
+        alert(
+            "Server connection failed"
+        );
+
+    }
 }
+/* =========================
+   START
+========================= */
 
-function viewOrder(index){
-
-localStorage.setItem(
-"selectedOrder",
-JSON.stringify(orders[index])
-);
-
-window.location.href = "order-details.html";
-
-}
 loadOrders();
 
 </script>

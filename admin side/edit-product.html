@@ -236,30 +236,43 @@ window.location.href =
 
 /* LOAD PRODUCT */
 
-let products =
-JSON.parse(localStorage.getItem("products")) || [];
+const productId = localStorage.getItem("editProductId");
 
-let index =
-localStorage.getItem("editProductIndex");
+async function loadProduct(){
 
-let product =
-products[index];
+    const response = await fetch(
+        "http://localhost:5000/api/products"
+    );
 
-document.getElementById("name").value =
-product.name;
+    const products = await response.json();
 
-document.getElementById("price").value =
-product.price;
+    const product = products.find(
+        p => p._id === productId
+    );
 
-document.getElementById("image").value =
-product.image;
+    if(!product){
+        alert("Product Not Found");
+        return;
+    }
 
-document.getElementById("category").value =
-product.category;
+    document.getElementById("name").value =
+    product.name;
 
-document.getElementById("previewImg").src =
-product.image;
+    document.getElementById("price").value =
+    product.price;
 
+    document.getElementById("image").value =
+    product.image;
+
+    document.getElementById("category").value =
+    product.category;
+
+    document.getElementById("previewImg").src =
+    product.image;
+
+}
+
+loadProduct();
 /* PREVIEW */
 
 function previewImage(){
@@ -271,37 +284,50 @@ document.getElementById("image").value;
 
 /* SAVE */
 
-function saveProduct(){
+async function saveProduct(){
 
-products[index] = {
+    console.log("Product ID:", productId);
 
-name:
-document.getElementById("name").value,
+    try{
 
-price:
-Number(document.getElementById("price").value),
+        const response = await fetch(
+    `http://localhost:5000/api/products/${productId}`,
+            {
+                method: "PUT",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+    name: document.getElementById("name").value,
+    price: document.getElementById("price").value,
+    image: document.getElementById("image").value,
+    category: document.getElementById("category").value
+})
+            }
+        );
 
-image:
-document.getElementById("image").value,
+        console.log("Response Status:", response.status);
+        console.log("Response OK:", response.ok);
 
-category:
-document.getElementById("category").value
+        const data = await response.json();
 
-};
+        alert(data.message);
 
-localStorage.setItem(
-"products",
-JSON.stringify(products)
-);
+        window.location.href = "manage-products.html";
 
-alert("Product Updated Successfully 🎉");
+    }
+    catch(error){
 
-window.location.href =
-"manage-products.html";
+        console.error(error);
+
+        alert("Update Failed");
+
+    }
 
 }
-
 </script>
+
+
 
 </body>
 </html>

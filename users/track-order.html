@@ -665,6 +665,26 @@ body{
 
 }
 
+.continue-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(255, 77, 109, 0.25);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.continue-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 77, 109, 0.35);
+    color: white;
+}
+
 </style>
 
 </head>
@@ -866,12 +886,12 @@ onclick="window.location.href='tel:+919930403727'">
 
       <div class="row">
         <span>Discount</span>
-        <span>- ₹165</span>
+        <span id="discount">₹0</span>
       </div>
 
       <div class="row">
         <span>Delivery Fee</span>
-        <span>₹50</span>
+        <span id="deliveryFee">₹50</span>
       </div>
 
       <div class="row total">
@@ -881,70 +901,179 @@ onclick="window.location.href='tel:+919930403727'">
 
     </div>
 
-    <button class="btn"
-onclick="window.location.href='index.html'">
-Continue Shopping →
-</button>
+    <a href="/" class="continue-btn">
+    🛍️ Continue Shopping
+</a>
 
   </div>
 
 </div>
 <script>
 
-let orders =
-JSON.parse(localStorage.getItem("orders")) || [];
+const lastOrder =
+    JSON.parse(localStorage.getItem("lastOrder"));
 
-if(orders.length === 0){
+if (!lastOrder) {
+
+    alert("No recent order found.");
     window.location.href = "index.html";
-}
-  
 
-if(orders.length > 0){
+} else {
 
-    let order =
-    orders[orders.length - 1];
+    console.log("Track Order:", lastOrder);
 
-    document.getElementById("trackProduct").innerHTML = `
-
-        <div class="product-img">
-            🎂
-        </div>
-
-        <div>
-
-            <h2>${order.name}</h2>
-
-            <p>
-                Qty : ${order.qty}
-            </p>
-
-            <div class="price">
-            ₹${order.price * order.qty}
-           </div>
-
-        </div>
-
-    `;
+    /* =========================
+       ORDER INFORMATION
+    ========================= */
 
     document.getElementById("orderInfo").innerHTML = `
-Order ID : #AV1000 <br>
-Payment : UPI Paid <br>
-Items : ${order.qty} <br>
-Ordered On : ${order.date}
-`;
+        Order ID : #${lastOrder._id} <br>
+        Payment : ${lastOrder.paymentMethod || "UPI"} <br>
+        Items : ${lastOrder.products.length} <br>
+        Status : ${lastOrder.status || "Pending"}
+    `;
 
-    let amount = order.price * order.qty;
 
-let discount = amount > 1000 ? 165 : 50;
-let deliveryFee = 50;
+    /* =========================
+       PRODUCTS
+    ========================= */
 
-let total = amount - discount + deliveryFee;
+    const productContainer =
+        document.getElementById("trackProduct");
 
-document.getElementById("subtotal").innerText =
-"₹" + amount;
+    productContainer.innerHTML = "";
 
-document.getElementById("total").innerText =
-"₹" + total;
+    let subtotal = 0;
+
+
+    lastOrder.products.forEach(product => {
+
+        const quantity =
+            Number(product.quantity ?? product.qty ?? 1);
+
+        const price =
+            Number(product.price || 0);
+
+        const productTotal =
+            price * quantity;
+
+        subtotal += productTotal;
+
+
+        productContainer.innerHTML += `
+
+            <div class="product">
+
+                <div class="product-img">
+
+                    ${
+                        product.image
+                        ?
+                        `<img
+                            src="${product.image}"
+                            style="
+                                width:100%;
+                                height:100%;
+                                object-fit:cover;
+                                border-radius:20px;
+                            "
+                        >`
+                        :
+                        `🎂`
+                    }
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h2>
+                        ${product.name}
+                    </h2>
+
+                    <p>
+                        Qty : ${quantity}
+                    </p>
+
+                    <div class="price">
+                        ₹${productTotal.toFixed(2)}
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+    });
+
+
+    /* =========================
+       DISCOUNT
+    ========================= */
+
+    let discount = 0;
+
+    if (subtotal > 1000) {
+
+        discount = subtotal * 0.10;
+
+    }
+
+
+    /* =========================
+       DELIVERY
+    ========================= */
+
+    const deliveryFee = 50;
+
+
+    /* =========================
+       FINAL TOTAL
+    ========================= */
+
+    /*
+       Backend totalAmount is the
+       final order amount.
+    */
+
+    const finalTotal =
+        Number(lastOrder.totalAmount);
+
+
+    /* =========================
+       PAYMENT SUMMARY
+    ========================= */
+
+    document.getElementById("subtotal").innerText =
+        "₹" + subtotal.toFixed(2);
+
+
+    document.getElementById("discount").innerText =
+        "- ₹" + discount.toFixed(2);
+
+
+    document.getElementById("deliveryFee").innerText =
+        "₹" + deliveryFee.toFixed(2);
+
+
+    document.getElementById("total").innerText =
+        "₹" + finalTotal.toFixed(2);
+
+
+    /* =========================
+       DEBUG
+    ========================= */
+
+    console.log("Products:", lastOrder.products);
+
+    console.log("Subtotal:", subtotal);
+
+    console.log("Discount:", discount);
+
+    console.log("Delivery:", deliveryFee);
+
+    console.log("Backend Total:", lastOrder.totalAmount);
+
 }
 
 </script>

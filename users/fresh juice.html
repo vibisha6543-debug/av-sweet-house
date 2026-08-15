@@ -547,134 +547,151 @@ class="btn btn-pink">
 </style>
 <script>
 
-async function loadfreshJuiceProducts(){
+async function loadFreshJuiceProducts(){
 
-    const response = await fetch("http://localhost:5000/api/products");
+    const response =
+        await fetch("http://localhost:5000/api/products");
 
-    const products = await response.json();
+    const products =
+        await response.json();
 
     const container =
-    document.getElementById("freshJuiceProducts");
+        document.getElementById("freshJuiceProducts");
 
     container.innerHTML = "";
 
     const freshJuiceProducts =
-    products.filter(product =>
-        product.category === "Fresh Juices"
-    );
+        products.filter(product =>
+            product.category === "Fresh Juices"
+        );
 
-    freshJuiceProducts.forEach(product=>{
+    freshJuiceProducts.forEach(product => {
 
         container.innerHTML += `
 
-<div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-6">
 
-<div class="product-card">
+            <div class="product-card">
 
-<img src="${product.image}">
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
 
-<div class="product-body">
+                <div class="product-body">
 
-<h4 class="product-title">
-${product.name}
-</h4>
+                    <h4 class="product-title">
+                        ${product.name}
+                    </h4>
 
-<div class="price">
-₹${product.price}
-</div>
+                    <div class="price">
+                        ₹${product.price}
+                    </div>
 
-<div class="d-grid gap-2 mt-3">
+                    <div class="d-grid gap-2 mt-3">
 
-<button
-class="btn btn-pink rounded-pill"
-onclick="addToCart(
-${product.id},
-'${product.name}',
-${product.price},
-'${product.image}',
-'${product.category}'
-)">
-🛒 Add to Cart
-</button>
+                        <button
+                            class="btn btn-pink rounded-pill"
+                            onclick="addToCart(
+                                '${product._id}',
+                                '${product.name}',
+                                ${product.price},
+                                '${product.image}',
+                                '${product.category}'
+                            )">
 
-<a
-href="product-detail.html?id=${product.id}"
-class="btn btn-outline-danger rounded-pill">
-👁 View Details
-</a>
+                            🛒 Add to Cart
 
-</div>
+                        </button>
 
-</div>
+                        <a
+                            href="product-detail.html?id=${product._id}"
+                            class="btn btn-outline-danger rounded-pill">
 
-</div>
+                            👁 View Details
 
-</div>
+                        </a>
 
-`;
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
 
     });
 
 }
 
+
 function addToCart(id, name, price, image, category){
 
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
 
-let existing =
-cart.find(item=>item.id==id);
+    let existing =
+        cart.find(item => item.id === id);
 
-if(existing){
+    if(existing){
 
-existing.quantity++;
+        existing.quantity++;
 
-}else{
+    } else {
 
-cart.push({
+        cart.push({
 
-id:id,
-name:name,
-price:price,
-image:image,
-category:category,
-quantity:1
+            id: id,
+            name: name,
+            price: price,
+            image: image,
+            category: category,
+            quantity: 1
 
-});
+        });
+
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    updateCartCount();
+
+    alert("✅ Product Added To Cart");
 
 }
 
-localStorage.setItem(
-"cart",
-JSON.stringify(cart)
-);
 
-document.getElementById("cartCount").innerText =
-cart.length;
-
-alert("✅ Product Added To Cart");
-
-}
-loadfreshJuiceProducts();
+loadFreshJuiceProducts();
 
 </script>
+
 <script src="cart.js"></script>
 <script src="wishlist.js"></script>
+
 <script>
 
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
-
 let wishlist =
-JSON.parse(localStorage.getItem("wishlist")) || [];
+    JSON.parse(localStorage.getItem("wishlist")) || [];
 
-document.getElementById("cartCount").innerText =
-cart.length;
+updateCartCount();
 
 document.getElementById("wishlistCount").innerText =
-wishlist.length;
+    wishlist.length;
 
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+<script src="cart.js"></script>
+<script src="wishlist.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

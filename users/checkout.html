@@ -505,7 +505,7 @@ textarea{
 
           <label>Full Name</label>
 
-          <input type="text" placeholder="Enter your name">
+          <input type="text" id="customerName" placeholder="Enter your name">
 
         </div>
 
@@ -513,7 +513,7 @@ textarea{
 
           <label>Phone Number</label>
 
-          <input type="text" placeholder="Enter phone number">
+          <input type="text" id="phone" placeholder="Enter phone number">
 
         </div>
 
@@ -523,7 +523,7 @@ textarea{
 
         <label>Email Address</label>
 
-        <input type="email" placeholder="Enter email">
+        <input type="email" id="email" placeholder="Enter email">
 
       </div>
 
@@ -541,7 +541,7 @@ textarea{
 
         <label>Address</label>
 
-        <textarea placeholder="House no, street, city, landmark"></textarea>
+        <textarea id="address" placeholder="House no, street, city, landmark"></textarea>
 
       </div>
 
@@ -551,7 +551,7 @@ textarea{
 
           <label>City</label>
 
-          <input type="text" placeholder="Enter city">
+          <input type="text" id="city" placeholder="Enter city">
 
         </div>
 
@@ -559,7 +559,7 @@ textarea{
 
           <label>Pincode</label>
 
-          <input type="text" placeholder="Enter pincode">
+          <input type="text" id="pincode" placeholder="Enter pincode">
 
         </div>
 
@@ -569,7 +569,7 @@ textarea{
 
         <label>Delivery Instructions</label>
 
-        <textarea placeholder="Optional instructions"></textarea>
+        <textarea id="deliveryInstructions" placeholder="Optional instructions"></textarea>
 
       </div>
 
@@ -589,10 +589,11 @@ textarea{
 
           <label>Select Option</label>
 
-          <select>
-            <option>Home Delivery</option>
-            <option>Pickup From Store</option>
-          </select>
+          <select id="deliveryOption">
+    <option value="Home Delivery">Home Delivery</option>
+    <option value="Pickup From Store">Pickup From Store</option>
+</select>
+
 
         </div>
 
@@ -600,7 +601,8 @@ textarea{
 
           <label>Select Date</label>
 
-          <input type="date">
+          <input type="date" id="deliveryDate">
+
 
         </div>
 
@@ -610,7 +612,7 @@ textarea{
 
         <label>Select Time</label>
 
-        <input type="time">
+        <input type="time" id="deliveryTime">
 
       </div>
 
@@ -618,63 +620,57 @@ textarea{
 
     <!-- PAYMENT -->
 
-    <div class="box">
+    <!-- PAYMENT -->
 
-      <h2>
-        💳 Payment Method
-      </h2>
+<div class="box">
 
-      <div class="payment-box active">
+    <h2>💳 Payment Method</h2>
+
+    <!-- UPI -->
+    <div class="payment-box active"
+         id="upiPayment"
+         onclick="selectPayment('UPI')">
 
         <div class="payment-icon">
-          <i class="fa-brands fa-google-pay"></i>
+            <i class="fa-brands fa-google-pay"></i>
         </div>
 
         <div class="payment-content">
-
-          <h4>UPI Payment</h4>
-
-          <p>Google Pay, PhonePe, Paytm</p>
-
+            <h4>UPI Payment</h4>
+            <p>Google Pay, PhonePe, Paytm</p>
         </div>
-
-      </div>
-
-      <div class="payment-box">
-
-        <div class="payment-icon">
-          💳
-        </div>
-
-        <div class="payment-content">
-
-          <h4>Card Payment</h4>
-
-          <p>Visa, MasterCard, RuPay</p>
-
-        </div>
-
-      </div>
-
-      <div class="payment-box">
-
-        <div class="payment-icon">
-          💵
-        </div>
-
-        <div class="payment-content">
-
-          <h4>Cash On Delivery</h4>
-
-          <p>Pay after receiving order</p>
-
-        </div>
-
-      </div>
 
     </div>
 
-  </div>
+    <!-- CARD -->
+    <div class="payment-box"
+         id="cardPayment"
+         onclick="selectPayment('Card')">
+
+        <div class="payment-icon">💳</div>
+
+        <div class="payment-content">
+            <h4>Card Payment</h4>
+            <p>Visa, MasterCard, RuPay</p>
+        </div>
+
+    </div>
+
+    <!-- COD -->
+    <div class="payment-box"
+         id="codPayment"
+         onclick="selectPayment('COD')">
+
+        <div class="payment-icon">💵</div>
+
+        <div class="payment-content">
+            <h4>Cash On Delivery</h4>
+            <p>Pay after receiving order</p>
+        </div>
+
+    </div>
+
+</div>
 
   <!-- RIGHT -->
 
@@ -753,12 +749,13 @@ onclick="placeOrder()">
 
 </button>
 
-      <button class="track-btn">
+      <button
+    class="track-btn"
+    onclick="window.location.href='track-order.html'">
 
-        Track Order
+    Track Order
 
-      </button>
-
+</button>
     </div>
 
   </div>
@@ -767,117 +764,391 @@ onclick="placeOrder()">
 
 </div>
 
+
 <script>
 
-function placeOrder(){
+let selectedPayment = "UPI";
+
+function selectPayment(payment){
+
+    selectedPayment = payment;
+
+    document.querySelectorAll(".payment-box")
+        .forEach(box => {
+            box.classList.remove("active");
+        });
+
+    if(payment === "UPI"){
+        document.getElementById("upiPayment")
+            .classList.add("active");
+    }
+
+    if(payment === "Card"){
+        document.getElementById("cardPayment")
+            .classList.add("active");
+    }
+
+    if(payment === "COD"){
+        document.getElementById("codPayment")
+            .classList.add("active");
+    }
+}
+
+</script>
+
+<script>
+
+async function placeOrder() {
+
+    // =========================
+    // LOGIN CHECK
+    // =========================
 
     let currentUser =
-    JSON.parse(localStorage.getItem("currentUser"));
+        JSON.parse(localStorage.getItem("currentUser"));
 
-    if(!currentUser){
+    if (!currentUser) {
 
         alert("Please login first!");
 
-        window.location.href="login.html";
+        window.location.href = "login.html";
 
         return;
-
     }
 
-    let customerName =
-    document.querySelector('input[type="text"]').value;
 
-    if(customerName.trim()===""){
+    // =========================
+    // SELECTED CHECKOUT ITEMS
+    // =========================
 
-        alert("Please enter your name");
+    let checkoutItems =
+        JSON.parse(
+            localStorage.getItem("checkoutItems")
+        ) || [];
+
+
+    if (checkoutItems.length === 0) {
+
+        alert("No products selected for checkout 🛒");
+
+        window.location.href = "cart.html";
 
         return;
-
     }
 
-    let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
 
-    if(cart.length===0){
+    // =========================
+    // CHECKOUT DETAILS
+    // =========================
 
-        alert("Your cart is empty 🛒");
+    const address =
+        document.getElementById("address").value;
 
-        return;
+    const city =
+        document.getElementById("city").value;
 
-    }
+    const pincode =
+        document.getElementById("pincode").value;
 
-    let orders =
-    JSON.parse(localStorage.getItem("orders")) || [];
+    const deliveryInstructions =
+        document.getElementById("deliveryInstructions").value;
+
+    const deliveryOption =
+        document.getElementById("deliveryOption").value;
+
+    const deliveryDate =
+        document.getElementById("deliveryDate").value;
+
+    const deliveryTime =
+        document.getElementById("deliveryTime").value;
+
+
+
+        // =========================
+// VALIDATE CHECKOUT DETAILS
+// =========================
+
+const customerName =
+    document.getElementById("customerName").value.trim();
+
+const phone =
+    document.getElementById("phone").value.trim();
+
+const email =
+    document.getElementById("email").value.trim();
+
+
+// Required fields
+if (
+    !customerName ||
+    !phone ||
+    !email ||
+    !address.trim() ||
+    !city.trim() ||
+    !pincode.trim() ||
+    !deliveryDate ||
+    !deliveryTime
+) {
+    alert("Please fill all required checkout details ⚠️");
+    return;
+}
+
+
+// Phone validation
+if (!/^[0-9]{10}$/.test(phone)) {
+    alert("Please enter a valid 10-digit phone number 📱");
+    return;
+}
+
+
+// Pincode validation
+if (!/^[0-9]{6}$/.test(pincode)) {
+    alert("Please enter a valid 6-digit pincode 📍");
+    return;
+}
+
+
+// Email validation
+if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert("Please enter a valid email address 📧");
+    return;
+}
+
+    // =========================
+    // CALCULATE TOTAL
+    // =========================
 
     let subtotal = 0;
 
-    cart.forEach(item=>{
+    checkoutItems.forEach(item => {
 
-        subtotal += item.price * item.qty;
+        subtotal +=
+            Number(item.price) *
+            Number(item.quantity || 1);
 
     });
 
+
+    let discount = 0;
+
+    if (subtotal > 1000) {
+
+        discount =
+            subtotal * 0.10;
+
+    }
+
+
     let delivery = 50;
 
-    let total = subtotal + delivery;
+    let total =
+        subtotal -
+        discount +
+        delivery;
+
+
+    // =========================
+    // CREATE ORDER
+    // =========================
 
     let order = {
 
-        orderId:
-        "ORD"+Date.now(),
+        userId:
+            currentUser.id,
 
         customerName:
-        currentUser.firstName + " " + currentUser.lastName,
+            currentUser.firstName +
+            " " +
+            currentUser.lastName,
 
         email:
-        currentUser.email,
+            currentUser.email,
 
         phone:
-        currentUser.phone,
+            currentUser.phone,
 
+        address:
+            address,
+
+        city:
+            city,
+
+        pincode:
+            pincode,
+
+        deliveryInstructions:
+            deliveryInstructions,
+
+        deliveryOption:
+            deliveryOption,
+
+        deliveryDate:
+            deliveryDate,
+
+        deliveryTime:
+            deliveryTime,
+
+        paymentMethod:
+            selectedPayment,
+
+        // IMPORTANT
+        // ONLY SELECTED PRODUCTS
         products:
-        cart,
+            checkoutItems,
 
-        total:
-        total,
+        totalAmount:
+            total,
 
         status:
-        "Pending",
-
-        date:
-        new Date().toLocaleDateString()
+            "Pending"
 
     };
 
-    orders.push(order);
 
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
+    console.log(
+        "ORDER BEING SENT:",
+        order
     );
 
-    localStorage.removeItem("cart");
-    container.innerHTML = "";
 
-    alert("Order Placed Successfully 🎉");
+    // =========================
+    // SEND ORDER TO BACKEND
+    // =========================
 
-    window.location.href="success.html";
+    try {
+
+        let response =
+            await fetch(
+                "http://localhost:5000/api/orders",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(order)
+                }
+            );
+
+
+        let data =
+            await response.json();
+
+
+        console.log(
+            "SERVER RESPONSE:",
+            data
+        );
+
+
+        if (data.success) {
+
+
+            // =========================
+            // REMOVE ONLY PURCHASED ITEMS
+            // =========================
+
+            let cart =
+                JSON.parse(
+                    localStorage.getItem("cart")
+                ) || [];
+
+
+            let purchasedIds =
+                checkoutItems.map(
+                    item => String(item.id)
+                );
+
+
+            cart =
+                cart.filter(
+                    item =>
+                        !purchasedIds.includes(
+                            String(item.id)
+                        )
+                );
+
+
+            // Save remaining cart
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cart)
+            );
+
+
+            // =========================
+            // CLEAR CHECKOUT ITEMS
+            // =========================
+
+            localStorage.removeItem(
+                "checkoutItems"
+            );
+
+
+            // =========================
+            // SAVE LAST ORDER
+            // =========================
+
+            localStorage.setItem(
+                "lastOrder",
+                JSON.stringify(data.order)
+            );
+
+
+            alert(
+                "Order Placed Successfully 🎉"
+            );
+
+
+            // =========================
+            // SUCCESS PAGE
+            // =========================
+
+            window.location.href =
+                "success.html";
+
+
+        } else {
+
+            alert(
+                data.message ||
+                "Order Failed"
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "ORDER ERROR:",
+            error
+        );
+
+        alert(
+            "Server connection failed"
+        );
+
+    }
 
 }
 </script>
 <script>
 
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+let checkoutItems =
+JSON.parse(localStorage.getItem("checkoutItems")) || [];
 
 let container =
 document.getElementById("checkoutItems");
 
 let subtotal = 0;
 
-cart.forEach(item => {
+checkoutItems.forEach(item => {
 
-    subtotal += item.price * item.qty;
+    subtotal += item.price * item.quantity;
 
     container.innerHTML += `
 
@@ -891,13 +1162,13 @@ cart.forEach(item => {
 
             <h4>${item.name}</h4>
 
-            <p>Qty : ${item.qty}</p>
+            <p>Quantity: ${item.quantity}</p>
 
         </div>
 
         <div class="product-price">
 
-            ₹${item.price * item.qty}
+            ₹${item.price * item.quantity}
 
         </div>
 
@@ -921,6 +1192,5 @@ document.getElementById("total").innerText =
 </body>
 
 </html>
-</body>
 
-</html>
+

@@ -656,160 +656,299 @@ cursor:pointer;
 
 <script>
 
-/* ADMIN LOGIN CHECK */
+/* =========================
+   ADMIN LOGIN CHECK
+========================= */
 
-if(localStorage.getItem("adminLoggedIn") !== "true"){
-
+if (localStorage.getItem("adminLoggedIn") !== "true") {
     window.location.href = "admin-login.html";
-
 }
 
-/* LOAD ORDER */
+
+/* =========================
+   LOAD SELECTED ORDER
+========================= */
 
 let orders =
-JSON.parse(localStorage.getItem("orders")) || [];
+    JSON.parse(localStorage.getItem("orders")) || [];
 
 let selectedOrder =
-JSON.parse(localStorage.getItem("selectedOrder"));
+    JSON.parse(localStorage.getItem("selectedOrder"));
 
-if(selectedOrder){
 
-document.getElementById("orderId").innerText =
-selectedOrder.orderId || "#AV1001";
+if (!selectedOrder) {
 
-document.getElementById("orderDate").innerText =
-selectedOrder.date || "26 June 2026";
+    alert("No order selected.");
 
-document.getElementById("paymentMethod").innerText =
-"Cash On Delivery";
+    window.location.href = "manage-orders.html";
 
-document.getElementById("statusText").innerText =
-selectedOrder.status || "Pending";
+} else {
 
-document.getElementById("statusSelect").value =
-selectedOrder.status || "Pending";
+    console.log("Selected Order:", selectedOrder);
 
-document.getElementById("customerName").innerText =
-selectedOrder.customerName || "Customer";
 
-document.getElementById("customerPhone").innerText =
-selectedOrder.phone || "Not Available";
+    /* =========================
+       ORDER INFORMATION
+    ========================= */
 
-document.getElementById("customerEmail").innerText =
-selectedOrder.email || "customer@gmail.com";
+    document.getElementById("orderId").innerText =
+        "#" + (selectedOrder._id || selectedOrder.orderId || "AV1001");
 
-document.getElementById("customerAddress").innerText =
-selectedOrder.address || "Address Not Provided";
 
-/* PRODUCT TABLE */
+    document.getElementById("orderDate").innerText =
+        selectedOrder.createdAt
+        ? new Date(selectedOrder.createdAt).toLocaleString()
+        : (selectedOrder.date || "Date Not Available");
 
-let table =
-document.getElementById("productsTable");
 
-table.innerHTML = "";
+    document.getElementById("paymentMethod").innerText =
+        selectedOrder.paymentMethod || "UPI";
 
-let subtotal = 0;
 
-if(selectedOrder.products){
+    document.getElementById("statusText").innerText =
+        selectedOrder.status || "Pending";
 
-selectedOrder.products.forEach(item=>{
 
-subtotal += item.price * item.qty;
+    document.getElementById("statusSelect").value =
+        selectedOrder.status || "Pending";
 
-table.innerHTML += `
 
-<tr>
+    /* =========================
+       CUSTOMER DETAILS
+    ========================= */
 
-<td style="padding:15px;text-align:center;">
+    document.getElementById("customerName").innerText =
+        selectedOrder.customerName || "Customer";
 
-<img
-src="${item.image}"
-style="width:70px;height:70px;border-radius:12px;object-fit:cover;">
 
-</td>
+    document.getElementById("customerPhone").innerText =
+        selectedOrder.phone || "Not Available";
 
-<td style="padding:15px;text-align:center;">
 
-${item.name}
+    document.getElementById("customerEmail").innerText =
+        selectedOrder.email || "Not Available";
 
-</td>
 
-<td style="padding:15px;text-align:center;">
+    document.getElementById("customerAddress").innerText =
 
-₹${item.price}
+    (selectedOrder.address || "Address Not Provided") +
+    "\n" +
+    (selectedOrder.city || "") +
+    "\n" +
+    (selectedOrder.pincode || "");
+    /* =========================
+       PRODUCTS
+    ========================= */
 
-</td>
+    let table =
+        document.getElementById("productsTable");
 
-<td style="padding:15px;text-align:center;">
+    table.innerHTML = "";
 
-${item.qty}
 
-</td>
+    let subtotal = 0;
 
-<td style="padding:15px;text-align:center;">
 
-₹${item.price * item.qty}
+    if (selectedOrder.products &&
+        selectedOrder.products.length > 0) {
 
-</td>
 
-</tr>
+        selectedOrder.products.forEach(item => {
 
-`;
 
-});
+            /* IMPORTANT:
+               Your database uses quantity,
+               NOT qty.
+            */
+
+            let quantity =
+                Number(item.quantity || 1);
+
+
+            let price =
+                Number(item.price || 0);
+
+
+            let productTotal =
+                price * quantity;
+
+
+            subtotal += productTotal;
+
+
+            table.innerHTML += `
+
+                <tr>
+
+                    <td style="padding:15px;text-align:center;">
+
+                        ${
+                            item.image
+                            ?
+                            `<img
+                                src="${item.image}"
+                                style="
+                                width:70px;
+                                height:70px;
+                                border-radius:12px;
+                                object-fit:cover;
+                                ">`
+                            :
+                            `🍰`
+                        }
+
+                    </td>
+
+
+                    <td style="padding:15px;text-align:center;">
+
+                        ${item.name}
+
+                    </td>
+
+
+                    <td style="padding:15px;text-align:center;">
+
+                        ₹${price.toFixed(2)}
+
+                    </td>
+
+
+                    <td style="padding:15px;text-align:center;">
+
+                        ${quantity}
+
+                    </td>
+
+
+                    <td style="padding:15px;text-align:center;">
+
+                        ₹${productTotal.toFixed(2)}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        });
+
+    }
+
+
+    /* =========================
+       ORDER SUMMARY
+    ========================= */
+
+    let delivery = 50;
+
+
+    let discount = 0;
+
+
+    /*
+       Same discount rule used
+       in your checkout/track page:
+       10% when subtotal > ₹1000
+    */
+
+    if (subtotal > 1000) {
+
+        discount = subtotal * 0.10;
+
+    }
+
+
+    let grandTotal =
+        subtotal - discount + delivery;
+
+
+    document.getElementById("subtotal").innerText =
+        "₹" + subtotal.toFixed(2);
+
+
+    document.getElementById("delivery").innerText =
+        "₹" + delivery.toFixed(2);
+
+
+    document.getElementById("discount").innerText =
+        "₹" + discount.toFixed(2);
+
+
+    document.getElementById("grandTotal").innerText =
+        "₹" + grandTotal.toFixed(2);
+
+
+    console.log("Subtotal:", subtotal);
+    console.log("Discount:", discount);
+    console.log("Delivery:", delivery);
+    console.log("Grand Total:", grandTotal);
 
 }
 
-let delivery = 50;
 
-let discount = 0;
+/* =========================
+   SAVE STATUS
+========================= */
 
-document.getElementById("subtotal").innerText =
-"₹" + (selectedOrder.total - delivery);
+async function saveStatus() {
 
-document.getElementById("delivery").innerText =
-"₹" + delivery;
+    let newStatus =
+        document.getElementById("statusSelect").value;
 
-document.getElementById("discount").innerText =
-"₹" + discount;
+    try {
 
-document.getElementById("grandTotal").innerText =
-"₹" + selectedOrder.total;
+        const response = await fetch(
+            `http://localhost:5000/api/orders/${selectedOrder._id}/status`,
+            {
+                method: "PUT",
 
-}
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-/* SAVE STATUS */
+                body: JSON.stringify({
+                    status: newStatus
+                })
+            }
+        );
 
-function saveStatus(){
+        const data = await response.json();
 
-let newStatus =
-document.getElementById("statusSelect").value;
+        console.log("Status Response:", data);
 
-selectedOrder.status = newStatus;
+        if (data.success) {
 
-document.getElementById("statusText").innerText =
-newStatus;
+            selectedOrder = data.order;
 
-let index =
-orders.findIndex(order => order.orderId === selectedOrder.orderId);
+            document.getElementById("statusText").innerText =
+                data.order.status;
 
-if(index != -1){
+            localStorage.setItem(
+                "selectedOrder",
+                JSON.stringify(data.order)
+            );
 
-orders[index] = selectedOrder;
+            localStorage.setItem(
+                "lastOrder",
+                JSON.stringify(data.order)
+            );
 
-localStorage.setItem(
-"orders",
-JSON.stringify(orders)
-);
+            alert("Order Status Updated Successfully 🎉");
 
-}
+        } else {
 
-localStorage.setItem(
-"selectedOrder",
-JSON.stringify(selectedOrder)
-);
+            alert("Status update failed");
 
-alert("Order Status Updated Successfully 🎉");
+        }
+
+    } catch (error) {
+
+        console.log("Status Error:", error);
+
+        alert("Server connection failed");
+
+    }
 
 }
 

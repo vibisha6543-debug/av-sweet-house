@@ -100,6 +100,23 @@
    width: 100%;
    object-fit: cover;
     }
+
+    .offer-order-btn {
+    display: inline-block;
+    background: #ff4d8d;
+    color: white;
+    padding: 13px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.offer-order-btn:hover {
+    background: #ff2f78;
+    color: white;
+    transform: translateY(-3px);
+}
     
   </style>
 </head>
@@ -111,59 +128,75 @@
   <div class="fw-bold text-danger">🍰 AV Sweet House</div>
 
   <!-- SEARCH BAR -->
-  <div style="flex:1; display:flex; justify-content:center;">
-  
-  <div style="position:relative; width:60%;">
-    
-    <input type="text" placeholder="Search cakes, desserts..."
-      style="width:100%; padding:6px 35px 6px 12px; border:1px solid #ddd; border-radius:20px; outline:none;">
+<div style="flex:1; display:flex; justify-content:center;">
 
-    <!-- SEARCH ICON -->
-    <span style="
-      position:absolute;
-      right:12px;
-      top:50%;
-      transform:translateY(-50%);
-      cursor:pointer;
-      color:#888;
-      font-size:16px;
-    ">
-      🔍
-    </span>
+    <div style="position:relative; width:60%;">
 
-  </div>
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search cakes, desserts..."
+            onkeydown="if(event.key === 'Enter') searchProducts()"
+            style="
+                width:100%;
+                padding:6px 40px 6px 12px;
+                border:1px solid #ddd;
+                border-radius:20px;
+                outline:none;
+            "
+        >
+
+        <!-- SEARCH ICON -->
+        <span
+            onclick="searchProducts()"
+            style="
+                position:absolute;
+                right:12px;
+                top:50%;
+                transform:translateY(-50%);
+                cursor:pointer;
+                color:#888;
+                font-size:16px;
+            "
+        >
+            🔍
+        </span>
+
+    </div>
 
 </div>
-  <div>
+ <div>
 
-<a href="profile.html" class="icon text-decoration-none">
-👤
-</a>
+    <a href="/users/user-profile.html" class="icon text-decoration-none">
+        👤
+    </a>
 
-<a href="wishlist.html" class="icon text-decoration-none">
-❤️
-<span class="badge bg-danger" id="wishlistCount">0</span>
-</a>
+    <a href="/users/wishlist.html" class="icon text-decoration-none">
+        ❤️
+        <span class="badge bg-danger" id="wishlistCount">0</span>
+    </a>
 
-<a href="cart.html" class="icon text-decoration-none">
-🛒
-<span class="badge bg-danger" id="cartCount">0</span>
-</a>
+    <a href="/users/cart.html" class="icon text-decoration-none">
+        🛒
+        <span class="badge bg-danger" id="cartCount">0</span>
+    </a>
 
-<button onclick="logoutUser()">
-    Logout
-</button>
+    <button onclick="logoutUser()">
+        Logout
+    </button>
+
+</div>
 
 </div>
 </div>
 
 <div class="second-nav">
-  <a href="about.html">About</a>
-  <a href="cakes.html">Cakes</a>
-  <a href="desserts.html">Desserts</a>
-  <a href="chocolates.html">Chocolate</a>
-  <a href="juices.html">Juice</a>
-  <a href="decorations.html">Decorations</a>
+    <a href="/users/About us.html">About</a>
+    <a href="/users/cakes.html">Cakes</a>
+    <a href="/users/dessert.html">Desserts</a>
+    <a href="/users/chocolate.html">Chocolate</a>
+    <a href="/users/juice.html">Juice</a>
+    <a href="/users/Snacks.html">Snacks</a>
 </div>
 
 <!-- HERO -->
@@ -210,7 +243,7 @@
     <div class="row g-4 justify-content-center">
 
       <div class="col-6 col-md-2">
-  <a href="cakes.html" class="text-decoration-none text-dark">
+  <a href="/users/cakes.html" class="text-decoration-none text-dark">
     <div class="cat-card">
       <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5">
       <p>CAKES</p>
@@ -219,7 +252,7 @@
 </div>
 
       <div class="col-6 col-md-2">
-        <a href="dessert.html" class="text-decoration-none text-dark">
+        <a href="/users/dessert.html" class="text-decoration-none text-dark">
         <div class="cat-card">
           <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
           <p>DESSERT</p>
@@ -228,7 +261,7 @@
       </div>
 
       <div class="col-6 col-md-2">
-        <a href="chocolate.html" class="text-decoration-none text-dark">
+        <a href="/users/chocolate.html" class="text-decoration-none text-dark">
         <div class="cat-card">
           <img src="https://images.unsplash.com/photo-1511381939415-e44015466834">
           <p>CHOCOLATE</p>
@@ -237,7 +270,7 @@
       </div>
 
       <div class="col-6 col-md-2">
-        <a href="juice.html" class="text-decoration-none text-dark">
+        <a href="/users/juice.html" class="text-decoration-none text-dark">
         <div class="cat-card">
           <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625">
           <p>JUICES</p>
@@ -246,22 +279,15 @@
       </div>
 
       <div class="col-6 col-md-2">
-        <a href="decoration.html" class="text-decoration-none text-dark">
+        <a href="/users/Snacks.html" class="text-decoration-none text-dark">
         <div class="cat-card">
           <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec">
-          <p>Decorations</p>
+          <p>Snacks</p>
         </div>
         </a>
       </div>
 
-      <div class="col-6 col-md-2">
-        <a href="brownie.html" class="text-decoration-none text-dark">
-        <div class="cat-card">
-          <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75">
-          <p>BROWNIE</p>
-        </div>
-        </a>
-      </div>
+      
 
     </div>
   </div>
@@ -293,10 +319,9 @@
         Grab your favorite flavors before it ends!
       </p>
 
-      <button class="btn btn-danger btn-lg mt-2"
-    onclick="window.location.href='cakes.html'">
-  Order Now
-</button>
+     <a href="/users/cupcake-offer.html" class="btn btn-pink">
+    Order Now
+</a>
     </div>
 
   </div>
@@ -397,147 +422,23 @@
   <!-- BEST SELLING PRODUCTS -->
 <section class="container py-5">
 
-  <!-- HEADING -->
-  <div class="text-center mb-5">
-    <h2 class="fw-bold text-danger">Best Selling Products</h2>
-    <p class="text-muted">Our most loved bakery items</p>
-  </div>
+<div class="text-center mb-5">
+<h2 class="fw-bold text-danger">
+Best Selling Products
+</h2>
 
-  <!-- ROW 1 -->
-  <div class="row g-4 mb-4">
+<p class="text-muted">
+Our most loved bakery items
+</p>
+</div>
 
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1542826438-bd32f43d626f">
-        <p>Dream Cake</p>
-      </div>
-    </div>
 
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589">
-        <p>Photo Cake</p>
-      </div>
-    </div>
+<div class="row g-4" id="productContainer">
 
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814">
-        <p>Jar Cake</p>
-      </div>
-    </div>
+</div>
 
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1519869325930-281384150729">
-        <p>Cup Cake</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ROW 2 -->
-  <div class="row g-4 mb-4">
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75">
-        <p>Brownie</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1511381939415-e44015466834">
-        <p>Chocolate</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625">
-        <p>Juice</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2">
-        <p>Fresh Cake</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ROW 3 -->
-  <div class="row g-4 mb-4">
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5">
-        <p>Black Forest</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b">
-        <p>Dessert</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1608198093002-ad4e005484ec">
-        <p>Snickers</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e">
-        <p>Premium Cake</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- ROW 4 -->
-  <div class="row g-4">
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1551024601-8a3a0f7a3d9a">
-        <p>Ice Cream</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1519869325930-281384150729">
-        <p>Mini Cake</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1527515637462-cff94eecc1ac">
-        <p>Cheese Cake</p>
-      </div>
-    </div>
-
-    <div class="col-6 col-md-3">
-      <div class="cat-card">
-        <img src="https://images.unsplash.com/photo-1541782814455-3b9c3c1f1a4b">
-        <p>Donuts</p>
-      </div>
-    </div>
-
-  </div>
 
 </section>
-
-
 
 <!-- FOOTER -->
 
@@ -583,12 +484,12 @@
 
         <div class="footer-links">
 
-          <a href="#">Our Story</a>
-          <a href="#">Special Cakes</a>
-          <a href="#">Fresh Desserts</a>
+          <a href="/users/About us.html">Our Story</a>
+          <a href="/users/cakes.html">Special Cakes</a>
+          <a href="/users/dessert.html">Fresh Desserts</a>
           <a href="#">Online Delivery</a>
           <a href="#">Privacy Policy</a>
-          <a href="#">Contact Us</a>
+          <a href="/users/contact.html">Contact Us</a>
 
         </div>
 
@@ -609,14 +510,7 @@
 
         </div>
 
-        <!-- SUBSCRIBE -->
-        <div class="subscribe-box">
-
-          <input type="email" placeholder="Enter your email">
-
-          <button>
-            Subscribe
-          </button>
+        
 
         </div>
 
@@ -861,11 +755,97 @@ function logoutUser(){
 
     localStorage.removeItem("currentUser");
 
-    window.location.href = "login.html";
+    window.location.href = "/users/login.html";
 
 }
 
 
 </script>
+<script>
+
+async function loadProducts(){
+
+try{
+
+const response = await fetch(
+"http://localhost:5000/api/products"
+);
+
+
+const products = await response.json();
+
+
+let container =
+document.getElementById("productContainer");
+
+
+container.innerHTML="";
+
+
+products.slice(0,16).forEach(product=>{
+
+
+container.innerHTML += `
+
+<div class="col-6 col-md-3">
+
+<div class="cat-card">
+
+
+<img src="${product.image}">
+
+
+<p>${product.name}</p>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+
+</div>
+
+</div>
+
+
+`;
+
+
+});
+
+
+}
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+
+loadProducts();
+
+
+</script>
+
+<script>
+
+function searchProducts() {
+
+    const keyword =
+        document.getElementById("searchInput").value.trim();
+
+    if (keyword === "") {
+        alert("Please enter a product name to search.");
+        return;
+    }
+
+    window.location.href =
+    "/users/search-results.html?q=" +
+    encodeURIComponent(keyword);
+  }
+</script>
 </body>
+
+
 </html>

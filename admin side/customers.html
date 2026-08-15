@@ -1,166 +1,623 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Customers | AV Sweet House</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
 
+/* =========================
+   RESET
+========================= */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
+
+
+/* =========================
+   BODY
+========================= */
 
 body{
-background:#fff5f8;
+
+    background:#fff5f8;
+
+    min-height:100vh;
+
+    color:#333;
+
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
-background:linear-gradient(135deg,#ff4d8d,#ff9ec6);
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-color:white;
+
+    background:
+    linear-gradient(
+        135deg,
+        #ff4d8d,
+        #ff9ec6
+    );
+
+    padding:22px 40px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:white;
+
+    box-shadow:
+    0 5px 20px rgba(255,77,141,.2);
+
 }
+
 
 .header h1{
-font-size:30px;
-font-weight:700;
+
+    font-size:30px;
+
+    font-weight:700;
+
 }
+
+
+.header p{
+
+    margin-top:4px;
+
+    font-size:14px;
+
+    opacity:.9;
+
+}
+
 
 .top-buttons{
-display:flex;
-gap:12px;
+
+    display:flex;
+
+    gap:12px;
+
 }
+
 
 .btn{
-padding:12px 22px;
-border-radius:30px;
-text-decoration:none;
-font-weight:600;
-transition:.3s;
+
+    padding:12px 22px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.3s;
+
+    display:inline-block;
+
 }
+
 
 .btn-dashboard{
-background:white;
-color:#ff4d8d;
+
+    background:white;
+
+    color:#ff4d8d;
+
 }
+
 
 .btn-dashboard:hover{
-transform:translateY(-2px);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.1);
+
 }
 
-/* CONTAINER */
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
-padding:40px;
+
+    padding:40px;
+
+    max-width:1500px;
+
+    margin:auto;
+
 }
 
-/* SEARCH */
+
+/* =========================
+   TOP INFO
+========================= */
+
+.page-info{
+
+    margin-bottom:25px;
+
+}
+
+
+.page-info h2{
+
+    font-size:25px;
+
+    color:#333;
+
+}
+
+
+.page-info p{
+
+    color:#888;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
 
 .search-box{
-margin-bottom:25px;
+
+    margin-bottom:25px;
+
+    position:relative;
+
 }
+
 
 .search-box input{
-width:100%;
-padding:15px 20px;
-border:2px solid #ffd6e6;
-border-radius:15px;
-font-size:16px;
-outline:none;
+
+    width:100%;
+
+    padding:16px 20px;
+
+    border:
+
+    2px solid #ffd6e6;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+    outline:none;
+
+    background:white;
+
+    transition:.3s;
+
 }
+
 
 .search-box input:focus{
-border-color:#ff4d8d;
+
+    border-color:#ff4d8d;
+
+    box-shadow:
+    0 0 0 4px rgba(255,77,141,.08);
+
 }
 
-/* TABLE */
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary-cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+
+.summary-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.06);
+
+}
+
+
+.summary-card .icon{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:25px;
+
+    background:#ffe1ec;
+
+    margin-bottom:15px;
+
+}
+
+
+.summary-card h3{
+
+    font-size:28px;
+
+    color:#333;
+
+}
+
+
+.summary-card p{
+
+    color:#888;
+
+    margin-top:3px;
+
+}
+
+
+/* =========================
+   TABLE WRAPPER
+========================= */
 
 .table-wrapper{
-background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-overflow-x:auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    overflow-x:auto;
+
 }
+
+
+/* =========================
+   TABLE
+========================= */
 
 table{
-width:100%;
-border-collapse:collapse;
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:950px;
+
 }
 
+
 thead{
-background:#ff4d8d;
-color:white;
+
+    background:#ff4d8d;
+
+    color:white;
+
 }
+
 
 th,
 td{
-padding:18px;
-text-align:left;
+
+    padding:18px;
+
+    text-align:left;
+
 }
+
+
+th{
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
 
 tbody tr{
-border-bottom:1px solid #eee;
+
+    border-bottom:
+    1px solid #eee;
+
+    transition:.2s;
+
 }
+
 
 tbody tr:hover{
-background:#fff8fb;
+
+    background:#fff8fb;
+
 }
 
-.delete-btn{
-background:#ff4d8d;
-color:white;
-border:none;
-padding:10px 18px;
-border-radius:25px;
-cursor:pointer;
-font-weight:600;
-transition:.3s;
+
+/* =========================
+   CUSTOMER NAME
+========================= */
+
+.customer-name{
+
+    font-weight:600;
+
+    color:#333;
+
 }
 
-.delete-btn:hover{
-background:#ff2f78;
+
+.customer-icon{
+
+    width:40px;
+
+    height:40px;
+
+    background:#ffe1ec;
+
+    border-radius:50%;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:10px;
+
+    vertical-align:middle;
+
 }
 
-/* EMPTY */
+
+/* =========================
+   ORDER COUNT
+========================= */
+
+.order-badge{
+
+    background:#eee7ff;
+
+    color:#7048d8;
+
+    padding:7px 14px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    display:inline-block;
+
+}
+
+
+/* =========================
+   TOTAL SPENT
+========================= */
+
+.total-spent{
+
+    color:#20a866;
+
+    font-weight:700;
+
+}
+
+
+/* =========================
+   VIEW BUTTON
+========================= */
+
+.view-btn{
+
+    background:#ff4d8d;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.view-btn:hover{
+
+    background:#ff2f78;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 5px 12px rgba(255,77,141,.25);
+
+}
+
+
+/* =========================
+   EMPTY
+========================= */
 
 .empty{
-display:none;
-text-align:center;
-padding:60px;
-font-size:20px;
-color:#888;
+
+    display:none;
+
+    text-align:center;
+
+    padding:70px 20px;
+
+    font-size:20px;
+
+    color:#888;
+
+    background:white;
+
+    border-radius:20px;
+
 }
 
-/* MOBILE */
+
+.empty-icon{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    text-align:center;
+
+    padding:60px;
+
+    color:#888;
+
+    background:white;
+
+    border-radius:20px;
+
+}
+
+
+.loading-icon{
+
+    font-size:40px;
+
+    margin-bottom:15px;
+
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message{
+
+    display:none;
+
+    background:#fff0f0;
+
+    border:1px solid #ffcccc;
+
+    color:#d33;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    margin-bottom:20px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    .summary-cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
 
 @media(max-width:768px){
 
-.header{
-flex-direction:column;
-gap:15px;
+    .header{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        text-align:center;
+
+        padding:20px;
+
+    }
+
+
+    .container{
+
+        padding:20px;
+
+    }
+
+
+    .header h1{
+
+        font-size:25px;
+
+    }
+
 }
 
-th,
-td{
-padding:12px;
-font-size:14px;
-}
-
-}
 
 </style>
 
@@ -168,190 +625,869 @@ font-size:14px;
 
 <body>
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <div class="header">
 
-<h1>👥 Customers</h1>
+```
+<div>
+
+    <h1>
+        👥 Customers
+    </h1>
+
+    <p>
+        AV Sweet House Admin Panel
+    </p>
+
+</div>
+
 
 <div class="top-buttons">
 
-<a href="admin-dashboard.html"
-class="btn btn-dashboard">
+    <a
+        href="admin-dashboard.html"
+        class="btn btn-dashboard"
+    >
 
-← Dashboard
+        ← Dashboard
 
-</a>
+    </a>
+
+</div>
+```
 
 </div>
 
-</div>
+<!-- =========================
+     MAIN
+========================= -->
 
 <div class="container">
 
+```
+<div class="page-info">
+
+    <h2>
+        Customer Management
+    </h2>
+
+    <p>
+        View customers who have placed orders
+        at AV Sweet House.
+    </p>
+
+</div>
+
+
+
+<!-- =========================
+     SUMMARY
+========================= -->
+
+<div class="summary-cards">
+
+
+    <div class="summary-card">
+
+        <div class="icon">
+            👥
+        </div>
+
+        <h3 id="totalCustomers">
+            0
+        </h3>
+
+        <p>
+            Total Customers
+        </p>
+
+    </div>
+
+
+
+    <div class="summary-card">
+
+        <div class="icon">
+            🛍️
+        </div>
+
+        <h3 id="totalCustomerOrders">
+            0
+        </h3>
+
+        <p>
+            Total Orders
+        </p>
+
+    </div>
+
+
+
+    <div class="summary-card">
+
+        <div class="icon">
+            💰
+        </div>
+
+        <h3 id="totalCustomerSales">
+            ₹0.00
+        </h3>
+
+        <p>
+            Total Customer Sales
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =========================
+     SEARCH
+========================= -->
+
 <div class="search-box">
 
-<input
-type="text"
-id="searchInput"
-placeholder="🔍 Search by Name or Email..."
-onkeyup="loadCustomers()">
+    <input
+
+        type="text"
+
+        id="searchInput"
+
+        placeholder="🔍 Search by Name, Email or Phone..."
+
+    >
 
 </div>
 
-<div class="table-wrapper">
 
-<table>
 
-<thead>
-
-<tr>
-
-<th>Name</th>
-
-<th>Email</th>
-
-<th>Phone</th>
-
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-<tbody id="customersTable">
-
-</tbody>
-
-</table>
-
-</div>
+<!-- =========================
+     ERROR
+========================= -->
 
 <div
-id="emptyMessage"
-class="empty">
+    id="errorMessage"
+    class="error-message"
+>
 
-No Customers Found 👤
+    ❌ Unable to load customers.
+
+    <br><br>
+
+    Make sure your server is running
+    on port 5000.
+
+</div>
+
+
+
+<!-- =========================
+     LOADING
+========================= -->
+
+<div
+    id="loading"
+    class="loading"
+>
+
+    <div class="loading-icon">
+        👥
+    </div>
+
+    Loading customers...
+
+</div>
+
+
+
+<!-- =========================
+     TABLE
+========================= -->
+
+<div
+    id="tableWrapper"
+    class="table-wrapper"
+    style="display:none;"
+>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Customer
+                </th>
+
+                <th>
+                    Email
+                </th>
+
+                <th>
+                    Phone
+                </th>
+
+                <th>
+                    Orders
+                </th>
+
+                <th>
+                    Total Spent
+                </th>
+
+                <th>
+                    Action
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody
+            id="customersTable"
+        >
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+<!-- =========================
+     EMPTY
+========================= -->
+
+<div
+    id="emptyMessage"
+    class="empty"
+>
+
+    <div class="empty-icon">
+        👤
+    </div>
+
+    No Customers Found
+
+    <br>
+
+    <small>
+        Customers will appear here
+        after placing orders.
+    </small>
+
+</div>
+```
 
 </div>
 
 <script>
 
-let customersTable =
-document.getElementById("customersTable");
 
-let emptyMessage =
-document.getElementById("emptyMessage");
+/* =========================
+   ADMIN LOGIN CHECK
+========================= */
 
-function loadCustomers(){
+if(
+    localStorage.getItem("adminLoggedIn")
+    !== "true"
+){
 
-    let keyword =
-    document.getElementById("searchInput")
-    .value
-    .toLowerCase();
-
-    let users =
-    JSON.parse(localStorage.getItem("users")) || [];
-
-    customersTable.innerHTML = "";
-
-    if(users.length === 0){
-
-        emptyMessage.style.display = "block";
-
-        return;
-
-    }
-
-    let filteredUsers = users.filter(user=>{
-
-        let fullName =
-        (user.firstName + " " + user.lastName)
-        .toLowerCase();
-
-        let email =
-        user.email.toLowerCase();
-
-        return fullName.includes(keyword) ||
-               email.includes(keyword);
-
-    });
-
-    if(filteredUsers.length === 0){
-
-        emptyMessage.style.display = "block";
-
-        return;
-
-    }
-
-    emptyMessage.style.display = "none";
-
-    filteredUsers.forEach((user,index)=>{
-
-        customersTable.innerHTML += `
-
-        <tr>
-
-        <td>
-
-        ${user.firstName} ${user.lastName}
-
-        </td>
-
-        <td>
-
-        ${user.email}
-
-        </td>
-
-        <td>
-
-        ${user.phone}
-
-        </td>
-
-        <td>
-
-        <button
-        class="delete-btn"
-        onclick="deleteCustomer(${index})">
-
-        Delete
-
-        </button>
-
-        </td>
-
-        </tr>
-
-        `;
-
-    });
+    window.location.href =
+        "admin-login.html";
 
 }
 
-function deleteCustomer(index){
 
-    if(confirm("Are you sure you want to delete this customer?")){
+/* =========================
+   ELEMENTS
+========================= */
 
-        let users =
-        JSON.parse(localStorage.getItem("users")) || [];
+const customersTable =
+    document.getElementById(
+        "customersTable"
+    );
 
-        users.splice(index,1);
 
-        localStorage.setItem(
-            "users",
-            JSON.stringify(users)
+const emptyMessage =
+    document.getElementById(
+        "emptyMessage"
+    );
+
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+
+const tableWrapper =
+    document.getElementById(
+        "tableWrapper"
+    );
+
+
+const errorMessage =
+    document.getElementById(
+        "errorMessage"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+const totalCustomers =
+    document.getElementById(
+        "totalCustomers"
+    );
+
+
+const totalCustomerOrders =
+    document.getElementById(
+        "totalCustomerOrders"
+    );
+
+
+const totalCustomerSales =
+    document.getElementById(
+        "totalCustomerSales"
+    );
+
+
+/* =========================
+   ORDERS
+========================= */
+
+let allOrders = [];
+
+
+/* =========================
+   LOAD ORDERS
+========================= */
+
+async function loadCustomers(){
+
+    try{
+
+
+        loading.style.display =
+            "block";
+
+
+        errorMessage.style.display =
+            "none";
+
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/orders"
+            );
+
+
+        if(!response.ok){
+
+            throw new Error(
+                "Failed to load orders"
+            );
+
+        }
+
+
+        allOrders =
+            await response.json();
+
+
+        console.log(
+            "Customers - Orders:",
+            allOrders
         );
 
-        alert("Customer deleted successfully.");
 
-        loadCustomers();
+        loading.style.display =
+            "none";
+
+
+        renderCustomers();
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "Customer Loading Error:",
+            error
+        );
+
+
+        loading.style.display =
+            "none";
+
+
+        tableWrapper.style.display =
+            "none";
+
+
+        errorMessage.style.display =
+            "block";
+
 
     }
 
 }
 
+
+/* =========================
+   CREATE UNIQUE CUSTOMERS
+========================= */
+
+function getCustomers(){
+
+
+    const customerMap = {};
+
+
+    allOrders.forEach(order => {
+
+
+        const email =
+            (
+                order.email ||
+                ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        const phone =
+            (
+                order.phone ||
+                ""
+            )
+            .trim();
+
+
+        /*
+           Use email first.
+           If email doesn't exist,
+           use phone.
+        */
+
+        const key =
+            email || phone;
+
+
+        if(!key){
+
+            return;
+
+        }
+
+
+        /* CREATE CUSTOMER */
+
+        if(!customerMap[key]){
+
+
+            customerMap[key] = {
+
+                name:
+                    order.customerName ||
+                    "Customer",
+
+
+                email:
+                    order.email ||
+                    "Not Available",
+
+
+                phone:
+                    order.phone ||
+                    "Not Available",
+
+
+                orders:0,
+
+
+                totalSpent:0,
+
+
+                latestOrder:
+                    order.createdAt ||
+                    null
+
+            };
+
+
+        }
+
+
+        /* ORDER COUNT */
+
+        customerMap[key].orders++;
+
+
+        /* TOTAL SPENT */
+
+        customerMap[key].totalSpent +=
+            Number(
+                order.totalAmount || 0
+            );
+
+
+        /* LATEST ORDER */
+
+        if(
+
+            order.createdAt &&
+
+            (
+                !customerMap[key].latestOrder ||
+
+                new Date(order.createdAt) >
+                new Date(
+                    customerMap[key].latestOrder
+                )
+
+            )
+
+        ){
+
+            customerMap[key].latestOrder =
+                order.createdAt;
+
+        }
+
+
+    });
+
+
+    return Object.values(
+        customerMap
+    );
+
+}
+
+
+/* =========================
+   RENDER CUSTOMERS
+========================= */
+
+function renderCustomers(){
+
+
+    const keyword =
+        searchInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const customers =
+        getCustomers();
+
+
+    /* SUMMARY */
+
+    totalCustomers.innerText =
+        customers.length;
+
+
+    totalCustomerOrders.innerText =
+        allOrders.length;
+
+
+    let totalSales = 0;
+
+
+    allOrders.forEach(order => {
+
+        totalSales +=
+            Number(
+                order.totalAmount || 0
+            );
+
+    });
+
+
+    totalCustomerSales.innerText =
+        "₹" +
+        totalSales.toFixed(2);
+
+
+    /* SEARCH */
+
+    const filteredCustomers =
+        customers.filter(
+            customer => {
+
+
+                return (
+
+                    customer.name
+                    .toLowerCase()
+                    .includes(keyword)
+
+
+                    ||
+
+                    customer.email
+                    .toLowerCase()
+                    .includes(keyword)
+
+
+                    ||
+
+                    customer.phone
+                    .toLowerCase()
+                    .includes(keyword)
+
+                );
+
+
+            }
+        );
+
+
+    customersTable.innerHTML =
+        "";
+
+
+    /* NO RESULTS */
+
+    if(
+        filteredCustomers.length === 0
+    ){
+
+        tableWrapper.style.display =
+            "none";
+
+
+        emptyMessage.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+    /* SHOW TABLE */
+
+    emptyMessage.style.display =
+        "none";
+
+
+    tableWrapper.style.display =
+        "block";
+
+
+    /* DISPLAY */
+
+    filteredCustomers.forEach(
+        customer => {
+
+
+            customersTable.innerHTML += `
+
+                <tr>
+
+
+                    <td>
+
+                        <span
+                            class="customer-icon"
+                        >
+                            👤
+                        </span>
+
+                        <span
+                            class="customer-name"
+                        >
+
+                            ${escapeHtml(
+                                customer.name
+                            )}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            customer.email
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${escapeHtml(
+                            customer.phone
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="order-badge"
+                        >
+
+                            ${customer.orders}
+                            Orders
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                            class="total-spent"
+                        >
+
+                            ₹${customer.totalSpent.toFixed(2)}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <button
+
+                            class="view-btn"
+
+                            onclick="
+                                viewCustomerOrders(
+                                    '${encodeURIComponent(
+                                        customer.email
+                                    )}'
+                                )
+                            "
+
+                        >
+
+                            View Orders
+
+                        </button>
+
+                    </td>
+
+
+                </tr>
+
+            `;
+
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ESCAPE HTML
+========================= */
+
+function escapeHtml(value){
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================
+   VIEW CUSTOMER ORDERS
+========================= */
+
+function viewCustomerOrders(
+    encodedEmail
+){
+
+    const email =
+        decodeURIComponent(
+            encodedEmail
+        );
+
+
+    /*
+       Save selected customer
+       so Manage Orders can use it
+       later if needed.
+    */
+
+    localStorage.setItem(
+        "customerEmail",
+        email
+    );
+
+
+    window.location.href =
+        "manage-orders.html";
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+searchInput.addEventListener(
+    "input",
+    renderCustomers
+);
+
+
+/* =========================
+   START
+========================= */
+
 loadCustomers();
+
 
 </script>
 

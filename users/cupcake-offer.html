@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cupcake Offer | AV Sweet House</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Poppins -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff5f8;
+            color: #222;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,.06);
+        }
+
+        .navbar-brand {
+            color: #ff4d8d !important;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .nav-link {
+            color: #444 !important;
+            font-weight: 500;
+            margin: 0 6px;
+            transition: .3s;
+        }
+
+        .nav-link:hover {
+            color: #ff4d8d !important;
+        }
+
+        .btn-pink {
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-pink:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           OFFER HERO
+        ========================= */
+
+        .offer-hero {
+            min-height: 520px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,77,141,.94),
+                    rgba(255,158,198,.90)
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            color: white;
+
+            padding: 80px 20px;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        /* decorative circles */
+
+        .offer-hero::before {
+            content: "🧁";
+            position: absolute;
+            font-size: 130px;
+            left: 5%;
+            top: 12%;
+            opacity: .15;
+            transform: rotate(-15deg);
+        }
+
+        .offer-hero::after {
+            content: "🍰";
+            position: absolute;
+            font-size: 150px;
+            right: 5%;
+            bottom: 5%;
+            opacity: .15;
+            transform: rotate(15deg);
+        }
+
+
+        .offer-content {
+            max-width: 850px;
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .fresh-text {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+
+        .offer-content h1 {
+            font-size: 58px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+
+        .offer-content h2 {
+            font-size: 34px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+
+        .offer-badge {
+            display: inline-block;
+
+            background: white;
+            color: #ff4d8d;
+
+            padding: 10px 25px;
+
+            border-radius: 50px;
+
+            font-size: 18px;
+            font-weight: 800;
+
+            margin-bottom: 20px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,.12);
+        }
+
+
+        .offer-description {
+            max-width: 650px;
+            margin: auto;
+
+            font-size: 17px;
+            line-height: 1.8;
+
+            opacity: .95;
+        }
+
+
+        .hero-buttons {
+            margin-top: 30px;
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+
+        .btn-order {
+            background: white;
+            color: #ff4d8d;
+
+            border: none;
+
+            padding: 13px 30px;
+
+            border-radius: 30px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            transition: .3s;
+        }
+
+        .btn-order:hover {
+            background: #fff0f6;
+            color: #ff2f78;
+            transform: translateY(-3px);
+        }
+
+
+        .btn-home {
+            border: 2px solid white;
+            color: white;
+
+            padding: 11px 28px;
+
+            border-radius: 30px;
+
+            font-weight: 600;
+
+            text-decoration: none;
+
+            transition: .3s;
+        }
+
+        .btn-home:hover {
+            background: white;
+            color: #ff4d8d;
+        }
+
+
+        /* =========================
+           OFFER INFO
+        ========================= */
+
+        .offer-info {
+            padding: 70px 20px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+
+        .benefit-card {
+            background: white;
+            padding: 30px 20px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            height: 100%;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,.06);
+
+            transition: .3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 35px rgba(255,77,141,.15);
+        }
+
+        .benefit-icon {
+            width: 65px;
+            height: 65px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            border-radius: 50%;
+
+            background: #fff0f6;
+            color: #ff4d8d;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+        }
+
+        .benefit-card h5 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            color: #777;
+            font-size: 14px;
+            margin: 0;
+        }
+
+
+        /* =========================
+           CUPCAKE PRODUCTS
+        ========================= */
+
+        .products-section {
+            padding: 70px 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,.07);
+
+            height: 100%;
+
+            transition: .3s;
+
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(255,77,141,.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .offer-tag {
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            background: #ff4d8d;
+            color: white;
+
+            padding: 6px 13px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .product-body {
+            padding: 20px;
+        }
+
+        .product-body h5 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-body p {
+            color: #777;
+            font-size: 14px;
+            min-height: 42px;
+        }
+
+        .price {
+            color: #ff4d8d;
+            font-size: 21px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 7px;
+        }
+
+        .btn-product {
+            width: 100%;
+
+            background: #ff4d8d;
+            color: white;
+
+            border: none;
+
+            padding: 11px;
+
+            border-radius: 30px;
+
+            font-weight: 600;
+
+            transition: .3s;
+        }
+
+        .btn-product:hover {
+            background: #ff2f78;
+            color: white;
+        }
+
+
+        /* =========================
+           OFFER NOTE
+        ========================= */
+
+        .offer-note {
+            background: linear-gradient(
+                135deg,
+                #fff,
+                #fff0f6
+            );
+
+            border: 1px solid #ffd8e5;
+
+            border-radius: 25px;
+
+            padding: 35px;
+
+            text-align: center;
+
+            margin-top: 20px;
+        }
+
+        .offer-note h3 {
+            color: #ff4d8d;
+            font-weight: 800;
+        }
+
+        .offer-note p {
+            color: #666;
+            line-height: 1.8;
+            margin: 10px 0 0;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 50px;
+
+            padding: 70px 0 25px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0f3,
+                    #ffe5ec,
+                    #fdf6ff,
+                    #eef7ff
+                );
+        }
+
+        .footer-logo {
+            color: #ff4d8d;
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .footer-text {
+            color: #777;
+            line-height: 1.8;
+            margin-top: 15px;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .footer-links a {
+            display: block;
+            text-decoration: none;
+            color: #777;
+            margin-bottom: 10px;
+            transition: .3s;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d8d;
+            transform: translateX(4px);
+        }
+
+        .footer-contact p {
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #ddd;
+
+            margin-top: 35px;
+            padding-top: 20px;
+
+            text-align: center;
+            color: #888;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:768px) {
+
+            .offer-content h1 {
+                font-size: 38px;
+            }
+
+            .offer-content h2 {
+                font-size: 25px;
+            }
+
+            .offer-hero {
+                min-height: 500px;
+            }
+
+            .section-title {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar navbar-expand-lg sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand" href="index.html">
+            🍰 AV Sweet House
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarNav">
+
+            <ul class="navbar-nav mx-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">
+                        Home
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/cakes.html">
+                        Cakes
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/dessert.html">
+                        Desserts
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/chocolate.html">
+                        Chocolate
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/juice.html">
+                        Juice
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/Snacks.html">
+                        Snacks
+                    </a>
+                </li>
+
+            </ul>
+
+
+            <div class="d-flex gap-2">
+
+                <a
+                    href="wishlist.html"
+                    class="btn btn-outline-danger rounded-pill">
+
+                    ❤️
+                    <span id="wishlistCount">0</span>
+
+                </a>
+
+                <a
+                    href="cart.html"
+                    class="btn btn-pink">
+
+                    🛒
+                    <span id="cartCount">0</span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     OFFER HERO
+========================= -->
+
+<section class="offer-hero">
+
+    <div class="offer-content">
+
+        <div class="fresh-text">
+            🔥 Fresh Out Of The Oven
+        </div>
+
+        <div class="offer-badge">
+            ✨ 20% OFFER
+        </div>
+
+        <h1>
+            Buy 1 Get 1 Free
+            <br>
+            On Cupcakes 🧁
+        </h1>
+
+        <h2>
+            Double the sweetness. Double the happiness! 💖
+        </h2>
+
+        <p class="offer-description">
+
+            Enjoy freshly baked cupcakes with a special
+            limited-time offer. Grab your favorite flavors
+            before it ends!
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#cupcakes"
+                class="btn-order">
+
+                🧁 Order Cupcakes
+
+            </a>
+
+            <a
+                href="/"
+                class="btn-home">
+
+                🏠 Back To Home
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     BENEFITS
+========================= -->
+
+<section class="offer-info">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Why You'll Love This Offer 💕
+        </h2>
+
+        <p class="section-subtitle">
+            Freshly baked treats made specially for you.
+        </p>
+
+
+        <div class="row g-4">
+
+
+            <div class="col-md-4">
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        🧁
+                    </div>
+
+                    <h5>
+                        Freshly Baked
+                    </h5>
+
+                    <p>
+                        Soft, delicious cupcakes baked fresh
+                        for every order.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        🎁
+                    </div>
+
+                    <h5>
+                        Buy 1 Get 1 Free
+                    </h5>
+
+                    <p>
+                        Buy your favorite cupcake and get
+                        another one absolutely free.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="benefit-card">
+
+                    <div class="benefit-icon">
+                        ⏰
+                    </div>
+
+                    <h5>
+                        Limited Time
+                    </h5>
+
+                    <p>
+                        Don't wait too long. This special
+                        cupcake offer won't last forever.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     CUPCAKE PRODUCTS
+========================= -->
+
+<section
+    class="products-section"
+    id="cupcakes">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            🧁 Cupcake Collection
+        </h2>
+
+        <p class="section-subtitle">
+            Pick your favorite flavor and enjoy our special offer.
+        </p>
+
+
+        <div
+            class="row g-4"
+            id="cupcakeProducts">
+
+        </div>
+
+
+        <div class="offer-note">
+
+            <h3>
+                🎉 Special Offer
+            </h3>
+
+            <p>
+                Buy any cupcake and get another cupcake
+                of equal or lesser value FREE.
+                Offer available for a limited time only.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="row g-5">
+
+
+            <div class="col-md-4">
+
+                <div class="footer-logo">
+                    🍰 AV Sweet House
+                </div>
+
+                <p class="footer-text">
+
+                    Fresh cakes, chocolates, desserts,
+                    juices and decorations made with love.
+
+                </p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h5 class="footer-title">
+                    Quick Links
+                </h5>
+
+                <div class="footer-links">
+
+                    <a href="/">
+                        Home
+                    </a>
+
+                    <a href="cakes.html">
+                        Cakes
+                    </a>
+
+                    <a href="dessert.html">
+                        Desserts
+                    </a>
+
+                    <a href="chocolate.html">
+                        Chocolate
+                    </a>
+
+                    <a href="wishlist.html">
+                        Wishlist
+                    </a>
+
+                    <a href="cart.html">
+                        Cart
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h5 class="footer-title">
+                    Contact Us
+                </h5>
+
+                <div class="footer-contact">
+
+                    <p>
+                        📞 +91 9930403727
+                    </p>
+
+                    <p>
+                        📧 avsweethouse@gmail.com
+                    </p>
+
+                    <p>
+                        📍 Kerala, India
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 AV Sweet House.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- Bootstrap -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="cart.js"></script>
+<script src="wishlist.js"></script>
+
+
+<script>
+
+/* =========================
+   LOAD CUPCAKES
+========================= */
+
+async function loadCupcakes() {
+
+    try {
+
+        const response =
+            await fetch("http://localhost:5000/api/products");
+
+        const products =
+            await response.json();
+
+
+        const container =
+            document.getElementById("cupcakeProducts");
+
+
+        container.innerHTML = "";
+
+
+        const cupcakes =
+            products.filter(product =>
+                product.category === "Cup Cakes"
+            );
+
+
+        cupcakes.forEach(product => {
+
+            container.innerHTML += `
+
+                <div class="col-md-4">
+
+                    <div class="product-card">
+
+                        <span class="offer-tag">
+                            20% OFFER
+                        </span>
+
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}">
+
+
+                        <div class="product-body">
+
+                            <h5>
+                                ${product.name}
+                            </h5>
+
+                            <p>
+                                Freshly baked cupcake
+                                made with premium ingredients.
+                            </p>
+
+
+                            <div class="price">
+
+                                ₹${product.price}
+
+                                <span class="old-price">
+                                    ₹${Math.round(product.price * 1.2)}
+                                </span>
+
+                            </div>
+
+
+                            <button
+                                class="btn-product"
+                                onclick="addOfferToCart(
+                                    '${product._id}',
+                                    '${product.name.replace(/'/g, "\\'")}',
+                                    ${product.price},
+                                    '${product.image.replace(/'/g, "\\'")}',
+                                    '${product.category.replace(/'/g, "\\'")}'
+                                )">
+
+                                🛒 Order Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+    } catch(error) {
+
+        console.error(
+            "Cupcake Loading Error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================
+   ADD TO CART
+========================= */
+
+function addOfferToCart(
+    id,
+    name,
+    price,
+    image,
+    category
+) {
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+
+    let existing =
+        cart.find(item =>
+            String(item.id) === String(id)
+        );
+
+
+    if(existing) {
+
+        existing.quantity =
+            Number(existing.quantity || 0) + 1;
+
+    } else {
+
+        cart.push({
+
+            id: String(id),
+
+            name: name,
+
+            price: Number(price),
+
+            image: image,
+
+            category: category,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+    alert(
+        "🧁 Cupcake added to your cart!"
+    );
+
+
+    if(
+        typeof updateCartCount === "function"
+    ) {
+
+        updateCartCount();
+
+    }
+
+}
+
+
+loadCupcakes();
+
+</script>
+
+
+</body>
+
+</html>

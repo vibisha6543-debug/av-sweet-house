@@ -6,6 +6,13 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcryptjs");
 
 
+require("./config/db");
+
+const Order = require("./models/Order");
+const User = require("./models/User");
+const Product = require("./models/Product");
+const Wishlist = require("./models/Wishlist");
+
 
 const app = express();
 
@@ -15,31 +22,14 @@ const app = express();
 
 let otpStore = {};
 
-const productsFile = path.join(__dirname, "data", "products.json");
 
-function getProducts() {
-
-    if (!fs.existsSync(productsFile)) {
-        fs.writeFileSync(productsFile, "[]");
-    }
-
-    return JSON.parse(
-        fs.readFileSync(productsFile, "utf8")
-    );
-
-}
-
-function saveProducts(products) {
-
-    fs.writeFileSync(
-        productsFile,
-        JSON.stringify(products, null, 2)
-    );
-
-}
 
 app.use(cors());
 app.use(express.json());
+
+app.use("/users", express.static(path.join(__dirname, "../users")));
+
+app.use("/admin", express.static(path.join(__dirname, "../admin side")));
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -54,45 +44,17 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname,  "index.html"));
 });
 
-app.get("/api/products", (req, res) => {
-
-    const productsPath = path.join(__dirname, "data", "products.json");
-
-    const products = JSON.parse(
-        fs.readFileSync(productsPath, "utf8")
-    );
-
-    res.json(products);
-
-});
-
-
-app.post("/api/products", (req, res) => {
+app.get("/api/products", async (req, res) => {
 
     try {
 
-        const products = getProducts();
+        const products = await Product.find();
 
-        const newProduct = {
-            id: Date.now(),
-            name: req.body.name,
-            price: req.body.price,
-            image: req.body.image,
-            category: req.body.category
-        };
-
-        products.push(newProduct);
-
-        saveProducts(products);
-
-        res.json({
-            success: true,
-            message: "🎉 Product Added Successfully!"
-        });
+        res.json(products);
 
     } catch (err) {
 
-        console.error(err);
+        console.log(err);
 
         res.status(500).json({
             success: false,
@@ -103,6 +65,39 @@ app.post("/api/products", (req, res) => {
 
 });
 
+app.post("/api/products", async (req, res) => {
+
+    try {
+
+        const product = new Product({
+
+            name: req.body.name,
+            price: req.body.price,
+            image: req.body.image,
+            category: req.body.category,
+            description: req.body.description
+
+        });
+
+        await product.save();
+
+        res.json({
+            success: true,
+            message: "Product Added Successfully"
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            success: false,
+            message: err.message
+        });
+
+    }
+
+});
 // ============================
 // VERIFY OTP
 // ============================
@@ -143,38 +138,6 @@ app.post("/api/verify-otp", (req, res) => {
    DELETE PRODUCT
 =========================== */
 
-app.delete("/api/products/:id", (req, res) => {
-
-    try {
-
-        let products = getProducts();
-
-        // ✅ FIX: keep as string (no Number conversion)
-        const productId = req.params.id;
-
-        products = products.filter(product => 
-            String(product.id) !== String(productId)
-        );
-
-        saveProducts(products);
-
-        res.json({
-            success: true,
-            message: "🗑 Product Deleted Successfully!"
-        });
-
-    } catch (err) {
-
-        console.error(err);
-
-        res.status(500).json({
-            success: false,
-            message: err.message
-        });
-
-    }
-
-});
 
 
 app.post("/api/send-otp", async (req, res) => {
@@ -230,29 +193,11 @@ const usersFile = path.join(__dirname, "data", "users.json");
 
 app.post("/api/register", async (req, res) => {
 
-    console.log("REGISTER API CALLED");
-    console.log(req.body);
-
     try {
 
-        let users = [];
+        const { firstName, lastName, email, phone, password } = req.body;
 
-        if (fs.existsSync(usersFile)) {
-            users = JSON.parse(fs.readFileSync(usersFile, "utf8"));
-        }
-
-        const {
-            firstName,
-            lastName,
-            email,
-            phone,
-            password
-        } = req.body;
-
-        // Check if user already exists
-        const existingUser = users.find(
-            user => user.email === email
-        );
+        const existingUser = await User.findOne({ email });
 
         if (existingUser) {
 
@@ -263,53 +208,35 @@ app.post("/api/register", async (req, res) => {
 
         }
 
-        // Encrypt password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        users.push({
-
-            id: Date.now(),
-
+        const user = new User({
             firstName,
-
             lastName,
-
             email,
-
             phone,
-
             password: hashedPassword
-
         });
 
-        fs.writeFileSync(
-            usersFile,
-            JSON.stringify(users, null, 2)
-        );
+        await user.save();
 
         res.json({
-
             success: true,
-            message: "Registration Successful"
-
+            message: "User Registered Successfully"
         });
 
     } catch (err) {
 
         console.log(err);
 
-        res.json({
-
+        res.status(500).json({
             success: false,
-            message: err.message
-
+            message: "Server Error"
         });
 
     }
 
 });
-
-
 // ============================
 // LOGIN USER
 // ============================
@@ -361,6 +288,458 @@ console.log("Password entered:", password);
     });
 
 });
+
+
+
+
+
+// ================================
+// PRODUCT API
+// ================================
+
+// GET ALL PRODUCTS
+app.get("/api/products", async (req,res)=>{
+
+    try{
+
+        const products = await Product.find();
+
+        res.json(products);
+
+    }catch(error){
+
+        res.status(500).json({
+            message:"Server Error"
+        });
+
+    }
+
+});
+
+
+// ADD PRODUCT
+app.post("/api/products", async(req,res)=>{
+
+    try{
+
+        const product = new Product({
+
+            name:req.body.name,
+            price:req.body.price,
+            image:req.body.image,
+            category:req.body.category
+
+        });
+
+
+        await product.save();
+
+
+        res.json({
+
+            success:true,
+            message:"Product Added Successfully"
+
+        });
+
+
+    }catch(error){
+
+        console.log(error);
+
+        res.status(500).json({
+
+            message:"Add Product Failed"
+
+        });
+
+    }
+
+});
+
+
+// UPDATE PRODUCT
+// UPDATE PRODUCT
+app.put("/api/products/:id", async (req, res) => {
+
+    try {
+
+        const updatedProduct =
+            await Product.findByIdAndUpdate(
+                req.params.id,
+                {
+                    name: req.body.name,
+                    price: Number(req.body.price),
+                    image: req.body.image,
+                    category: req.body.category
+                },
+                {
+                    new: true
+                }
+            );
+
+        if (!updatedProduct) {
+
+            return res.status(404).json({
+                success: false,
+                message: "Product not found"
+            });
+
+        }
+
+        res.json({
+            success: true,
+            message: "Product Updated Successfully",
+            product: updatedProduct
+        });
+
+    } catch (error) {
+
+        console.error("Update Product Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Update Failed"
+        });
+
+    }
+
+});
+
+// DELETE PRODUCT
+app.delete("/api/products/:id", async(req,res)=>{
+
+    try{
+
+        await Product.findByIdAndDelete(req.params.id);
+
+
+        res.json({
+
+            success:true,
+            message:"Product Deleted"
+
+        });
+
+
+    }catch(error){
+
+        res.status(500).json({
+
+            message:"Delete Failed"
+
+        });
+
+    }
+
+});
+
+// CREATE ORDER
+
+app.post("/api/orders", async(req,res)=>{
+
+    try{
+
+        const order = new Order(req.body);
+
+        await order.save();
+
+
+        res.json({
+
+            success:true,
+            message:"Order Placed Successfully",
+            order
+
+        });
+
+
+    }catch(error){
+
+        console.log(error);
+
+        res.status(500).json({
+
+            success:false,
+            message:"Order Failed"
+
+        });
+
+    }
+
+});
+
+
+// GET ALL ORDERS (ADMIN)
+
+app.get("/api/orders", async(req,res)=>{
+
+    try{
+
+        const orders = await Order.find()
+        .sort({createdAt:-1});
+
+
+        res.json(orders);
+
+
+    }catch(error){
+
+        res.status(500).json({
+
+            message:"Server Error"
+
+        });
+
+    }
+
+});
+// GET SINGLE ORDER
+app.get("/api/orders/:id", async (req, res) => {
+
+    try {
+
+        const order =
+            await Order.findById(req.params.id);
+
+        if(!order){
+
+            return res.status(404).json({
+
+                success:false,
+                message:"Order not found"
+
+            });
+
+        }
+
+        res.json(order);
+
+    }
+    catch(error){
+
+        console.error(
+            "Get Order Error:",
+            error
+        );
+
+        res.status(500).json({
+
+            success:false,
+            message:"Server Error"
+
+        });
+
+    }
+
+});
+// UPDATE ORDER STATUS
+// UPDATE ORDER STATUS
+
+app.put("/api/orders/:id/status", async (req, res) => {
+
+    try {
+
+        const { status } = req.body;
+
+        const allowedStatuses = [
+            "Pending",
+            "Processing",
+            "Shipped",
+            "Delivered",
+            "Cancelled"
+        ];
+
+        if (!allowedStatuses.includes(status)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid order status"
+            });
+        }
+
+        const updatedOrder = await Order.findByIdAndUpdate(
+            req.params.id,
+            { status: status },
+            { returnDocument: "after" }
+        );
+
+        if (!updatedOrder) {
+            return res.status(404).json({
+                success: false,
+                message: "Order not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Order status updated successfully",
+            order: updatedOrder
+        });
+
+    } catch (error) {
+
+        console.error("Status Update Error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server Error"
+        });
+
+    }
+
+});
+// UPDATE ORDER STATUS (ADMIN)
+
+// ================================
+// WISHLIST API
+// ================================
+
+// ADD TO WISHLIST
+app.post("/api/wishlist", async (req, res) => {
+
+    try {
+
+        const {
+            userId,
+            productId,
+            name,
+            price,
+            image,
+            category
+        } = req.body;
+
+        if (!userId || !productId) {
+
+            return res.json({
+                success: false,
+                message: "User and Product required"
+            });
+
+        }
+
+        // Check if product already exists in wishlist
+        const existingWishlist =
+            await Wishlist.findOne({
+                userId: String(userId),
+                productId: String(productId)
+            });
+
+        if (existingWishlist) {
+
+            return res.json({
+                success: false,
+                message: "Already in Wishlist ❤️"
+            });
+
+        }
+
+        // Create wishlist item
+        const wishlist =
+            new Wishlist({
+
+                userId: String(userId),
+                productId: String(productId),
+                name: name,
+                price: price,
+                image: image,
+                category: category
+
+            });
+
+        await wishlist.save();
+
+        res.json({
+
+            success: true,
+            message: "Added to Wishlist ❤️",
+            wishlist: wishlist
+
+        });
+
+    } catch (error) {
+
+        console.error("Wishlist Error:", error);
+
+        res.status(500).json({
+
+            success: false,
+            message: "Wishlist failed"
+
+        });
+
+    }
+
+});
+
+
+// GET USER WISHLIST
+app.get("/api/wishlist/:userId", async (req, res) => {
+
+    try {
+
+        const wishlist =
+            await Wishlist.find({
+                userId: String(req.params.userId)
+            }).sort({
+                createdAt: -1
+            });
+
+        res.json(wishlist);
+
+    } catch (error) {
+
+        console.error("Get Wishlist Error:", error);
+
+        res.status(500).json({
+
+            success: false,
+            message: "Failed to load wishlist"
+
+        });
+
+    }
+
+});
+
+
+// REMOVE FROM WISHLIST
+app.delete(
+    "/api/wishlist/:userId/:productId",
+    async (req, res) => {
+
+        try {
+
+            await Wishlist.findOneAndDelete({
+
+                userId: String(req.params.userId),
+
+                productId:
+                    String(req.params.productId)
+
+            });
+
+            res.json({
+
+                success: true,
+                message: "Removed from Wishlist"
+
+            });
+
+        } catch (error) {
+
+            console.error("Remove Wishlist Error:", error);
+
+            res.status(500).json({
+
+                success: false,
+                message: "Remove failed"
+
+            });
+
+        }
+
+    }
+);
 
 const PORT = 5000;
 

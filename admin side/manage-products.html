@@ -366,32 +366,53 @@ placeholder="🔍 Search Products..."
 onkeyup="loadProducts()">
 
 <select
-id="categoryFilter"
-onchange="loadProducts()">
+    id="categoryFilter"
+    onchange="loadProducts()">
 
-<option value="All">All Categories</option>
+    <option value="All">All Categories</option>
 
-<option value="Cakes">Cakes</option>
+    <option value="Cakes">Cakes</option>
+    <option value="Birthday Cakes">Birthday Cakes</option>
+    <option value="Anniversary Cakes">Anniversary Cakes</option>
+    <option value="Occasion Cakes">Occasion Cakes</option>
+    <option value="Wedding Cakes">Wedding Cakes</option>
+    <option value="Kids Cakes">Kids Cakes</option>
+    <option value="Cup Cakes">Cup Cakes</option>
 
-<option value="Birthday Cakes">Birthday Cakes</option>
+    <option value="Brownies">Brownies</option>
+    <option value="Donuts">Donuts</option>
+    <option value="Cheesecakes">Cheesecakes</option>
+    <option value="Macarons">Macarons</option>
+    <option value="Pastries">Pastries</option>
+    <option value="Cookies">Cookies</option>
+    <option value="Chocolate Cakes">Chocolate Cakes</option>
+    <option value="Desserts">Desserts</option>
 
-<option value="Anniversary Cakes">Anniversary Cakes</option>
-<option value="Occasion Cakes">Occasion Cakes</option>
+    <option value="Chocolates">Chocolates</option>
+    <option value="Dark Chocolates">Dark Chocolates</option>
+    <option value="Milk Chocolates">Milk Chocolates</option>
+    <option value="White Chocolates">White Chocolates</option>
+    <option value="Nut Chocolates">Nut Chocolates</option>
+    <option value="Gift Boxes">Gift Boxes</option>
+    <option value="Festival">Festival</option>
 
-<option value="Chocolate Cakes">Chocolate Cakes</option>
+    <option value="Juices">Juices</option>
+    <option value="Fresh Juices">Fresh Juices</option>
+    <option value="Milkshakes">Milkshakes</option>
+    <option value="Smoothies">Smoothies</option>
+    <option value="Mocktails">Mocktails</option>
+    <option value="Cold Coffee">Cold Coffee</option>
+    <option value="Healthy Drinks">Healthy Drinks</option>
 
-<option value="Wedding Cakes">Wedding Cakes</option>
-
-<option value="Desserts">Desserts</option>
-
-<option value="Chocolates">Chocolates</option>
-
-<option value="Juices">Juices</option>
-
-<option value="Decorations">Decorations</option>
+    <option value="Snacks">Snacks</option>
+    <option value="Murukku">Murukku</option>
+    <option value="Traditional Sweets">Traditional Sweets</option>
+    <option value="Mixtures & Namkeen">Mixtures & Namkeen</option>
+    <option value="Biscuits">Biscuits</option>
+    <option value="Chips">Chips</option>
+    <option value="Evening Snacks">Evening Snacks</option>
 
 </select>
-
 </div>
 
 <div
@@ -488,17 +509,15 @@ async function loadProducts(){
 
                 <button
 class="action-btn edit-btn"
-onclick="editProduct(${product.id})">
+onclick="editProduct('${product._id}')">
 
 ✏ Edit Product
 
-</button>
+<button
+    class="action-btn delete-btn"
+    onclick="deleteProduct('${product._id}')">
 
-                <button
-class="action-btn delete-btn"
-onclick="deleteProduct(${product.id})">
-
-🗑 Delete Product
+    🗑 Delete Product
 
 </button>
 
@@ -514,20 +533,22 @@ onclick="deleteProduct(${product.id})">
 
 /* EDIT */
 
-function editProduct(index){
+function editProduct(id){
 
-localStorage.setItem(
-"editProductIndex",
-index
-);
+    localStorage.setItem(
+        "editProductId",
+        id
+    );
 
-window.location.href="edit-product.html";
+    window.location.href = "edit-product.html";
 
 }
 
 /* DELETE */
 
 async function deleteProduct(id){
+
+    console.log("Deleting Product ID:", id);
 
     let confirmDelete = confirm(
         "Are you sure you want to delete this product?"

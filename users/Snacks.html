@@ -224,7 +224,7 @@ class="btn btn-pink">
 <img src="../users/images/products/Traditional Sweets.webp" alt="Traditional Sweets">
 <div class="category-body">
 <h4> Traditional Sweets</h4>
-<a href="milk-chocolates.html" class="btn-pink">Explore</a>
+<a href="traditional sweets.html" class="btn-pink">Explore</a>
 </div>
 </div>
 </div>
@@ -235,7 +235,7 @@ class="btn btn-pink">
 <img src="../users/images/products/Mixtures & Namkeen.webp" alt="Mixtures & Namkeen">
 <div class="category-body">
 <h4> Mixtures & Namkeen</h4>
-<a href="truffles.html" class="btn-pink">Explore</a>
+<a href="mixtures-namkeen.html" class="btn-pink">Explore</a>
 </div>
 </div>
 </div>
@@ -246,7 +246,7 @@ class="btn btn-pink">
 <img src="../users/images/products/Biscuits .jpg" alt="Biscuits">
 <div class="category-body">
 <h4>🍪 Biscuits</h4>
-<a href="gift-boxes.html" class="btn-pink">Explore</a>
+<a href="biscuits.html" class="btn-pink">Explore</a>
 </div>
 </div>
 </div>
@@ -257,7 +257,7 @@ class="btn btn-pink">
 <img src="../users/images/products/Chips.webp" alt="Chips">
 <div class="category-body">
 <h4> Chips</h4>
-<a href="premium-chocolates.html" class="btn-pink">Explore</a>
+<a href="Chips .html" class="btn-pink">Explore</a>
 </div>
 </div>
 </div>
@@ -268,7 +268,7 @@ class="btn btn-pink">
 <img src="../users/images/products/Evening Snacks.jpg" alt="Evening Snacks">
 <div class="category-body">
 <h4> Evening Snacks</h4>
-<a href="festival-specials.html" class="btn-pink">Explore</a>
+<a href="evening snacks.html" class="btn-pink">Explore</a>
 </div>
 </div>
 </div>
@@ -276,6 +276,17 @@ class="btn btn-pink">
 </div>
 
 </div>
+
+<section class="container py-5">
+
+<h2 class="text-center text-danger fw-bold mb-4">
+All Snack Products
+</h2>
+
+<div class="row" id="productContainer">
+</div>
+
+</section>
 <!-- FOOTER -->
 
 <!-- PREMIUM FOOTER -->
@@ -591,6 +602,71 @@ cart.length;
 document.getElementById("wishlistCount").innerText =
 wishlist.length;
 
+</script>
+
+<script>
+async function loadProducts() {
+
+try {
+
+const res = await fetch("http://localhost:5000/api/products");
+const products = await res.json();
+
+const container =
+document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products.filter(product =>
+product.category &&
+(
+product.category.toLowerCase().includes("snack") ||
+product.category.toLowerCase().includes("murukku") ||
+product.category.toLowerCase().includes("chips") ||
+product.category.toLowerCase().includes("biscuit") ||
+product.category.toLowerCase().includes("mixture")
+)
+)
+.forEach(product => {
+
+container.innerHTML += `
+
+<div class="col-md-3 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="${product.image}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body text-center">
+
+<h5>${product.name}</h5>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+<p>${product.category}</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+catch(error){
+console.log(error);
+}
+}
+
+loadProducts();
 </script>
 </body>
 </html>

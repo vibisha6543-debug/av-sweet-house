@@ -1,33 +1,56 @@
-function addToWishlist(name, price, image){
+async function addToWishlist(id, name, price, image, category) {
 
-    let wishlist =
-    JSON.parse(localStorage.getItem("wishlist")) || [];
+    const currentUser =
+        JSON.parse(localStorage.getItem("currentUser"));
 
-    let exists =
-    wishlist.find(item => item.name === name);
-
-    if(exists){
-
-        alert("Already in Wishlist ❤️");
+    if (!currentUser) {
+        alert("Please login first ❤️");
+        window.location.href = "login.html";
         return;
     }
 
-    wishlist.push({
-        name:name,
-        price:price,
-        image:image
-    });
+    const userId =
+        currentUser._id || currentUser.id;
 
-    localStorage.setItem(
-        "wishlist",
-        JSON.stringify(wishlist)
-    );
+    try {
 
-    alert("Added to Wishlist ❤️");
-}
-// Wishlist Count Update
-let countEl = document.getElementById("wishlistCount");
+        const response = await fetch(
+            "http://localhost:5000/api/wishlist",
+            {
+                method: "POST",
 
-if(countEl){
-    countEl.innerText = wishlist.length;
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    userId: userId,
+                    productId: id,
+                    name: name,
+                    price: price,
+                    image: image,
+                    category: category
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            alert("❤️ Added to Wishlist");
+
+        } else {
+
+            alert(data.message || "Wishlist failed");
+
+        }
+
+    } catch (error) {
+
+        console.error("Wishlist Error:", error);
+
+        alert("Server connection failed");
+
+    }
 }

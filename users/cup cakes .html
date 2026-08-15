@@ -618,121 +618,190 @@ class="btn btn-pink">
 
 async function loadCupCakeProducts(){
 
-    const response = await fetch("http://localhost:5000/api/products");
+    const response =
+        await fetch("http://localhost:5000/api/products");
 
-    const products = await response.json();
+    const products =
+        await response.json();
+
 
     const container =
-    document.getElementById("cupCakeProducts");
+        document.getElementById("cupCakeProducts");
+
 
     container.innerHTML = "";
 
+
     const cupCakeProducts =
-    products.filter(product =>
-        product.category === "Cup Cakes"
-    );
+        products.filter(product =>
+            product.category === "Cup Cakes"
+        );
+
 
     cupCakeProducts.forEach(product=>{
 
+
         container.innerHTML += `
 
-<div class="col-lg-4 col-md-6">
 
-<div class="product-card">
+        <div class="col-lg-4 col-md-6">
 
-<img src="${product.image}" alt="${product.name}">
 
-<div class="product-body">
+            <div class="product-card">
 
-<h4 class="product-title">
-${product.name}
-</h4>
 
-<div class="price">
-₹${product.price}
-</div>
+                <img src="${product.image}" alt="${product.name}">
 
-<div class="button-group">
 
-<button
-class="btn-cart"
-onclick="addToCart(
-${product.id},
-'${product.name}',
-${product.price},
-'${product.image}',
-'${product.category}'
-)">
-🛒 Add to Cart
-</button>
+                <div class="product-body">
 
-<a
-href="product-detail.html?id=${product.id}"
-class="btn-view">
-View Details
-</a>
 
-</div>
-</div>
+                    <h4 class="product-title">
+                        ${product.name}
+                    </h4>
 
-</div>
 
-</div>
+                    <div class="price">
+                        ₹${product.price}
+                    </div>
 
-`;
+
+                    <div class="button-group">
+
+
+                    <button
+                    class="btn-cart"
+                    onclick="addToCart(
+                    '${product._id}',
+                    '${product.name}',
+                    ${product.price},
+                    '${product.image}',
+                    '${product.category}'
+                    )">
+
+                    🛒 Add to Cart
+
+                    </button>
+
+
+                    <a
+                    href="product-detail.html?id=${product._id}"
+                    class="btn-view">
+
+                    View Details
+
+                    </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        `;
+
 
     });
 
+
 }
+
+
+
 function addToCart(id,name,price,image,category){
 
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-let existing=cart.find(item=>item.id==id);
+    let cart =
+    JSON.parse(localStorage.getItem("cart")) || [];
 
-if(existing){
 
-existing.quantity++;
 
-}else{
+    let existing =
+    cart.find(item=>item.id===id);
 
-cart.push({
-id:id,
-name:name,
-price:price,
-image:image,
-category:category,
-quantity:1
-});
+
+
+    if(existing){
+
+
+        existing.quantity++;
+
+
+    }
+    else{
+
+
+        cart.push({
+
+            id:id,
+
+            name:name,
+
+            price:price,
+
+            image:image,
+
+            category:category,
+
+            quantity:1
+
+        });
+
+
+    }
+
+
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+
+    updateCartCount();
+
+
+    alert("✅ Product Added To Cart");
+
 
 }
 
-localStorage.setItem("cart",JSON.stringify(cart));
 
-document.getElementById("cartCount").innerText=cart.length;
 
-alert("✅ Product Added To Cart");
-
-}
 loadCupCakeProducts();
 
+
 </script>
+
+
 <script src="cart.js"></script>
 <script src="wishlist.js"></script>
-<script>
 
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+
+<script>
 
 let wishlist =
 JSON.parse(localStorage.getItem("wishlist")) || [];
 
-document.getElementById("cartCount").innerText =
-cart.length;
+
+updateCartCount();
+
 
 document.getElementById("wishlistCount").innerText =
 wishlist.length;
 
+
 </script>
+<script src="cart.js"></script>
+<script src="wishlist.js"></script>
+
 </body>
 </html>

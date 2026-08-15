@@ -170,7 +170,7 @@ data-bs-target="#navbarNav">
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="desserts.html">Desserts</a>
+<a class="nav-link" href="dessert.html">Desserts</a>
 </li>
 
 <li class="nav-item">
@@ -225,7 +225,7 @@ class="btn btn-pink">
 <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800">
 <div class="card-body">
 <h4 class="card-title">🍫 Brownies</h4>
-<a href="brownies.html" class="btn btn-dessert">
+<a href="brownie.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -238,7 +238,7 @@ View Collection
 <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800">
 <div class="card-body">
 <h4 class="card-title">🍩 Donuts</h4>
-<a href="donuts.html" class="btn btn-dessert">
+<a href="donut.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -251,7 +251,7 @@ View Collection
 <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=800">
 <div class="card-body">
 <h4 class="card-title">🍰 Cheesecake</h4>
-<a href="cheesecake.html" class="btn btn-dessert">
+<a href="cheese cake.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -300,6 +300,17 @@ View Collection
 </div>
 
 </div>
+
+<section class="container py-5">
+
+<h2 class="text-center text-danger fw-bold mb-4">
+All Dessert Products
+</h2>
+
+<div class="row" id="productContainer">
+</div>
+
+</section>
 <!-- FOOTER -->
 
 <!-- PREMIUM FOOTER -->
@@ -615,6 +626,141 @@ cart.length;
 document.getElementById("wishlistCount").innerText =
 wishlist.length;
 
+</script>
+<script>
+async function loadProducts() {
+
+try {
+
+const res = await fetch("http://localhost:5000/api/products");
+const products = await res.json();
+
+const container =
+document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products
+.filter(product =>
+product.category &&
+(
+product.category.toLowerCase().includes("dessert") ||
+product.category.toLowerCase().includes("brownie") ||
+product.category.toLowerCase().includes("donut") ||
+product.category.toLowerCase().includes("cookie") ||
+product.category.toLowerCase().includes("pastry") ||
+product.category.toLowerCase().includes("macaron") ||
+product.category.toLowerCase().includes("cheesecake")
+)
+)
+.forEach(product => {
+
+container.innerHTML += `
+
+<div class="col-md-3 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="${product.image}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body text-center">
+
+<h5>${product.name}</h5>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+<p>${product.category}</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+catch(error){
+console.log(error);
+}
+}
+
+loadProducts();
+</script>
+
+<script>
+async function loadProducts() {
+
+try {
+
+const res = await fetch("http://localhost:5000/api/products");
+const products = await res.json();
+
+const container =
+document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products
+.filter(product =>
+product.category &&
+(
+product.category.toLowerCase().includes("dessert") ||
+product.category.toLowerCase().includes("brownie") ||
+product.category.toLowerCase().includes("donut") ||
+product.category.toLowerCase().includes("cookie") ||
+product.category.toLowerCase().includes("pastry") ||
+product.category.toLowerCase().includes("macaron") ||
+product.category.toLowerCase().includes("cheesecake")
+)
+)
+.forEach(product => {
+
+container.innerHTML += `
+
+<div class="col-md-3 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="${product.image}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body text-center">
+
+<h5>${product.name}</h5>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+<p>${product.category}</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+catch(error){
+console.log(error);
+}
+}
+
+loadProducts();
 </script>
 </body>
 </html>

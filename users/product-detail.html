@@ -674,8 +674,8 @@ async function loadProduct(){
     const products = await response.json();
 
     currentProduct = products.find(
-        p => String(p.id) === String(productId)
-    );
+    p => String(p._id) === String(productId)
+);
 
     if(!currentProduct){
 
@@ -825,10 +825,11 @@ function showProductOptions(category){
 
 function addToCart() {
 
+    alert("NEW PRODUCT DETAIL JS RUNNING");
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     let cartItem = {
-        id: currentProduct.id,
+    id: currentProduct._id,
         name: currentProduct.name,
         price: currentProduct.price,
         image: currentProduct.image,
@@ -888,11 +889,14 @@ function addWishlist(){
 
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
-    let exist = wishlist.find(item => item.id == currentProduct.id);
+    let exist = wishlist.find(item => item.id == currentProduct._id);
 
     if(!exist){
 
-        wishlist.push(currentProduct);
+        wishlist.push({
+    ...currentProduct,
+    id: currentProduct._id
+});
 
         localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
@@ -911,7 +915,7 @@ function loadRelated(products){
 
     products.slice(0,4).forEach(product=>{
 
-        if(product.id != currentProduct.id){
+        if(product._id != currentProduct._id){
 
             html += `
 
@@ -927,8 +931,7 @@ function loadRelated(products){
 
                         <p>₹${product.price}</p>
 
-                        <a href="product-detail.html?id=${product.id}"
-                        class="btn btn-danger">
+                        <a href="product-detail.html?id=${product._id}" class="btn btn-danger">
 
                         View Details
 

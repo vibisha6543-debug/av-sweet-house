@@ -547,117 +547,187 @@ class="btn btn-pink">
 </style>
 <script>
 
-async function loadsmoothieProducts(){
+async function loadSmoothieProducts() {
 
-    const response = await fetch("http://localhost:5000/api/products");
+    try {
 
-    const products = await response.json();
+        const response =
+            await fetch("http://localhost:5000/api/products");
 
-    const container =
-    document.getElementById("smoothieProducts");
+        const products =
+            await response.json();
 
-    container.innerHTML = "";
+        const container =
+            document.getElementById("smoothieProducts");
 
-    const smoothieProducts =
-    products.filter(product =>
-        product.category === "Smoothies"
-    );
+        container.innerHTML = "";
 
-    smoothieProducts.forEach(product=>{
+        const smoothieProducts =
+            products.filter(product =>
+                product.category === "Smoothies"
+            );
 
-        container.innerHTML += `
+        smoothieProducts.forEach(product => {
 
-<div class="col-lg-4 col-md-6">
+            container.innerHTML += `
 
-<div class="product-card">
+            <div class="col-lg-4 col-md-6">
 
-<img src="${product.image}">
+                <div class="product-card">
 
-<div class="product-body">
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                    >
 
-<h4 class="product-title">
-${product.name}
-</h4>
+                    <div class="product-body">
 
-<div class="price">
-₹${product.price}
-</div>
+                        <h4 class="product-title">
+                            ${product.name}
+                        </h4>
 
-<button
-class="btn btn-pink rounded-pill w-100 mt-3"
-onclick="addToCart(
-${product.id},
-'${product.name}',
-${product.price},
-'${product.image}',
-'${product.category}'
-)">
-🛒 Add to Cart
-</button>
+                        <div class="price">
+                            ₹${product.price}
+                        </div>
 
-<a
-href="product-detail.html?id=${product.id}"
-class="btn btn-outline-danger rounded-pill w-100 mt-2">
-👁️ View Details
-</a>
+                        <button
+                            class="btn btn-pink rounded-pill w-100 mt-3"
+                            onclick="addToCart(
+                                '${product._id}',
+                                '${product.name}',
+                                ${product.price},
+                                '${product.image}',
+                                '${product.category}'
+                            )">
 
-</div>
+                            🛒 Add to Cart
 
-</div>
+                        </button>
 
-</div>
+                        <a
+                            href="product-detail.html?id=${product._id}"
+                            class="btn btn-outline-danger rounded-pill w-100 mt-2">
 
-`;
+                            👁️ View Details
 
-    });
+                        </a>
 
-}
+                    </div>
 
-function addToCart(id, name, price, image, category){
+                </div>
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            </div>
 
-    let existing = cart.find(item => item.id == id);
+            `;
 
-    if(existing){
-        existing.quantity++;
-    }else{
-        cart.push({
-            id,
-            name,
-            price,
-            image,
-            category,
-            quantity:1
         });
+
+    }
+    catch(error) {
+
+        console.error("Error loading products:", error);
+
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    document.getElementById("cartCount").innerText = cart.length;
-
-    alert("✅ Product Added To Cart");
 }
 
-loadsmoothieProducts();
 
-</script>
-<script src="cart.js"></script>
-<script src="wishlist.js"></script>
-<script>
+function addToCart(id, name, price, image, category) {
 
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existing =
+        cart.find(item => item.id === id);
+
+    if(existing) {
+
+        existing.quantity =
+            existing.quantity + 1;
+
+    }
+    else {
+
+        cart.push({
+
+            id: id,
+            name: name,
+            price: price,
+            image: image,
+            category: category,
+            quantity: 1
+
+        });
+
+    }
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    // Update cart count
+    const cartCount =
+        document.getElementById("cartCount");
+
+    if(cartCount) {
+
+        cartCount.innerText =
+            cart.reduce(
+                (total, item) =>
+                    total + item.quantity,
+                0
+            );
+
+    }
+
+    alert("✅ Product Added To Cart");
+
+}
+
+
+loadSmoothieProducts();
+
+
+// Load existing cart and wishlist count
 let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
+    JSON.parse(localStorage.getItem("cart")) || [];
 
 let wishlist =
-JSON.parse(localStorage.getItem("wishlist")) || [];
+    JSON.parse(localStorage.getItem("wishlist")) || [];
 
-document.getElementById("cartCount").innerText =
-cart.length;
+const cartCount =
+    document.getElementById("cartCount");
 
-document.getElementById("wishlistCount").innerText =
-wishlist.length;
+if(cartCount) {
+
+    cartCount.innerText =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+}
+
+const wishlistCount =
+    document.getElementById("wishlistCount");
+
+if(wishlistCount) {
+
+    wishlistCount.innerText =
+        wishlist.length;
+
+}
 
 </script>
+
+<script src="cart.js"></script>
+<script src="wishlist.js"></script>
+
 </body>
 </html>
+
+
+
+

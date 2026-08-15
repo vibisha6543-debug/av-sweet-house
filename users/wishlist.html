@@ -132,122 +132,223 @@
 </div>
 
 <!-- JS -->
+
 <script>
 
-let wishlist =
-JSON.parse(localStorage.getItem("wishlist")) || [];
+const currentUser =
+    JSON.parse(localStorage.getItem("currentUser"));
 
-let container =
-document.getElementById("wishlistContainer");
+const container =
+    document.getElementById("wishlistContainer");
 
-let emptyBox =
-document.getElementById("emptyWishlist");
+const emptyBox =
+    document.getElementById("emptyWishlist");
 
-if(wishlist.length === 0){
+
+// CHECK LOGIN
+if (!currentUser) {
 
     emptyBox.style.display = "block";
 
-}else{
+    emptyBox.innerHTML = `
+        <i class="fa-regular fa-heart"></i>
+        <h3>Please Login First</h3>
+        <p>Login to see your wishlist ❤️</p>
+        <a href="login.html" class="btn btn-outline-danger">
+            Login
+        </a>
+    `;
 
-    wishlist.forEach((item,index)=>{
+} else {
 
-        container.innerHTML += `
+    const userId =
+        currentUser._id || currentUser.id;
 
-        <div class="col-md-4">
+    loadWishlist(userId);
 
-            <div class="wish-card">
+}
 
-                <img src="${item.image}">
 
-                <div class="wish-content">
+// LOAD WISHLIST
+async function loadWishlist(userId) {
 
-                    <h5>${item.name}</h5>
+    try {
 
-                    <div class="price">
-                        ₹${item.price}
+        const response = await fetch(
+            `http://localhost:5000/api/wishlist/${userId}`
+        );
+
+        const wishlist =
+            await response.json();
+
+        container.innerHTML = "";
+
+        if (!wishlist || wishlist.length === 0) {
+
+            emptyBox.style.display = "block";
+
+            return;
+        }
+
+        emptyBox.style.display = "none";
+
+
+        wishlist.forEach(item => {
+
+            container.innerHTML += `
+
+                <div class="col-md-4">
+
+                    <div class="wish-card">
+
+                        <img src="${item.image}">
+
+                        <div class="wish-content">
+
+                            <h5>${item.name}</h5>
+
+                            <div class="price">
+                                ₹${item.price}
+                            </div>
+
+                            <button
+                                class="btn btn-danger w-100 mt-3"
+                                onclick="moveToCart(
+                                    '${item.productId}',
+                                    '${item.name.replace(/'/g, "\\'")}',
+                                    ${item.price},
+                                    '${item.image.replace(/'/g, "\\'")}'
+                                )">
+
+                                🛒 Move To Cart
+
+                            </button>
+
+                            <button
+                                class="btn-remove"
+                                onclick="removeWishlist(
+                                    '${item.productId}'
+                                )">
+
+                                Remove
+
+                            </button>
+
+                        </div>
+
                     </div>
-
-                    <button
-                    class="btn btn-danger w-100 mt-3"
-                    onclick="moveToCart(${index})">
-
-                        🛒 Move To Cart
-
-                    </button>
-
-                    <button
-                    class="btn-remove"
-                    onclick="removeWishlist(${index})">
-
-                        Remove
-
-                    </button>
 
                 </div>
 
-            </div>
+            `;
 
-        </div>
+        });
 
-        `;
+    } catch (error) {
 
-    });
+        console.error("Wishlist Error:", error);
 
-}
+        alert("Failed to load wishlist");
 
-function removeWishlist(index){
-
-    wishlist.splice(index,1);
-
-    localStorage.setItem(
-        "wishlist",
-        JSON.stringify(wishlist)
-    );
-
-    location.reload();
+    }
 
 }
 
-function moveToCart(index){
+
+// REMOVE WISHLIST
+async function removeWishlist(productId, fromCart = false) {
+
+    const userId =
+        currentUser._id || currentUser.id;
+
+    try {
+
+        const response = await fetch(
+            `http://localhost:5000/api/wishlist/${userId}/${productId}`,
+            {
+                method: "DELETE"
+            }
+        );
+
+        const data =
+            await response.json();
+
+        if (data.success) {
+
+            if (fromCart) {
+                alert("Moved To Cart 🛒");
+            } else {
+                alert("Removed from Wishlist ❤️");
+            }
+
+            loadWishlist(userId);
+
+        } else {
+
+            alert("Remove failed");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Server connection failed");
+
+    }
+
+}
+
+// MOVE TO CART
+function moveToCart(
+    productId,
+    name,
+    price,
+    image
+) {
 
     let cart =
-    JSON.parse(localStorage.getItem("cart")) || [];
+        JSON.parse(localStorage.getItem("cart")) || [];
+
 
     let existing =
-    cart.find(item =>
-    item.name === wishlist[index].name);
+        cart.find(item =>
+            item.name === name
+        );
 
-    if(existing){
+
+    if (existing) {
 
         existing.qty++;
 
-    }else{
+    } else {
 
         cart.push({
-            name: wishlist[index].name,
-            price: wishlist[index].price,
-            image: wishlist[index].image,
+
+            name: name,
+
+            price: price,
+
+            image: image,
+
             qty: 1
+
         });
 
     }
+
 
     localStorage.setItem(
         "cart",
         JSON.stringify(cart)
     );
 
-    wishlist.splice(index,1);
 
-    localStorage.setItem(
-        "wishlist",
-        JSON.stringify(wishlist)
-    );
+    // Remove from MongoDB wishlist
+    removeWishlist(productId, true);
 
-    alert("Moved To Cart 🛒");
-
-    location.reload();
 }
+
 </script>
 
 </body>

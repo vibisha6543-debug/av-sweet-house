@@ -263,183 +263,286 @@ Fresh cakes, chocolates, desserts, juices and decorations for every celebration.
 </footer>
 <script>
 
-let currentUser =
-JSON.parse(localStorage.getItem("currentUser"));
+async function loadMyOrders() {
 
-if(!currentUser){
+    const currentUser =
+        JSON.parse(localStorage.getItem("currentUser"));
 
-    window.location.href="login.html";
+    // Check login
+    if (!currentUser) {
+        window.location.href = "login.html";
+        return;
+    }
+
+    const container =
+        document.getElementById("ordersContainer");
+
+    try {
+
+        // Get orders from backend
+        const response =
+            await fetch("http://localhost:5000/api/orders");
+
+        const data =
+            await response.json();
+
+        console.log("All Orders:", data);
+
+        // Get orders array
+        let allOrders = [];
+
+        if (Array.isArray(data)) {
+
+            allOrders = data;
+
+        } else if (Array.isArray(data.orders)) {
+
+            allOrders = data.orders;
+
+        }
+
+        // Only current user's orders
+        const orders =
+            allOrders.filter(order =>
+                order.email === currentUser.email
+            );
+
+        console.log("My Orders:", orders);
+
+        // Update counters
+        const delivered =
+            orders.filter(order =>
+                order.status === "Delivered"
+            ).length;
+
+        const pending =
+            orders.filter(order =>
+                order.status !== "Delivered"
+            ).length;
+
+        document.getElementById("totalOrders").innerText =
+            orders.length;
+
+        document.getElementById("deliveredOrders").innerText =
+            delivered;
+
+        document.getElementById("pendingOrders").innerText =
+            pending;
+
+
+        // Clear container
+        container.innerHTML = "";
+
+
+        // No orders
+        if (orders.length === 0) {
+
+            container.innerHTML = `
+                <div class="order-card">
+
+                    <h3>No Orders Yet 📦</h3>
+
+                    <p>
+                        Your completed orders will appear here.
+                    </p>
+
+                </div>
+            `;
+
+        } else {
+
+            // Latest order first
+            [...orders].reverse().forEach(order => {
+
+                let productsHTML = "";
+
+
+                // Products
+                if (Array.isArray(order.products)) {
+
+                    order.products.forEach(product => {
+
+                        const quantity =
+                            product.quantity || product.qty || 1;
+
+                        const price =
+                            Number(product.price) || 0;
+
+                        productsHTML += `
+
+                            <div class="d-flex align-items-center mb-3">
+
+                                <div class="me-3">
+
+                                    <img
+                                        src="${product.image || ''}"
+                                        style="
+                                            width:80px;
+                                            height:80px;
+                                            border-radius:15px;
+                                            object-fit:cover;
+                                        "
+                                    >
+
+                                </div>
+
+                                <div>
+
+                                    <h5>
+                                        ${product.name}
+                                    </h5>
+
+                                    <p class="mb-1">
+                                        Qty : ${quantity}
+                                    </p>
+
+                                    <p class="mb-0">
+                                        ₹${price * quantity}
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        `;
+
+                    });
+
+                }
+
+
+                const totalAmount =
+                    Number(order.totalAmount) || 0;
+
+
+                const orderId =
+                    order._id || "N/A";
+
+
+                const createdDate =
+                    order.createdAt
+                    ? new Date(order.createdAt).toLocaleString()
+                    : "Date unavailable";
+
+
+                container.innerHTML += `
+
+                    <div class="order-card">
+
+                        <div class="row">
+
+                            <div class="col-md-8">
+
+                                <h3 class="order-title">
+
+                                    Order #${orderId}
+
+                                </h3>
+
+
+                                <p class="order-id">
+
+                                    📅 ${createdDate}
+
+                                </p>
+
+
+                                <p>
+
+                                    👤 ${order.customerName || ""}
+
+                                </p>
+
+
+                                <p>
+
+                                    📧 ${order.email || ""}
+
+                                </p>
+
+
+                                <hr>
+
+
+                                ${productsHTML}
+
+                            </div>
+
+
+                            <div class="col-md-4 text-end">
+
+                                <h4 style="color:#ff4d8d;">
+
+                                    ₹${totalAmount.toFixed(2)}
+
+                                </h4>
+
+
+                                <br>
+
+
+                                <span class="status
+                                    ${
+                                        order.status === "Delivered"
+                                        ? "delivered"
+                                        : "processing"
+                                    }">
+
+                                    ${order.status || "Pending"}
+
+                                </span>
+
+
+                                <br><br>
+
+
+                                <a
+                                    href="track-order.html"
+                                    class="btn btn-pink">
+
+                                    Track Order
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error("Error loading orders:", error);
+
+        container.innerHTML = `
+
+            <div class="order-card">
+
+                <h3>Unable to load orders ❌</h3>
+
+                <p>
+                    Please make sure your backend server is running.
+                </p>
+
+            </div>
+
+        `;
+
+    }
 
 }
 
-let allOrders =
-JSON.parse(localStorage.getItem("orders")) || [];
 
-let orders =
-allOrders.filter(order =>
-
-    order.email === currentUser.email
-
-);
-
-let container =
-document.getElementById("ordersContainer");
-
-container.innerHTML = "";
-
-let delivered =
-orders.filter(order => order.status === "Delivered").length;
-
-let pending =
-orders.filter(order => order.status !== "Delivered").length;
-
-document.getElementById("totalOrders").innerText =
-orders.length;
-
-document.getElementById("deliveredOrders").innerText =
-delivered;
-
-document.getElementById("pendingOrders").innerText =
-pending;
-
-if(orders.length===0){
-
-container.innerHTML=`
-
-<div class="order-card">
-
-<h3>No Orders Yet 📦</h3>
-
-<p>Your completed orders will appear here.</p>
-
-</div>
-
-`;
-
-}else{
-
-[...orders].reverse().forEach((order,index)=>{
-
-    let productsHTML = "";
-
-order.products.forEach(product=>{
-
-productsHTML += `
-
-<div class="d-flex align-items-center mb-3">
-
-<div class="me-3">
-
-<img
-src="${product.image}"
-style="width:80px;height:80px;border-radius:15px;object-fit:cover;">
-
-</div>
-
-<div>
-
-<h5>${product.name}</h5>
-
-<p class="mb-1">
-
-Qty : ${product.qty}
-
-</p>
-
-<p class="mb-0">
-
-₹${product.price * product.qty}
-
-</p>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-container.innerHTML += `
-
-<div class="order-card">
-
-<div class="row">
-
-<div class="col-md-8">
-
-<h3 class="order-title">
-
-${order.orderId}
-
-</h3>
-
-<p class="order-id">
-
-📅 ${order.date}
-
-</p>
-
-<p>
-
-👤 ${order.customerName}
-
-</p>
-
-<p>
-
-📧 ${order.email}
-
-</p>
-
-<hr>
-
-${productsHTML}
-
-</div>
-
-<div class="col-md-4 text-end">
-
-<h4 style="color:#ff4d8d;">
-
-₹${order.total}
-
-</h4>
-
-<br>
-
-<span class="status
-${order.status==="Delivered"
-?
-"delivered"
-:
-"processing"}">
-
-${order.status}
-
-</span>
-
-<br><br>
-
-<a
-href="track-order.html"
-class="btn btn-pink">
-
-Track Order
-
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-});
-
-}
-        
+// Start
+loadMyOrders();
 
 </script>
 </body>

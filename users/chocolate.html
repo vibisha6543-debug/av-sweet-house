@@ -226,7 +226,7 @@ class="btn btn-pink">
 <img src="../users/images/products/dark-chocolate.jpg" alt="Dark Chocolate">
 <div class="card-body">
 <h4 class="card-title">🍫 Dark Chocolates</h4>
-<a href="dark-chocolate.html" class="btn btn-dessert">
+<a href="dark chocolate.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -239,7 +239,7 @@ View Collection
 <img src="../users/images/products/milk-chocolate.jpg" alt="Milk Chocolate">
 <div class="card-body">
 <h4 class="card-title">🥛 Milk Chocolates</h4>
-<a href="milk-chocolate.html" class="btn btn-dessert">
+<a href="milk chocolate.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -252,7 +252,7 @@ View Collection
 <img src="../users/images/products/white-chocolate.jpg" alt="White Chocolate">
 <div class="card-body">
 <h4 class="card-title">🤍 White Chocolates</h4>
-<a href="white-chocolate.html" class="btn btn-dessert">
+<a href="white chocolate.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -265,7 +265,7 @@ View Collection
 <img src="../users/images/products/nut-chocolate.jpg" alt="Nut Chocolate">
 <div class="card-body">
 <h4 class="card-title">🥜 Nut Chocolates</h4>
-<a href="nut-chocolate.html" class="btn btn-dessert">
+<a href="nut chocolate.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -278,7 +278,7 @@ View Collection
 <img src="../users/images/products/gift-box.jpg" alt="Gift Box">
 <div class="card-body">
 <h4 class="card-title">🎁 Gift Boxes</h4>
-<a href="gift-box.html" class="btn btn-dessert">
+<a href="gift boxes.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -291,7 +291,7 @@ View Collection
 <img src="../users/images/products/festival-special.jpg" alt="Festival Special">
 <div class="card-body">
 <h4 class="card-title">🎉 Festival Specials</h4>
-<a href="festival-special.html" class="btn btn-dessert">
+<a href="festivel special.html" class="btn btn-dessert">
 View Collection
 </a>
 </div>
@@ -299,6 +299,17 @@ View Collection
 </div>
 
 </div>
+
+<section class="container py-5">
+
+<h2 class="text-center text-danger fw-bold mb-4">
+All Chocolate Products
+</h2>
+
+<div class="row" id="productContainer">
+</div>
+
+</section>
 <!-- FOOTER -->
 
 <!-- PREMIUM FOOTER -->
@@ -614,6 +625,65 @@ cart.length;
 document.getElementById("wishlistCount").innerText =
 wishlist.length;
 
+</script>
+
+<script>
+async function loadProducts() {
+
+try {
+
+const res = await fetch("http://localhost:5000/api/products");
+const products = await res.json();
+
+const container =
+document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products.filter(product =>
+product.category &&
+product.category.toLowerCase().includes("chocolate")
+)
+.forEach(product => {
+
+container.innerHTML += `
+
+<div class="col-md-3 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="${product.image}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body text-center">
+
+<h5>${product.name}</h5>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+<p>${product.category}</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+catch(error){
+console.log(error);
+}
+}
+
+loadProducts();
 </script>
 </body>
 </html>

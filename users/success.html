@@ -430,24 +430,24 @@ h1{
   <div class="order-box">
 
     <div class="order-row">
-      <span>Order ID</span>
-      <span>#AV45892</span>
-    </div>
+  <span>Order ID</span>
+  <span id="orderId">Loading...</span>
+</div>
 
-    <div class="order-row">
-      <span>Payment Method</span>
-      <span>UPI</span>
-    </div>
+<div class="order-row">
+  <span>Payment Method</span>
+  <span id="paymentMethod">Loading...</span>
+</div>
 
-    <div class="order-row">
-      <span>Total Paid</span>
-      <span>₹1540</span>
-    </div>
+<div class="order-row">
+  <span>Total Paid</span>
+  <span id="totalPaid">₹0</span>
+</div>
 
-    <div class="order-row">
-      <span>Status</span>
-      <span>Preparing 🍰</span>
-    </div>
+<div class="order-row">
+  <span>Status</span>
+  <span id="orderStatus">Preparing 🍰</span>
+</div>
 
   </div>
 
@@ -476,17 +476,56 @@ h1{
 
   <div class="buttons">
 
-    <button class="btn primary">
-      Track Order
-    </button>
+    <button
+    class="btn primary"
+    onclick="window.location.href='track-order.html'">
+    Track Order
+</button>
 
-    <button class="btn outline">
-      Continue Shopping
-    </button>
-
+    <button
+    class="btn outline"
+    onclick="window.location.href='index.html'">
+    Continue Shopping
+</button>
   </div>
 
 </div>
+<script>
 
+const lastOrder =
+    JSON.parse(localStorage.getItem("lastOrder"));
+
+
+if (!lastOrder) {
+
+    console.log("No recent order found");
+
+} else {
+
+    console.log("Last Order:", lastOrder);
+
+
+    // Order ID
+    document.getElementById("orderId").innerText =
+        "#" + lastOrder._id;
+
+
+    // Payment
+    document.getElementById("paymentMethod").innerText =
+        lastOrder.paymentMethod || "UPI";
+
+
+    // Total
+    document.getElementById("totalPaid").innerText =
+        "₹" + Number(lastOrder.totalAmount).toFixed(2);
+
+
+    // Status
+    document.getElementById("orderStatus").innerText =
+        lastOrder.status || "Preparing 🍰";
+
+}
+
+</script>
 </body>
 </html>

@@ -150,34 +150,34 @@ data-bs-target="#navbarNav">
 <ul class="navbar-nav mx-auto">
 
 <li class="nav-item">
-<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="/">Home</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="cakes.html">Cakes</a>
+<a class="nav-link" href="/users/cakes.html">Cakes</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="desserts.html">Desserts</a>
+<a class="nav-link" href="/users/dessert.html">Desserts</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="chocolate.html">Chocolate</a>
+<a class="nav-link" href="/users/chocolate.html">Chocolate</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="juice.html">Juice</a>
+<a class="nav-link" href="/users/juice.html">Juice</a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="snacks.html">Snacks</a>
+<a class="nav-link" href="/users/Snacks.html">Snacks</a>
 </li>
 
 </ul>
 
 <div>
 
-<a href="wishlist.html"
+<a href="/users/wishlist.html"
 class="btn btn-outline-danger me-2">
 ❤️ Wishlist (<span id="wishlistCount">0</span>)
 </a>
@@ -195,7 +195,7 @@ class="btn btn-pink">
 
 <div class="container py-4">
 
-<a href="index.html" class="back-btn">← Back Home</a>
+<a href="/" class="back-btn">← Back Home</a>
 
 <h1 class="title">🎂 Our Cake Categories</h1>
 
@@ -213,7 +213,7 @@ Choose your favorite cake category and explore delicious creations
 <p class="card-text">
 Perfect cakes for birthdays and celebrations.
 </p>
-<a href="birthday-cakes.html" class="btn btn-pink">
+<a href="birthday.html" class="btn btn-pink">
 View Cakes
 </a>
 </div>
@@ -228,7 +228,7 @@ View Cakes
 <p class="card-text">
 Celebrate your love with beautiful cakes.
 </p>
-<a href="anniversary-cakes.html" class="btn btn-pink">
+<a href="anniversary cake.html" class="btn btn-pink">
 View Cakes
 </a>
 </div>
@@ -243,7 +243,7 @@ View Cakes
 <p class="card-text">
 Print your memories on delicious cakes.
 </p>
-<a href="occasion-cakes.html" class="btn btn-pink">
+<a href="occasion cake.html" class="btn btn-pink">
 View Cakes
 </a>
 </div>
@@ -258,7 +258,7 @@ View Cakes
 <p class="card-text">
 Elegant wedding cakes for your big day.
 </p>
-<a href="wedding-cakes.html" class="btn btn-pink">
+<a href="wedding cake.html" class="btn btn-pink">
 View Cakes
 </a>
 </div>
@@ -273,7 +273,7 @@ View Cakes
 <p class="card-text">
 Colorful cartoon cakes loved by children.
 </p>
-<a href="kids-cakes.html" class="btn btn-pink">
+<a href="kids cake.html" class="btn btn-pink">
 View Cakes
 </a>
 </div>
@@ -288,7 +288,7 @@ View Cakes
 <p class="card-text">
 Fresh cupcakes available in many flavors.
 </p>
-<a href="cup-cakes.html" class="btn btn-pink">
+<a href="cup cakes .html" class="btn btn-pink">
 View Cakes
 </a>
 </div>
@@ -298,6 +298,86 @@ View Cakes
 </div>
 
 </div>
+
+<section class="container py-5">
+
+<h2 class="text-center text-danger fw-bold mb-4">
+All Cake Products
+</h2>
+
+<div class="row" id="productContainer">
+</div>
+
+</section>
+
+<script>
+
+async function loadProducts() {
+
+try {
+
+const res = await fetch("http://localhost:5000/api/products");
+
+const products = await res.json();
+
+const container =
+document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products
+.filter(product =>
+    product.category &&
+    product.category.toLowerCase().includes("cake")
+)
+.forEach(product => {
+
+container.innerHTML += `
+
+<div class="col-md-3 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="${product.image}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body text-center">
+
+<h5>${product.name}</h5>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+<p>
+${product.category}
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+catch(error){
+
+console.log(error);
+
+}
+
+}
+
+loadProducts();
+
+</script>
+
 <!-- FOOTER -->
 
 <!-- PREMIUM FOOTER -->

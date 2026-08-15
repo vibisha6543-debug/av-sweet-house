@@ -1,386 +1,638 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>My Profile | AV Sweet House</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
+/* =========================
+   GLOBAL
+========================= */
+
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#fff5f8;
+    background:#fff5f8;
+    color:#222;
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 
-.text-pink{
-color:#ff4d8d !important;
+.navbar{
+    background:white;
+    box-shadow:0 4px 20px rgba(0,0,0,.06);
+}
+
+.navbar-brand{
+    color:#ff4d8d !important;
+    font-size:22px;
+    font-weight:800;
 }
 
 .nav-link{
-font-weight:500;
+    color:#444 !important;
+    font-weight:500;
+    margin:0 6px;
+    transition:.3s;
 }
 
 .nav-link:hover{
-color:#ff4d8d !important;
+    color:#ff4d8d !important;
 }
 
 .btn-pink{
-background:#ff4d8d;
-color:white;
-border:none;
+    background:#ff4d8d;
+    color:white;
+    border:none;
+    border-radius:30px;
+    padding:10px 20px;
+    font-weight:600;
 }
 
 .btn-pink:hover{
-background:#ff2f78;
-color:white;
+    background:#ff2f78;
+    color:white;
 }
 
-/* HERO */
+/* =========================
+   PROFILE HERO
+========================= */
 
-.profile-banner{
-height:420px;
-background:
-linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
-url('https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=1200');
-background-size:cover;
-background-position:center;
-position:relative;
+.profile-hero{
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,77,141,.95),
+        rgba(255,158,198,.92)
+    );
+
+    padding:70px 20px 130px;
+    color:white;
+    text-align:center;
 }
 
-.overlay{
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-color:white;
+.profile-hero h1{
+    font-size:42px;
+    font-weight:800;
 }
 
-.overlay h1{
-font-size:50px;
-font-weight:700;
+.profile-hero p{
+    margin-top:10px;
+    font-size:17px;
+    opacity:.95;
 }
 
-.overlay p{
-font-size:18px;
+/* =========================
+   PROFILE CARD
+========================= */
+
+.profile-wrapper{
+    margin-top:-90px;
+    position:relative;
+    z-index:5;
 }
 
-/* PROFILE CARD */
-
-.profile-card{
-background:white;
-padding:35px;
-border-radius:30px;
-box-shadow:0 15px 35px rgba(0,0,0,.1);
-text-align:center;
-margin-top:-90px;
-position:relative;
-z-index:10;
+.profile-main-card{
+    background:white;
+    border-radius:30px;
+    padding:35px;
+    box-shadow:0 15px 45px rgba(255,77,141,.15);
 }
 
-.profile-img{
-width:160px;
-height:160px;
-border-radius:50%;
-object-fit:cover;
-border:6px solid #ff4d8d;
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:30px;
 }
 
-.profile-name{
-font-size:32px;
-font-weight:700;
-margin-top:20px;
+.profile-avatar{
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:
+    linear-gradient(135deg,#ff4d8d,#ff9ec6);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+    font-size:55px;
+
+    border:6px solid white;
+
+    box-shadow:
+    0 8px 25px rgba(255,77,141,.25);
+
+    flex-shrink:0;
 }
 
-.profile-badge{
-background:#fff0f6;
-color:#ff4d8d;
-padding:8px 20px;
-border-radius:30px;
-font-weight:600;
-display:inline-block;
-margin-top:10px;
+.profile-info h2{
+    font-size:30px;
+    font-weight:800;
+    margin-bottom:7px;
 }
 
-/* STATS */
+.profile-info .email{
+    color:#777;
+    margin-bottom:12px;
+}
+
+.member-badge{
+    display:inline-block;
+    background:#fff0f6;
+    color:#ff4d8d;
+    padding:7px 16px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-actions{
+    margin-top:30px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.quick-btn{
+    text-decoration:none;
+    padding:11px 20px;
+    border-radius:30px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn-order{
+    background:#ff4d8d;
+    color:white;
+}
+
+.btn-order:hover{
+    background:#ff2f78;
+    color:white;
+    transform:translateY(-2px);
+}
+
+.btn-outline-pink{
+    border:2px solid #ff4d8d;
+    color:#ff4d8d;
+    background:white;
+}
+
+.btn-outline-pink:hover{
+    background:#ff4d8d;
+    color:white;
+}
+
+/* =========================
+   STATS
+========================= */
 
 .stats-section{
-margin-top:40px;
+    margin-top:30px;
 }
 
-.stats-card{
-background:white;
-padding:30px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-transition:.4s;
-height:100%;
+.stat-card{
+    background:white;
+    padding:25px 15px;
+    border-radius:22px;
+    text-align:center;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+    transition:.3s;
 }
 
-.stats-card:hover{
-transform:translateY(-8px);
+.stat-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 12px 30px rgba(255,77,141,.12);
 }
 
-.stats-card h2{
-font-size:42px;
-font-weight:700;
-color:#ff4d8d;
+.stat-icon{
+    font-size:30px;
+    margin-bottom:8px;
 }
 
-.stats-card p{
-margin-top:10px;
-color:#666;
-font-weight:500;
+.stat-number{
+    font-size:30px;
+    font-weight:800;
+    color:#ff4d8d;
 }
 
-@media(max-width:768px){
-
-.overlay h1{
-font-size:34px;
+.stat-label{
+    color:#777;
+    font-size:14px;
+    font-weight:500;
 }
 
-.profile-card{
-margin-top:-60px;
-}
+/* =========================
+   SECTION
+========================= */
 
-.profile-img{
-width:120px;
-height:120px;
-}
-
-.profile-name{
-font-size:26px;
-}
-
-}
-
-/* PART 2 */
-
-.premium-card{
-background:white;
-padding:35px;
-border-radius:25px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-height:100%;
+.profile-section{
+    margin-top:45px;
 }
 
 .section-title{
-font-weight:700;
-color:#ff4d8d;
-margin-bottom:25px;
+    font-size:25px;
+    font-weight:800;
+    color:#222;
+    margin-bottom:20px;
 }
 
-.info-item{
-margin-bottom:18px;
+/* =========================
+   INFORMATION CARD
+========================= */
+
+.info-card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    height:100%;
 }
 
-.info-item strong{
-display:block;
-margin-bottom:5px;
+.info-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:17px 0;
+    border-bottom:1px solid #f3e3e8;
 }
 
-.info-item p{
-margin:0;
-color:#666;
+.info-row:last-child{
+    border-bottom:none;
 }
 
-.address-box{
-background:#fff5f8;
-padding:20px;
-border-radius:20px;
+.info-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+
+    background:#fff0f6;
+    color:#ff4d8d;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:20px;
 }
 
-.main-heading{
-font-weight:700;
-margin-bottom:30px;
-color:#ff4d8d;
+.info-content small{
+    display:block;
+    color:#999;
+    font-size:12px;
+    margin-bottom:3px;
 }
 
-.order-card{
-background:white;
-border-radius:25px;
-overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-transition:.4s;
+.info-content strong{
+    font-size:15px;
 }
 
-.order-card:hover{
-transform:translateY(-8px);
+/* =========================
+   ADDRESS
+========================= */
+
+.address-card{
+    background:
+    linear-gradient(
+        135deg,
+        #fff,
+        #fff0f6
+    );
+
+    border:1px solid #ffd8e5;
+
+    padding:30px;
+    border-radius:25px;
+
+    height:100%;
 }
 
-.order-card img{
-width:100%;
-height:230px;
-object-fit:cover;
+.address-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
 }
 
-.order-body{
-padding:20px;
+.address-header h4{
+    font-weight:700;
+    margin:0;
 }
 
-.wishlist-card{
-background:white;
-padding:20px;
-border-radius:25px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-transition:.4s;
-text-align:center;
+.home-badge{
+    background:#ff4d8d;
+    color:white;
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:11px;
 }
 
-.wishlist-card:hover{
-transform:translateY(-8px);
+.address-text{
+    color:#666;
+    line-height:1.8;
 }
 
-.wishlist-card img{
-width:100%;
-height:220px;
-object-fit:cover;
-border-radius:20px;
-margin-bottom:15px;
+/* =========================
+   ACCOUNT OPTIONS
+========================= */
+
+.option-card{
+    background:white;
+    border-radius:22px;
+    padding:25px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+    transition:.3s;
+
+    text-decoration:none;
+    color:#222;
+
+    display:block;
 }
 
-.price{
-font-size:24px;
-font-weight:700;
-color:#ff4d8d;
-}
-/* REWARD BOX */
-
-.reward-box{
-background:white;
-padding:40px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+.option-card:hover{
+    transform:translateY(-5px);
+    color:#222;
+    box-shadow:0 12px 30px rgba(255,77,141,.12);
 }
 
-.reward-box h1{
-font-size:60px;
-font-weight:700;
-color:#ff4d8d;
+.option-icon{
+    width:55px;
+    height:55px;
+
+    background:#fff0f6;
+    color:#ff4d8d;
+
+    border-radius:17px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+
+    margin-bottom:15px;
 }
 
-/* COUPON CARD */
-
-.coupon-card{
-background:white;
-padding:25px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-transition:.3s;
-height:100%;
+.option-card h5{
+    font-weight:700;
+    margin-bottom:6px;
 }
 
-.coupon-card:hover{
-transform:translateY(-8px);
+.option-card p{
+    color:#888;
+    font-size:13px;
+    margin:0;
 }
 
-.coupon-card h4{
-color:#ff4d8d;
-font-weight:700;
+/* =========================
+   REWARD CARD
+========================= */
+
+
+/* =========================
+   HELP CARD
+========================= */
+
+.help-card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    height:100%;
 }
 
-/* TIMELINE */
-
-.timeline-card{
-background:white;
-padding:30px;
-border-radius:25px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
+.help-card h4{
+    font-weight:700;
 }
 
-.activity-item{
-padding:15px;
-margin-bottom:10px;
-background:#fff5f8;
-border-radius:15px;
+.help-card p{
+    color:#777;
+    line-height:1.7;
 }
 
-/* SETTINGS */
+/* =========================
+   LOGOUT
+========================= */
 
-.settings-card{
-background:white;
-padding:25px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-height:100%;
-transition:.3s;
+.logout-section{
+    margin-top:45px;
+    text-align:center;
 }
 
-.settings-card:hover{
-transform:translateY(-8px);
+.logout-btn{
+    border:2px solid #dc3545;
+    color:#dc3545;
+    background:white;
+    padding:12px 35px;
+    border-radius:30px;
+    font-weight:600;
+    transition:.3s;
 }
 
-/* FOOTER */
+.logout-btn:hover{
+    background:#dc3545;
+    color:white;
+}
 
-.premium-footer{
-background:linear-gradient(135deg,#fff0f3,#ffe5ec);
-padding:60px 0 20px;
-margin-top:50px;
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:70px;
+    background:
+    linear-gradient(
+        135deg,
+        #fff0f3,
+        #ffe5ec,
+        #fdf6ff
+    );
+
+    padding:60px 0 25px;
 }
 
 .footer-logo{
-color:#ff4d8d;
-font-weight:700;
+    color:#ff4d8d;
+    font-size:25px;
+    font-weight:800;
 }
 
 .footer-text{
-color:#666;
+    color:#777;
+    line-height:1.8;
+    margin-top:15px;
 }
 
 .footer-title{
-color:#ff4d8d;
-margin-bottom:15px;
+    font-weight:700;
+    margin-bottom:18px;
 }
 
 .footer-links a{
-display:block;
-text-decoration:none;
-color:#666;
-margin-bottom:10px;
+    display:block;
+    text-decoration:none;
+    color:#777;
+    margin-bottom:10px;
+    transition:.3s;
 }
 
 .footer-links a:hover{
-color:#ff4d8d;
+    color:#ff4d8d;
+    transform:translateX(4px);
+}
+
+.footer-contact p{
+    color:#777;
+    margin-bottom:10px;
 }
 
 .footer-bottom{
-text-align:center;
-margin-top:30px;
-padding-top:20px;
-border-top:1px solid #ddd;
+    border-top:1px solid #ddd;
+    margin-top:35px;
+    padding-top:20px;
+    text-align:center;
+    color:#888;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+    .profile-hero{
+        padding:50px 15px 110px;
+    }
+
+    .profile-hero h1{
+        font-size:32px;
+    }
+
+    .profile-top{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .profile-main-card{
+        padding:25px 20px;
+    }
+
+    .profile-info h2{
+        font-size:25px;
+    }
+
+    .quick-actions{
+        justify-content:center;
+    }
+
+    .profile-avatar{
+        width:110px;
+        height:110px;
+        font-size:45px;
+    }
+
+}
+
+/* =========================
+   ADDRESS CARD
+========================= */
+
+.address-card{
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    height:100%;
+}
+
+.address-box{
+    background:#fff5f8;
+    padding:22px;
+    border-radius:18px;
+}
+
+.address-box h5{
+    color:#ff4d8d;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.address-box p{
+    color:#555;
+    line-height:1.8;
+    margin:0;
+}
+
+
+/* MANAGE ADDRESS BUTTON */
+
+.manage-address-btn{
+    display:block;
+    width:100%;
+    margin-top:20px;
+    padding:13px 20px;
+    background:#ff4d8d;
+    color:white;
+    text-align:center;
+    text-decoration:none;
+    border-radius:30px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.manage-address-btn:hover{
+    background:#ff2f78;
+    color:white;
+    transform:translateY(-2px);
 }
 
 </style>
 
 </head>
+
 <body>
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<nav class="navbar navbar-expand-lg sticky-top">
 
 <div class="container">
 
-<a class="navbar-brand fw-bold text-pink" href="index.html">
-🎂 AV Sweet House
+<a class="navbar-brand" href="index.html">
+🍰 AV Sweet House
 </a>
 
-<button class="navbar-toggler"
+<button
+class="navbar-toggler"
 type="button"
 data-bs-toggle="collapse"
 data-bs-target="#navbarNav">
@@ -389,59 +641,64 @@ data-bs-target="#navbarNav">
 
 </button>
 
-<div class="collapse navbar-collapse"
+<div
+class="collapse navbar-collapse"
 id="navbarNav">
 
 <ul class="navbar-nav mx-auto">
 
 <li class="nav-item">
-<a class="nav-link" href="index.html">
-Home
+<a class="nav-link" href="/">
+    Home
 </a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="cakes.html">
+<a class="nav-link" href="/users/cakes.html">
 Cakes
 </a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="desserts.html">
+<a class="nav-link" href="/users/dessert.html">
 Desserts
 </a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="chocolate.html">
+<a class="nav-link" href="/users/chocolate.html">
 Chocolate
 </a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="juice.html">
-Juices
+<a class="nav-link" href="/users/juice.html">
+Juice
 </a>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="decorations.html">
-Decorations
+<a class="nav-link" href="/users/snacks.html">
+Snacks
 </a>
 </li>
 
 </ul>
 
-<div>
+<div class="d-flex gap-2">
 
 <a href="wishlist.html"
-class="btn btn-outline-danger me-2">
-❤ Wishlist
+class="btn btn-outline-danger rounded-pill">
+
+❤️ <span id="wishlistCount">0</span>
+
 </a>
 
 <a href="cart.html"
 class="btn btn-pink">
-🛒 Cart
+
+🛒 <span id="cartCount">0</span>
+
 </a>
 
 </div>
@@ -452,60 +709,69 @@ class="btn btn-pink">
 
 </nav>
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
-<section class="profile-banner">
+<section class="profile-hero">
 
-<div class="overlay">
-
-<div>
-
-<h1>
-Welcome Back 👋
-</h1>
+<h1>My Profile 👋</h1>
 
 <p>
-Manage your AV Sweet House account
+Welcome to your AV Sweet House account
 </p>
-
-</div>
-
-</div>
 
 </section>
 
-<!-- PROFILE CARD -->
+<!-- =========================
+     PROFILE
+========================= -->
 
-<div class="container">
+<div class="container profile-wrapper">
 
-<div class="profile-card">
+<div class="profile-main-card">
 
-<img
-src="https://randomuser.me/api/portraits/women/44.jpg"
-class="profile-img"
-alt="Profile">
+<div class="profile-top">
 
-<h2 class="profile-name" id="profileName">
+<div class="profile-avatar">
+👤
+</div>
+
+<div class="profile-info">
+
+<h2 id="profileName">
+Loading...
 </h2>
 
-<div class="profile-badge">
-⭐ Premium Customer
-</div>
-
-<p class="text-muted mt-3">
-Member Since 2026
+<p class="email" id="profileEmail">
+Loading...
 </p>
 
-<div class="mt-4">
+<span class="member-badge">
+⭐ AV Sweet House Customer
+</span>
 
-<a href="#"
-class="btn btn-pink">
-Edit Profile
+<div class="quick-actions">
+
+<a href="My Order .html"
+class="quick-btn btn-order">
+
+📦 My Orders
+
 </a>
 
-<a href="#"
-class="btn btn-outline-danger">
-Change Password
+<a href="wishlist.html"
+class="quick-btn btn-outline-pink">
+
+❤️ Wishlist
+
+</a>
+
+<a href="cart.html"
+class="quick-btn btn-outline-pink">
+
+🛒 My Cart
+
 </a>
 
 </div>
@@ -514,57 +780,96 @@ Change Password
 
 </div>
 
-<!-- STATS -->
+</div>
+
+<!-- =========================
+     STATS
+========================= -->
 
 <section class="stats-section">
 
-<div class="container">
-
 <div class="row g-4">
 
-<div class="col-md-3">
+<div class="col-6 col-lg-3">
 
-<div class="stats-card">
+<div class="stat-card">
 
-<h2 id="orderCount">0</h2>
-<p>📦 Orders</p>
-
+<div class="stat-icon">
+📦
 </div>
 
+<div
+class="stat-number"
+id="orderCount">
+0
 </div>
 
-<div class="col-md-3">
-
-<div class="stats-card">
-
-<h2>8</h2>
-
-<p>❤ Wishlist</p>
-
+<div class="stat-label">
+Total Orders
 </div>
-
-</div>
-
-<div class="col-md-3">
-
-<div class="stats-card">
-
-<h2>3</h2>
-
-<p>🛒 Cart Items</p>
 
 </div>
 
 </div>
 
-<div class="col-md-3">
+<div class="col-6 col-lg-3">
 
-<div class="stats-card">
+<div class="stat-card">
 
-<h2>250</h2>
+<div class="stat-icon">
+❤️
+</div>
 
-<p>🎁 Reward Points</p>
+<div
+class="stat-number"
+id="wishlistStat">
+0
+</div>
 
+<div class="stat-label">
+Wishlist Items
+</div>
+
+</div>
+
+</div>
+
+<div class="col-6 col-lg-3">
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🛒
+</div>
+
+<div
+class="stat-number"
+id="cartStat">
+0
+</div>
+
+<div class="stat-label">
+Cart Items
+</div>
+
+</div>
+
+</div>
+
+<div class="col-6 col-lg-3">
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🎁
+</div>
+
+<div class="stat-number">
+250
+</div>
+
+<div class="stat-label">
+Reward Points
 </div>
 
 </div>
@@ -575,297 +880,219 @@ Change Password
 
 </section>
 
-<!-- PART 2 STARTS BELOW -->
- <!-- PERSONAL INFORMATION -->
 
-<section class="py-5">
 
-<div class="container">
+<!-- =========================
+     PERSONAL INFORMATION
+========================= -->
 
-<div class="row g-4">
+<section class="profile-section">
 
-<!-- PERSONAL INFO -->
+    <h2 class="section-title">
+        👤 Personal Information
+    </h2>
 
-<div class="col-lg-6">
+    <div class="row g-4">
 
-<div class="premium-card">
+        <!-- PERSONAL INFORMATION -->
 
-<h3 class="section-title">
-👤 Personal Information
-</h3>
+        <div class="col-lg-6">
 
-<div class="info-item">
-<strong>Full Name</strong>
-<p>Vibi</p>
-</div>
+            <div class="info-card">
 
-<div class="info-item">
-<strong>Email Address</strong>
-<p id="profileEmail"></p>
-</div>
+                <div class="info-row">
 
-<div class="info-item">
-<strong>Phone Number</strong>
-<p id="profilePhone"></p>
-</div>
+                    <div class="info-icon">
+                        👤
+                    </div>
 
-<div class="info-item">
-<strong>Date of Birth</strong>
-<p>12 March 2000</p>
-</div>
+                    <div class="info-content">
 
-<div class="info-item">
-<strong>Gender</strong>
-<p>Female</p>
-</div>
+                        <small>Full Name</small>
 
-<a href="#" class="btn btn-pink mt-3">
-Edit Information
-</a>
+                        <strong id="fullName">
+                            -
+                        </strong>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
-<!-- DELIVERY ADDRESS -->
 
-<div class="col-lg-6">
+                <div class="info-row">
 
-<div class="premium-card">
+                    <div class="info-icon">
+                        📧
+                    </div>
 
-<h3 class="section-title">
-📍 Delivery Address
-</h3>
+                    <div class="info-content">
 
-<div class="address-box">
+                        <small>Email Address</small>
 
-<h5>🏠 Home Address</h5>
+                        <strong id="emailAddress">
+                            -
+                        </strong>
 
-<p>
-123 Sweet Street,<br>
-Bakery Nagar,<br>
-Kerala,<br>
-India - 695001
-</p>
+                    </div>
 
-</div>
+                </div>
 
-<div class="address-box mt-4">
 
-<h5>🏢 Office Address</h5>
+                <div class="info-row">
 
-<p>
-AV Sweet House Office,<br>
-City Center Road,<br>
-Kerala,<br>
-India - 695002
-</p>
+                    <div class="info-icon">
+                        📱
+                    </div>
 
-</div>
+                    <div class="info-content">
 
-<a href="#" class="btn btn-outline-danger mt-3">
-Manage Addresses
-</a>
+                        <small>Phone Number</small>
 
-</div>
+                        <strong id="phoneNumber">
+                            -
+                        </strong>
 
-</div>
+                    </div>
 
-</div>
+                </div>
 
-</div>
+            </div>
+
+        </div>
+
+
+        <!-- DELIVERY ADDRESS -->
+
+        <div class="col-lg-6">
+
+            <div class="address-card">
+
+                <div class="address-box">
+
+                    <h5>
+                        🏠 Home Address
+                    </h5>
+
+                    <p id="profileAddress">
+                        No address saved yet.
+                    </p>
+
+                </div>
+
+
+                <!-- MANAGE ADDRESS BUTTON -->
+
+                <a
+                    href="manage-address.html"
+                    class="manage-address-btn"
+                >
+                    📍 Manage Address
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- RECENT ORDERS -->
+<!-- =========================
+     ACCOUNT OPTIONS
+========================= -->
 
-<section class="pb-5">
+<section class="profile-section">
 
-<div class="container">
-
-<h2 class="main-heading">
-📦 Recent Orders
+<h2 class="section-title">
+⚙️ Account & Orders
 </h2>
 
 <div class="row g-4">
 
-<!-- ORDER 1 -->
+<div class="col-md-6 col-lg-3">
 
-<div class="col-lg-4">
+<a
+href="My Order .html"
+class="option-card">
 
-<div class="order-card">
-
-<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800">
-
-<div class="order-body">
-
-<h5>Chocolate Truffle Cake</h5>
-
-<p>Order ID: #AV1001</p>
-
-<span class="badge bg-success">
-Delivered
-</span>
-
+<div class="option-icon">
+📦
 </div>
 
-</div>
-
-</div>
-
-<!-- ORDER 2 -->
-
-<div class="col-lg-4">
-
-<div class="order-card">
-
-<img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800">
-
-<div class="order-body">
-
-<h5>Rainbow Celebration Cake</h5>
-
-<p>Order ID: #AV1002</p>
-
-<span class="badge bg-primary">
-Shipped
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ORDER 3 -->
-
-<div class="col-lg-4">
-
-<div class="order-card">
-
-<img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=800">
-
-<div class="order-body">
-
-<h5>Premium Strawberry Cake</h5>
-
-<p>Order ID: #AV1003</p>
-
-<span class="badge bg-warning text-dark">
-Processing
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- WISHLIST PREVIEW -->
-
-<section class="pb-5">
-
-<div class="container">
-
-<h2 class="main-heading">
-❤️ Wishlist Preview
-</h2>
-
-<div class="row g-4">
-
-<div class="col-lg-4">
-
-<div class="wishlist-card">
-
-<img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800">
-
-<h5>Luxury Chocolate Box</h5>
-
-<p class="price">
-₹499
-</p>
-
-<a href="product-details.html"
-class="btn btn-pink w-100">
-View Product
-</a>
-
-</div>
-
-</div>
-
-<div class="col-lg-4">
-
-<div class="wishlist-card">
-
-<img src="https://images.unsplash.com/photo-1511381939415-e44015466834?w=800">
-
-<h5>Birthday Balloon Set</h5>
-
-<p class="price">
-₹299
-</p>
-
-<a href="product-details.html"
-class="btn btn-pink w-100">
-View Product
-</a>
-
-</div>
-
-</div>
-
-<div class="col-lg-4">
-
-<div class="wishlist-card">
-
-<img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=800">
-
-<h5>Premium Dessert Box</h5>
-
-<p class="price">
-₹599
-</p>
-
-<a href="product-details.html"
-class="btn btn-pink w-100">
-View Product
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-<!-- REWARD POINTS -->
-
-<section class="pb-5">
-
-<div class="container">
-
-<div class="reward-box text-center">
-
-<h5>🎁 Loyalty Rewards</h5>
-
-<h1>250 Points</h1>
+<h5>
+My Orders
+</h5>
 
 <p>
-Earn points on every order and redeem them
-for discounts on cakes, chocolates and desserts.
+View your previous orders and order status.
 </p>
 
-<a href="#" class="btn btn-pink">
-Redeem Rewards
+</a>
+
+</div>
+
+<div class="col-md-6 col-lg-3">
+
+<a
+href="wishlist.html"
+class="option-card">
+
+<div class="option-icon">
+❤️
+</div>
+
+<h5>
+My Wishlist
+</h5>
+
+<p>
+View products you saved for later.
+</p>
+
+</a>
+
+</div>
+
+<div class="col-md-6 col-lg-3">
+
+<a
+href="cart.html"
+class="option-card">
+
+<div class="option-icon">
+🛒
+</div>
+
+<h5>
+Shopping Cart
+</h5>
+
+<p>
+Continue shopping and checkout.
+</p>
+
+</a>
+
+</div>
+
+<div class="col-md-6 col-lg-3">
+
+<a
+href="/"
+class="option-card">
+
+<div class="option-icon">
+🏠
+</div>
+
+<h5>
+Continue Shopping
+</h5>
+
+<p>
+Explore cakes, desserts and chocolates.
+</p>
+
 </a>
 
 </div>
@@ -874,199 +1101,79 @@ Redeem Rewards
 
 </section>
 
-<!-- COUPONS -->
+<!-- =========================
+     REWARD + HELP
+========================= -->
 
-<section class="pb-5">
+<!-- =========================
+     HELP
+========================= -->
 
-<div class="container">
+<section class="profile-section">
 
-<h2 class="main-heading">
-🎟 Available Coupons
-</h2>
+    <div class="row g-4">
 
-<div class="row g-4">
+        <div class="col-lg-6 mx-auto">
 
-<div class="col-md-4">
+            <div class="help-card">
 
-<div class="coupon-card">
+                <h4>
+                    💬 Need Help?
+                </h4>
 
-<h4>SAVE20</h4>
+                <p>
+                    Have a question about your order, delivery,
+                    payment or account? Our support team is here
+                    to help you.
+                </p>
 
-<p>
-Get 20% OFF on orders above ₹999
-</p>
+                <div class="d-flex flex-wrap gap-2">
 
-<span>Valid Till: 31 Dec</span>
+                    <a
+                        href="contact.html"
+                        class="btn btn-pink">
+                        Contact Us
+                    </a>
 
-</div>
+                    <a
+                        href="My Order .html"
+                        class="btn btn-outline-danger rounded-pill">
+                        Track My Order
+                    </a>
 
-</div>
+                </div>
 
-<div class="col-md-4">
+            </div>
 
-<div class="coupon-card">
+        </div>
 
-<h4>FREEDEL</h4>
-
-<p>
-Free Delivery on orders above ₹499
-</p>
-
-<span>Valid Till: 31 Dec</span>
-
-</div>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="coupon-card">
-
-<h4>CHOCO10</h4>
-
-<p>
-10% OFF on premium chocolates
-</p>
-
-<span>Valid Till: 31 Dec</span>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!-- ACTIVITY TIMELINE -->
+<!-- =========================
+     LOGOUT
+========================= -->
 
-<section class="pb-5">
-
-<div class="container">
-
-<h2 class="main-heading">
-🕒 Recent Activity
-</h2>
-
-<div class="timeline-card">
-
-<div class="activity-item">
-✅ Chocolate Cake delivered successfully
-</div>
-
-<div class="activity-item">
-❤️ Added Premium Chocolate Box to wishlist
-</div>
-
-<div class="activity-item">
-🛒 Added Birthday Cake to cart
-</div>
-
-<div class="activity-item">
-🎁 Earned 50 Reward Points
-</div>
-
-<div class="activity-item">
-📦 Order #AV1003 placed
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ACCOUNT SETTINGS -->
-
-<section class="pb-5">
-
-<div class="container">
-
-<h2 class="main-heading">
-⚙ Account Settings
-</h2>
-
-<div class="row g-4">
-
-<div class="col-md-3">
-
-<div class="settings-card">
-
-<h1>👤</h1>
-
-<h5>Edit Profile</h5>
-
-<a href="#" class="btn btn-pink mt-2">
-Open
-</a>
-
-</div>
-
-</div>
-
-<div class="col-md-3">
-
-<div class="settings-card">
-
-<h1>🔒</h1>
-
-<h5>Change Password</h5>
-
-<a href="#" class="btn btn-pink mt-2">
-Open
-</a>
-
-</div>
-
-</div>
-
-<div class="col-md-3">
-
-<div class="settings-card">
-
-<h1>📍</h1>
-
-<h5>Manage Address</h5>
-
-<a href="#" class="btn btn-pink mt-2">
-Open
-</a>
-
-</div>
-
-</div>
-
-<div class="col-md-3">
-
-<div class="settings-card">
-
-<h1>🚪</h1>
-
-<h5>Logout</h5>
+<section class="logout-section">
 
 <button
-class="btn btn-outline-danger mt-2"
+class="logout-btn"
 onclick="logoutUser()">
 
-Logout
+🚪 Logout from Account
 
 </button>
 
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
 
-<!-- PREMIUM FOOTER -->
+</div>
 
-<footer class="premium-footer">
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
 
 <div class="container">
 
@@ -1074,29 +1181,46 @@ Logout
 
 <div class="col-md-4">
 
-<h2 class="footer-logo">
+<div class="footer-logo">
 🍰 AV Sweet House
-</h2>
+</div>
 
 <p class="footer-text">
+
 Fresh cakes, chocolates, desserts,
 juices and decorations made with love.
+
 </p>
 
 </div>
 
 <div class="col-md-4">
 
-<h4 class="footer-title">
+<h5 class="footer-title">
 Quick Links
-</h4>
+</h5>
 
 <div class="footer-links">
 
-<a href="index.html">Home</a>
-<a href="cakes.html">Cakes</a>
-<a href="desserts.html">Desserts</a>
-<a href="about-us.html">About Us</a>
+<a href="index.html">
+Home
+</a>
+
+<a href="cakes.html">
+Cakes
+</a>
+
+<a href="desserts.html">
+Desserts
+</a>
+
+<a href="chocolate.html">
+Chocolate
+</a>
+
+<a href="my-orders.html">
+My Orders
+</a>
 
 </div>
 
@@ -1104,13 +1228,19 @@ Quick Links
 
 <div class="col-md-4">
 
-<h4 class="footer-title">
+<h5 class="footer-title">
 Contact Us
-</h4>
+</h5>
+
+<div class="footer-contact">
 
 <p>📞 +91 9930403727</p>
+
 <p>📧 avsweethouse@gmail.com</p>
+
 <p>📍 Kerala, India</p>
+
+</div>
 
 </div>
 
@@ -1118,9 +1248,7 @@ Contact Us
 
 <div class="footer-bottom">
 
-<p>
 © 2026 AV Sweet House. All Rights Reserved.
-</p>
 
 </div>
 
@@ -1128,43 +1256,180 @@ Contact Us
 
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
+
+/* =========================
+   LOGIN CHECK
+========================= */
 
 let currentUser =
 JSON.parse(localStorage.getItem("currentUser"));
 
+
 if(!currentUser){
 
-    window.location.href="login.html";
+    window.location.href = "login.html";
 
 }
 
+
+/* =========================
+   USER INFORMATION
+========================= */
+
+let firstName =
+currentUser.firstName || "";
+
+let lastName =
+currentUser.lastName || "";
+
+let fullName =
+(firstName + " " + lastName).trim();
+
+
+if(!fullName){
+    fullName = "AV Sweet House Customer";
+}
+
+
+/* PROFILE NAME */
+
 document.getElementById("profileName").innerText =
-currentUser.firstName + " " + currentUser.lastName;
+fullName;
+
+
+/* FULL NAME */
+
+document.getElementById("fullName").innerText =
+fullName;
+
+
+/* EMAIL */
 
 document.getElementById("profileEmail").innerText =
-currentUser.email;
+currentUser.email || "Email not available";
 
-document.getElementById("profilePhone").innerText =
-currentUser.phone;
+document.getElementById("emailAddress").innerText =
+currentUser.email || "Email not available";
+
+
+/* PHONE */
+
+document.getElementById("phoneNumber").innerText =
+currentUser.phone || "Phone not available";
+
+// ===============================
+// LOAD SAVED ADDRESS
+// ===============================
+
+let savedAddresses =
+    JSON.parse(localStorage.getItem("savedAddresses")) || [];
+
+const profileAddress =
+    document.getElementById("profileAddress");
+
+if (savedAddresses.length > 0) {
+
+    const address = savedAddresses[0];
+
+    profileAddress.innerHTML = `
+        ${address.address}<br>
+        ${address.city},<br>
+        ${address.state},<br>
+        India - ${address.pincode}<br>
+        📞 ${address.phone}
+    `;
+
+} else {
+
+    profileAddress.innerHTML =
+        "No address saved yet.";
+
+}
+
+
+/* =========================
+   ORDERS
+========================= */
 
 let orders =
 JSON.parse(localStorage.getItem("orders")) || [];
 
+
 let myOrders =
-orders.filter(order=>order.email===currentUser.email);
+orders.filter(order =>
+    order.email === currentUser.email
+);
+
 
 document.getElementById("orderCount").innerText =
 myOrders.length;
 
+
+/* =========================
+   WISHLIST
+========================= */
+
+let wishlist =
+JSON.parse(localStorage.getItem("wishlist")) || [];
+
+
+document.getElementById("wishlistCount").innerText =
+wishlist.length;
+
+document.getElementById("wishlistStat").innerText =
+wishlist.length;
+
+
+/* =========================
+   CART
+========================= */
+
+let cart =
+JSON.parse(localStorage.getItem("cart")) || [];
+
+
+let cartQuantity =
+cart.reduce(
+    (total,item) =>
+    total + (Number(item.quantity) || 0),
+    0
+);
+
+
+document.getElementById("cartCount").innerText =
+cartQuantity;
+
+document.getElementById("cartStat").innerText =
+cartQuantity;
+
+
+/* =========================
+   LOGOUT
+========================= */
+
 function logoutUser(){
+
+    let confirmLogout =
+    confirm(
+        "Are you sure you want to logout?"
+    );
+
+    if(!confirmLogout){
+        return;
+    }
 
     localStorage.removeItem("currentUser");
 
-    window.location.href="login.html";
+    window.location.href =
+    "login.html";
 
 }
+
 </script>
+
 </body>
+
 </html>

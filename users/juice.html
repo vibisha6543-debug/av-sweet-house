@@ -224,7 +224,7 @@ class="btn btn-pink">
 <img src="../users/images/products/fresh-fruit-juices.jpg" alt="Fresh Juices">
 <div class="card-body">
 <h4 class="card-title"> Fresh Juices</h4>
-<a href="fresh-fruit-juices.html" class="btn btn-juice">
+<a href="fresh juice.html" class="btn btn-juice">
     View Collection
 </a>
 </div>
@@ -237,7 +237,7 @@ class="btn btn-pink">
 <img src="../users/images/products/milkshakes.jpg" alt="Milkshakes">
 <div class="card-body">
 <h4 class="card-title">🥤 Milkshakes</h4>
-<a href="milkshakes.html" class="btn btn-juice">View Collection</a>
+<a href="milkshake.html" class="btn btn-juice">View Collection</a>
 </div>
 </div>
 </div>
@@ -248,7 +248,7 @@ class="btn btn-pink">
 <img src="../users/images/products/smoothies.jpg" alt="Smoothies">
 <div class="card-body">
 <h4 class="card-title">🥤 Smoothies</h4>
-<a href="smoothies.html" class="btn btn-juice">View Collection</a>
+<a href="Smoothies.html" class="btn btn-juice">View Collection</a>
 </div>
 </div>
 </div>
@@ -260,7 +260,7 @@ class="btn btn-pink">
 <div class="card-body">
 <h4 class="card-title">🌈 Mocktails</h4>
 
-<a href="mocktails.html" class="btn btn-juice">View Collection</a>
+<a href="Mocktails.html" class="btn btn-juice">View Collection</a>
 </div>
 </div>
 </div>
@@ -272,7 +272,7 @@ class="btn btn-pink">
 <div class="card-body">
 <h4 class="card-title">☕ Cold Coffee</h4>
 
-<a href="cold-coffee.html" class="btn btn-juice">View Collection</a>
+<a href="cold coffee.html" class="btn btn-juice">View Collection</a>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ class="btn btn-pink">
 <div class="card-body">
 <h4 class="card-title">🥗 Healthy Drinks</h4>
 
-<a href="healthy-drinks.html" class="btn btn-juice">View Collection</a>
+<a href="Healthy Drinks.html" class="btn btn-juice">View Collection</a>
 </div>
 </div>
 </div>
@@ -293,6 +293,17 @@ class="btn btn-pink">
 </div>
 
 </div>
+
+<section class="container py-5">
+
+<h2 class="text-center text-danger fw-bold mb-4">
+All Juice Products
+</h2>
+
+<div class="row" id="productContainer">
+</div>
+
+</section>
 <!-- FOOTER -->
 
 <!-- PREMIUM FOOTER -->
@@ -627,6 +638,71 @@ cart.length;
 document.getElementById("wishlistCount").innerText =
 wishlist.length;
 
+</script>
+
+<script>
+async function loadProducts() {
+
+try {
+
+const res = await fetch("http://localhost:5000/api/products");
+const products = await res.json();
+
+const container =
+document.getElementById("productContainer");
+
+container.innerHTML = "";
+
+products.filter(product =>
+product.category &&
+(
+product.category.toLowerCase().includes("juice") ||
+product.category.toLowerCase().includes("milkshake") ||
+product.category.toLowerCase().includes("smoothie") ||
+product.category.toLowerCase().includes("mocktail") ||
+product.category.toLowerCase().includes("cold coffee")
+)
+)
+.forEach(product => {
+
+container.innerHTML += `
+
+<div class="col-md-3 mb-4">
+
+<div class="card h-100 shadow">
+
+<img
+src="${product.image}"
+class="card-img-top"
+style="height:220px;object-fit:cover;">
+
+<div class="card-body text-center">
+
+<h5>${product.name}</h5>
+
+<p class="text-danger fw-bold">
+₹${product.price}
+</p>
+
+<p>${product.category}</p>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+catch(error){
+console.log(error);
+}
+}
+
+loadProducts();
 </script>
 </body>
 </html>

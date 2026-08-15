@@ -527,93 +527,174 @@ class="btn btn-pink">
 
 async function loadAnniversaryProducts(){
 
-    const response = await fetch("http://localhost:5000/api/products");
+    try {
 
-    const products = await response.json();
+        const response = await fetch(
+            "http://localhost:5000/api/products"
+        );
 
-    const container =
-    document.getElementById("anniversaryProducts");
+        const products = await response.json();
 
-    container.innerHTML = "";
+        const container =
+            document.getElementById("anniversaryProducts");
 
-    const anniversaryProducts =
-    products.filter(product =>
-        product.category === "Anniversary Cakes"
-    );
+        container.innerHTML = "";
 
-    anniversaryProducts.forEach(product=>{
+        const anniversaryProducts =
+            products.filter(product =>
+                product.category === "Anniversary Cakes"
+            );
 
-        container.innerHTML += `
+        anniversaryProducts.forEach(product => {
 
-<div class="col-md-4">
+            container.innerHTML += `
 
-<div class="product-card">
+                <div class="col-md-4">
 
-<img src="${product.image}">
+                   <div class="product-card">
 
-<div class="card-body">
+    <button
+        class="wish"
+        onclick="addToWishlist(
+            '${product._id}',
+            '${product.name.replace(/'/g, "\\'")}',
+            ${product.price},
+            '${product.image.replace(/'/g, "\\'")}',
+            '${product.category.replace(/'/g, "\\'")}'
+        )">
+        ❤️
+    </button>
 
-<h5 class="product-title">${product.name}</h5>
+    <img src="${product.image}">
 
-<div class="price">
-₹${product.price}
-</div>
+    <div class="card-body">
+                            <h5 class="product-title">
+                                ${product.name}
+                            </h5>
 
-<button
-class="btn-cart"
-onclick="addToCart(
-    ${product.id},
-    '${product.name}',
-    ${product.price},
-    '${product.image}',
-    '${product.category}'
-)">
-🛒 Add to Cart
-</button>
+                            <div class="price">
+                                ₹${product.price}
+                            </div>
 
-<a href="product-detail.html?id=${product.id}"
-class="btn btn-outline-danger rounded-pill w-100 mt-3">
-View Details
-</a>
+                            <button
+                                class="btn-cart"
+                                onclick="addToCart(
+                                    '${product._id}',
+                                    '${product.name.replace(/'/g, "\\'")}',
+                                    ${product.price},
+                                    '${product.image.replace(/'/g, "\\'")}',
+                                    '${product.category.replace(/'/g, "\\'")}'
+                                )">
 
-</div>
+                                🛒 Add to Cart
 
-</div>
+                            </button>
 
-</div>
+                            <a
+                                href="product-detail.html?id=${product._id}"
+                                class="btn btn-outline-danger rounded-pill w-100 mt-3">
 
-`;
+                                View Details
 
-    });
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+    } catch(error) {
+
+        console.error("Product Loading Error:", error);
+
+    }
 
 }
 
+
+// ============================
+// ADD TO CART
+// ============================
+
 function addToCart(id, name, price, image, category) {
 
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    console.log("ADD TO CART");
+    console.log("Product ID:", id);
+    console.log("Product Name:", name);
 
-    let existing = cart.find(item => item.id == id);
+    let cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
 
-    if (existing) {
-        existing.quantity += 1;
+
+    // IMPORTANT:
+    // Compare MongoDB _id values
+
+    let existing =
+        cart.find(item =>
+            String(item.id) === String(id)
+        );
+
+
+    if(existing) {
+
+        existing.quantity =
+            Number(existing.quantity || 0) + 1;
+
     } else {
 
         cart.push({
-            id: id,
+
+            id: String(id),
+
             name: name,
-            price: price,
+
+            price: Number(price),
+
             image: image,
+
             category: category,
+
             quantity: 1
+
         });
 
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+
+    console.log(
+        "UPDATED CART:",
+        JSON.parse(localStorage.getItem("cart"))
+    );
+
 
     alert("✅ Product Added To Cart");
 
+
+    // Update navbar count
+
+    if(typeof updateCartCount === "function"){
+
+        updateCartCount();
+
+    }
+
 }
+
+
+// ============================
+// LOAD
+// ============================
 
 loadAnniversaryProducts();
 
@@ -621,6 +702,8 @@ loadAnniversaryProducts();
 
 <script src="cart.js"></script>
 <script src="wishlist.js"></script>
+
+
 
 </body>
 </html>
