@@ -1,307 +1,819 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product | AV Sweet House</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-<title>Add Product | AV Sweet House</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        body {
+            background: #fff5f8;
+            min-height: 100vh;
+            padding: 0;
+        }
 
-<style>
+        .header {
+            background: linear-gradient(135deg, #ff4d8d, #ff9ec6);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(255, 77, 141, 0.2);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-body{
-background:#fff5f8;
-}
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
 
-/* HEADER */
+        .back-btn {
+            text-decoration: none;
+            background: white;
+            color: #ff4d8d;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid transparent;
+        }
 
-.header{
-background:linear-gradient(135deg,#ff4d8d,#ff9ec6);
-padding:20px 40px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-color:white;
-}
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: white;
+        }
 
-.header h1{
-font-size:30px;
-}
+        .container {
+            max-width: 750px;
+            margin: 40px auto;
+            padding: 35px 40px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
 
-.back-btn{
-text-decoration:none;
-background:white;
-color:#ff4d8d;
-padding:12px 20px;
-border-radius:30px;
-font-weight:600;
-}
+        .container h2 {
+            text-align: center;
+            color: #ff4d8d;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 700;
+        }
 
-/* FORM */
+        .container .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
 
-.container{
-max-width:700px;
-margin:50px auto;
-padding:30px;
-background:white;
-border-radius:25px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
+        .form-group {
+            margin-bottom: 22px;
+        }
 
-.container h2{
-text-align:center;
-color:#ff4d8d;
-margin-bottom:25px;
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #444;
+        }
 
-.form-group{
-margin-bottom:20px;
-}
+        .form-group label .required {
+            color: #dc3545;
+            margin-left: 3px;
+        }
 
-label{
-display:block;
-margin-bottom:8px;
-font-weight:600;
-}
+        .form-group .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: #f8f0f3;
+            border-radius: 14px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
 
-input,
-select{
-width:100%;
-padding:14px;
-border:2px solid #eee;
-border-radius:12px;
-outline:none;
-font-size:15px;
-}
+        .form-group .input-wrapper:focus-within {
+            border-color: #ff4d8d;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 77, 141, 0.08);
+        }
 
-input:focus,
-select:focus{
-border-color:#ff4d8d;
-}
+        .form-group .input-wrapper .input-icon {
+            padding: 0 0 0 16px;
+            color: #999;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
 
-.preview{
-margin-top:20px;
-text-align:center;
-}
+        .form-group .input-wrapper:focus-within .input-icon {
+            color: #ff4d8d;
+        }
 
-.preview img{
-width:220px;
-height:220px;
-object-fit:cover;
-border-radius:20px;
-border:3px solid #ff4d8d;
-display:none;
-}
+        .form-group .input-wrapper input,
+        .form-group .input-wrapper select {
+            width: 100%;
+            padding: 14px 16px 14px 12px;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+            appearance: none;
+            -webkit-appearance: none;
+        }
 
-.add-btn{
-width:100%;
-padding:15px;
-border:none;
-border-radius:30px;
-background:#ff4d8d;
-color:white;
-font-size:17px;
-font-weight:700;
-cursor:pointer;
-margin-top:20px;
-}
+        .form-group .input-wrapper select {
+            cursor: pointer;
+        }
 
-.add-btn:hover{
-background:#ff2f78;
-}
+        .form-group .input-wrapper .select-arrow {
+            padding-right: 16px;
+            color: #999;
+            pointer-events: none;
+        }
 
-</style>
+        .form-group .input-wrapper input::placeholder {
+            color: #aaa;
+            font-weight: 400;
+        }
 
+        .form-group .error-text {
+            color: #dc3545;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 6px;
+            display: none;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .form-group .error-text.show {
+            display: flex;
+        }
+
+        .form-group .char-count {
+            font-size: 12px;
+            color: #999;
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .preview-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f0f3;
+            border-radius: 16px;
+            text-align: center;
+            border: 2px dashed #ddd;
+            transition: all 0.3s ease;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-section.has-image {
+            border-color: #ff4d8d;
+            border-style: solid;
+            background: #fff5f8;
+        }
+
+        .preview-section .placeholder-text {
+            color: #aaa;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .preview-section .placeholder-text i {
+            font-size: 40px;
+            color: #ddd;
+        }
+
+        .preview-section img {
+            max-width: 200px;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 3px solid #ff4d8d;
+            display: none;
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.15);
+        }
+
+        .preview-section img.show {
+            display: block;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ff4d8d, #ff7eaa);
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 77, 141, 0.35);
+        }
+
+        .add-btn:active {
+            transform: scale(0.98);
+        }
+
+        .add-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .add-btn .spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .add-btn.loading .spinner {
+            display: inline-block;
+        }
+
+        .add-btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .toast {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 16px 24px;
+            border-radius: 14px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            min-width: 280px;
+            max-width: 450px;
+            animation: slideDown 0.4s ease;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+
+        .toast.success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+        }
+
+        .toast.error {
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media(max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .header h1 {
+                font-size: 22px;
+                justify-content: center;
+            }
+            .header-actions {
+                justify-content: center;
+            }
+            .container {
+                margin: 20px 15px;
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+            .container h2 {
+                font-size: 20px;
+            }
+            .form-group .input-wrapper input,
+            .form-group .input-wrapper select {
+                padding: 12px 14px 12px 10px;
+                font-size: 13px;
+            }
+            .toast {
+                top: 15px;
+                right: 15px;
+                left: 15px;
+                min-width: auto;
+                padding: 14px 18px;
+                font-size: 13px;
+            }
+        }
+
+        @media(max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+            .back-btn {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            .container {
+                padding: 20px 15px;
+                margin: 15px 10px;
+            }
+            .form-group {
+                margin-bottom: 16px;
+            }
+            .form-group .input-wrapper input,
+            .form-group .input-wrapper select {
+                padding: 10px 12px 10px 8px;
+                font-size: 12px;
+            }
+            .add-btn {
+                font-size: 15px;
+                padding: 14px;
+            }
+            .preview-section {
+                min-height: 120px;
+                padding: 15px;
+            }
+            .preview-section img {
+                max-width: 120px;
+                max-height: 120px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="header">
+    <header class="header">
+        <h1>
+            <i class="fa-solid fa-plus-circle"></i>
+            Add Product
+        </h1>
+        <div class="header-actions">
+            <a href="manage-products.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i>
+                Manage Products
+            </a>
+        </div>
+    </header>
 
-<h1>➕ Add Product</h1>
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
 
-<a href="manage-products.html" class="back-btn">
-Manage Products
-</a>
+    <div class="container">
 
-</div>
+        <h2>🍰 Add New Product</h2>
+        <p class="subtitle">Fill in the details below to add a new product to your store</p>
 
-<div class="container">
+        <form id="productForm" onsubmit="handleAddProduct(event)">
 
-<h2>Add New Product</h2>
+            <!-- Product Name -->
+            <div class="form-group">
+                <label for="name">
+                    Product Name <span class="required">*</span>
+                </label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><i class="fa-regular fa-tag"></i></span>
+                    <input type="text" id="name" placeholder="Enter product name" maxlength="100" required>
+                </div>
+                <div class="char-count"><span id="nameCount">0</span>/100</div>
+                <div class="error-text" id="nameError">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Product name is required
+                </div>
+            </div>
 
-<div class="form-group">
+            <!-- Price -->
+            <div class="form-group">
+                <label for="price">
+                    Price (₹) <span class="required">*</span>
+                </label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                    <input type="number" id="price" placeholder="Enter price (e.g. 499)" min="0" step="1" required>
+                </div>
+                <div class="error-text" id="priceError">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Please enter a valid price
+                </div>
+            </div>
 
-<label>Product Name</label>
+            <!-- ===== CATEGORY - ALLOWS BOTH MAIN & SUB ===== -->
+            <div class="form-group">
+                <label for="category">
+                    Category <span class="required">*</span>
+                </label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><i class="fa-regular fa-layer-group"></i></span>
+                    <select id="category" required>
+                        <option value="">Select Category</option>
+                    </select>
+                    <span class="select-arrow"><i class="fa-solid fa-chevron-down"></i></span>
+                </div>
+                <div style="font-size:12px;color:#888;margin-top:5px;">
+                    <i class="fa-regular fa-circle-info"></i>
+                    You can add products to <strong>Main Categories</strong> or <strong>Subcategories</strong>
+                </div>
+                <div class="error-text" id="categoryError">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Please select a category
+                </div>
+            </div>
 
-<input
-type="text"
-id="name"
-placeholder="Enter Product Name">
+            <!-- Image URL -->
+            <div class="form-group">
+                <label for="image">
+                    Image URL
+                    <span style="font-weight:400;color:#888;font-size:12px;">(optional)</span>
+                </label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><i class="fa-regular fa-image"></i></span>
+                    <input type="text" id="image" placeholder="Paste image URL" oninput="previewImage()">
+                </div>
+            </div>
 
-</div>
+            <!-- Image Preview -->
+            <div class="preview-section" id="previewSection">
+                <div class="placeholder-text" id="placeholderText">
+                    <i class="fa-regular fa-image"></i>
+                    <span>Image preview will appear here</span>
+                </div>
+                <img id="previewImg" alt="Product preview">
+            </div>
 
-<div class="form-group">
+            <button type="submit" class="add-btn" id="addBtn">
+                <span class="spinner"></span>
+                <span class="btn-text">
+                    <i class="fa-solid fa-save"></i>
+                    Save Product
+                </span>
+            </button>
 
-<label>Price</label>
+        </form>
 
-<input
-type="number"
-id="price"
-placeholder="Enter Price">
+    </div>
 
-</div>
+    <script>
+        if (localStorage.getItem("adminLoggedIn") !== "true") {
+            window.location.href = "admin-login.html";
+        }
 
-<div class="form-group">
+        // ============================================
+        // GET CATEGORIES FROM localStorage
+        // ============================================
 
-<label>Image URL</label>
+        function getCategories() {
+            try {
+                const stored = localStorage.getItem('productCategoriesList');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (e) {}
 
-<input
-type="text"
-id="image"
-placeholder="Paste Image URL"
-onkeyup="previewImage()">
+            // Default categories
+            const defaultCategories = [
+                { name: 'Cakes', icon: '🎂', type: 'main' },
+                { name: 'Birthday Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+                { name: 'Anniversary Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+                { name: 'Wedding Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+                { name: 'Kids Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+                { name: 'Cup Cakes', icon: '🧁', type: 'sub', parent: 'Cakes' },
+                { name: 'Occasion Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+                { name: 'Chocolates', icon: '🍫', type: 'main' },
+                { name: 'Milk Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+                { name: 'Dark Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+                { name: 'White Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+                { name: 'Nut Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+                { name: 'Desserts', icon: '🍰', type: 'main' },
+                { name: 'Brownies', icon: '🍩', type: 'sub', parent: 'Desserts' },
+                { name: 'Donuts', icon: '🍩', type: 'sub', parent: 'Desserts' },
+                { name: 'Cheesecakes', icon: '🍰', type: 'sub', parent: 'Desserts' },
+                { name: 'Pastry', icon: '🍰', type: 'sub', parent: 'Desserts' },
+                { name: 'Macarons', icon: '🍪', type: 'sub', parent: 'Desserts' },
+                { name: 'Cookies', icon: '🍪', type: 'sub', parent: 'Desserts' },
+                { name: 'Juices', icon: '🥤', type: 'main' },
+                { name: 'Fresh Juices', icon: '🥤', type: 'sub', parent: 'Juices' },
+                { name: 'Milkshakes', icon: '🥤', type: 'sub', parent: 'Juices' },
+                { name: 'Smoothies', icon: '🍹', type: 'sub', parent: 'Juices' },
+                { name: 'Mocktails', icon: '🍹', type: 'sub', parent: 'Juices' },
+                { name: 'Cold Coffee', icon: '☕', type: 'sub', parent: 'Juices' },
+                { name: 'Snacks', icon: '🍿', type: 'main' },
+                { name: 'Murukku', icon: '🍿', type: 'sub', parent: 'Snacks' },
+                { name: 'Traditional Sweets', icon: '🍭', type: 'sub', parent: 'Snacks' },
+                { name: 'Mixtures & Namkeen', icon: '🍿', type: 'sub', parent: 'Snacks' },
+                { name: 'Biscuits', icon: '🍪', type: 'sub', parent: 'Snacks' },
+                { name: 'Chips', icon: '🍿', type: 'sub', parent: 'Snacks' },
+                { name: 'Evening Snacks', icon: '🍿', type: 'sub', parent: 'Snacks' }
+            ];
+            localStorage.setItem('productCategoriesList', JSON.stringify(defaultCategories));
+            return defaultCategories;
+        }
 
-</div>
+        // ============================================
+        // POPULATE CATEGORY DROPDOWN - SHOWS ALL
+        // ============================================
 
-<div class="form-group">
+        function populateCategories() {
+            const categories = getCategories();
+            const select = document.getElementById('category');
 
-<label>Category</label>
+            // Separate main and sub
+            const mainCats = categories.filter(c => c.type === 'main');
+            const subCats = categories.filter(c => c.type === 'sub');
 
-<select id="category">
+            select.innerHTML = '<option value="">Select Category</option>';
 
-<option value="">Select Category</option>
+            // ===== ADD MAIN CATEGORIES (These can also have products!) =====
+            if (mainCats.length > 0) {
+                const mainGroup = document.createElement('optgroup');
+                mainGroup.label = '⭐ Main Categories (Can add products here)';
 
-<option>Cakes</option>
-<option>Birthday Cakes</option>
-<option>Anniversary Cakes</option>
-<option>Occasion Cakes</option>
-<option>Wedding Cakes</option>
-<option>Kids Cakes</option>
-<option>Cup Cakes</option>
-<option>Brownies</option>
-<option>Donuts</option>
-<option>Cheesecakes</option>
-<option>Pastry</option>
-<option>Macarons</option>
-<option>Cookies</option>
-<option>Milk Chocolates</option>
-<option>Desserts</option>
-<option>Chocolates</option>
-<option>Dark Chocolates</option>
-<option>White Chocolates</option>
-<option>Nut Chocolates</option>
-<option>Gift Boxes</option>
-<option>Festival</option>
-<option>Juices</option>
-<option>Fresh Juices</option>
-<option>Milkshakes</option>
-<option>Smoothies</option>
-<option>Mocktails</option>
-<option>Cold Coffee</option>
-<option>Healthy Drinks</option>
-<option>Snacks</option>
-<option>Murukku</option>
-<option>Traditional Sweets</option>
-<option>Mixtures & Namkeen</option>
-<option>Biscuits</option>
-<option>Chips</option>
-<option>Evening Snacks</option>
+                mainCats.forEach(cat => {
+                    const option = document.createElement('option');
+                    option.value = cat.name;
+                    option.textContent = cat.icon + ' ' + cat.name;
+                    option.style.fontWeight = 'bold';
+                    mainGroup.appendChild(option);
+                });
+                select.appendChild(mainGroup);
+            }
 
+            // ===== ADD SUBCATEGORIES =====
+            if (subCats.length > 0) {
+                // Group subcategories by parent
+                const grouped = {};
+                subCats.forEach(cat => {
+                    const parent = cat.parent || 'Other';
+                    if (!grouped[parent]) {
+                        grouped[parent] = [];
+                    }
+                    grouped[parent].push(cat);
+                });
 
-</select>
+                Object.keys(grouped).forEach(parent => {
+                    const group = document.createElement('optgroup');
+                    group.label = '📎 ' + parent + ' (Subcategories)';
+                    grouped[parent].forEach(cat => {
+                        const option = document.createElement('option');
+                        option.value = cat.name;
+                        option.textContent = '  └─ ' + cat.icon + ' ' + cat.name;
+                        group.appendChild(option);
+                    });
+                    select.appendChild(group);
+                });
+            }
 
-</div>
+            console.log('✅ Categories loaded:', categories.length);
+        }
 
-<div class="preview">
+        // ============================================
+        // TOAST NOTIFICATION
+        // ============================================
 
-<img id="previewImg">
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            toast.className = 'toast show ' + type;
+            toastMsg.textContent = message;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
 
-</div>
+        // ============================================
+        // IMAGE PREVIEW
+        // ============================================
 
-<button
-class="add-btn"
-onclick="addProduct()">
+        function previewImage() {
+            const url = document.getElementById('image').value.trim();
+            const img = document.getElementById('previewImg');
+            const section = document.getElementById('previewSection');
+            const placeholder = document.getElementById('placeholderText');
 
-Save Product
+            if (url) {
+                img.src = url;
+                img.className = 'show';
+                section.classList.add('has-image');
+                placeholder.style.display = 'none';
 
-</button>
+                img.onerror = function() {
+                    img.className = '';
+                    section.classList.remove('has-image');
+                    placeholder.style.display = 'flex';
+                    placeholder.innerHTML = `
+                            <i class="fa-solid fa-triangle-exclamation" style="color:#dc3545;"></i>
+                            <span style="color:#dc3545;">Invalid image URL</span>
+                        `;
+                };
 
-</div>
+                img.onload = function() {
+                    placeholder.innerHTML = `
+                            <i class="fa-regular fa-image"></i>
+                            <span>Image preview will appear here</span>
+                        `;
+                    placeholder.style.display = 'none';
+                };
+            } else {
+                img.className = '';
+                section.classList.remove('has-image');
+                placeholder.style.display = 'flex';
+                placeholder.innerHTML = `
+                        <i class="fa-regular fa-image"></i>
+                        <span>Image preview will appear here</span>
+                    `;
+            }
+        }
 
-<script>
-if (localStorage.getItem("adminLoggedIn") !== "true") {
-    window.location.href = "admin-login.html";
-}
+        // ============================================
+        // CHARACTER COUNTER
+        // ============================================
 
-function previewImage() {
-    let url = document.getElementById("image").value;
-    let img = document.getElementById("previewImg");
-
-    if (url.trim() !== "") {
-        img.src = url;
-        img.style.display = "block";
-    } else {
-        img.style.display = "none";
-    }
-}
-
-async function addProduct() {
-
-    let name = document.getElementById("name").value;
-    let price = document.getElementById("price").value;
-    let image =
-                 "../users/images/products/" +
-             document.getElementById("image").value;
-    let category = document.getElementById("category").value;
-
-    if (!name || !price || !image || !category) {
-        alert("Please fill all fields");
-        return;
-    }
-
-    let product = {
-        name,
-        price: Number(price),
-        image,
-        category
-    };
-
-    try {
-
-        const response = await fetch("http://localhost:5000/api/products", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(product)
+        document.getElementById('name').addEventListener('input', function() {
+            document.getElementById('nameCount').textContent = this.value.length;
         });
 
-        const data = await response.json();
+        // ============================================
+        // HANDLE ADD PRODUCT
+        // ============================================
 
-        alert(data.message);
+        async function handleAddProduct(event) {
+            event.preventDefault();
 
-        window.location.href = "manage-products.html";
+            const name = document.getElementById('name').value.trim();
+            const price = document.getElementById('price').value.trim();
+            const category = document.getElementById('category').value;
+            const image = document.getElementById('image').value.trim();
 
-    } catch (error) {
-        console.log(error);
-        alert("Server not running!");
-    }
-}
-</script>
+            document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
 
+            let hasError = false;
 
+            if (!name) {
+                document.getElementById('nameError').classList.add('show');
+                hasError = true;
+            }
+
+            if (!price || isNaN(price) || Number(price) <= 0) {
+                document.getElementById('priceError').classList.add('show');
+                hasError = true;
+            }
+
+            if (!category) {
+                document.getElementById('categoryError').classList.add('show');
+                hasError = true;
+            }
+
+            if (hasError) {
+                showToast('Please fill all required fields correctly', 'error');
+                return;
+            }
+
+            const product = {
+                name: name,
+                price: Number(price),
+                category: category,
+                image: image || 'https://via.placeholder.com/300x300/ff4d8d/ffffff?text=Product'
+            };
+
+            const addBtn = document.getElementById('addBtn');
+            addBtn.classList.add('loading');
+            addBtn.disabled = true;
+
+            try {
+                const response = await fetch('http://localhost:5000/api/products', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(product)
+                });
+
+                const data = await response.json();
+
+                if (data.success || response.ok) {
+                    showToast('✅ Product added successfully!', 'success');
+
+                    document.getElementById('productForm').reset();
+                    document.getElementById('nameCount').textContent = '0';
+                    document.getElementById('previewImg').className = '';
+                    document.getElementById('previewSection').classList.remove('has-image');
+                    document.getElementById('placeholderText').style.display = 'flex';
+
+                    setTimeout(() => {
+                        window.location.href = 'manage-products.html';
+                    }, 1500);
+                } else {
+                    showToast('❌ ' + (data.message || 'Failed to add product'), 'error');
+                }
+            } catch (error) {
+                console.error('Add Product Error:', error);
+                showToast('⚠️ Server not running! Please start your server on port 5000.', 'error');
+            } finally {
+                addBtn.classList.remove('loading');
+                addBtn.disabled = false;
+            }
+        }
+
+        // ============================================
+        // KEYBOARD SHORTCUT
+        // ============================================
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('productForm').dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // ============================================
+        // LOAD ON PAGE LOAD
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            populateCategories();
+            console.log('✅ Add Product page loaded - Main categories can now have products!');
+            console.log('📌 You can add products to Main Categories OR Subcategories');
+        });
+    </script>
 
 </body>
 

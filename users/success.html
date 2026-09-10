@@ -2,530 +2,973 @@
 <html lang="en">
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Order Success - AV Sweet House</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-
-<style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
-
-html,body{
-  width:100%;
-  min-height:100%;
-  overflow-x:hidden;
-}
-
-body{
-
-  background:
-  radial-gradient(circle at top left,#ffe5ec 0%,transparent 30%),
-  radial-gradient(circle at bottom right,#d6f6ff 0%,transparent 30%),
-  #fffaf7;
-
-  padding:40px 15px;
-}
-
-/* MAIN CARD */
-
-.success-card{
-
-  width:100%;
-  max-width:700px;
-
-  margin:auto;
-
-  background:rgba(255,255,255,0.82);
-
-  backdrop-filter:blur(16px);
-
-  border-radius:35px;
-
-  padding:40px 28px;
-
-  text-align:center;
-
-  position:relative;
-
-  overflow:hidden;
-
-  box-shadow:0 20px 60px rgba(0,0,0,0.08);
-}
-
-/* COLOR FIREWORKS */
-
-/* FULL PINK FIREWORKS */
-
-.blast{
-  position:absolute;
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  animation:pinkBlast 2.5s infinite ease-out;
-}
-
-/* DIFFERENT PINK SHADES */
-
-.blast:nth-child(1){
-  top:10%;
-  left:8%;
-  background:#ff4d6d;
-  color:#ff4d6d;
-}
-
-.blast:nth-child(2){
-  top:12%;
-  right:10%;
-  background:#ff758f;
-  color:#ff758f;
-  animation-delay:.4s;
-}
-
-.blast:nth-child(3){
-  bottom:15%;
-  left:12%;
-  background:#ff85a2;
-  color:#ff85a2;
-  animation-delay:.8s;
-}
-
-.blast:nth-child(4){
-  bottom:12%;
-  right:14%;
-  background:#ff5c8a;
-  color:#ff5c8a;
-  animation-delay:1.2s;
-}
-
-.blast:nth-child(5){
-  top:45%;
-  left:5%;
-  background:#ff99ac;
-  color:#ff99ac;
-  animation-delay:1.6s;
-}
-
-.blast:nth-child(6){
-  top:50%;
-  right:5%;
-  background:#ffb3c1;
-  color:#ffb3c1;
-  animation-delay:2s;
-}
-
-/* ANIMATION */
-
-@keyframes pinkBlast{
-
-  0%{
-    transform:scale(0);
-    opacity:1;
-    box-shadow:none;
-  }
-
-  40%{
-
-    opacity:1;
-
-    box-shadow:
-    0 -50px 0 6px currentColor,
-    50px 0 0 6px currentColor,
-    -50px 0 0 6px currentColor,
-    0 50px 0 6px currentColor,
-
-    38px -38px 0 6px currentColor,
-    -38px -38px 0 6px currentColor,
-    38px 38px 0 6px currentColor,
-    -38px 38px 0 6px currentColor;
-  }
-
-  70%{
-
-    opacity:.8;
-
-    box-shadow:
-    0 -75px 0 3px rgba(255,77,109,.8),
-    75px 0 0 3px rgba(255,117,143,.8),
-    -75px 0 0 3px rgba(255,133,162,.8),
-    0 75px 0 3px rgba(255,92,138,.8),
-
-    55px -55px 0 3px rgba(255,153,172,.8),
-    -55px -55px 0 3px rgba(255,179,193,.8),
-    55px 55px 0 3px rgba(255,117,143,.8),
-    -55px 55px 0 3px rgba(255,77,109,.8);
-  }
-
-  100%{
-    transform:scale(2.5);
-    opacity:0;
-    box-shadow:none;
-  }
-
-}
-/* SUCCESS ICON */
-
-.circle{
-
-  width:130px;
-  height:130px;
-
-  margin:auto;
-
-  border-radius:50%;
-
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  color:white;
-
-  font-size:60px;
-
-  box-shadow:0 15px 35px rgba(255,77,109,0.35);
-
-  animation:pop .7s ease;
-}
-
-@keyframes pop{
-
-  from{
-    transform:scale(.5);
-    opacity:0;
-  }
-
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-
-}
-
-/* TITLE */
-
-h1{
-
-  margin-top:28px;
-
-  font-size:42px;
-  font-weight:800;
-
-  background:linear-gradient(90deg,#ff4d6d,#ff758f);
-
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.desc{
-
-  margin-top:16px;
-
-  color:#666;
-
-  line-height:1.9;
-
-  font-size:15px;
-}
-
-/* ORDER DETAILS */
-
-.order-box{
-
-  margin-top:35px;
-
-  background:#fff0f3;
-
-  border-radius:25px;
-
-  padding:25px;
-}
-
-.order-row{
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  margin-bottom:18px;
-
-  color:#444;
-
-  flex-wrap:wrap;
-}
-
-.order-row:last-child{
-  margin-bottom:0;
-}
-
-.order-row span:last-child{
-  color:#ff4d6d;
-  font-weight:700;
-}
-
-/* DELIVERY */
-
-.delivery{
-
-  margin-top:28px;
-
-  background:#fff7fa;
-
-  border-radius:25px;
-
-  padding:22px;
-
-  line-height:1.8;
-
-  color:#555;
-}
-
-.delivery i{
-
-  font-size:30px;
-
-  color:#ff4d6d;
-
-  margin-bottom:10px;
-}
-
-/* BUTTONS */
-
-.buttons{
-
-  margin-top:32px;
-
-  display:flex;
-  gap:16px;
-}
-
-.btn{
-
-  flex:1;
-
-  padding:16px;
-
-  border:none;
-
-  border-radius:50px;
-
-  font-size:15px;
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.3s;
-}
-
-.primary{
-
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-
-  color:white;
-
-  box-shadow:0 10px 25px rgba(255,77,109,0.25);
-}
-
-.primary:hover{
-  transform:translateY(-4px);
-}
-
-.outline{
-
-  background:white;
-
-  border:2px solid #ff4d6d;
-
-  color:#ff4d6d;
-}
-
-.outline:hover{
-
-  background:#ff4d6d;
-  color:white;
-}
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-  body{
-    padding:20px 12px;
-  }
-
-  .success-card{
-    padding:30px 18px;
-  }
-
-  h1{
-    font-size:30px;
-  }
-
-  .buttons{
-    flex-direction:column;
-  }
-
-  .circle{
-    width:110px;
-    height:110px;
-    font-size:48px;
-  }
-
-  .order-row{
-    font-size:14px;
-  }
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success - AV Sweet House</title>
+
+    <!-- ===== FAVICON ===== -->
+<link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top left, #ffe5ec 0%, transparent 30%),
+                radial-gradient(circle at bottom right, #d6f6ff 0%, transparent 30%),
+                #fffaf7;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff4d8d !important;
+        }
+
+        .navbar-brand:hover {
+            color: #ff2f78 !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 14px;
+            color: #555 !important;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #ff4d8d !important;
+        }
+
+        .btn-pink {
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 22px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-pink:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.3);
+        }
+
+        .badge-count {
+            background: #ff4d8d;
+            color: white;
+            border-radius: 50%;
+            padding: 1px 7px;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+            margin-left: 3px;
+        }
+
+        /* ===== SUCCESS CARD ===== */
+        .success-card {
+            max-width: 700px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            border-radius: 35px;
+            padding: 40px 28px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        /* ===== FIREWORKS ===== */
+        .blast {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            animation: pinkBlast 2.5s infinite ease-out;
+        }
+
+        .blast:nth-child(1) {
+            top: 10%;
+            left: 8%;
+            background: #ff4d6d;
+            color: #ff4d6d;
+        }
+
+        .blast:nth-child(2) {
+            top: 12%;
+            right: 10%;
+            background: #ff758f;
+            color: #ff758f;
+            animation-delay: .4s;
+        }
+
+        .blast:nth-child(3) {
+            bottom: 15%;
+            left: 12%;
+            background: #ff85a2;
+            color: #ff85a2;
+            animation-delay: .8s;
+        }
+
+        .blast:nth-child(4) {
+            bottom: 12%;
+            right: 14%;
+            background: #ff5c8a;
+            color: #ff5c8a;
+            animation-delay: 1.2s;
+        }
+
+        .blast:nth-child(5) {
+            top: 45%;
+            left: 5%;
+            background: #ff99ac;
+            color: #ff99ac;
+            animation-delay: 1.6s;
+        }
+
+        .blast:nth-child(6) {
+            top: 50%;
+            right: 5%;
+            background: #ffb3c1;
+            color: #ffb3c1;
+            animation-delay: 2s;
+        }
+
+        @keyframes pinkBlast {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+                box-shadow: none;
+            }
+            40% {
+                opacity: 1;
+                box-shadow: 0 -50px 0 6px currentColor,
+                    50px 0 0 6px currentColor,
+                    -50px 0 0 6px currentColor,
+                    0 50px 0 6px currentColor,
+                    38px -38px 0 6px currentColor,
+                    -38px -38px 0 6px currentColor,
+                    38px 38px 0 6px currentColor,
+                    -38px 38px 0 6px currentColor;
+            }
+            70% {
+                opacity: .8;
+                box-shadow: 0 -75px 0 3px rgba(255, 77, 109, .8),
+                    75px 0 0 3px rgba(255, 117, 143, .8),
+                    -75px 0 0 3px rgba(255, 133, 162, .8),
+                    0 75px 0 3px rgba(255, 92, 138, .8),
+                    55px -55px 0 3px rgba(255, 153, 172, .8),
+                    -55px -55px 0 3px rgba(255, 179, 193, .8),
+                    55px 55px 0 3px rgba(255, 117, 143, .8),
+                    -55px 55px 0 3px rgba(255, 77, 109, .8);
+            }
+            100% {
+                transform: scale(2.5);
+                opacity: 0;
+                box-shadow: none;
+            }
+        }
+
+        /* ===== SUCCESS ICON ===== */
+        .circle {
+            width: 130px;
+            height: 130px;
+            margin: auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 60px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.35);
+            animation: pop .7s ease;
+        }
+
+        @keyframes pop {
+            from {
+                transform: scale(.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== TITLE ===== */
+        h1 {
+            margin-top: 28px;
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .desc {
+            margin-top: 16px;
+            color: #666;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        /* ===== ORDER DETAILS ===== */
+        .order-box {
+            margin-top: 35px;
+            background: #fff0f3;
+            border-radius: 25px;
+            padding: 25px;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            color: #444;
+            flex-wrap: wrap;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 77, 141, 0.08);
+        }
+
+        .order-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .order-row span:last-child {
+            color: #ff4d6d;
+            font-weight: 700;
+        }
+
+        /* ===== DELIVERY ===== */
+        .delivery {
+            margin-top: 28px;
+            background: #fff7fa;
+            border-radius: 25px;
+            padding: 22px;
+            line-height: 1.8;
+            color: #555;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .delivery i {
+            font-size: 30px;
+            color: #ff4d6d;
+            margin-bottom: 10px;
+        }
+
+        .delivery h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .delivery p {
+            font-size: 14px;
+        }
+
+        /* ===== NO ORDER STATE ===== */
+        .no-order {
+            padding: 30px 0;
+        }
+
+        .no-order .icon {
+            font-size: 60px;
+            color: #ff4d8d;
+            margin-bottom: 15px;
+        }
+
+        .no-order h3 {
+            font-weight: 700;
+            color: #333;
+        }
+
+        .no-order p {
+            color: #777;
+        }
+
+        /* ===== BUTTONS ===== */
+        .buttons {
+            margin-top: 32px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .primary {
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.25);
+        }
+
+        .primary:hover {
+            transform: translateY(-4px);
+            color: white;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.35);
+        }
+
+        .outline {
+            background: white;
+            border: 2px solid #ff4d6d;
+            color: #ff4d6d;
+        }
+
+        .outline:hover {
+            background: #ff4d6d;
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* ============================================
+                   FOOTER
+                   ============================================ */
+        .premium-footer {
+            margin-top: 60px;
+            padding: 70px 0 30px;
+            background: linear-gradient(135deg, #fff0f3, #ffe5ec, #fdf6ff, #eef7ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-footer::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #ffb3c1;
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .premium-footer::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #bde0fe;
+            border-radius: 50%;
+            bottom: -120px;
+            right: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            color: #666;
+            line-height: 1.9;
+            margin-top: 15px;
+            max-width: 350px;
+            font-size: 14px;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: #ff4d8d;
+            border-radius: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d6d;
+            transform: translateX(8px);
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.4s;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .social-box:hover {
+            transform: translateY(-6px) scale(1.08);
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border-color: transparent;
+        }
+
+        .subscribe-box {
+            margin-top: 20px;
+        }
+
+        .subscribe-box input {
+            width: 100%;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+
+        .subscribe-box input:focus {
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.15);
+        }
+
+        .subscribe-box button {
+            width: 100%;
+            margin-top: 12px;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .subscribe-box button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(255, 77, 109, 0.35);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .footer-bottom p {
+            color: #777;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* ============================================
+                   RESPONSIVE
+                   ============================================ */
+
+        @media(max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar-brand {
+                font-size: 20px;
+            }
+
+            .success-card {
+                padding: 30px 18px;
+                border-radius: 28px;
+                margin: 20px 10px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .circle {
+                width: 110px;
+                height: 110px;
+                font-size: 48px;
+            }
+
+            .order-row {
+                font-size: 14px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                padding: 14px;
+                font-size: 14px;
+            }
+
+            .delivery h3 {
+                font-size: 18px;
+            }
+
+            .premium-footer {
+                text-align: center;
+                padding: 50px 0 25px;
+            }
+
+            .footer-text {
+                margin: 15px auto 0;
+                max-width: 100%;
+            }
+
+            .footer-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .footer-links {
+                align-items: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+        }
+
+        @media(max-width: 480px) {
+            body {
+                padding-top: 56px;
+            }
+
+            .navbar-brand {
+                font-size: 17px;
+            }
+
+            .success-card {
+                padding: 25px 14px;
+                border-radius: 24px;
+                margin: 15px 5px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .desc {
+                font-size: 13px;
+            }
+
+            .circle {
+                width: 90px;
+                height: 90px;
+                font-size: 40px;
+            }
+
+            .order-box {
+                padding: 18px;
+            }
+
+            .order-row {
+                font-size: 13px;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+            }
+
+            .delivery {
+                padding: 18px;
+            }
+
+            .delivery i {
+                font-size: 24px;
+            }
+
+            .delivery h3 {
+                font-size: 16px;
+            }
+
+            .delivery p {
+                font-size: 13px;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 13px;
+            }
+
+            .footer-logo {
+                font-size: 26px;
+            }
+
+            .social-box {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="success-card">
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                🍰 AV Sweet House
+            </a>
 
-  <!-- FIREWORKS -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-  <div class="blast"></div>
-  <div class="blast"></div>
-  <div class="blast"></div>
-  <div class="blast"></div>
-  <div class="blast"></div>
-  <div class="blast"></div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About%20us.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cakes.html">Cakes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dessert.html">Desserts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="chocolate.html">Chocolate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="juice.html">Juice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Snacks.html">Snacks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
 
-  <!-- SUCCESS ICON -->
+                <div class="d-flex gap-2">
+                    <a href="wishlist.html" class="btn btn-outline-danger btn-sm">
+                        ❤️ <span class="badge-count" id="wishlistCount">0</span>
+                    </a>
+                    <a href="cart.html" class="btn btn-pink btn-sm">
+                        🛒 <span class="badge-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <div class="circle">
-    <i class="fa-solid fa-check"></i>
-  </div>
+    <!-- ===== SUCCESS CARD ===== -->
+    <div class="success-card">
 
-  <!-- TITLE -->
+        <!-- FIREWORKS -->
+        <div class="blast"></div>
+        <div class="blast"></div>
+        <div class="blast"></div>
+        <div class="blast"></div>
+        <div class="blast"></div>
+        <div class="blast"></div>
 
-  <h1>
-    Order Successful!
-  </h1>
+        <!-- SUCCESS ICON -->
+        <div class="circle">
+            <i class="fa-solid fa-check"></i>
+        </div>
 
-  <p class="desc">
-    Thank you for ordering from
-    <strong>AV Sweet House</strong> ❤️
-    <br>
-    Your sweets & cakes are now freshly being prepared.
-  </p>
+        <!-- TITLE -->
+        <h1>Order Successful! 🎉</h1>
+        <p class="desc">
+            Thank you for ordering from
+            <strong>AV Sweet House</strong> ❤️
+            <br>
+            Your sweets & cakes are now freshly being prepared.
+        </p>
 
-  <!-- ORDER DETAILS -->
+        <!-- ORDER DETAILS -->
+        <div class="order-box" id="orderBox">
+            <div class="order-row">
+                <span>Order ID</span>
+                <span id="orderId">Loading...</span>
+            </div>
+            <div class="order-row">
+                <span>Payment Method</span>
+                <span id="paymentMethod">Loading...</span>
+            </div>
+            <div class="order-row">
+                <span>Total Paid</span>
+                <span id="totalPaid">₹0</span>
+            </div>
+            <div class="order-row">
+                <span>Status</span>
+                <span id="orderStatus">Preparing 🍰</span>
+            </div>
+        </div>
 
-  <div class="order-box">
+        <!-- No Order State -->
+        <div id="noOrderState" class="no-order" style="display:none;">
+            <div class="icon">🍰</div>
+            <h3>No Recent Order</h3>
+            <p>You haven't placed any orders yet. Start shopping!</p>
+            <a href="/" class="btn primary" style="margin-top:15px; display:inline-block;">
+                Start Shopping
+            </a>
+        </div>
 
-    <div class="order-row">
-  <span>Order ID</span>
-  <span id="orderId">Loading...</span>
+        <!-- DELIVERY -->
+        <div class="delivery" id="deliverySection">
+            <i class="fa-solid fa-motorcycle"></i>
+            <h3>Delivery On The Way</h3>
+            <p>Estimated Delivery: <strong>30 - 40 mins</strong></p>
+            <p>🎁 FREE Cookie Added To Your Order</p>
+        </div>
+
+        <!-- BUTTONS -->
+<div class="buttons" id="actionButtons">
+    <a href="#" id="trackOrderBtn" class="btn primary">
+        <i class="fa-solid fa-location-dot"></i> Track Order
+    </a>
+    <a href="/" class="btn outline">
+        <i class="fa-solid fa-shop"></i> Continue Shopping
+    </a>
 </div>
 
-<div class="order-row">
-  <span>Payment Method</span>
-  <span id="paymentMethod">Loading...</span>
-</div>
+    </div>
 
-<div class="order-row">
-  <span>Total Paid</span>
-  <span id="totalPaid">₹0</span>
-</div>
+    <!-- ===== FOOTER ===== -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4 text-center text-md-start">
+                    <h2 class="footer-logo">🍰 AV Sweet House</h2>
+                    <p class="footer-text mx-auto mx-md-0">
+                        Fresh Cakes & Desserts Made Daily. Bringing sweetness to every celebration with love,
+                        happiness and premium bakery experience.
+                    </p>
+                    <div class="social-icons justify-content-center justify-content-md-start">
+                        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
 
-<div class="order-row">
-  <span>Status</span>
-  <span id="orderStatus">Preparing 🍰</span>
-</div>
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="About%20us.html">Our Story</a>
+                        <a href="cakes.html">Special Cakes</a>
+                        <a href="dessert.html">Fresh Desserts</a>
+                        <a href="#">Online Delivery</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="contact.html">Contact Us</a>
+                    </div>
+                </div>
 
-  </div>
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91 9930403727</p>
+                        <p><i class="fas fa-envelope"></i> avsweethouse@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Kerala, India</p>
+                    </div>
+                    <div class="subscribe-box">
+                        <input type="email" placeholder="Subscribe for offers">
+                        <button onclick="alert('Thank you for subscribing! 🎉')">Subscribe</button>
+                    </div>
+                </div>
+            </div>
 
-  <!-- DELIVERY -->
+            <div class="footer-bottom">
+                <p>© 2026 AV Sweet House. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  <div class="delivery">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
 
-    <i class="fa-solid fa-motorcycle"></i>
+    <script>
+        // ============================================
+        // GET USER
+        // ============================================
 
-    <h3>
-      Delivery On The Way
-    </h3>
+        function getUser() {
+            try {
+                let userData = localStorage.getItem('user');
+                if (userData) {
+                    return JSON.parse(userData);
+                }
+                userData = localStorage.getItem('currentUser');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.removeItem('currentUser');
+                    return user;
+                }
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
 
-    <p>
-      Estimated Delivery:
-      <strong>30 - 40 mins</strong>
-    </p>
+        // ============================================
+        // UPDATE COUNTS
+        // ============================================
 
-    <p>
-      🎁 FREE Cookie Added To Your Order
-    </p>
+        async function updateCounts() {
+            const user = getUser();
+            if (!user) return;
 
-  </div>
+            const userId = user.id || user._id;
 
-  <!-- BUTTONS -->
+            try {
+                const wishlistRes = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+                const wishlist = await wishlistRes.json();
+                document.getElementById('wishlistCount').innerText = Array.isArray(wishlist) ? wishlist.length : 0;
 
-  <div class="buttons">
+                const cartRes = await fetch(`http://localhost:5000/api/cart/count/${userId}`);
+                const cart = await cartRes.json();
+                document.getElementById('cartCount').innerText = cart.count || 0;
 
-    <button
-    class="btn primary"
-    onclick="window.location.href='track-order.html'">
-    Track Order
-</button>
+            } catch (e) {
+                console.error('Count Error:', e);
+            }
+        }
 
-    <button
-    class="btn outline"
-    onclick="window.location.href='index.html'">
-    Continue Shopping
-</button>
-  </div>
+        // ============================================
+        // LOAD ORDER DETAILS
+        // ============================================
 
-</div>
-<script>
+        function loadOrderDetails() {
+            const lastOrder = JSON.parse(localStorage.getItem("lastOrder"));
 
-const lastOrder =
-    JSON.parse(localStorage.getItem("lastOrder"));
+            const orderBox = document.getElementById('orderBox');
+            const noOrderState = document.getElementById('noOrderState');
+            const deliverySection = document.getElementById('deliverySection');
+            const actionButtons = document.getElementById('actionButtons');
+            const trackOrderBtn = document.getElementById('trackOrderBtn');
 
+            if (!lastOrder) {
+                // No order found - show empty state
+                orderBox.style.display = 'none';
+                deliverySection.style.display = 'none';
+                actionButtons.style.display = 'none';
+                noOrderState.style.display = 'block';
+                return;
+            }
 
-if (!lastOrder) {
+            // Show all sections
+            orderBox.style.display = 'block';
+            deliverySection.style.display = 'block';
+            actionButtons.style.display = 'flex';
+            noOrderState.style.display = 'none';
 
-    console.log("No recent order found");
+            console.log("Last Order:", lastOrder);
 
-} else {
+            // Order ID
+            document.getElementById("orderId").innerText = "#" + (lastOrder._id || 'N/A');
 
-    console.log("Last Order:", lastOrder);
+            // Payment
+            document.getElementById("paymentMethod").innerText = lastOrder.paymentMethod || "UPI";
 
+            // Total
+            document.getElementById("totalPaid").innerText = "₹" + Number(lastOrder.totalAmount || 0).toFixed(0);
 
-    // Order ID
-    document.getElementById("orderId").innerText =
-        "#" + lastOrder._id;
+            // Status
+            const statusMap = {
+                'Pending': '⏳ Pending',
+                'Processing': '🔄 Processing',
+                'Shipped': '🚚 Shipped',
+                'Delivered': '✅ Delivered',
+                'Cancelled': '❌ Cancelled'
+            };
+            document.getElementById("orderStatus").innerText = statusMap[lastOrder.status] || "Preparing 🍰";
 
+            // Track Order Button - Pass the order ID
+            if (lastOrder._id) {
+                trackOrderBtn.href = "track-order.html?id=" + lastOrder._id;
+            } else {
+                trackOrderBtn.href = "track-order.html";
+            }
+        }
 
-    // Payment
-    document.getElementById("paymentMethod").innerText =
-        lastOrder.paymentMethod || "UPI";
+        // ============================================
+        // INIT
+        // ============================================
 
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounts();
+            loadOrderDetails();
+            console.log('🎉 Success Page Loaded');
+        });
+    </script>
 
-    // Total
-    document.getElementById("totalPaid").innerText =
-        "₹" + Number(lastOrder.totalAmount).toFixed(2);
-
-
-    // Status
-    document.getElementById("orderStatus").innerText =
-        lastOrder.status || "Preparing 🍰";
-
-}
-
-</script>
 </body>
+
 </html>

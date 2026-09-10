@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password - AV Sweet House</title>
+    <title>Verify OTP - AV Sweet House</title>
 
      <!-- ===== FAVICON (Browser Tab Icon) ===== -->
-    
+    <!-- Option 1: Simple Cake -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
     
 
@@ -34,7 +34,7 @@
             padding: 20px;
         }
 
-        .forgot-box {
+        .verify-box {
             width: 100%;
             max-width: 450px;
             background: rgba(255, 255, 255, 0.92);
@@ -65,6 +65,10 @@
             margin-bottom: 25px;
         }
 
+        .sub-text strong {
+            color: #ff4d8d;
+        }
+
         .input-box {
             text-align: left;
             margin-bottom: 20px;
@@ -87,6 +91,9 @@
             transition: 0.3s;
             font-size: 15px;
             background: #faf8f8;
+            text-align: center;
+            letter-spacing: 5px;
+            font-weight: 700;
         }
 
         .input-box input:focus {
@@ -102,7 +109,6 @@
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 15px;
-            text-align: left;
         }
 
         .message-box.success {
@@ -178,8 +184,20 @@
             text-decoration: underline;
         }
 
+        .resend {
+            margin-top: 12px;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .resend a {
+            color: #ff4d8d;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
         @media(max-width: 500px) {
-            .forgot-box {
+            .verify-box {
                 padding: 30px 20px;
             }
             h1 {
@@ -191,34 +209,53 @@
 
 <body>
 
-    <div class="forgot-box">
+    <div class="verify-box">
 
-        <div class="icon">🔐</div>
+        <div class="icon">🔑</div>
 
-        <h1>Forgot Password?</h1>
+        <h1>Verify OTP</h1>
 
         <p class="sub-text">
-            Enter your email address and we'll send you an OTP to reset your password.
+            Enter the 6-digit OTP sent to <strong id="emailDisplay">your email</strong>
         </p>
 
         <div id="messageBox" class="message-box"></div>
 
         <div class="input-box">
-            <label>Email Address</label>
-            <input type="email" id="emailInput" placeholder="Enter your registered email">
+            <label>Enter OTP</label>
+            <input type="text" id="otpInput" placeholder="Enter 6-digit OTP" maxlength="6">
         </div>
 
-        <button id="sendOtpBtn" class="btn" onclick="sendOTP()">
-            <i class="fa-regular fa-paper-plane"></i> Send OTP
+        <button id="verifyBtn" class="btn" onclick="verifyOTP()">
+            <i class="fa-solid fa-check"></i> Verify OTP
         </button>
 
+        <div class="resend">
+            Didn't receive OTP? <a onclick="resendOTP()">Resend OTP</a>
+        </div>
+
         <div class="back">
-            Remember your password? <a href="login.html">Login</a>
+            <a href="login.html">← Back to Login</a>
         </div>
 
     </div>
 
     <script>
+        // ============================================
+        // GET EMAIL - ONLY FOR FORGOT PASSWORD
+        // ============================================
+
+        const resetEmail = localStorage.getItem('resetEmail');
+
+        if (resetEmail) {
+            document.getElementById('emailDisplay').textContent = resetEmail;
+            console.log('📧 Email found for password reset:', resetEmail);
+        } else {
+            document.getElementById('emailDisplay').textContent = 'your email';
+            console.log('⚠️ No email found. Please request OTP again.');
+            showMessage('Email not found. Please go back and request OTP again.', 'error');
+        }
+
         // ============================================
         // SHOW MESSAGE
         // ============================================
@@ -237,29 +274,79 @@
         }
 
         // ============================================
-        // SEND OTP
+        // VERIFY OTP
         // ============================================
 
-        async function sendOTP() {
-            const email = document.getElementById('emailInput').value.trim();
-            const btn = document.getElementById('sendOtpBtn');
+        async function verifyOTP() {
+            const otp = document.getElementById('otpInput').value.trim();
+            const btn = document.getElementById('verifyBtn');
+            const email = resetEmail;
 
             hideMessage();
 
             if (!email) {
-                showMessage('Please enter your email address.', 'error');
+                showMessage('Email not found. Please request OTP again.', 'error');
                 return;
             }
 
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                showMessage('Please enter a valid email address.', 'error');
+            if (!otp || otp.length !== 6) {
+                showMessage('Please enter a valid 6-digit OTP.', 'error');
+                document.getElementById('otpInput').focus();
                 return;
             }
 
             btn.disabled = true;
-            btn.innerHTML = `<span class="spinner"></span> Sending OTP...`;
+            btn.innerHTML = `<span class="spinner"></span> Verifying...`;
 
-            console.log('📧 Sending OTP to:', email);
+            try {
+                console.log('🔐 Verifying OTP for:', email);
+                console.log('🔐 OTP:', otp);
+
+                const response = await fetch('http://localhost:5000/api/verify-otp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, otp: otp })
+                });
+
+                const data = await response.json();
+                console.log('🔐 Response:', data);
+
+                if (data.success) {
+                    showMessage('✅ OTP verified successfully! Redirecting...', 'success');
+
+                    setTimeout(() => {
+                        window.location.href = 'reset password.html';
+                    }, 1500);
+
+                } else {
+                    showMessage(data.message || 'Invalid OTP. Please try again.', 'error');
+                    btn.disabled = false;
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Verify OTP`;
+                }
+
+            } catch (error) {
+                console.error('❌ Error:', error);
+                showMessage('Network error. Please try again.', 'error');
+                btn.disabled = false;
+                btn.innerHTML = `<i class="fa-solid fa-check"></i> Verify OTP`;
+            }
+        }
+
+        // ============================================
+        // RESEND OTP
+        // ============================================
+
+        async function resendOTP() {
+            const email = resetEmail;
+
+            if (!email) {
+                showMessage('Email not found. Please request OTP again.', 'error');
+                return;
+            }
+
+            const link = document.querySelector('.resend a');
+            link.textContent = 'Sending...';
+            link.style.pointerEvents = 'none';
 
             try {
                 const response = await fetch('http://localhost:5000/api/send-otp', {
@@ -269,46 +356,40 @@
                 });
 
                 const data = await response.json();
-                console.log('📧 Response:', data);
 
                 if (data.success) {
-                    localStorage.setItem('resetEmail', email);
-
-                    showMessage('✅ OTP sent successfully! Please check your email.', 'success');
-
-                    btn.disabled = false;
-                    btn.innerHTML = `<i class="fa-regular fa-paper-plane"></i> Send OTP`;
-
-                    // Redirect to OTP verification page after 3 seconds
-                    setTimeout(() => {
-                        window.location.href = 'forget verify otp.html';
-                    }, 3000);
-
+                    showMessage('✅ OTP resent successfully! Check your email.', 'success');
                 } else {
-                    showMessage(data.message || 'Failed to send OTP. Please try again.', 'error');
-                    btn.disabled = false;
-                    btn.innerHTML = `<i class="fa-regular fa-paper-plane"></i> Send OTP`;
+                    showMessage(data.message || 'Failed to resend OTP.', 'error');
                 }
 
             } catch (error) {
-                console.error('❌ Error:', error);
                 showMessage('Network error. Please try again.', 'error');
-                btn.disabled = false;
-                btn.innerHTML = `<i class="fa-regular fa-paper-plane"></i> Send OTP`;
             }
+
+            link.textContent = 'Resend OTP';
+            link.style.pointerEvents = 'auto';
         }
 
         // ============================================
         // ENTER KEY
         // ============================================
 
-        document.getElementById('emailInput').addEventListener('keypress', function(e) {
+        document.getElementById('otpInput').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                sendOTP();
+                verifyOTP();
             }
         });
 
-        console.log('🔐 Forgot Password Page Loaded');
+        document.getElementById('otpInput').addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            if (this.value.length === 6) {
+                verifyOTP();
+            }
+        });
+
+        console.log('🔐 Forgot Password - Verify OTP Page Loaded');
+        console.log('📧 Email:', resetEmail);
     </script>
 
 </body>

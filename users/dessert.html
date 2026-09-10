@@ -1,766 +1,987 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desserts | AV Sweet House</title>
 
-<title>Desserts | AV Sweet House</title>
+    <!-- ===== FAVICON (Browser Tab Icon) ===== -->
+    <!-- Option 1: Simple Cake -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        body {
+            background: #fff5f8;
+            min-height: 100vh;
+            padding-top: 70px;
+        }
 
-body{
-background:#fff5f8;
-}
+        .text-pink {
+            color: #ff4d8d !important;
+        }
 
-/* Hero Section */
+        .btn-pink {
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
 
-.hero{
-background:linear-gradient(135deg,#ff4d8d,#ff9ec6);
-padding:90px 20px;
-text-align:center;
-color:white;
-border-radius:0 0 50px 50px;
-}
+        .btn-pink:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.3);
+        }
 
-.hero h1{
-font-size:3rem;
-font-weight:700;
-}
+        .btn-outline-pink {
+            background: transparent;
+            color: #ff4d8d;
+            border: 2px solid #ff4d8d;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
 
-.hero p{
-font-size:18px;
-margin-top:10px;
-}
+        .btn-outline-pink:hover {
+            background: #ff4d8d;
+            color: white;
+        }
 
-/* Back Button */
+        .nav-link {
+            font-weight: 500;
+            transition: 0.3s;
+        }
 
-.back-btn{
-position:fixed;
-top:20px;
-left:20px;
-background:white;
-padding:10px 20px;
-border-radius:30px;
-text-decoration:none;
-color:#ff4d8d;
-font-weight:600;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-z-index:1000;
-}
+        .nav-link:hover {
+            color: #ff4d8d !important;
+        }
 
-.back-btn:hover{
-background:#ff4d8d;
-color:white;
-}
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            padding: 10px 0;
+        }
 
-/* Category Cards */
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 800;
+        }
 
-.category-card{
-background:white;
-border-radius:25px;
-overflow:hidden;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-transition:.4s;
-height:100%;
-}
+        .badge-count {
+            background: #ff4d8d;
+            color: white;
+            border-radius: 50%;
+            padding: 1px 7px;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            margin-left: 3px;
+        }
 
-.category-card:hover{
-transform:translateY(-10px);
-}
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #ff4d8d, #ff9ec6);
+            padding: 60px 20px;
+            text-align: center;
+            color: white;
+            border-radius: 0 0 50px 50px;
+        }
 
-.category-card img{
-width:100%;
-height:250px;
-object-fit:cover;
-transition:.4s;
-}
+        .hero h1 {
+            font-size: 44px;
+            font-weight: 700;
+        }
 
-.category-card:hover img{
-transform:scale(1.05);
-}
+        .hero p {
+            font-size: 18px;
+            margin-top: 10px;
+            opacity: 0.95;
+        }
 
-.card-body{
-padding:20px;
-text-align:center;
-}
+        /* ===== BACK BUTTON ===== */
+        .back-btn {
+            display: inline-block;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #ff4d8d;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .08);
+            transition: 0.3s;
+        }
 
-.card-title{
-font-size:24px;
-font-weight:700;
-color:#333;
-}
+        .back-btn:hover {
+            background: #ff4d8d;
+            color: white;
+        }
 
-.btn-dessert{
-background:#ff4d8d;
-color:white;
-border:none;
-padding:12px 25px;
-border-radius:30px;
-font-weight:600;
-margin-top:10px;
-}
+        /* ===== CATEGORY CARDS ===== */
+        .category-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .08);
+            transition: .4s;
+            height: 100%;
+            cursor: pointer;
+        }
 
-.btn-dessert:hover{
-background:#ff2f78;
-color:white;
-}
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255, 77, 141, 0.15);
+        }
 
-.text-pink{
-color:#ff4d8d !important;
-}
+        .category-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: .4s;
+        }
 
-.nav-link{
-font-weight:500;
-}
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
 
-.nav-link:hover{
-color:#ff4d8d !important;
-}
+        .category-card .card-body {
+            padding: 20px;
+            text-align: center;
+        }
 
-.btn-pink{
-background:#ff4d8d;
-color:white;
-border:none;
-}
+        .category-card .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+        }
 
-.btn-pink:hover{
-background:#ff2f78;
-color:white;
-}
+        .category-card .btn-dessert {
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
 
-</style>
+        .category-card .btn-dessert:hover {
+            background: #ff2f78;
+            transform: scale(1.02);
+        }
+
+        /* ===== PRODUCT CARDS ===== */
+        .product-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            background: white;
+            transition: .4s;
+            height: 100%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(255, 77, 141, 0.15);
+        }
+
+        .product-card img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .product-card .card-body {
+            padding: 18px;
+            text-align: center;
+        }
+
+        .product-card .product-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            min-height: 44px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card .product-price {
+            color: #ff4d8d;
+            font-weight: 700;
+            font-size: 20px;
+            margin: 8px 0;
+        }
+
+        .product-card .product-category {
+            color: #999;
+            font-size: 12px;
+            background: #fff0f3;
+            padding: 3px 12px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .product-card .btn-add-cart {
+            margin-top: 10px;
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 30px;
+            background: #ff4d8d;
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        .product-card .btn-add-cart:hover {
+            background: #ff2f78;
+            transform: scale(1.02);
+        }
+
+        .product-card .btn-view {
+            margin-top: 8px;
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #ff4d8d;
+            border-radius: 30px;
+            background: transparent;
+            color: #ff4d8d;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        .product-card .btn-view:hover {
+            background: #ff4d8d;
+            color: white;
+        }
+
+        /* ===== LOADING ===== */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px 0;
+        }
+
+        .loading-spinner .spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff4d8d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+                   FOOTER
+                   ============================================ */
+        .premium-footer {
+            margin-top: 80px;
+            padding: 70px 0 30px;
+            background: linear-gradient(135deg, #fff0f3, #ffe5ec, #fdf6ff, #eef7ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-footer::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #ffb3c1;
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .premium-footer::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #bde0fe;
+            border-radius: 50%;
+            bottom: -120px;
+            right: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .footer-logo {
+            font-size: 34px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            color: #666;
+            line-height: 1.9;
+            margin-top: 18px;
+            max-width: 350px;
+            font-size: 14px;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 22px;
+            color: #222;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: #ff4d8d;
+            border-radius: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #ff4d6d;
+            transform: translateX(8px);
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.4s;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .social-box:hover {
+            transform: translateY(-6px) scale(1.08);
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border-color: transparent;
+        }
+
+        .subscribe-box {
+            margin-top: 20px;
+        }
+
+        .subscribe-box input {
+            width: 100%;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+
+        .subscribe-box input:focus {
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.15);
+        }
+
+        .subscribe-box button {
+            width: 100%;
+            margin-top: 12px;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            box-shadow: 0 12px 30px rgba(255, 77, 109, 0.25);
+            font-size: 14px;
+        }
+
+        .subscribe-box button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(255, 77, 109, 0.35);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .footer-bottom p {
+            color: #777;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* ============================================
+                   RESPONSIVE
+                   ============================================ */
+
+        @media(max-width: 992px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media(max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .navbar-brand {
+                font-size: 20px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+                border-radius: 0 0 30px 30px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .category-card img {
+                height: 180px;
+            }
+
+            .product-card img {
+                height: 160px;
+            }
+
+            .premium-footer {
+                text-align: center;
+                padding: 50px 0 25px;
+            }
+
+            .footer-text {
+                margin: 15px auto 0;
+                max-width: 100%;
+            }
+
+            .footer-title::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .footer-links {
+                align-items: center;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+        }
+
+        @media(max-width: 480px) {
+            body {
+                padding-top: 56px;
+            }
+
+            .navbar-brand {
+                font-size: 17px;
+            }
+
+            .hero h1 {
+                font-size: 22px;
+            }
+
+            .hero p {
+                font-size: 13px;
+            }
+
+            .category-card img {
+                height: 150px;
+            }
+
+            .category-card .card-title {
+                font-size: 17px;
+            }
+
+            .product-card img {
+                height: 130px;
+            }
+
+            .product-card .product-name {
+                font-size: 14px;
+                min-height: 36px;
+            }
+
+            .product-card .product-price {
+                font-size: 17px;
+            }
+
+            .footer-logo {
+                font-size: 26px;
+            }
+
+            .social-box {
+                width: 38px;
+                height: 38px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand text-pink" href="/">
+                🍰 AV Sweet House
+            </a>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-<div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<a class="navbar-brand fw-bold text-pink" href="index.html">
-🎂 AV Sweet House
-</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/About%20us.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/cakes.html">Cakes</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="/users/dessert.html">Desserts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/chocolate.html">Chocolate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/juice.html">Juice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/Snacks.html">Snacks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/contact.html">Contact</a></li>
+                </ul>
 
-<button class="navbar-toggler" type="button"
-data-bs-toggle="collapse"
-data-bs-target="#navbarNav">
-<span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse" id="navbarNav">
-
-<ul class="navbar-nav mx-auto">
-
-<li class="nav-item">
-<a class="nav-link" href="index.html">Home</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="cakes.html">Cakes</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="dessert.html">Desserts</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="chocolate.html">Chocolate</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="juice.html">Juice</a>
-</li>
-
-<li class="nav-item">
-    <a class="nav-link" href="snacks.html">Snacks</a>
-</li>
-
-</ul>
-
-<div>
-
-<a href="wishlist.html"
-class="btn btn-outline-danger me-2">
-❤️ Wishlist (<span id="wishlistCount">0</span>)
-</a>
-
-<a href="cart.html"
-class="btn btn-pink">
-🛒 Cart (<span id="cartCount">0</span>)
-</a>
-
-</div>
-
-</div>
-
-</div>
-</nav>
-
-<a href="index.html" class="back-btn">
-← Back
-</a>
-
-<section class="hero">
-<h1>🍩 Desserts Collection</h1>
-<p>Freshly baked desserts for every sweet moment</p>
-</section>
-
-<div class="container py-5">
-
-<div class="row g-4">
-
-<!-- Brownies -->
-<div class="col-lg-4 col-md-6">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800">
-<div class="card-body">
-<h4 class="card-title">🍫 Brownies</h4>
-<a href="brownie.html" class="btn btn-dessert">
-View Collection
-</a>
-</div>
-</div>
-</div>
-
-<!-- Donuts -->
-<div class="col-lg-4 col-md-6">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800">
-<div class="card-body">
-<h4 class="card-title">🍩 Donuts</h4>
-<a href="donut.html" class="btn btn-dessert">
-View Collection
-</a>
-</div>
-</div>
-</div>
-
-<!-- Cheesecake -->
-<div class="col-lg-4 col-md-6">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=800">
-<div class="card-body">
-<h4 class="card-title">🍰 Cheesecake</h4>
-<a href="cheese cake.html" class="btn btn-dessert">
-View Collection
-</a>
-</div>
-</div>
-</div>
-
-<!-- Macarons -->
-<div class="col-lg-4 col-md-6">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800">
-<div class="card-body">
-<h4 class="card-title">🌈 Macarons</h4>
-<a href="macarons.html" class="btn btn-dessert">
-View Collection
-</a>
-</div>
-</div>
-</div>
-
-<!-- Pastries -->
-<div class="col-lg-4 col-md-6">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800">
-<div class="card-body">
-<h4 class="card-title">🥐 Pastries</h4>
-<a href="pastries.html" class="btn btn-dessert">
-View Collection
-</a>
-</div>
-</div>
-</div>
-
-<!-- Cookies -->
-<div class="col-lg-4 col-md-6">
-<div class="category-card">
-<img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800">
-<div class="card-body">
-<h4 class="card-title">🍪 Cookies</h4>
-<a href="cookies.html" class="btn btn-dessert">
-View Collection
-</a>
-</div>
-</div>
-</div>
-
-</div>
-
-</div>
-
-<section class="container py-5">
-
-<h2 class="text-center text-danger fw-bold mb-4">
-All Dessert Products
-</h2>
-
-<div class="row" id="productContainer">
-</div>
-
-</section>
-<!-- FOOTER -->
-
-<!-- PREMIUM FOOTER -->
-
-<footer class="premium-footer">
-
-  <div class="container">
-
-    <div class="row g-5">
-
-      <!-- BRAND -->
-      <div class="col-md-4">
-
-        <h2 class="footer-logo">
-          🍰 AV Sweet House
-        </h2>
-
-        <p class="footer-text">
-          Fresh Cakes & Desserts Made Daily.
-          Bringing sweetness to every celebration with love,
-          happiness and premium bakery experience.
-        </p>
-
-        <!-- SOCIAL ICONS -->
-        <div class="social-icons">
-
-          <div class="social-box">📸</div>
-          <div class="social-box">📘</div>
-          <div class="social-box">📱</div>
-          <div class="social-box">▶️</div>
-
+                <div class="d-flex gap-2">
+                    <a href="/users/wishlist.html" class="btn btn-outline-danger btn-sm">
+                        ❤️ <span id="wishlistCount">0</span>
+                    </a>
+                    <a href="/users/cart.html" class="btn btn-pink btn-sm">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
         </div>
+    </nav>
 
-      </div>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <h1>🍩 Desserts Collection</h1>
+        <p>Freshly baked desserts for every sweet moment</p>
+    </section>
 
-      <!-- LINKS -->
-      <div class="col-md-4">
-
-        <h4 class="footer-title">
-          Quick Links
-        </h4>
-
-        <div class="footer-links">
-
-          <a href="#">Our Story</a>
-          <a href="#">Special Cakes</a>
-          <a href="#">Fresh Desserts</a>
-          <a href="#">Online Delivery</a>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Contact Us</a>
-
-        </div>
-
-      </div>
-
-      <!-- CONTACT -->
-      <div class="col-md-4">
-
-        <h4 class="footer-title">
-          Contact Us
-        </h4>
-
-        <div class="contact-info">
-
-          <p>📞 +91 9930403727</p>
-          <p>📧 avsweethouse@gmail.com</p>
-          <p>📍 Kerala, India</p>
-
-        </div>
-
-        <!-- SUBSCRIBE -->
-        <div class="subscribe-box">
-
-          <input type="email" placeholder="Enter your email">
-
-          <button>
-            Subscribe
-          </button>
-
-        </div>
-
-      </div>
-
+    <!-- ===== BACK BUTTON ===== -->
+    <div class="container mt-4">
+        <a href="/" class="back-btn">← Back Home</a>
     </div>
 
-    <!-- BOTTOM -->
+    <!-- ===== CATEGORIES ===== -->
+    <div class="container py-4">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="category-card" onclick="window.location.href='/users/brownie.html'">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=800" alt="Brownies" loading="lazy">
+                    <div class="card-body">
+                        <h4 class="card-title">🍫 Brownies</h4>
+                        <button class="btn-dessert">View Collection</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="footer-bottom">
+            <div class="col-lg-4 col-md-6">
+                <div class="category-card" onclick="window.location.href='/users/donut.html'">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?w=800" alt="Donuts" loading="lazy">
+                    <div class="card-body">
+                        <h4 class="card-title">🍩 Donuts</h4>
+                        <button class="btn-dessert">View Collection</button>
+                    </div>
+                </div>
+            </div>
 
-      <p>
-        © 2026 AV Sweet House. All Rights Reserved.
-      </p>
+            <div class="col-lg-4 col-md-6">
+                <div class="category-card" onclick="window.location.href='/users/cheese%20cake.html'">
+                    <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=800" alt="Cheesecake" loading="lazy">
+                    <div class="card-body">
+                        <h4 class="card-title">🍰 Cheesecake</h4>
+                        <button class="btn-dessert">View Collection</button>
+                    </div>
+                </div>
+            </div>
 
+            <div class="col-lg-4 col-md-6">
+                <div class="category-card" onclick="window.location.href='/users/macarons.html'">
+                    <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800" alt="Macarons" loading="lazy">
+                    <div class="card-body">
+                        <h4 class="card-title">🌈 Macarons</h4>
+                        <button class="btn-dessert">View Collection</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="category-card" onclick="window.location.href='/users/pastries.html'">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800" alt="Pastries" loading="lazy">
+                    <div class="card-body">
+                        <h4 class="card-title">🥐 Pastries</h4>
+                        <button class="btn-dessert">View Collection</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="category-card" onclick="window.location.href='/users/cookies.html'">
+                    <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800" alt="Cookies" loading="lazy">
+                    <div class="card-body">
+                        <h4 class="card-title">🍪 Cookies</h4>
+                        <button class="btn-dessert">View Collection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-  </div>
-
-</footer>
-
-<style>
-
-.premium-footer{
-  margin-top:100px;
-  padding:80px 0 30px;
-  background:
-  linear-gradient(
-    135deg,
-    #fff0f3,
-    #ffe5ec,
-    #fdf6ff,
-    #eef7ff
-  );
-  position:relative;
-  overflow:hidden;
-}
-
-/* GLOW EFFECT */
-
-.premium-footer::before{
-  content:'';
-  position:absolute;
-  width:350px;
-  height:350px;
-  background:#ffb3c1;
-  border-radius:50%;
-  top:-100px;
-  left:-100px;
-  filter:blur(120px);
-  opacity:0.4;
-}
-
-.premium-footer::after{
-  content:'';
-  position:absolute;
-  width:350px;
-  height:350px;
-  background:#bde0fe;
-  border-radius:50%;
-  bottom:-120px;
-  right:-100px;
-  filter:blur(120px);
-  opacity:0.4;
-}
-
-/* LOGO */
-
-.footer-logo{
-  font-size:38px;
-  font-weight:800;
-  background:linear-gradient(90deg,#ff4d6d,#ff758f);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-/* TEXT */
-
-.footer-text{
-  color:#666;
-  line-height:1.9;
-  margin-top:18px;
-  max-width:350px;
-}
-
-/* TITLE */
-
-.footer-title{
-  font-weight:700;
-  margin-bottom:25px;
-  color:#222;
-}
-
-/* LINKS */
-
-.footer-links{
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-.footer-links a{
-  text-decoration:none;
-  color:#666;
-  transition:0.3s;
-  font-weight:500;
-}
-
-.footer-links a:hover{
-  color:#ff4d6d;
-  transform:translateX(8px);
-}
-
-/* CONTACT */
-
-.contact-info p{
-  color:#666;
-  margin-bottom:12px;
-}
-
-/* SOCIAL */
-
-.social-icons{
-  display:flex;
-  gap:14px;
-  margin-top:25px;
-}
-
-.social-box{
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(12px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,0.08);
-  transition:0.4s;
-  font-size:18px;
-}
-
-.social-box:hover{
-  transform:translateY(-6px) scale(1.08);
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:white;
-}
-
-/* SUBSCRIBE */
-
-.subscribe-box{
-  margin-top:25px;
-}
-
-.subscribe-box input{
-  width:100%;
-  padding:14px 18px;
-  border:none;
-  border-radius:50px;
-  outline:none;
-  background:rgba(255,255,255,0.7);
-  backdrop-filter:blur(10px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
-}
-
-.subscribe-box button{
-  width:100%;
-  margin-top:14px;
-  border:none;
-  padding:14px;
-  border-radius:50px;
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:white;
-  font-weight:600;
-  transition:0.3s;
-  box-shadow:0 12px 30px rgba(255,77,109,0.25);
-}
-
-.subscribe-box button:hover{
-  transform:translateY(-4px);
-}
-
-/* BOTTOM */
-
-.footer-bottom{
-  text-align:center;
-  margin-top:60px;
-  padding-top:25px;
-  border-top:1px solid rgba(0,0,0,0.08);
-}
-
-.footer-bottom p{
-  color:#777;
-  margin:0;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-  .footer-logo{
-    font-size:30px;
-  }
-
-  .premium-footer{
-    text-align:center;
-  }
-
-  .footer-text{
-    margin:auto;
-    margin-top:15px;
-  }
-
-  .social-icons{
-    justify-content:center;
-  }
+    <!-- ===== PRODUCTS SECTION ===== -->
+    <section class="container py-4">
+        <h2 class="text-center text-pink fw-bold mb-4">🍰 All Dessert Products</h2>
+
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p style="color:#888;">Loading desserts...</p>
+        </div>
+
+        <div class="row g-4" id="productContainer"></div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4 text-center text-md-start">
+                    <h2 class="footer-logo">🍰 AV Sweet House</h2>
+                    <p class="footer-text mx-auto mx-md-0">
+                        Fresh Cakes & Desserts Made Daily. Bringing sweetness to every celebration with love,
+                        happiness and premium bakery experience.
+                    </p>
+                    <div class="social-icons justify-content-center justify-content-md-start">
+                        <a href="#" class="social-box">📸</a>
+                        <a href="#" class="social-box">📘</a>
+                        <a href="#" class="social-box">📱</a>
+                        <a href="#" class="social-box">▶️</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="/users/About%20us.html">Our Story</a>
+                        <a href="/users/cakes.html">Special Cakes</a>
+                        <a href="/users/dessert.html">Fresh Desserts</a>
+                        <a href="#">Online Delivery</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="/users/contact.html">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <p>📞 +91 9930403727</p>
+                        <p>📧 avsweethouse@gmail.com</p>
+                        <p>📍 Kerala, India</p>
+                    </div>
+                    <div class="subscribe-box">
+                        <input type="email" placeholder="Subscribe for offers">
+                        <button onclick="alert('Thank you for subscribing! 🎉')">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AV Sweet House. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script>
+        // ============================================
+        // GET USER
+        // ============================================
+
+        function getUser() {
+            try {
+                let userData = localStorage.getItem('user');
+                if (userData) {
+                    return JSON.parse(userData);
+                }
+                userData = localStorage.getItem('currentUser');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.removeItem('currentUser');
+                    return user;
+                }
+                return null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // ============================================
+        // UPDATE CART COUNT
+        // ============================================
+
+        async function updateCartCount() {
+            const user = getUser();
+            const cartBadge = document.getElementById("cartCount");
+
+            if (!user) {
+                cartBadge.innerText = "0";
+                return;
+            }
+
+            try {
+                const userId = user.id || user._id;
+                const response = await fetch(`http://localhost:5000/api/cart/count/${userId}`);
+                const result = await response.json();
+                cartBadge.innerText = result.count || 0;
+            } catch (error) {
+                console.error("Cart Count Error:", error);
+                cartBadge.innerText = "0";
+            }
+        }
+
+        // ============================================
+        // UPDATE WISHLIST COUNT
+        // ============================================
+
+        async function updateWishlistCount() {
+            const user = getUser();
+            const wishlistBadge = document.getElementById("wishlistCount");
+
+            if (!user) {
+                wishlistBadge.innerText = "0";
+                return;
+            }
+
+            try {
+                const userId = user.id || user._id;
+                const response = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+                const wishlist = await response.json();
+                wishlistBadge.innerText = wishlist.length || 0;
+            } catch (error) {
+                console.error("Wishlist Count Error:", error);
+                wishlistBadge.innerText = "0";
+            }
+        }
+
+        // ============================================
+        // ADD TO CART
+        // ============================================
+
+        async function addToCart(productId, name, price, image, category) {
+            const user = getUser();
+
+            if (!user) {
+                alert('Please login first!');
+                window.location.href = '/users/login.html';
+                return;
+            }
+
+            try {
+                const userId = user.id || user._id;
+
+                const response = await fetch('http://localhost:5000/api/cart/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: String(userId),
+                        productId: String(productId),
+                        name: name,
+                        price: Number(price),
+                        image: image,
+                        category: category || 'Dessert',
+                        quantity: 1
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(`✅ ${name} added to cart!`);
+                    updateCartCount();
+                } else {
+                    alert(result.message || 'Failed to add to cart');
+                }
+            } catch (error) {
+                console.error('Add to Cart Error:', error);
+                alert('Network error. Please try again.');
+            }
+        }
+
+        // ============================================
+        // LOAD PRODUCTS
+        // ============================================
+
+        async function loadProducts() {
+            const container = document.getElementById("productContainer");
+            const spinner = document.getElementById("loadingSpinner");
+
+            try {
+                const response = await fetch("http://localhost:5000/api/products");
+                const products = await response.json();
+
+                spinner.style.display = "none";
+
+                const dessertProducts = products.filter(product =>
+                    product.category &&
+                    (
+                        product.category.toLowerCase().includes("dessert") ||
+                        product.category.toLowerCase().includes("brownie") ||
+                        product.category.toLowerCase().includes("donut") ||
+                        product.category.toLowerCase().includes("cookie") ||
+                        product.category.toLowerCase().includes("pastry") ||
+                        product.category.toLowerCase().includes("macaron") ||
+                        product.category.toLowerCase().includes("cheesecake")
+                    )
+                );
+
+                if (dessertProducts.length === 0) {
+                    container.innerHTML = `
+                            <div class="col-12 text-center py-5">
+                                <p class="text-muted">No dessert products available.</p>
+                            </div>
+                        `;
+                    return;
+                }
+
+                dessertProducts.forEach(product => {
+                    container.innerHTML += `
+                            <div class="col-md-3 col-sm-6">
+                                <div class="product-card">
+                                    <img src="${product.image || 'https://via.placeholder.com/300?text=No+Image'}" 
+                                         alt="${product.name}" 
+                                         loading="lazy"
+                                         onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                                    <div class="card-body">
+                                        <div class="product-name">${product.name}</div>
+                                        <div class="product-price">₹${Number(product.price).toFixed(0)}</div>
+                                        <span class="product-category">${product.category || 'Dessert'}</span>
+                                        <button class="btn-add-cart" onclick="event.stopPropagation(); addToCart('${product._id}', '${product.name.replace(/'/g, "\\'")}', ${product.price}, '${product.image}', '${product.category}')">
+                                            🛒 Add to Cart
+                                        </button>
+                                        <button class="btn-view" onclick="event.stopPropagation(); window.location.href='/users/product-detail.html?id=${product._id}'">
+                                            View Details
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                });
+
+            } catch (error) {
+                console.error("Load Products Error:", error);
+                spinner.style.display = "none";
+                container.innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <p class="text-danger">⚠️ Failed to load products.</p>
+                            <button onclick="loadProducts()" class="btn btn-pink">🔄 Retry</button>
+                        </div>
+                    `;
+            }
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            updateCartCount();
+            updateWishlistCount();
+            console.log('🍩 Desserts Page Loaded');
+        });
+    </script>
 
-}
-
-</style>
-<script src="cart.js"></script>
-<script src="wishlist.js"></script>
-<script>
-
-let cart =
-JSON.parse(localStorage.getItem("cart")) || [];
-
-let wishlist =
-JSON.parse(localStorage.getItem("wishlist")) || [];
-
-document.getElementById("cartCount").innerText =
-cart.length;
-
-document.getElementById("wishlistCount").innerText =
-wishlist.length;
-
-</script>
-<script>
-async function loadProducts() {
-
-try {
-
-const res = await fetch("http://localhost:5000/api/products");
-const products = await res.json();
-
-const container =
-document.getElementById("productContainer");
-
-container.innerHTML = "";
-
-products
-.filter(product =>
-product.category &&
-(
-product.category.toLowerCase().includes("dessert") ||
-product.category.toLowerCase().includes("brownie") ||
-product.category.toLowerCase().includes("donut") ||
-product.category.toLowerCase().includes("cookie") ||
-product.category.toLowerCase().includes("pastry") ||
-product.category.toLowerCase().includes("macaron") ||
-product.category.toLowerCase().includes("cheesecake")
-)
-)
-.forEach(product => {
-
-container.innerHTML += `
-
-<div class="col-md-3 mb-4">
-
-<div class="card h-100 shadow">
-
-<img
-src="${product.image}"
-class="card-img-top"
-style="height:220px;object-fit:cover;">
-
-<div class="card-body text-center">
-
-<h5>${product.name}</h5>
-
-<p class="text-danger fw-bold">
-₹${product.price}
-</p>
-
-<p>${product.category}</p>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-catch(error){
-console.log(error);
-}
-}
-
-loadProducts();
-</script>
-
-<script>
-async function loadProducts() {
-
-try {
-
-const res = await fetch("http://localhost:5000/api/products");
-const products = await res.json();
-
-const container =
-document.getElementById("productContainer");
-
-container.innerHTML = "";
-
-products
-.filter(product =>
-product.category &&
-(
-product.category.toLowerCase().includes("dessert") ||
-product.category.toLowerCase().includes("brownie") ||
-product.category.toLowerCase().includes("donut") ||
-product.category.toLowerCase().includes("cookie") ||
-product.category.toLowerCase().includes("pastry") ||
-product.category.toLowerCase().includes("macaron") ||
-product.category.toLowerCase().includes("cheesecake")
-)
-)
-.forEach(product => {
-
-container.innerHTML += `
-
-<div class="col-md-3 mb-4">
-
-<div class="card h-100 shadow">
-
-<img
-src="${product.image}"
-class="card-img-top"
-style="height:220px;object-fit:cover;">
-
-<div class="card-body text-center">
-
-<h5>${product.name}</h5>
-
-<p class="text-danger fw-bold">
-₹${product.price}
-</p>
-
-<p>${product.category}</p>
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-catch(error){
-console.log(error);
-}
-}
-
-loadProducts();
-</script>
 </body>
 </html>

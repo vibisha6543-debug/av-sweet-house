@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories | AV Sweet House</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff5f8;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff4d8d, #ff9ec6);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(255, 77, 141, 0.2);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: white;
+            color: #ff4d8d;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .add-cat-btn {
+            background: white;
+            color: #ff4d8d;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .add-cat-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .top-bar h2 {
+            font-weight: 700;
+            color: #333;
+            font-size: 22px;
+        }
+
+        .top-bar p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .count-badge {
+            background: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #888;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .count-badge span {
+            color: #ff4d8d;
+            font-weight: 700;
+        }
+
+        /* =========================
+           CATEGORY GRID
+        ========================= */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 16px;
+            padding: 18px 16px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(255, 77, 141, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(255, 77, 141, 0.12);
+        }
+
+        .category-card .cat-icon {
+            font-size: 35px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .category-card .cat-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .category-card .cat-type {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 2px;
+        }
+
+        .category-card .cat-type.main {
+            color: #ff4d8d;
+            font-weight: 600;
+        }
+
+        .category-card .cat-type.sub {
+            color: #888;
+        }
+
+        .category-card .main-badge {
+            display: inline-block;
+            background: #ff4d8d;
+            color: white;
+            font-size: 9px;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-card .sub-badge {
+            display: inline-block;
+            background: #e8e8e8;
+            color: #666;
+            font-size: 9px;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .category-card .cat-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .category-card .cat-actions button {
+            border: none;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-card .cat-actions .edit-btn {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .category-card .cat-actions .edit-btn:hover {
+            background: #1e40af;
+            color: white;
+        }
+
+        .category-card .cat-actions .delete-btn {
+            background: #fde8e8;
+            color: #991b1b;
+        }
+
+        .category-card .cat-actions .delete-btn:hover {
+            background: #991b1b;
+            color: white;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+            border: 2px dashed #f0e0e0;
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 50px;
+            color: #ddd;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .empty-state h4 {
+            color: #888;
+            font-size: 20px;
+        }
+
+        /* =========================
+           MODAL
+        ========================= */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal h3 {
+            color: #ff4d8d;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .modal .modal-subtitle {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .modal .form-group {
+            margin-bottom: 18px;
+        }
+
+        .modal .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        .modal .form-group label .required {
+            color: #dc3545;
+        }
+
+        .modal .form-group input,
+        .modal .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .modal .form-group input:focus,
+        .modal .form-group select:focus {
+            border-color: #ff4d8d;
+            box-shadow: 0 0 0 4px rgba(255, 77, 141, 0.08);
+            background: white;
+        }
+
+        .modal .form-group .help-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .modal .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .modal .modal-actions button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal .modal-actions .cancel-btn {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .modal .modal-actions .cancel-btn:hover {
+            background: #ddd;
+        }
+
+        .modal .modal-actions .save-btn {
+            background: linear-gradient(135deg, #ff4d8d, #ff7eaa);
+            color: white;
+        }
+
+        .modal .modal-actions .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.3);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            padding: 16px 24px;
+            border-radius: 14px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: slideDown 0.4s ease;
+            max-width: 400px;
+        }
+
+        .toast.show {
+            display: flex;
+        }
+        .toast.success { background: linear-gradient(135deg, #28a745, #20c997); }
+        .toast.error { background: linear-gradient(135deg, #dc3545, #e74c3c); }
+
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media(max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .header h1 { font-size: 22px; }
+            .header-actions { justify-content: center; }
+            .category-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .modal { padding: 25px; margin: 15px; }
+        }
+
+        @media(max-width: 480px) {
+            .header h1 { font-size: 18px; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .category-card { padding: 14px 10px; }
+            .category-card .cat-icon { font-size: 28px; }
+            .category-card .cat-name { font-size: 12px; }
+            .modal { padding: 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1><i class="fa-solid fa-tags"></i> Manage Categories</h1>
+        <div class="header-actions">
+            <!-- ===== ADD CATEGORY BUTTON ===== -->
+            <button class="add-cat-btn" onclick="openAddCategory()">
+                <i class="fa-solid fa-plus"></i> Add Category
+            </button>
+            <a href="manage-products.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Products
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <div class="container">
+        <div class="top-bar">
+            <div>
+                <h2>📂 All Categories</h2>
+                <p>Main categories and subcategories used in your store</p>
+            </div>
+            <div class="count-badge">
+                <i class="fa-regular fa-folder"></i>
+                <span id="totalCount">0</span> Categories
+                &nbsp;·&nbsp;
+                <span id="mainCount">0</span> Main
+                &nbsp;·&nbsp;
+                <span id="subCount">0</span> Sub
+            </div>
+        </div>
+
+        <div class="category-grid" id="categoryGrid">
+            <div class="empty-state">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                <h4>Loading categories...</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         ADD/EDIT CATEGORY MODAL
+    ============================================ -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal">
+            <h3 id="modalTitle">Add Category</h3>
+            <p class="modal-subtitle" id="modalSubtitle">Enter category details below</p>
+
+            <form id="categoryForm" onsubmit="saveCategory(event)">
+                <!-- Category Name -->
+                <div class="form-group">
+                    <label>Category Name <span class="required">*</span></label>
+                    <input type="text" id="catName" placeholder="e.g. Vegan Cakes, Gluten Free" required>
+                </div>
+
+                <!-- Icon -->
+                <div class="form-group">
+                    <label>Icon (Emoji)</label>
+                    <select id="catIcon">
+                        <option value="🎂">🎂 Cake</option>
+                        <option value="🍫">🍫 Chocolate</option>
+                        <option value="🧁">🧁 Cupcake</option>
+                        <option value="🍩">🍩 Donut</option>
+                        <option value="🥧">🥧 Pie</option>
+                        <option value="🍰">🍰 Dessert</option>
+                        <option value="🍪">🍪 Cookie</option>
+                        <option value="🥤">🥤 Juice</option>
+                        <option value="🍿">🍿 Snacks</option>
+                        <option value="🍭">🍭 Candy</option>
+                        <option value="🎉">🎉 Festival</option>
+                        <option value="🎁">🎁 Gift</option>
+                        <option value="🍦">🍦 Ice Cream</option>
+                        <option value="🧇">🧇 Waffle</option>
+                        <option value="🌰">🌰 Nuts</option>
+                        <option value="🥛">🥛 Milkshake</option>
+                        <option value="☕">☕ Coffee</option>
+                        <option value="🍹">🍹 Smoothie</option>
+                        <option value="🧃">🧃 Drink</option>
+                    </select>
+                </div>
+
+                <!-- Category Type -->
+                <div class="form-group">
+                    <label>Category Type</label>
+                    <select id="catType">
+                        <option value="main">⭐ Main Category</option>
+                        <option value="sub">📎 Subcategory</option>
+                    </select>
+                    <div class="help-text">
+                        <i class="fa-regular fa-circle-info"></i>
+                        <span id="typeHelp">Main categories appear as top-level categories</span>
+                    </div>
+                </div>
+
+                <!-- Parent Category (for Subcategories) -->
+                <div class="form-group" id="parentGroup">
+                    <label>Parent Category <span class="required">*</span></label>
+                    <select id="parentCategory">
+                        <option value="">Select Parent Category</option>
+                    </select>
+                    <div class="help-text">
+                        <i class="fa-regular fa-circle-info"></i>
+                        Choose which main category this subcategory belongs to
+                    </div>
+                </div>
+
+                <input type="hidden" id="editCatId" value="">
+
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeModal()">
+                        <i class="fa-regular fa-xmark"></i> Cancel
+                    </button>
+                    <button type="submit" class="save-btn">
+                        <i class="fa-regular fa-floppy-disk"></i> Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <script>
+        if (localStorage.getItem("adminLoggedIn") !== "true") {
+            window.location.href = "admin-login.html";
+        }
+
+        // ============================================
+        // CATEGORY DATA - YOUR EXACT CATEGORIES
+        // ============================================
+
+        // Your 5 MAIN categories with 6 subcategories each
+        const DEFAULT_CATEGORIES = [
+            // Main: Cakes
+            { name: 'Cakes', icon: '🎂', type: 'main' },
+            { name: 'Birthday Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Anniversary Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Wedding Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Kids Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Cup Cakes', icon: '🧁', type: 'sub', parent: 'Cakes' },
+            { name: 'Occasion Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+
+            // Main: Chocolates
+            { name: 'Chocolates', icon: '🍫', type: 'main' },
+            { name: 'Milk Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+            { name: 'Dark Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+            { name: 'White Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+            { name: 'Nut Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+
+            // Main: Desserts
+            { name: 'Desserts', icon: '🍰', type: 'main' },
+            { name: 'Brownies', icon: '🍩', type: 'sub', parent: 'Desserts' },
+            { name: 'Donuts', icon: '🍩', type: 'sub', parent: 'Desserts' },
+            { name: 'Cheesecakes', icon: '🍰', type: 'sub', parent: 'Desserts' },
+            { name: 'Pastry', icon: '🍰', type: 'sub', parent: 'Desserts' },
+            { name: 'Macarons', icon: '🍪', type: 'sub', parent: 'Desserts' },
+            { name: 'Cookies', icon: '🍪', type: 'sub', parent: 'Desserts' },
+
+            // Main: Juices
+            { name: 'Juices', icon: '🥤', type: 'main' },
+            { name: 'Fresh Juices', icon: '🥤', type: 'sub', parent: 'Juices' },
+            { name: 'Milkshakes', icon: '🥤', type: 'sub', parent: 'Juices' },
+            { name: 'Smoothies', icon: '🍹', type: 'sub', parent: 'Juices' },
+            { name: 'Mocktails', icon: '🍹', type: 'sub', parent: 'Juices' },
+            { name: 'Cold Coffee', icon: '☕', type: 'sub', parent: 'Juices' },
+
+            // Main: Snacks
+            { name: 'Snacks', icon: '🍿', type: 'main' },
+            { name: 'Murukku', icon: '🍿', type: 'sub', parent: 'Snacks' },
+            { name: 'Traditional Sweets', icon: '🍭', type: 'sub', parent: 'Snacks' },
+            { name: 'Mixtures & Namkeen', icon: '🍿', type: 'sub', parent: 'Snacks' },
+            { name: 'Biscuits', icon: '🍪', type: 'sub', parent: 'Snacks' },
+            { name: 'Chips', icon: '🍿', type: 'sub', parent: 'Snacks' },
+            { name: 'Evening Snacks', icon: '🍿', type: 'sub', parent: 'Snacks' }
+        ];
+
+        // ============================================
+        // STORAGE FUNCTIONS
+        // ============================================
+
+        function getCategories() {
+            try {
+                const stored = localStorage.getItem('productCategoriesList');
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (e) {}
+
+            // Save default categories
+            localStorage.setItem('productCategoriesList', JSON.stringify(DEFAULT_CATEGORIES));
+            return DEFAULT_CATEGORIES;
+        }
+
+        function saveCategories(categories) {
+            localStorage.setItem('productCategoriesList', JSON.stringify(categories));
+            renderCategories();
+            updateCategoryCount();
+        }
+
+        // ============================================
+        // TOAST
+        // ============================================
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            toast.className = 'toast show ' + type;
+            toastMsg.textContent = message;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        }
+
+        // ============================================
+        // RENDER CATEGORIES
+        // ============================================
+
+        function renderCategories() {
+            const categories = getCategories();
+            const grid = document.getElementById('categoryGrid');
+
+            // Counts
+            const mainCats = categories.filter(c => c.type === 'main');
+            const subCats = categories.filter(c => c.type === 'sub');
+
+            document.getElementById('totalCount').textContent = categories.length;
+            document.getElementById('mainCount').textContent = mainCats.length;
+            document.getElementById('subCount').textContent = subCats.length;
+
+            if (categories.length === 0) {
+                grid.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fa-regular fa-folder-open"></i>
+                            <h4>No categories found</h4>
+                            <p>Click "Add Category" to create your first category</p>
+                            <button class="add-cat-btn" onclick="openAddCategory()" style="margin-top:15px;">
+                                <i class="fa-solid fa-plus"></i> Add Category
+                            </button>
+                        </div>
+                    `;
+                return;
+            }
+
+            grid.innerHTML = categories.map(cat => `
+                    <div class="category-card">
+                        <span class="cat-icon">${cat.icon || '📁'}</span>
+                        <div class="cat-name">${cat.name}</div>
+                        <div class="cat-type ${cat.type === 'main' ? 'main' : 'sub'}">
+                            ${cat.type === 'main' ? '⭐ Main Category' : '📎 ' + (cat.parent || '')}
+                        </div>
+                        ${cat.type === 'main' ? '<span class="main-badge">Main</span>' : '<span class="sub-badge">Sub</span>'}
+                        <div class="cat-actions">
+                            <button class="edit-btn" onclick="editCategory('${cat.name}')">
+                                <i class="fa-regular fa-pen-to-square"></i> Edit
+                            </button>
+                            <button class="delete-btn" onclick="deleteCategory('${cat.name}')">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        // ============================================
+        // OPEN ADD CATEGORY MODAL
+        // ============================================
+
+        function openAddCategory() {
+            document.getElementById('modalTitle').textContent = 'Add New Category';
+            document.getElementById('modalSubtitle').textContent = 'Create a new category for your store';
+            document.getElementById('catName').value = '';
+            document.getElementById('catIcon').value = '🎂';
+            document.getElementById('catType').value = 'main';
+            document.getElementById('editCatId').value = '';
+
+            // Update parent category dropdown
+            updateParentDropdown();
+
+            // Show/hide parent group based on type
+            toggleParentGroup();
+
+            document.getElementById('categoryModal').classList.add('show');
+            setTimeout(() => document.getElementById('catName').focus(), 100);
+        }
+
+        // ============================================
+        // OPEN EDIT CATEGORY MODAL
+        // ============================================
+
+        function editCategory(catName) {
+            const categories = getCategories();
+            const cat = categories.find(c => c.name === catName);
+            if (!cat) return;
+
+            document.getElementById('modalTitle').textContent = 'Edit Category';
+            document.getElementById('modalSubtitle').textContent = 'Update category details';
+            document.getElementById('catName').value = cat.name;
+            document.getElementById('catIcon').value = cat.icon || '📁';
+            document.getElementById('catType').value = cat.type || 'main';
+            document.getElementById('editCatId').value = catName;
+
+            // Update parent dropdown
+            updateParentDropdown();
+
+            // Set parent if subcategory
+            if (cat.type === 'sub' && cat.parent) {
+                document.getElementById('parentCategory').value = cat.parent;
+            }
+
+            // Show/hide parent group
+            toggleParentGroup();
+
+            document.getElementById('categoryModal').classList.add('show');
+            setTimeout(() => document.getElementById('catName').focus(), 100);
+        }
+
+        // ============================================
+        // UPDATE PARENT DROPDOWN
+        // ============================================
+
+        function updateParentDropdown() {
+            const categories = getCategories();
+            const mainCats = categories.filter(c => c.type === 'main');
+            const select = document.getElementById('parentCategory');
+
+            select.innerHTML = '<option value="">Select Parent Category</option>';
+            mainCats.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.name;
+                option.textContent = cat.icon + ' ' + cat.name;
+                select.appendChild(option);
+            });
+        }
+
+        // ============================================
+        // TOGGLE PARENT GROUP
+        // ============================================
+
+        function toggleParentGroup() {
+            const type = document.getElementById('catType').value;
+            const parentGroup = document.getElementById('parentGroup');
+            const helpText = document.getElementById('typeHelp');
+
+            if (type === 'sub') {
+                parentGroup.style.display = 'block';
+                helpText.textContent = 'Choose which main category this subcategory belongs to';
+            } else {
+                parentGroup.style.display = 'none';
+                helpText.textContent = 'Main categories appear as top-level categories';
+            }
+        }
+
+        // Listen for type change
+        document.getElementById('catType').addEventListener('change', toggleParentGroup);
+
+        // ============================================
+        // SAVE CATEGORY
+        // ============================================
+
+        function saveCategory(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('catName').value.trim();
+            const icon = document.getElementById('catIcon').value;
+            const type = document.getElementById('catType').value;
+            const parent = document.getElementById('parentCategory').value;
+            const editName = document.getElementById('editCatId').value;
+
+            if (!name) {
+                showToast('Please enter a category name', 'error');
+                return;
+            }
+
+            let categories = getCategories();
+
+            // Check for duplicate (except when editing)
+            const duplicate = categories.find(c =>
+                c.name.toLowerCase() === name.toLowerCase() &&
+                c.name !== editName
+            );
+            if (duplicate) {
+                showToast('⚠️ A category with this name already exists!', 'error');
+                return;
+            }
+
+            if (type === 'sub' && !parent) {
+                showToast('Please select a parent category for subcategory', 'error');
+                return;
+            }
+
+            if (editName) {
+                // EDIT existing category
+                const index = categories.findIndex(c => c.name === editName);
+                if (index !== -1) {
+                    categories[index].name = name;
+                    categories[index].icon = icon;
+                    categories[index].type = type;
+                    if (type === 'sub') {
+                        categories[index].parent = parent;
+                    } else {
+                        delete categories[index].parent;
+                    }
+
+                    // Update subcategories if main category name changed
+                    if (type === 'main' && editName !== name) {
+                        categories.forEach(c => {
+                            if (c.parent === editName) {
+                                c.parent = name;
+                            }
+                        });
+                    }
+
+                    saveCategories(categories);
+                    showToast('✅ Category updated successfully!', 'success');
+                }
+            } else {
+                // ADD new category
+                const newCat = {
+                    name: name,
+                    icon: icon,
+                    type: type
+                };
+                if (type === 'sub') {
+                    newCat.parent = parent;
+                }
+                categories.push(newCat);
+                saveCategories(categories);
+                showToast(`✅ "${name}" added successfully!`, 'success');
+            }
+
+            closeModal();
+        }
+
+        // ============================================
+        // DELETE CATEGORY
+        // ============================================
+
+        function deleteCategory(catName) {
+            const categories = getCategories();
+            const cat = categories.find(c => c.name === catName);
+            if (!cat) return;
+
+            // Check if main category has subcategories
+            if (cat.type === 'main') {
+                const subs = categories.filter(c => c.parent === catName);
+                let msg = `Delete "${catName}"?`;
+                if (subs.length > 0) {
+                    msg += `\n\n⚠️ This category has ${subs.length} subcategories.`;
+                    msg += `\nDeleting will also remove all subcategories.`;
+                }
+                if (!confirm(msg)) return;
+
+                // Remove main and all subcategories
+                const remaining = categories.filter(c => c.parent !== catName);
+                const final = remaining.filter(c => c.name !== catName);
+                saveCategories(final);
+                showToast(`🗑️ "${catName}" and ${subs.length} subcategories deleted!`, 'success');
+            } else {
+                // Delete subcategory
+                if (!confirm(`Delete "${catName}"?`)) return;
+                const updated = categories.filter(c => c.name !== catName);
+                saveCategories(updated);
+                showToast(`🗑️ "${catName}" deleted!`, 'success');
+            }
+        }
+
+        // ============================================
+        // MODAL CONTROL
+        // ============================================
+
+        function closeModal() {
+            document.getElementById('categoryModal').classList.remove('show');
+        }
+
+        document.getElementById('categoryModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================
+        // UPDATE CATEGORY COUNT IN SIDEBAR
+        // ============================================
+
+        function updateCategoryCount() {
+            const categories = getCategories();
+            const mainCats = categories.filter(c => c.type === 'main');
+            const badge = document.getElementById('categoryBadge');
+            if (badge) {
+                badge.textContent = mainCats.length;
+            }
+        }
+
+        // ============================================
+        // LOAD ON PAGE LOAD
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCategories();
+            updateCategoryCount();
+            console.log('✅ Manage Categories page loaded');
+            console.log('📊 Total categories:', getCategories().length);
+        });
+    </script>
+
+</body>
+</html>
