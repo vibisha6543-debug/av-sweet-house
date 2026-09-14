@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product | AV Sweet House</title>
+    <title>Add Product | AV Sweet House Admin</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -99,9 +99,7 @@
             margin-bottom: 30px;
         }
 
-        .form-group {
-            margin-bottom: 22px;
-        }
+        .form-group { margin-bottom: 22px; }
 
         .form-group label {
             display: block;
@@ -111,10 +109,7 @@
             color: #444;
         }
 
-        .form-group label .required {
-            color: #dc3545;
-            margin-left: 3px;
-        }
+        .form-group label .required { color: #dc3545; margin-left: 3px; }
 
         .form-group .input-wrapper {
             position: relative;
@@ -139,9 +134,7 @@
             transition: all 0.3s ease;
         }
 
-        .form-group .input-wrapper:focus-within .input-icon {
-            color: #ff4d8d;
-        }
+        .form-group .input-wrapper:focus-within .input-icon { color: #ff4d8d; }
 
         .form-group .input-wrapper input,
         .form-group .input-wrapper select {
@@ -157,9 +150,7 @@
             -webkit-appearance: none;
         }
 
-        .form-group .input-wrapper select {
-            cursor: pointer;
-        }
+        .form-group .input-wrapper select { cursor: pointer; }
 
         .form-group .input-wrapper .select-arrow {
             padding-right: 16px;
@@ -182,9 +173,7 @@
             gap: 5px;
         }
 
-        .form-group .error-text.show {
-            display: flex;
-        }
+        .form-group .error-text.show { display: flex; }
 
         .form-group .char-count {
             font-size: 12px;
@@ -223,10 +212,7 @@
             gap: 8px;
         }
 
-        .preview-section .placeholder-text i {
-            font-size: 40px;
-            color: #ddd;
-        }
+        .preview-section .placeholder-text i { font-size: 40px; color: #ddd; }
 
         .preview-section img {
             max-width: 200px;
@@ -238,9 +224,7 @@
             box-shadow: 0 8px 25px rgba(255, 77, 141, 0.15);
         }
 
-        .preview-section img.show {
-            display: block;
-        }
+        .preview-section img.show { display: block; }
 
         .add-btn {
             width: 100%;
@@ -262,20 +246,9 @@
             overflow: hidden;
         }
 
-        .add-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 77, 141, 0.35);
-        }
-
-        .add-btn:active {
-            transform: scale(0.98);
-        }
-
-        .add-btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+        .add-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(255, 77, 141, 0.35); }
+        .add-btn:active { transform: scale(0.98); }
+        .add-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none !important; }
 
         .add-btn .spinner {
             display: none;
@@ -287,22 +260,10 @@
             animation: spin 0.8s linear infinite;
         }
 
-        .add-btn.loading .spinner {
-            display: inline-block;
-        }
+        .add-btn.loading .spinner { display: inline-block; }
+        .add-btn.loading .btn-text { display: none; }
 
-        .add-btn.loading .btn-text {
-            display: none;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .toast {
             position: fixed;
@@ -323,97 +284,36 @@
             animation: slideDown 0.4s ease;
         }
 
-        .toast.show {
-            display: flex;
-        }
-
-        .toast.success {
-            background: linear-gradient(135deg, #28a745, #20c997);
-        }
-
-        .toast.error {
-            background: linear-gradient(135deg, #dc3545, #e74c3c);
-        }
+        .toast.show { display: flex; }
+        .toast.success { background: linear-gradient(135deg, #28a745, #20c997); }
+        .toast.error { background: linear-gradient(135deg, #dc3545, #e74c3c); }
 
         @keyframes slideDown {
-            from {
-                transform: translateY(-30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         @media(max-width: 768px) {
-            .header {
-                padding: 15px 20px;
-                flex-direction: column;
-                text-align: center;
-            }
-            .header h1 {
-                font-size: 22px;
-                justify-content: center;
-            }
-            .header-actions {
-                justify-content: center;
-            }
-            .container {
-                margin: 20px 15px;
-                padding: 25px 20px;
-                border-radius: 20px;
-            }
-            .container h2 {
-                font-size: 20px;
-            }
+            .header { padding: 15px 20px; flex-direction: column; text-align: center; }
+            .header h1 { font-size: 22px; justify-content: center; }
+            .header-actions { justify-content: center; }
+            .container { margin: 20px 15px; padding: 25px 20px; border-radius: 20px; }
+            .container h2 { font-size: 20px; }
             .form-group .input-wrapper input,
-            .form-group .input-wrapper select {
-                padding: 12px 14px 12px 10px;
-                font-size: 13px;
-            }
-            .toast {
-                top: 15px;
-                right: 15px;
-                left: 15px;
-                min-width: auto;
-                padding: 14px 18px;
-                font-size: 13px;
-            }
+            .form-group .input-wrapper select { padding: 12px 14px 12px 10px; font-size: 13px; }
+            .toast { top: 15px; right: 15px; left: 15px; min-width: auto; padding: 14px 18px; font-size: 13px; }
         }
 
         @media(max-width: 480px) {
-            .header h1 {
-                font-size: 18px;
-            }
-            .back-btn {
-                font-size: 12px;
-                padding: 8px 16px;
-            }
-            .container {
-                padding: 20px 15px;
-                margin: 15px 10px;
-            }
-            .form-group {
-                margin-bottom: 16px;
-            }
+            .header h1 { font-size: 18px; }
+            .back-btn { font-size: 12px; padding: 8px 16px; }
+            .container { padding: 20px 15px; margin: 15px 10px; }
+            .form-group { margin-bottom: 16px; }
             .form-group .input-wrapper input,
-            .form-group .input-wrapper select {
-                padding: 10px 12px 10px 8px;
-                font-size: 12px;
-            }
-            .add-btn {
-                font-size: 15px;
-                padding: 14px;
-            }
-            .preview-section {
-                min-height: 120px;
-                padding: 15px;
-            }
-            .preview-section img {
-                max-width: 120px;
-                max-height: 120px;
-            }
+            .form-group .input-wrapper select { padding: 10px 12px 10px 8px; font-size: 12px; }
+            .add-btn { font-size: 15px; padding: 14px; }
+            .preview-section { min-height: 120px; padding: 15px; }
+            .preview-section img { max-width: 120px; max-height: 120px; }
         }
     </style>
 </head>
@@ -447,9 +347,7 @@
 
             <!-- Product Name -->
             <div class="form-group">
-                <label for="name">
-                    Product Name <span class="required">*</span>
-                </label>
+                <label for="name">Product Name <span class="required">*</span></label>
                 <div class="input-wrapper">
                     <span class="input-icon"><i class="fa-regular fa-tag"></i></span>
                     <input type="text" id="name" placeholder="Enter product name" maxlength="100" required>
@@ -463,9 +361,7 @@
 
             <!-- Price -->
             <div class="form-group">
-                <label for="price">
-                    Price (₹) <span class="required">*</span>
-                </label>
+                <label for="price">Price (₹) <span class="required">*</span></label>
                 <div class="input-wrapper">
                     <span class="input-icon"><i class="fa-solid fa-indian-rupee-sign"></i></span>
                     <input type="number" id="price" placeholder="Enter price (e.g. 499)" min="0" step="1" required>
@@ -476,21 +372,19 @@
                 </div>
             </div>
 
-            <!-- ===== CATEGORY - ALLOWS BOTH MAIN & SUB ===== -->
+            <!-- Category -->
             <div class="form-group">
-                <label for="category">
-                    Category <span class="required">*</span>
-                </label>
+                <label for="category">Category <span class="required">*</span></label>
                 <div class="input-wrapper">
                     <span class="input-icon"><i class="fa-regular fa-layer-group"></i></span>
                     <select id="category" required>
-                        <option value="">Select Category</option>
+                        <option value="">Loading categories...</option>
                     </select>
                     <span class="select-arrow"><i class="fa-solid fa-chevron-down"></i></span>
                 </div>
                 <div style="font-size:12px;color:#888;margin-top:5px;">
                     <i class="fa-regular fa-circle-info"></i>
-                    You can add products to <strong>Main Categories</strong> or <strong>Subcategories</strong>
+                    Categories are loaded from the database (MongoDB)
                 </div>
                 <div class="error-text" id="categoryError">
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -532,137 +426,95 @@
     </div>
 
     <script>
+        const API_URL = "http://localhost:5000/api";
+
+        /* ============================================
+           ADMIN AUTH CHECK
+        ============================================ */
         if (localStorage.getItem("adminLoggedIn") !== "true") {
+            alert("⚠️ Please login first.");
             window.location.href = "admin-login.html";
         }
 
-        // ============================================
-        // GET CATEGORIES FROM localStorage
-        // ============================================
-
-        function getCategories() {
+        /* =====================================================
+           ✅ FETCH CATEGORIES FROM DATABASE
+        ===================================================== */
+        async function fetchCategories() {
             try {
-                const stored = localStorage.getItem('productCategoriesList');
-                if (stored) {
-                    return JSON.parse(stored);
-                }
-            } catch (e) {}
-
-            // Default categories
-            const defaultCategories = [
-                { name: 'Cakes', icon: '🎂', type: 'main' },
-                { name: 'Birthday Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
-                { name: 'Anniversary Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
-                { name: 'Wedding Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
-                { name: 'Kids Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
-                { name: 'Cup Cakes', icon: '🧁', type: 'sub', parent: 'Cakes' },
-                { name: 'Occasion Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
-                { name: 'Chocolates', icon: '🍫', type: 'main' },
-                { name: 'Milk Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
-                { name: 'Dark Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
-                { name: 'White Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
-                { name: 'Nut Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
-                { name: 'Desserts', icon: '🍰', type: 'main' },
-                { name: 'Brownies', icon: '🍩', type: 'sub', parent: 'Desserts' },
-                { name: 'Donuts', icon: '🍩', type: 'sub', parent: 'Desserts' },
-                { name: 'Cheesecakes', icon: '🍰', type: 'sub', parent: 'Desserts' },
-                { name: 'Pastry', icon: '🍰', type: 'sub', parent: 'Desserts' },
-                { name: 'Macarons', icon: '🍪', type: 'sub', parent: 'Desserts' },
-                { name: 'Cookies', icon: '🍪', type: 'sub', parent: 'Desserts' },
-                { name: 'Juices', icon: '🥤', type: 'main' },
-                { name: 'Fresh Juices', icon: '🥤', type: 'sub', parent: 'Juices' },
-                { name: 'Milkshakes', icon: '🥤', type: 'sub', parent: 'Juices' },
-                { name: 'Smoothies', icon: '🍹', type: 'sub', parent: 'Juices' },
-                { name: 'Mocktails', icon: '🍹', type: 'sub', parent: 'Juices' },
-                { name: 'Cold Coffee', icon: '☕', type: 'sub', parent: 'Juices' },
-                { name: 'Snacks', icon: '🍿', type: 'main' },
-                { name: 'Murukku', icon: '🍿', type: 'sub', parent: 'Snacks' },
-                { name: 'Traditional Sweets', icon: '🍭', type: 'sub', parent: 'Snacks' },
-                { name: 'Mixtures & Namkeen', icon: '🍿', type: 'sub', parent: 'Snacks' },
-                { name: 'Biscuits', icon: '🍪', type: 'sub', parent: 'Snacks' },
-                { name: 'Chips', icon: '🍿', type: 'sub', parent: 'Snacks' },
-                { name: 'Evening Snacks', icon: '🍿', type: 'sub', parent: 'Snacks' }
-            ];
-            localStorage.setItem('productCategoriesList', JSON.stringify(defaultCategories));
-            return defaultCategories;
+                const response = await fetch(`${API_URL}/categories`);
+                if (!response.ok) throw new Error("Failed to load categories");
+                const categories = await response.json();
+                return Array.isArray(categories) ? categories : [];
+            } catch (error) {
+                console.error("Fetch Categories Error:", error);
+                return [];
+            }
         }
 
-        // ============================================
-        // POPULATE CATEGORY DROPDOWN - SHOWS ALL
-        // ============================================
-
-        function populateCategories() {
-            const categories = getCategories();
+        async function populateCategories() {
+            const categories = await fetchCategories();
             const select = document.getElementById('category');
 
-            // Separate main and sub
             const mainCats = categories.filter(c => c.type === 'main');
             const subCats = categories.filter(c => c.type === 'sub');
 
             select.innerHTML = '<option value="">Select Category</option>';
 
-            // ===== ADD MAIN CATEGORIES (These can also have products!) =====
+            // Main Categories
             if (mainCats.length > 0) {
                 const mainGroup = document.createElement('optgroup');
-                mainGroup.label = '⭐ Main Categories (Can add products here)';
+                mainGroup.label = '⭐ Main Categories';
 
                 mainCats.forEach(cat => {
                     const option = document.createElement('option');
                     option.value = cat.name;
-                    option.textContent = cat.icon + ' ' + cat.name;
+                    option.textContent = (cat.icon || '') + ' ' + cat.name;
                     option.style.fontWeight = 'bold';
                     mainGroup.appendChild(option);
                 });
                 select.appendChild(mainGroup);
             }
 
-            // ===== ADD SUBCATEGORIES =====
+            // Subcategories grouped by parent
             if (subCats.length > 0) {
-                // Group subcategories by parent
                 const grouped = {};
                 subCats.forEach(cat => {
                     const parent = cat.parent || 'Other';
-                    if (!grouped[parent]) {
-                        grouped[parent] = [];
-                    }
+                    if (!grouped[parent]) grouped[parent] = [];
                     grouped[parent].push(cat);
                 });
 
                 Object.keys(grouped).forEach(parent => {
                     const group = document.createElement('optgroup');
-                    group.label = '📎 ' + parent + ' (Subcategories)';
+                    group.label = '📎 ' + parent;
                     grouped[parent].forEach(cat => {
                         const option = document.createElement('option');
                         option.value = cat.name;
-                        option.textContent = '  └─ ' + cat.icon + ' ' + cat.name;
+                        option.textContent = '  └─ ' + (cat.icon || '') + ' ' + cat.name;
                         group.appendChild(option);
                     });
                     select.appendChild(group);
                 });
             }
 
-            console.log('✅ Categories loaded:', categories.length);
+            console.log('✅ Categories loaded from DB:', categories.length);
         }
 
-        // ============================================
-        // TOAST NOTIFICATION
-        // ============================================
-
+        /* ============================================
+           TOAST NOTIFICATION
+        ============================================ */
         function showToast(message, type = 'success') {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toastMessage');
             toast.className = 'toast show ' + type;
             toastMsg.textContent = message;
             clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3500);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 3500);
         }
 
-        // ============================================
-        // IMAGE PREVIEW
-        // ============================================
-
+        /* ============================================
+           IMAGE PREVIEW (FIXED - no external placeholder)
+        ============================================ */
         function previewImage() {
             const url = document.getElementById('image').value.trim();
             const img = document.getElementById('previewImg');
@@ -670,51 +522,46 @@
             const placeholder = document.getElementById('placeholderText');
 
             if (url) {
-                img.src = url;
-                img.className = 'show';
-                section.classList.add('has-image');
-                placeholder.style.display = 'none';
-
                 img.onerror = function() {
                     img.className = '';
                     section.classList.remove('has-image');
                     placeholder.style.display = 'flex';
                     placeholder.innerHTML = `
-                            <i class="fa-solid fa-triangle-exclamation" style="color:#dc3545;"></i>
-                            <span style="color:#dc3545;">Invalid image URL</span>
-                        `;
+                        <i class="fa-solid fa-triangle-exclamation" style="color:#dc3545;"></i>
+                        <span style="color:#dc3545;">Invalid image URL</span>
+                    `;
+                    img.onerror = null;
                 };
 
                 img.onload = function() {
-                    placeholder.innerHTML = `
-                            <i class="fa-regular fa-image"></i>
-                            <span>Image preview will appear here</span>
-                        `;
                     placeholder.style.display = 'none';
                 };
+
+                img.src = url;
+                img.className = 'show';
+                section.classList.add('has-image');
+                placeholder.style.display = 'none';
             } else {
                 img.className = '';
                 section.classList.remove('has-image');
                 placeholder.style.display = 'flex';
                 placeholder.innerHTML = `
-                        <i class="fa-regular fa-image"></i>
-                        <span>Image preview will appear here</span>
-                    `;
+                    <i class="fa-regular fa-image"></i>
+                    <span>Image preview will appear here</span>
+                `;
             }
         }
 
-        // ============================================
-        // CHARACTER COUNTER
-        // ============================================
-
-        document.getElementById('name').addEventListener('input', function() {
+        /* ============================================
+           CHARACTER COUNTER
+        ============================================ */
+        document.getElementById('name').addEventListener('input', function () {
             document.getElementById('nameCount').textContent = this.value.length;
         });
 
-        // ============================================
-        // HANDLE ADD PRODUCT
-        // ============================================
-
+        /* ============================================
+           HANDLE ADD PRODUCT
+        ============================================ */
         async function handleAddProduct(event) {
             event.preventDefault();
 
@@ -723,6 +570,7 @@
             const category = document.getElementById('category').value;
             const image = document.getElementById('image').value.trim();
 
+            // Hide previous errors
             document.querySelectorAll('.error-text').forEach(el => el.classList.remove('show'));
 
             let hasError = false;
@@ -747,11 +595,12 @@
                 return;
             }
 
+            // ✅ No external placeholder — use empty string, admin page will show fallback
             const product = {
                 name: name,
                 price: Number(price),
                 category: category,
-                image: image || 'https://via.placeholder.com/300x300/ff4d8d/ffffff?text=Product'
+                image: image || ''
             };
 
             const addBtn = document.getElementById('addBtn');
@@ -759,11 +608,9 @@
             addBtn.disabled = true;
 
             try {
-                const response = await fetch('http://localhost:5000/api/products', {
+                const response = await fetch(`${API_URL}/products`, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(product)
                 });
 
@@ -772,11 +619,16 @@
                 if (data.success || response.ok) {
                     showToast('✅ Product added successfully!', 'success');
 
+                    // Reset form
                     document.getElementById('productForm').reset();
                     document.getElementById('nameCount').textContent = '0';
                     document.getElementById('previewImg').className = '';
                     document.getElementById('previewSection').classList.remove('has-image');
                     document.getElementById('placeholderText').style.display = 'flex';
+                    document.getElementById('placeholderText').innerHTML = `
+                        <i class="fa-regular fa-image"></i>
+                        <span>Image preview will appear here</span>
+                    `;
 
                     setTimeout(() => {
                         window.location.href = 'manage-products.html';
@@ -793,25 +645,29 @@
             }
         }
 
-        // ============================================
-        // KEYBOARD SHORTCUT
-        // ============================================
-
-        document.addEventListener('keydown', function(e) {
+        /* ============================================
+           KEYBOARD SHORTCUT (Ctrl+Enter = Submit)
+        ============================================ */
+        document.addEventListener('keydown', function (e) {
             if (e.ctrlKey && e.key === 'Enter') {
                 e.preventDefault();
-                document.getElementById('productForm').dispatchEvent(new Event('submit'));
+                const form = document.getElementById('productForm');
+                if (form.requestSubmit) {
+                    form.requestSubmit();
+                } else {
+                    form.dispatchEvent(new Event('submit', { cancelable: true }));
+                }
             }
         });
 
-        // ============================================
-        // LOAD ON PAGE LOAD
-        // ============================================
-
-        document.addEventListener('DOMContentLoaded', function() {
-            populateCategories();
-            console.log('✅ Add Product page loaded - Main categories can now have products!');
-            console.log('📌 You can add products to Main Categories OR Subcategories');
+        /* ============================================
+           INIT
+        ============================================ */
+        document.addEventListener('DOMContentLoaded', async function () {
+            // ✅ Populate categories from DATABASE
+            await populateCategories();
+            console.log('✅ Add Product page loaded');
+            console.log('📌 Ctrl+Enter to submit');
         });
     </script>
 

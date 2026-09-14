@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | AV Sweet House</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
 
     <style>
@@ -33,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* Decorative background elements */
         body::before {
             content: '🎂';
             position: absolute;
@@ -74,10 +68,7 @@
             transform: translateY(-2px);
         }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+        .logo { text-align: center; margin-bottom: 20px; }
 
         .logo-icon {
             font-size: 55px;
@@ -99,14 +90,9 @@
             margin-top: 4px;
         }
 
-        .login-form {
-            margin-top: 30px;
-        }
+        .login-form { margin-top: 30px; }
 
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
+        .form-group { margin-bottom: 20px; position: relative; }
 
         .form-group label {
             display: block;
@@ -116,9 +102,6 @@
             margin-bottom: 6px;
         }
 
-        /* ============================================
-           FIX: HIDE AUTO-FILL COMPLETELY
-        ============================================ */
         .form-group .input-wrapper {
             position: relative;
             display: flex;
@@ -143,9 +126,7 @@
             z-index: 2;
         }
 
-        .form-group .input-wrapper:focus-within .input-icon {
-            color: #ff4d8d;
-        }
+        .form-group .input-wrapper:focus-within .input-icon { color: #ff4d8d; }
 
         .form-group .input-wrapper input {
             width: 100%;
@@ -160,31 +141,20 @@
             z-index: 2;
         }
 
-        /* ============================================
-           COMPLETE AUTO-FILL DISABLE
-        ============================================ */
-        /* Hide browser autofill background */
         .form-group .input-wrapper input:-webkit-autofill,
         .form-group .input-wrapper input:-webkit-autofill:hover,
         .form-group .input-wrapper input:-webkit-autofill:focus,
         .form-group .input-wrapper input:-webkit-autofill:active {
             -webkit-box-shadow: 0 0 0 1000px #f8f0f3 inset !important;
             -webkit-text-fill-color: #333 !important;
-            background-color: transparent !important;
-            background-clip: content-box !important;
             transition: background-color 5000s ease-in-out 0s !important;
         }
 
-        /* Hide the autofill icon/button that browsers show */
         .form-group .input-wrapper input::-webkit-contacts-auto-fill-button,
         .form-group .input-wrapper input::-webkit-credentials-auto-fill-button {
             visibility: hidden;
             display: none !important;
             pointer-events: none;
-            height: 0;
-            width: 0;
-            margin: 0;
-            padding: 0;
         }
 
         .form-group .input-wrapper input::placeholder {
@@ -201,29 +171,13 @@
             z-index: 2;
         }
 
-        .form-group .input-wrapper .toggle-password:hover {
-            color: #ff4d8d;
-        }
-
-        /* Fake input overlay to block autofill */
-        .form-group .input-wrapper .autofill-blocker {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-            background: transparent;
-            pointer-events: none;
-        }
+        .form-group .input-wrapper .toggle-password:hover { color: #ff4d8d; }
 
         .form-options {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             margin-bottom: 25px;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .form-options .remember-me {
@@ -242,19 +196,6 @@
             cursor: pointer;
         }
 
-        .form-options .forgot-link {
-            color: #ff4d8d;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .form-options .forgot-link:hover {
-            color: #ff2f78;
-            text-decoration: underline;
-        }
-
         .btn-login {
             width: 100%;
             padding: 15px;
@@ -270,18 +211,14 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .btn-login:hover {
+        .btn-login:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(255, 77, 141, 0.35);
         }
 
-        .btn-login:active {
-            transform: scale(0.98);
-        }
+        .btn-login:active { transform: scale(0.98); }
 
         .btn-login:disabled {
             opacity: 0.7;
@@ -299,70 +236,40 @@
             animation: spin 0.8s linear infinite;
         }
 
-        .btn-login.loading .spinner {
-            display: inline-block;
-        }
-
-        .btn-login.loading .btn-text {
-            display: none;
-        }
+        .btn-login.loading .spinner { display: inline-block; }
+        .btn-login.loading .btn-text { display: none; }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Error message */
+        .error-message, .success-message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            display: none;
+            margin-bottom: 20px;
+            align-items: center;
+            gap: 10px;
+        }
+
         .error-message {
             background: #fde8e8;
             color: #991b1b;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            display: none;
-            margin-bottom: 20px;
             border-left: 4px solid #dc3545;
-            align-items: center;
-            gap: 10px;
         }
 
-        .error-message.show {
-            display: flex;
-        }
-
-        .error-message i {
-            font-size: 18px;
-        }
-
-        /* Success message */
         .success-message {
             background: #d1fae5;
             color: #065f46;
-            padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 500;
-            display: none;
-            margin-bottom: 20px;
             border-left: 4px solid #28a745;
-            align-items: center;
-            gap: 10px;
         }
 
-        .success-message.show {
-            display: flex;
-        }
+        .error-message.show, .success-message.show { display: flex; }
+        .error-message i, .success-message i { font-size: 18px; }
 
-        .success-message i {
-            font-size: 18px;
-        }
-
-        /* Footer links */
         .login-footer {
             text-align: center;
             margin-top: 25px;
@@ -370,10 +277,7 @@
             border-top: 1px solid #f0e0e0;
         }
 
-        .login-footer p {
-            color: #999;
-            font-size: 13px;
-        }
+        .login-footer p { color: #999; font-size: 13px; }
 
         .login-footer a {
             color: #ff4d8d;
@@ -381,78 +285,19 @@
             font-weight: 500;
         }
 
-        .login-footer a:hover {
-            text-decoration: underline;
-        }
+        .login-footer a:hover { text-decoration: underline; }
 
-        /* Demo credentials badge */
-        .demo-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #f8f0f3;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #666;
-            margin-top: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid #e8d5db;
-        }
-
-        .demo-badge:hover {
-            background: #ff4d8d;
-            color: white;
-            border-color: #ff4d8d;
-        }
-
-        .demo-badge i {
-            font-size: 13px;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
         @media(max-width: 480px) {
-            .login-box {
-                padding: 30px 20px 25px;
-                border-radius: 20px;
-            }
-
-            .logo h1 {
-                font-size: 24px;
-            }
-
-            .logo-icon {
-                font-size: 45px;
-            }
-
-            .form-group .input-wrapper input {
-                padding: 12px 14px 12px 10px;
-                font-size: 13px;
-            }
-
-            .btn-login {
-                padding: 13px;
-                font-size: 14px;
-            }
-
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
+            .login-box { padding: 30px 20px 25px; border-radius: 20px; }
+            .logo h1 { font-size: 24px; }
+            .logo-icon { font-size: 45px; }
+            .form-group .input-wrapper input { padding: 12px 14px 12px 10px; font-size: 13px; }
+            .btn-login { padding: 13px; font-size: 14px; }
         }
 
         @media(max-width: 360px) {
-            .login-box {
-                padding: 20px 15px;
-            }
-
-            .logo h1 {
-                font-size: 20px;
-            }
+            .login-box { padding: 20px 15px; }
+            .logo h1 { font-size: 20px; }
         }
     </style>
 </head>
@@ -460,7 +305,6 @@
 <body>
 
     <div class="login-container">
-
         <div class="login-box">
 
             <!-- LOGO -->
@@ -482,36 +326,29 @@
                 <span id="successText">Login successful!</span>
             </div>
 
-            <!-- ============================================
-                 LOGIN FORM - With hidden fake fields to block autofill
-            ============================================ -->
+            <!-- LOGIN FORM -->
             <form class="login-form" id="loginForm" onsubmit="handleLogin(event)" autocomplete="off">
 
-                <!-- FAKE FIELDS to trick browser autofill (hidden) -->
-                <div style="display:none !important; position:absolute !important; height:0 !important; width:0 !important; overflow:hidden !important;">
-                    <input type="text" name="fakeusername" value="">
-                    <input type="password" name="fakepassword" value="">
-                </div>
+                <!-- Hidden fake fields to block autofill -->
+                <input type="text" name="fakeusername" style="display:none" tabindex="-1" autocomplete="off">
+                <input type="password" name="fakepassword" style="display:none" tabindex="-1" autocomplete="off">
 
                 <!-- Username -->
                 <div class="form-group">
                     <label for="username">
                         <i class="fa-regular fa-user" style="margin-right:6px;color:#ff4d8d;"></i>
-                        Username / Email
+                        Username
                     </label>
                     <div class="input-wrapper">
                         <span class="input-icon"><i class="fa-regular fa-user"></i></span>
                         <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        placeholder="Enter admin username"
-                        autocomplete="off"
-                        readonly
-                        onfocus="this.removeAttribute('readonly')"
-                        required
+                            type="text"
+                            id="username"
+                            name="admin-username"
+                            placeholder="Enter admin username"
+                            autocomplete="off"
+                            required
                         >
-                        <div class="autofill-blocker"></div>
                     </div>
                 </div>
 
@@ -524,31 +361,25 @@
                     <div class="input-wrapper">
                         <span class="input-icon"><i class="fa-regular fa-lock"></i></span>
                         <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        placeholder="Enter your password"
-                        autocomplete="new-password"
-                        readonly
-                        onfocus="this.removeAttribute('readonly')"
-                        required
+                            type="password"
+                            id="password"
+                            name="admin-password"
+                            placeholder="Enter your password"
+                            autocomplete="new-password"
+                            required
                         >
                         <span class="toggle-password" onclick="togglePasswordVisibility()">
                             <i class="fa-regular fa-eye" id="eyeIcon"></i>
                         </span>
-                        <div class="autofill-blocker"></div>
                     </div>
                 </div>
 
-                <!-- Options -->
+                <!-- Remember me only (Forgot password removed) -->
                 <div class="form-options">
                     <label class="remember-me">
                         <input type="checkbox" id="rememberMe">
                         <span>Remember me</span>
                     </label>
-                    <a href="#" class="forgot-link" onclick="showForgotPassword(event)">
-                        Forgot password?
-                    </a>
                 </div>
 
                 <!-- Login Button -->
@@ -562,14 +393,6 @@
 
             </form>
 
-            <!-- Demo Credentials - Click to fill -->
-            <div style="text-align:center;margin-top:12px;">
-                <span class="demo-badge" onclick="fillDemoCredentials()">
-                    <i class="fa-regular fa-key"></i>
-                    🔑 Click to fill demo credentials
-                </span>
-            </div>
-
             <!-- Footer -->
             <div class="login-footer">
                 <p>
@@ -577,14 +400,11 @@
                     2026 AV Sweet House. All rights reserved.
                 </p>
                 <p style="margin-top:4px;font-size:12px;">
-                    <a href="/">Back to Website</a>
-                    &nbsp;·&nbsp;
-                    <a href="#" onclick="showForgotPassword(event)">Help</a>
+                    <a href="/">← Back to Website</a>
                 </p>
             </div>
 
         </div>
-
     </div>
 
     <script>
@@ -592,49 +412,43 @@
            TOGGLE PASSWORD VISIBILITY
         ================================================= */
         function togglePasswordVisibility() {
-            const passwordInput = document.getElementById('password');
+            const pwd = document.getElementById('password');
             const eyeIcon = document.getElementById('eyeIcon');
 
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
+            if (pwd.type === 'password') {
+                pwd.type = 'text';
                 eyeIcon.className = 'fa-regular fa-eye-slash';
             } else {
-                passwordInput.type = 'password';
+                pwd.type = 'password';
                 eyeIcon.className = 'fa-regular fa-eye';
             }
         }
 
         /* =================================================
-           SHOW/HIDE ERROR MESSAGE
+           SHOW ERROR / SUCCESS
         ================================================= */
         function showError(message) {
             const errorDiv = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
             const successDiv = document.getElementById('successMessage');
 
             successDiv.classList.remove('show');
-            errorText.textContent = message;
+            document.getElementById('errorText').textContent = message;
             errorDiv.classList.add('show');
 
             clearTimeout(errorDiv._hideTimeout);
-            errorDiv._hideTimeout = setTimeout(() => {
-                errorDiv.classList.remove('show');
-            }, 5000);
+            errorDiv._hideTimeout = setTimeout(() => errorDiv.classList.remove('show'), 5000);
         }
 
         function showSuccess(message) {
             const successDiv = document.getElementById('successMessage');
-            const successText = document.getElementById('successText');
             const errorDiv = document.getElementById('errorMessage');
 
             errorDiv.classList.remove('show');
-            successText.textContent = message;
+            document.getElementById('successText').textContent = message;
             successDiv.classList.add('show');
 
             clearTimeout(successDiv._hideTimeout);
-            successDiv._hideTimeout = setTimeout(() => {
-                successDiv.classList.remove('show');
-            }, 3000);
+            successDiv._hideTimeout = setTimeout(() => successDiv.classList.remove('show'), 3000);
         }
 
         /* =================================================
@@ -660,25 +474,22 @@
             document.getElementById('successMessage').classList.remove('show');
 
             try {
-                const response = await fetch('http://localhost:5000/api/login', {
+                const response = await fetch('http://localhost:5000/api/admin/login', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: username,
-                        password: password
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    showSuccess('✅ Welcome back, ' + (data.user?.firstName || 'Admin') + '!');
+                    // ✅ LOGIN SUCCESS
+                    showSuccess('✅ Welcome back, Administrator!');
 
                     localStorage.setItem('adminLoggedIn', 'true');
-                    localStorage.setItem('adminUser', JSON.stringify(data.user));
-                    localStorage.setItem('adminName', data.user?.firstName || 'Admin');
+                    localStorage.setItem('adminUser', JSON.stringify(data.admin));
+                    localStorage.setItem('adminName', 'Administrator');
+                    localStorage.setItem('adminLoginTime', new Date().toISOString());
 
                     if (rememberMe) {
                         localStorage.setItem('rememberAdmin', 'true');
@@ -691,53 +502,17 @@
                     }, 800);
 
                 } else {
-                    // Fallback: Local authentication
-                    if (username === 'admin' && password === 'admin123') {
-                        showSuccess('✅ Login successful');
-
-                        localStorage.setItem('adminLoggedIn', 'true');
-                        localStorage.setItem('adminUser', JSON.stringify({
-                            firstName: 'Admin',
-                            email: 'admin@avsweethouse.com'
-                        }));
-                        localStorage.setItem('adminName', 'Admin');
-
-                        if (rememberMe) {
-                            localStorage.setItem('rememberAdmin', 'true');
-                        }
-
-                        setTimeout(() => {
-                            window.location.href = 'admin-dashboard.html';
-                        }, 800);
-                    } else {
-                        showError(data.message || 'Invalid credentials. Please try again.');
-                    }
+                    // ❌ WRONG CREDENTIALS
+                    showError('❌ Invalid username or password');
+                    document.getElementById('password').value = '';
+                    document.getElementById('password').focus();
                 }
 
             } catch (error) {
-                console.log('API Error:', error.message);
+                // ⚠️ SERVER NOT REACHABLE (True network error)
+                console.error('Server Error:', error);
+                showError('⚠️ Cannot connect to server. Please make sure the backend is running on port 5000.');
 
-                // Fallback: Local authentication if API is down
-                if (username === 'admin' && password === 'admin123') {
-                    showSuccess('✅ Login successful (offline mode)');
-
-                    localStorage.setItem('adminLoggedIn', 'true');
-                    localStorage.setItem('adminUser', JSON.stringify({
-                        firstName: 'Admin',
-                        email: 'admin@avsweethouse.com'
-                    }));
-                    localStorage.setItem('adminName', 'Admin');
-
-                    if (rememberMe) {
-                        localStorage.setItem('rememberAdmin', 'true');
-                    }
-
-                    setTimeout(() => {
-                        window.location.href = 'admin-dashboard.html';
-                    }, 800);
-                } else {
-                    showError('⚠️ Server not reachable. Check if your server is running on port 5000.');
-                }
             } finally {
                 loginBtn.classList.remove('loading');
                 loginBtn.disabled = false;
@@ -745,106 +520,34 @@
         }
 
         /* =================================================
-           FILL DEMO CREDENTIALS
+           FILL DEMO CREDENTIALS (keyboard shortcut only)
         ================================================= */
         function fillDemoCredentials() {
-            const usernameField = document.getElementById('username');
-            const passwordField = document.getElementById('password');
-
-            // Remove readonly to allow filling
-            usernameField.removeAttribute('readonly');
-            passwordField.removeAttribute('readonly');
-
-            usernameField.value = 'admin';
-            passwordField.value = 'admin123';
+            document.getElementById('username').value = 'admin';
+            document.getElementById('password').value = 'admin123';
             document.getElementById('rememberMe').checked = true;
 
-            // Re-add readonly to prevent autofill
-            usernameField.setAttribute('readonly', 'readonly');
-            passwordField.setAttribute('readonly', 'readonly');
-
-            // Highlight effect
-            const fields = [usernameField, passwordField];
-            fields.forEach(field => {
-                field.style.border = '2px solid #ff4d8d';
-                field.style.borderRadius = '14px';
-                setTimeout(() => {
-                    field.style.border = 'none';
-                }, 1500);
-            });
-
-            showSuccess('✅ Demo credentials filled! Click Login to continue.');
+            showSuccess('✅ Demo credentials filled. Press Enter or click Login.');
         }
 
         /* =================================================
-           FORGOT PASSWORD
+           INIT
         ================================================= */
-        function showForgotPassword(event) {
-            event.preventDefault();
-            showError('🔑 Please contact admin@avsweethouse.com to reset your password.');
-        }
-
-        /* =================================================
-           REMOVE READONLY ON FOCUS (so user can type)
-        ================================================= */
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check if admin is already logged in
+        document.addEventListener('DOMContentLoaded', function () {
+            // If already logged in, go to dashboard
             if (localStorage.getItem('adminLoggedIn') === 'true') {
                 window.location.href = 'admin-dashboard.html';
                 return;
             }
 
-            const usernameField = document.getElementById('username');
-            const passwordField = document.getElementById('password');
-
-            // Remove readonly on focus so user can type
-            usernameField.addEventListener('focus', function() {
-                this.removeAttribute('readonly');
-            });
-
-            passwordField.addEventListener('focus', function() {
-                this.removeAttribute('readonly');
-            });
-
-            // Re-add readonly on blur if empty
-            usernameField.addEventListener('blur', function() {
-                if (this.value === '') {
-                    this.setAttribute('readonly', 'readonly');
-                }
-            });
-
-            passwordField.addEventListener('blur', function() {
-                if (this.value === '') {
-                    this.setAttribute('readonly', 'readonly');
-                }
-            });
-
-            // Clear any autofilled values on load
-            setTimeout(() => {
-                if (usernameField.value !== '') {
-                    usernameField.value = '';
-                }
-                if (passwordField.value !== '') {
-                    passwordField.value = '';
-                }
-                // Apply readonly if empty
-                if (usernameField.value === '') {
-                    usernameField.setAttribute('readonly', 'readonly');
-                }
-                if (passwordField.value === '') {
-                    passwordField.setAttribute('readonly', 'readonly');
-                }
-            }, 200);
-
-            usernameField.focus();
-            console.log('✅ Admin Login page loaded (NO auto-fill)');
+            document.getElementById('username').focus();
+            console.log('✅ Admin Login page loaded');
         });
 
         /* =================================================
-           KEYBOARD SHORTCUTS
+           KEYBOARD SHORTCUT: Ctrl+Shift+L
         ================================================= */
-        document.addEventListener('keydown', function(e) {
-            // Ctrl+Shift+L = Auto-fill demo credentials
+        document.addEventListener('keydown', function (e) {
             if (e.ctrlKey && e.shiftKey && e.key === 'L') {
                 e.preventDefault();
                 fillDemoCredentials();

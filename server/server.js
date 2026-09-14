@@ -17,6 +17,7 @@ const Order = require("./models/Order");
 const User = require("./models/User");
 const Product = require("./models/Product");
 const Wishlist = require("./models/Wishlist");
+const Category = require("./models/Category");
 
 // Create Cart model if it doesn't exist
 let Cart;
@@ -63,8 +64,6 @@ app.use(express.urlencoded({ extended: true }));
 // ============================
 // SERVE STATIC FILES
 // ============================
-
-// Users folder
 const usersPath = path.join(__dirname, "../users");
 const adminPath = path.join(__dirname, "../admin side");
 
@@ -72,73 +71,82 @@ console.log("📁 Users path:", usersPath);
 console.log("📁 Admin path:", adminPath);
 console.log("📁 Server path:", __dirname);
 
-// Serve static files
 app.use("/users", express.static(usersPath));
 app.use("/admin", express.static(adminPath));
 
-// Homepage - Look in multiple locations
-app.get("/", (req, res) => {
-    // Try server folder first
-    const serverIndex = path.join(__dirname, "index.html");
-    if (fs.existsSync(serverIndex)) {
-        return res.sendFile(serverIndex);
+// ============================
+// ADMIN API ROUTES (Placed FIRST for priority)
+// ============================
+app.post("/api/admin/login", async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        console.log("=====================================");
+        console.log("🔐 ADMIN LOGIN ATTEMPT");
+        console.log("📧 Username:", username);
+        console.log("🕒 Time:", new Date().toLocaleString());
+        console.log("=====================================");
+
+        if (!username || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Username and password required"
+            });
+        }
+
+        // ⭐ ADMIN CREDENTIALS
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "admin123";
+
+        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+            console.log("✅ Admin login SUCCESSFUL");
+
+            return res.json({
+                success: true,
+                message: "Admin login successful",
+                admin: {
+                    username: "admin",
+                    name: "Administrator",
+                    role: "admin",
+                    loginTime: new Date().toISOString()
+                }
+            });
+        }
+
+        console.log("❌ Admin login FAILED - Wrong credentials");
+        return res.status(401).json({
+            success: false,
+            message: "Invalid admin credentials"
+        });
+
+    } catch (error) {
+        console.error("❌ Admin Login Error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error during login"
+        });
     }
-    
-    // Try users folder
+});
+
+// ============================
+// HOME & PAGE ROUTES
+// ============================
+app.get("/", (req, res) => {
     const usersIndex = path.join(usersPath, "index.html");
     if (fs.existsSync(usersIndex)) {
         return res.sendFile(usersIndex);
     }
-    
-    // If no index found
+
+    const serverIndex = path.join(__dirname, "index.html");
+    if (fs.existsSync(serverIndex)) {
+        return res.sendFile(serverIndex);
+    }
+
     res.send(`
         <h1>🍰 AV Sweet House</h1>
         <p>Server is running!</p>
         <p>Visit: <a href="/users/index.html">/users/index.html</a></p>
-        <p>Or: <a href="/users/">/users/</a></p>
     `);
-});
-
-// Serve any HTML page directly
-app.get("/:page.html", (req, res) => {
-    const page = req.params.page;
-    
-    // Try server folder first
-    let filePath = path.join(__dirname, `${page}.html`);
-    if (fs.existsSync(filePath)) {
-        return res.sendFile(filePath);
-    }
-    
-    // Try users folder
-    filePath = path.join(usersPath, `${page}.html`);
-    if (fs.existsSync(filePath)) {
-        return res.sendFile(filePath);
-    }
-    
-    res.status(404).send(`Page "${page}.html" not found`);
-});
-
-// ============================
-// MAIN ROUTES
-// ============================
-
-app.get("/", (req, res) => {
-    const indexPath = path.join(usersPath, "index.html");
-    if (fs.existsSync(indexPath)) {
-        res.sendFile(indexPath);
-    } else {
-        res.send("Welcome to AV Sweet House! (index.html not found)");
-    }
-});
-
-app.get("/:page.html", (req, res) => {
-    const page = req.params.page;
-    const filePath = path.join(usersPath, `${page}.html`);
-    if (fs.existsSync(filePath)) {
-        res.sendFile(filePath);
-    } else {
-        res.status(404).send(`Page "${page}.html" not found in users folder`);
-    }
 });
 
 // ============================
@@ -163,22 +171,18 @@ const transporter = nodemailer.createTransport({
 app.post("/api/send-otp", async (req, res) => {
     try {
         const { email } = req.body;
-        
+
         if (!email) {
-            return res.status(400).json({ 
-                success: false, 
-                message: "Email required" 
+            return res.status(400).json({
+                success: false,
+                message: "Email required"
             });
         }
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
         otpStore[email] = otp;
-        
-        console.log("=====================================");
-        console.log("📧 OTP GENERATED");
-        console.log("📧 Email:", email);
-        console.log("📧 OTP:", otp);
-        console.log("=====================================");
+
+        console.log("📧 OTP:", otp, "→", email);
 
         try {
             await transporter.sendMail({
@@ -194,28 +198,25 @@ app.post("/api/send-otp", async (req, res) => {
                             ${otp}
                         </div>
                         <p style="color: #666; text-align: center; font-size: 13px;">This OTP is valid for 5 minutes.</p>
-                        <hr style="border: none; border-top: 1px solid #f0e0e0;">
-                        <p style="color: #999; text-align: center; font-size: 12px;">AV Sweet House - Fresh Cakes & Desserts</p>
                     </div>
                 `
             });
-            console.log("✅ Email sent successfully!");
+            console.log("✅ Email sent");
         } catch (emailError) {
             console.log("⚠️ Email failed but OTP is:", otp);
-            console.log("⚠️ Email Error:", emailError.message);
         }
 
-        return res.json({ 
-            success: true, 
+        return res.json({
+            success: true,
             message: "OTP sent successfully!",
             otp: otp
         });
 
     } catch (err) {
         console.log("❌ ERROR:", err);
-        return res.status(500).json({ 
-            success: false, 
-            message: err.message 
+        return res.status(500).json({
+            success: false,
+            message: err.message
         });
     }
 });
@@ -225,32 +226,25 @@ app.post("/api/send-otp", async (req, res) => {
 // ============================
 app.post("/api/verify-otp", (req, res) => {
     const { email, otp } = req.body;
-    
-    console.log("=================================");
-    console.log("🔐 OTP VERIFICATION");
-    console.log("📧 Email:", email);
-    console.log("📧 Entered OTP:", otp);
-    console.log("📧 Stored OTP:", otpStore[email]);
-    console.log("=================================");
 
     if (!otpStore[email]) {
-        return res.json({ 
-            success: false, 
-            message: "OTP expired or not found. Please request a new OTP." 
+        return res.json({
+            success: false,
+            message: "OTP expired or not found. Please request a new OTP."
         });
     }
-    
+
     if (String(otpStore[email]) !== String(otp)) {
-        return res.json({ 
-            success: false, 
-            message: "Invalid OTP. Please try again." 
+        return res.json({
+            success: false,
+            message: "Invalid OTP. Please try again."
         });
     }
-    
+
     delete otpStore[email];
-    res.json({ 
-        success: true, 
-        message: "OTP verified successfully!" 
+    res.json({
+        success: true,
+        message: "OTP verified successfully!"
     });
 });
 
@@ -261,11 +255,6 @@ app.post("/api/reset-password", async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        console.log("=====================================");
-        console.log("🔐 RESET PASSWORD REQUEST");
-        console.log("📧 Email:", email);
-        console.log("=====================================");
-
         if (!email || !password) {
             return res.status(400).json({
                 success: false,
@@ -275,21 +264,15 @@ app.post("/api/reset-password", async (req, res) => {
 
         const user = await User.findOne({ email });
         if (!user) {
-            console.log("❌ User not found:", email);
             return res.json({
                 success: false,
                 message: "User not found with this email"
             });
         }
 
-        console.log("✅ User found:", user.email);
-
         const hashedPassword = await bcrypt.hash(password, 10);
         user.password = hashedPassword;
         await user.save();
-
-        console.log("✅ Password reset successfully for:", email);
-        console.log("=====================================");
 
         res.json({
             success: true,
@@ -300,7 +283,7 @@ app.post("/api/reset-password", async (req, res) => {
         console.error("❌ Reset Password Error:", error);
         res.status(500).json({
             success: false,
-            message: "Failed to reset password. Please try again."
+            message: "Failed to reset password."
         });
     }
 });
@@ -342,15 +325,11 @@ app.post("/api/login", async (req, res) => {
         }
 
         const user = await User.findOne({ email });
-        console.log("User found:", user ? user.email : "undefined");
-
         if (!user) {
             return res.json({ success: false, message: "Invalid email or password" });
         }
 
         const match = await bcrypt.compare(password, user.password);
-        console.log("Password Match:", match);
-
         if (!match) {
             return res.json({ success: false, message: "Invalid email or password" });
         }
@@ -370,6 +349,72 @@ app.post("/api/login", async (req, res) => {
     } catch (error) {
         console.error("LOGIN ERROR:", error);
         res.status(500).json({ success: false, message: "Server error. Please try again." });
+    }
+});
+
+// ============================
+// ADMIN - GET ALL ORDERS
+// ============================
+app.get("/api/admin/orders", async (req, res) => {
+    try {
+        const orders = await Order.find().sort({ createdAt: -1 });
+        res.json({ success: true, orders });
+    } catch (error) {
+        console.error("Admin Get Orders Error:", error);
+        res.status(500).json({ success: false, message: "Failed to load orders" });
+    }
+});
+
+// ============================
+// ADMIN - GET ALL CUSTOMERS
+// ============================
+app.get("/api/admin/customers", async (req, res) => {
+    try {
+        const customers = await User.find().select("-password").sort({ createdAt: -1 });
+        res.json({ success: true, customers });
+    } catch (error) {
+        console.error("Admin Get Customers Error:", error);
+        res.status(500).json({ success: false, message: "Failed to load customers" });
+    }
+});
+
+// ============================
+// ADMIN - DASHBOARD STATS
+// ============================
+app.get("/api/admin/stats", async (req, res) => {
+    try {
+        const totalOrders = await Order.countDocuments();
+        const totalCustomers = await User.countDocuments();
+        const pendingOrders = await Order.countDocuments({ status: "Pending" });
+        const deliveredOrders = await Order.countDocuments({ status: "Delivered" });
+
+        // Calculate total revenue from Delivered + Processing + Shipped orders
+        const revenueOrders = await Order.find({
+            status: { $in: ["Delivered", "Shipped", "Processing"] }
+        });
+        const totalRevenue = revenueOrders.reduce((sum, o) => sum + (Number(o.totalAmount) || 0), 0);
+
+        // Today's orders
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const todayOrders = await Order.countDocuments({
+            createdAt: { $gte: today }
+        });
+
+        res.json({
+            success: true,
+            stats: {
+                totalOrders,
+                totalCustomers,
+                pendingOrders,
+                deliveredOrders,
+                totalRevenue,
+                todayOrders
+            }
+        });
+    } catch (error) {
+        console.error("Admin Stats Error:", error);
+        res.status(500).json({ success: false, message: "Failed to load stats" });
     }
 });
 
@@ -485,16 +530,9 @@ app.post("/api/cart/add", async (req, res) => {
         const cartItem = new Cart({
             userId: String(userId),
             productId: String(productId),
-            name,
-            price,
-            image,
-            category,
+            name, price, image, category,
             quantity: quantity || 1,
-            weight,
-            flavor,
-            message,
-            packSize,
-            bottleSize
+            weight, flavor, message, packSize, bottleSize
         });
 
         await cartItem.save();
@@ -570,7 +608,7 @@ app.put("/api/cart/update", async (req, res) => {
 });
 
 // ============================
-// CLEAR CART AFTER ORDER (NEW!)
+// CLEAR CART AFTER ORDER
 // ============================
 app.post("/api/cart/clear-items", async (req, res) => {
     try {
@@ -580,7 +618,6 @@ app.post("/api/cart/clear-items", async (req, res) => {
             return res.status(400).json({ success: false, message: "userId and productIds required" });
         }
 
-        // Convert all IDs to strings to match MongoDB
         const stringIds = productIds.map(id => String(id));
 
         const result = await Cart.deleteMany({
@@ -604,8 +641,6 @@ app.post("/api/cart/clear-items", async (req, res) => {
 // ============================
 // RAZORPAY PAYMENT API
 // ============================
-
-// ===== RAZORPAY - CREATE ORDER =====
 app.post("/api/payment/create-order", async (req, res) => {
     try {
         const { amount } = req.body;
@@ -628,7 +663,6 @@ app.post("/api/payment/create-order", async (req, res) => {
     }
 });
 
-// ===== RAZORPAY - VERIFY SIGNATURE =====
 app.post("/api/payment/verify-signature", (req, res) => {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
@@ -655,8 +689,6 @@ app.post("/api/payment/verify-signature", (req, res) => {
 // ============================
 // ORDERS API
 // ============================
-
-// ===== ORDERS - CREATE =====
 app.post("/api/orders", async (req, res) => {
     try {
         const order = new Order(req.body);
@@ -668,7 +700,6 @@ app.post("/api/orders", async (req, res) => {
     }
 });
 
-// ===== ORDERS - GET ALL =====
 app.get("/api/orders", async (req, res) => {
     try {
         const orders = await Order.find().sort({ createdAt: -1 });
@@ -678,7 +709,21 @@ app.get("/api/orders", async (req, res) => {
     }
 });
 
-// ===== ORDERS - GET SINGLE =====
+// ===== ORDERS - GET BY USER =====
+app.get("/api/orders/user/:userId", async (req, res) => {
+    try {
+        const orders = await Order.find({
+            userId: String(req.params.userId)
+        }).sort({ createdAt: -1 });
+
+        console.log(`📦 Found ${orders.length} orders for user ${req.params.userId}`);
+        res.json(orders);
+    } catch (error) {
+        console.error("Get User Orders Error:", error);
+        res.status(500).json({ success: false, message: "Failed to load orders" });
+    }
+});
+
 app.get("/api/orders/:id", async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
@@ -696,7 +741,7 @@ app.get("/api/orders/:id", async (req, res) => {
 app.put("/api/orders/:id/status", async (req, res) => {
     try {
         const { status } = req.body;
-        const allowedStatuses = ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"];
+        const allowedStatuses = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"];
 
         if (!allowedStatuses.includes(status)) {
             return res.status(400).json({ success: false, message: "Invalid order status" });
@@ -705,12 +750,14 @@ app.put("/api/orders/:id/status", async (req, res) => {
         const updatedOrder = await Order.findByIdAndUpdate(
             req.params.id,
             { status: status },
-            { returnDocument: "after" }
+            { new: true }
         );
 
         if (!updatedOrder) {
             return res.status(404).json({ success: false, message: "Order not found" });
         }
+
+        console.log(`✅ Order ${req.params.id} status updated to "${status}"`);
 
         res.json({
             success: true,
@@ -723,24 +770,21 @@ app.put("/api/orders/:id/status", async (req, res) => {
     }
 });
 
-// ===== ORDERS - CANCEL (DELETE method) =====
+// ===== ORDERS - CANCEL (DELETE) =====
 app.delete("/api/orders/:id", async (req, res) => {
     try {
         const orderId = req.params.id;
-        
+
         const order = await Order.findById(orderId);
         if (!order) {
-            return res.status(404).json({ 
-                success: false, 
-                message: "Order not found" 
-            });
+            return res.status(404).json({ success: false, message: "Order not found" });
         }
 
         const nonCancellableStatuses = ["Delivered", "Cancelled"];
         if (nonCancellableStatuses.includes(order.status)) {
-            return res.status(400).json({ 
-                success: false, 
-                message: `Order cannot be cancelled because it is ${order.status}` 
+            return res.status(400).json({
+                success: false,
+                message: `Order cannot be cancelled because it is ${order.status}`
             });
         }
 
@@ -748,38 +792,28 @@ app.delete("/api/orders/:id", async (req, res) => {
         await order.save();
 
         console.log(`✅ Order ${orderId} cancelled successfully`);
-        res.json({ 
-            success: true, 
-            message: "Order cancelled successfully",
-            order: order
-        });
+        res.json({ success: true, message: "Order cancelled successfully", order });
     } catch (error) {
         console.error("Cancel Order Error:", error);
-        res.status(500).json({ 
-            success: false, 
-            message: "Failed to cancel order" 
-        });
+        res.status(500).json({ success: false, message: "Failed to cancel order" });
     }
 });
 
-// ===== ORDERS - CANCEL (PUT method) =====
+// ===== ORDERS - CANCEL (PUT) =====
 app.put("/api/orders/:id/cancel", async (req, res) => {
     try {
         const orderId = req.params.id;
-        
+
         const order = await Order.findById(orderId);
         if (!order) {
-            return res.status(404).json({ 
-                success: false, 
-                message: "Order not found" 
-            });
+            return res.status(404).json({ success: false, message: "Order not found" });
         }
 
         const nonCancellableStatuses = ["Delivered", "Cancelled"];
         if (nonCancellableStatuses.includes(order.status)) {
-            return res.status(400).json({ 
-                success: false, 
-                message: `Order cannot be cancelled because it is ${order.status}` 
+            return res.status(400).json({
+                success: false,
+                message: `Order cannot be cancelled because it is ${order.status}`
             });
         }
 
@@ -787,25 +821,16 @@ app.put("/api/orders/:id/cancel", async (req, res) => {
         await order.save();
 
         console.log(`✅ Order ${orderId} cancelled successfully (PUT)`);
-        res.json({ 
-            success: true, 
-            message: "Order cancelled successfully",
-            order: order
-        });
+        res.json({ success: true, message: "Order cancelled successfully", order });
     } catch (error) {
         console.error("Cancel Order Error:", error);
-        res.status(500).json({ 
-            success: false, 
-            message: "Failed to cancel order" 
-        });
+        res.status(500).json({ success: false, message: "Failed to cancel order" });
     }
 });
 
 // ============================
 // WISHLIST API
 // ============================
-
-// ===== WISHLIST - ADD =====
 app.post("/api/wishlist", async (req, res) => {
     try {
         const { userId, productId, name, price, image, category } = req.body;
@@ -826,10 +851,7 @@ app.post("/api/wishlist", async (req, res) => {
         const wishlist = new Wishlist({
             userId: String(userId),
             productId: String(productId),
-            name,
-            price,
-            image,
-            category
+            name, price, image, category
         });
 
         await wishlist.save();
@@ -840,7 +862,6 @@ app.post("/api/wishlist", async (req, res) => {
     }
 });
 
-// ===== WISHLIST - GET =====
 app.get("/api/wishlist/:userId", async (req, res) => {
     try {
         const wishlist = await Wishlist.find({
@@ -853,16 +874,9 @@ app.get("/api/wishlist/:userId", async (req, res) => {
     }
 });
 
-// ===== WISHLIST - REMOVE =====
 app.delete("/api/wishlist/:userId/:productId", async (req, res) => {
     try {
         const { userId, productId } = req.params;
-        
-        console.log("=====================================");
-        console.log("🗑️ DELETE WISHLIST REQUEST");
-        console.log("📌 User ID:", userId);
-        console.log("📌 Product ID:", productId);
-        console.log("=====================================");
 
         let result = await Wishlist.findOneAndDelete({
             userId: String(userId),
@@ -870,7 +884,6 @@ app.delete("/api/wishlist/:userId/:productId", async (req, res) => {
         });
 
         if (!result) {
-            console.log("⚠️ Not found by productId, trying by _id...");
             result = await Wishlist.findOneAndDelete({
                 userId: String(userId),
                 _id: productId
@@ -878,26 +891,19 @@ app.delete("/api/wishlist/:userId/:productId", async (req, res) => {
         }
 
         if (!result) {
-            console.log("⚠️ Not found by userId+_id, trying by _id only...");
             result = await Wishlist.findByIdAndDelete(productId);
         }
 
-        console.log("🗑️ Delete result:", result ? `DELETED: ${result.name}` : "NOT FOUND");
-
         if (result) {
-            console.log(`✅ Successfully deleted: ${result.name}`);
-            console.log("=====================================");
-            res.json({ 
-                success: true, 
+            res.json({
+                success: true,
                 message: `Removed "${result.name}" from Wishlist`,
                 deleted: true,
                 item: result
             });
         } else {
-            console.log("❌ Item not found in wishlist");
-            console.log("=====================================");
-            res.json({ 
-                success: false, 
+            res.json({
+                success: false,
                 message: "Item not found in wishlist",
                 deleted: false
             });
@@ -905,13 +911,159 @@ app.delete("/api/wishlist/:userId/:productId", async (req, res) => {
 
     } catch (error) {
         console.error("❌ Remove Wishlist Error:", error);
-        console.log("=====================================");
-        res.status(500).json({ 
-            success: false, 
+        res.status(500).json({
+            success: false,
             message: error.message || "Remove failed"
         });
     }
 });
+
+// ============================
+// WILDCARD PAGE ROUTE (MUST BE LAST)
+// ============================
+app.get("/:page.html", (req, res) => {
+    const page = req.params.page;
+
+    let filePath = path.join(__dirname, `${page}.html`);
+    if (fs.existsSync(filePath)) {
+        return res.sendFile(filePath);
+    }
+
+    filePath = path.join(usersPath, `${page}.html`);
+    if (fs.existsSync(filePath)) {
+        return res.sendFile(filePath);
+    }
+
+    res.status(404).send(`Page "${page}.html" not found`);
+});
+
+// ============================
+// CATEGORIES API
+// ============================
+
+// GET ALL CATEGORIES
+app.get("/api/categories", async (req, res) => {
+    try {
+        const categories = await Category.find().sort({ createdAt: 1 });
+        res.json(categories);
+    } catch (error) {
+        console.error("Get Categories Error:", error);
+        res.status(500).json({ success: false, message: "Failed to load categories" });
+    }
+});
+
+// GET SINGLE CATEGORY
+app.get("/api/categories/:id", async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.id);
+        if (!category) return res.status(404).json({ success: false, message: "Category not found" });
+        res.json(category);
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+});
+
+// ADD CATEGORY
+app.post("/api/categories", async (req, res) => {
+    try {
+        const { name, icon, type, parent, description } = req.body;
+        if (!name) return res.status(400).json({ success: false, message: "Category name required" });
+
+        const existing = await Category.findOne({ name: name.trim() });
+        if (existing) return res.status(400).json({ success: false, message: "Category already exists" });
+
+        const category = new Category({
+            name: name.trim(),
+            icon: icon || "🍰",
+            type: type || "main",
+            parent: parent || "",
+            description: description || ""
+        });
+
+        await category.save();
+        res.json({ success: true, message: "Category added successfully", category });
+    } catch (error) {
+        console.error("Add Category Error:", error);
+        res.status(500).json({ success: false, message: "Failed to add category" });
+    }
+});
+
+// UPDATE CATEGORY
+app.put("/api/categories/:id", async (req, res) => {
+    try {
+        const { name, icon, type, parent, description, isActive } = req.body;
+
+        const updated = await Category.findByIdAndUpdate(
+            req.params.id,
+            { name, icon, type, parent, description, isActive },
+            { new: true }
+        );
+
+        if (!updated) return res.status(404).json({ success: false, message: "Category not found" });
+        res.json({ success: true, message: "Category updated", category: updated });
+    } catch (error) {
+        console.error("Update Category Error:", error);
+        res.status(500).json({ success: false, message: "Failed to update category" });
+    }
+});
+
+// DELETE CATEGORY
+app.delete("/api/categories/:id", async (req, res) => {
+    try {
+        const category = await Category.findByIdAndDelete(req.params.id);
+        if (!category) return res.status(404).json({ success: false, message: "Category not found" });
+        res.json({ success: true, message: "Category deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Failed to delete category" });
+    }
+});
+
+// SEED DEFAULT CATEGORIES (One-time)
+app.post("/api/categories/seed", async (req, res) => {
+    try {
+        const count = await Category.countDocuments();
+        if (count > 0) {
+            return res.json({ success: false, message: `Already ${count} categories exist` });
+        }
+
+        const defaults = [
+            { name: 'Cakes', icon: '🎂', type: 'main' },
+            { name: 'Birthday Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Anniversary Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Wedding Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Kids Cakes', icon: '🎂', type: 'sub', parent: 'Cakes' },
+            { name: 'Cup Cakes', icon: '🧁', type: 'sub', parent: 'Cakes' },
+            { name: 'Chocolates', icon: '🍫', type: 'main' },
+            { name: 'Milk Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+            { name: 'Dark Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+            { name: 'White Chocolates', icon: '🍫', type: 'sub', parent: 'Chocolates' },
+            { name: 'Desserts', icon: '🍰', type: 'main' },
+            { name: 'Brownies', icon: '🍩', type: 'sub', parent: 'Desserts' },
+            { name: 'Donuts', icon: '🍩', type: 'sub', parent: 'Desserts' },
+            { name: 'Cheesecakes', icon: '🍰', type: 'sub', parent: 'Desserts' },
+            { name: 'Pastry', icon: '🍰', type: 'sub', parent: 'Desserts' },
+            { name: 'Cookies', icon: '🍪', type: 'sub', parent: 'Desserts' },
+            { name: 'Juices', icon: '🥤', type: 'main' },
+            { name: 'Fresh Juices', icon: '🥤', type: 'sub', parent: 'Juices' },
+            { name: 'Milkshakes', icon: '🥤', type: 'sub', parent: 'Juices' },
+            { name: 'Smoothies', icon: '🍹', type: 'sub', parent: 'Juices' },
+            { name: 'Cold Coffee', icon: '☕', type: 'sub', parent: 'Juices' },
+            { name: 'Snacks', icon: '🍿', type: 'main' },
+            { name: 'Murukku', icon: '🍿', type: 'sub', parent: 'Snacks' },
+            { name: 'Traditional Sweets', icon: '🍭', type: 'sub', parent: 'Snacks' },
+            { name: 'Mixtures & Namkeen', icon: '🍿', type: 'sub', parent: 'Snacks' },
+            { name: 'Biscuits', icon: '🍪', type: 'sub', parent: 'Snacks' },
+            { name: 'Chips', icon: '🍿', type: 'sub', parent: 'Snacks' }
+        ];
+
+        const result = await Category.insertMany(defaults);
+        res.json({ success: true, message: `${result.length} categories seeded`, count: result.length });
+    } catch (error) {
+        console.error("Seed Error:", error);
+        res.status(500).json({ success: false, message: "Failed to seed" });
+    }
+});
+
 
 // ============================
 // ERROR HANDLING
@@ -933,4 +1085,5 @@ app.listen(PORT, () => {
     console.log(`📁 Users folder: ${usersPath}`);
     console.log(`🌐 Visit: http://localhost:5000`);
     console.log(`🔑 API Base: http://localhost:5000/api`);
+    console.log(`👤 Admin Login: POST http://localhost:5000/api/admin/login`);
 });
