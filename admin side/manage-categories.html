@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Categories | AV Sweet House Admin</title>
-
+     
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -690,56 +691,95 @@
                 mainCats.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.icon || '')} ${escapeHtml(c.name)}</option>`).join('');
         }
 
-        /* ============ SAVE CATEGORY ============ */
-        async function saveCategory() {
-            const btn = document.getElementById('modalSaveBtn');
+        /* ============================================================
+   SAVE CATEGORY — with rename warning + cascade support
+   ============================================================ */
+async function saveCategory() {
+    const btn = document.getElementById('modalSaveBtn');
 
-            const name = document.getElementById('catName').value.trim();
-            const icon = document.getElementById('catIcon').value.trim() || '🍰';
-            const type = document.getElementById('catType').value;
-            const parent = type === 'sub' ? document.getElementById('catParent').value : '';
-            const description = document.getElementById('catDescription').value.trim();
+    const name = document.getElementById('catName').value.trim();
+    const icon = document.getElementById('catIcon').value.trim() || '🍰';
+    const type = document.getElementById('catType').value;
+    const parent = type === 'sub' ? document.getElementById('catParent').value : '';
+    const description = document.getElementById('catDescription').value.trim();
 
-            if (!name) {
-                showToast('⚠️ Category name required', 'error');
-                return;
-            }
-            if (type === 'sub' && !parent) {
-                showToast('⚠️ Please select a parent category', 'error');
-                return;
-            }
+    if (!name) {
+        showToast('⚠️ Category name required', 'error');
+        return;
+    }
+    if (type === 'sub' && !parent) {
+        showToast('⚠️ Please select a parent category', 'error');
+        return;
+    }
 
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+    // ============ RENAME CHECK (only when editing) ============
+    if (editingId) {
+        const current = allCategories.find(c => c._id === editingId);
+        const oldName = current ? current.name : '';
 
+        if (oldName && oldName !== name) {
+            // Count how many products use this category
+            let affectedProducts = 0;
             try {
-                const url = editingId ? `${API_URL}/categories/${editingId}` : `${API_URL}/categories`;
-                const method = editingId ? 'PUT' : 'POST';
-
-                const response = await fetch(url, {
-                    method: method,
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, icon, type, parent, description })
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    showToast(`✅ Category "${name}" ${editingId ? 'updated' : 'added'}!`, 'success');
-                    closeModal();
-                    loadCategories();
-                } else {
-                    showToast(`❌ ${data.message || 'Failed to save'}`, 'error');
-                }
-            } catch (error) {
-                console.error("Save Category Error:", error);
-                showToast(`❌ ${error.message}`, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fa-solid fa-save"></i> Save';
+                const prodRes = await fetch(`${API_URL}/products`);
+                const products = await prodRes.json();
+                affectedProducts = products.filter(
+                    p => (p.category || '').trim().toLowerCase() === oldName.trim().toLowerCase()
+                ).length;
+            } catch (e) {
+                console.log("Could not pre-check products:", e.message);
             }
-        }
 
+            // Confirm with the admin
+            const msg = affectedProducts > 0
+                ? `Rename "${oldName}" → "${name}"?\n\n⚠️ This will also update ${affectedProducts} product(s) that use this category.\n\nContinue?`
+                : `Rename "${oldName}" → "${name}"?\n\nNo products are affected.\n\nContinue?`;
+
+            if (!confirm(msg)) return;
+        }
+    }
+
+    // ============ SEND TO SERVER ============
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+    try {
+        const url = editingId ? `${API_URL}/categories/${editingId}` : `${API_URL}/categories`;
+        const method = editingId ? 'PUT' : 'POST';
+
+        const response = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, icon, type, parent, description })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            let msg = `✅ Category "${name}" ${editingId ? 'updated' : 'added'}!`;
+
+            if (data.renamed && (data.affectedProducts > 0 || data.affectedSubCategories > 0)) {
+                msg = `✅ Renamed to "${name}"`;
+                if (data.affectedProducts > 0)
+                    msg += ` • 📦 ${data.affectedProducts} products updated`;
+                if (data.affectedSubCategories > 0)
+                    msg += ` • 📁 ${data.affectedSubCategories} sub-cats updated`;
+            }
+
+            showToast(msg, 'success');
+            closeModal();
+            loadCategories();
+        } else {
+            showToast(`❌ ${data.message || 'Failed to save'}`, 'error');
+        }
+    } catch (error) {
+        console.error("Save Category Error:", error);
+        showToast(`❌ ${error.message}`, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-save"></i> Save';
+    }
+}
         /* ============ DELETE CATEGORY ============ */
         async function deleteCategory(id, name) {
             if (!confirm(`Delete category "${name}"?\n\nThis won't delete products in this category.`)) return;

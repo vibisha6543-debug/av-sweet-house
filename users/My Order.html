@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Orders · AV Sweet House</title>
-    <!-- FAVICON -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
-    <!-- Bootstrap + Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -97,7 +95,6 @@
         .footer-bottom { text-align:center; margin-top:40px; padding-top:25px; border-top:1px solid rgba(0,0,0,0.06); }
         .footer-bottom p { color:#777; margin:0; font-size:14px; }
 
-        /* cancel button & error toast */
         .btn-cancel { background:#fff; color:#dc3545; border:1.5px solid #dc3545; border-radius:30px; padding:6px 18px; font-weight:600; font-size:13px; transition:0.3s; }
         .btn-cancel:hover { background:#dc3545; color:#fff; transform:scale(1.02); }
         .btn-cancel:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
@@ -146,7 +143,7 @@
     </style>
 </head>
 <body>
-<!-- NAVBAR -->
+<!-- ===== DYNAMIC NAVBAR ===== -->
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
         <a class="navbar-brand" href="/">🍰 AV Sweet House</a>
@@ -154,19 +151,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
+            <ul class="navbar-nav mx-auto" id="dynamicNavList">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="About%20us.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="cakes.html">Cakes</a></li>
-                <li class="nav-item"><a class="nav-link" href="dessert.html">Desserts</a></li>
-                <li class="nav-item"><a class="nav-link" href="chocolate.html">Chocolate</a></li>
-                <li class="nav-item"><a class="nav-link" href="juice.html">Juice</a></li>
-                <li class="nav-item"><a class="nav-link" href="Snacks.html">Snacks</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="/users/About%20us.html">About</a></li>
+                <!-- Dynamic categories injected here -->
+                <li class="nav-item"><a class="nav-link" href="/users/contact.html">Contact</a></li>
             </ul>
             <div class="d-flex gap-2">
-                <a href="wishlist.html" class="btn btn-outline-danger btn-sm">❤️ <span class="badge-count" id="wishlistCount">0</span></a>
-                <a href="cart.html" class="btn btn-pink btn-sm">🛒 <span class="badge-count" id="cartCount">0</span></a>
+                <a href="/users/wishlist.html" class="btn btn-outline-danger btn-sm">❤️ <span class="badge-count" id="wishlistCount">0</span></a>
+                <a href="/users/cart.html" class="btn btn-pink btn-sm">🛒 <span class="badge-count" id="cartCount">0</span></a>
             </div>
         </div>
     </div>
@@ -221,12 +214,12 @@
             <div class="col-md-4 text-center text-md-start">
                 <h4 class="footer-title">Quick Links</h4>
                 <div class="footer-links">
-                    <a href="About%20us.html">Our Story</a>
-                    <a href="cakes.html">Special Cakes</a>
-                    <a href="dessert.html">Fresh Desserts</a>
+                    <a href="/users/About%20us.html">Our Story</a>
+                    <a href="/users/category.html?name=Cakes">Special Cakes</a>
+                    <a href="/users/category.html?name=Desserts">Fresh Desserts</a>
                     <a href="#">Online Delivery</a>
                     <a href="#">Privacy Policy</a>
-                    <a href="contact.html">Contact Us</a>
+                    <a href="/users/contact.html">Contact Us</a>
                 </div>
             </div>
             <div class="col-md-4 text-center text-md-start">
@@ -247,6 +240,8 @@
 </footer>
 
 <script>
+    const API_URL = 'http://localhost:5000/api';
+
     // ----- HELPERS -----
     function getUser() {
         try {
@@ -263,32 +258,54 @@
         } catch { return null; }
     }
 
+    // ----- DYNAMIC NAVBAR -----
+    async function loadNavCategories() {
+        try {
+            const response = await fetch(`${API_URL}/categories`);
+            const categories = await response.json();
+            if (!Array.isArray(categories)) return;
+
+            const mainCats = categories.filter(c => c.type === 'main');
+            const navList = document.getElementById("dynamicNavList");
+            const contactItem = navList.querySelector('a[href="/users/contact.html"]').parentElement;
+
+            mainCats.forEach(cat => {
+                const li = document.createElement("li");
+                li.className = "nav-item";
+                li.innerHTML = `<a class="nav-link" href="/users/category.html?name=${encodeURIComponent(cat.name)}">${cat.name}</a>`;
+                navList.insertBefore(li, contactItem);
+            });
+
+            console.log("✅ Nav categories loaded:", mainCats.length);
+        } catch (error) {
+            console.error("Nav load error:", error);
+        }
+    }
+
     async function updateCounts() {
         const user = getUser();
         if (!user) return;
         const userId = user.id || user._id;
         try {
-            const w = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+            const w = await fetch(`${API_URL}/wishlist/${userId}`);
             const wishlist = await w.json();
             document.getElementById('wishlistCount').innerText = Array.isArray(wishlist) ? wishlist.length : 0;
-            const c = await fetch(`http://localhost:5000/api/cart/count/${userId}`);
+            const c = await fetch(`${API_URL}/cart/count/${userId}`);
             const cart = await c.json();
             document.getElementById('cartCount').innerText = cart.count || 0;
         } catch {}
     }
 
-    // ----- CANCEL ORDER (with improved error handling) -----
+    // ----- CANCEL ORDER -----
     async function cancelOrder(orderId) {
         if (!orderId) return;
         if (!confirm('Are you sure you want to cancel this order?')) return;
         try {
-            // ✅ Fixed: using the correct endpoint with orderId in URL
-            const res = await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+            const res = await fetch(`${API_URL}/orders/${orderId}`, {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' }
             });
             if (!res.ok) throw new Error(`Server responded with ${res.status}`);
-            // refresh orders after successful cancellation
             await loadOrders();
             filterOrders();
         } catch (error) {
@@ -298,7 +315,7 @@
             if (old) old.remove();
             const toast = document.createElement('div');
             toast.className = 'toast-error';
-            toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> <span><strong>localhost:5000 says</strong><br>Error cancelling order: ${error.message}</span>`;
+            toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> <span><strong>Error cancelling order:</strong> ${error.message}</span>`;
             container.prepend(toast);
             setTimeout(() => { if (toast.parentNode) toast.remove(); }, 6000);
         }
@@ -344,7 +361,7 @@
         }, 300);
     }
 
-    // ----- RENDER (with cancel button) -----
+    // ----- RENDER -----
     function renderOrders(orders) {
         const container = document.getElementById('ordersContainer');
         const keyword = document.getElementById('searchInput').value.trim();
@@ -379,7 +396,7 @@
         orders.forEach(order => {
             const statusMap = { 'Delivered':'status-delivered', 'Shipped':'status-shipped', 'Processing':'status-processing', 'Pending':'status-pending', 'Cancelled':'status-cancelled' };
             const statusClass = statusMap[order.status] || 'status-pending';
-            const orderDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) : '05 Sept 2026';
+            const orderDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) : 'N/A';
             const isCancelled = order.status === 'Cancelled';
             const isDelivered = order.status === 'Delivered';
             const canCancel = !isCancelled && !isDelivered;
@@ -389,9 +406,14 @@
                 order.products.slice(0,2).forEach(p => {
                     const qty = p.quantity || p.qty || 1;
                     const price = Number(p.price) || 0;
+                    const imgUrl = p.image || '';
+                    const imgTag = imgUrl
+                        ? `<img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:75px;height:75px;border-radius:15px;background:#f8e8ec;display:flex;align-items:center;justify-content:center;font-size:30px;\\'>🍰</div>';">`
+                        : `<div style="width:75px;height:75px;border-radius:15px;background:#f8e8ec;display:flex;align-items:center;justify-content:center;font-size:30px;">🍰</div>`;
+
                     productsHTML += `
                         <div class="d-flex align-items-center gap-3 mb-3 pb-3 border-bottom">
-                            <img src="${p.image || 'https://via.placeholder.com/80x80/ffb3c6/ffffff?text=🍫'}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/80x80/ffb3c6/ffffff?text=🍫'">
+                            ${imgTag}
                             <div class="flex-grow-1">
                                 <div class="product-name">${p.name || 'Product'}</div>
                                 <div class="product-qty">Qty: ${qty}</div>
@@ -409,8 +431,8 @@
                         <div class="col-md-8">
                             <div class="order-title">Order #${String(order._id).slice(-8)}</div>
                             <div class="order-id">📅 ${orderDate}</div>
-                            <div class="order-id">👤 ${order.customerName || order.name || 'vibi sha'}</div>
-                            <div class="order-id">📧 ${order.email || 'vibisha6543@gmail.com'}</div>
+                            <div class="order-id">👤 ${order.customerName || order.name || 'Customer'}</div>
+                            <div class="order-id">📧 ${order.email || ''}</div>
                             <hr>${productsHTML}
                         </div>
                         <div class="col-md-4 text-md-end text-start mt-3 mt-md-0">
@@ -430,7 +452,7 @@
         });
     }
 
-    // ----- LOAD ORDERS (with sample data) -----
+    // ----- LOAD ORDERS -----
     async function loadOrders() {
         const user = getUser();
         const container = document.getElementById('ordersContainer');
@@ -450,41 +472,14 @@
         }
 
         try {
-            let userOrders = [];
-            try {
-                const response = await fetch('http://localhost:5000/api/orders');
-                if (!response.ok) throw new Error('API not available');
-                const data = await response.json();
-                let allOrders = Array.isArray(data) ? data : (Array.isArray(data.orders) ? data.orders : []);
-                const userId = user.id || user._id;
-                userOrders = allOrders.filter(o => String(o.userId) === String(userId) || o.email === user.email);
-            } catch (apiError) {
-                // fallback: sample data
-                userOrders = [
-                    {
-                        _id: '2155384c',
-                        status: 'Cancelled',
-                        createdAt: '2026-09-05T00:00:00.000Z',
-                        customerName: 'vibi sha',
-                        email: 'vibisha6543@gmail.com',
-                        totalAmount: 244,
-                        products: [
-                            { name: 'Creamy Milk Chocolate', quantity: 1, price: 244, image: 'https://via.placeholder.com/80x80/d4a373/ffffff?text=🍫' }
-                        ]
-                    },
-                    {
-                        _id: 'ce905eb1',
-                        status: 'Pending',
-                        createdAt: '2026-09-02T00:00:00.000Z',
-                        customerName: 'vibi sha',
-                        email: 'vibisha6543@gmail.com',
-                        totalAmount: 90,
-                        products: [
-                            { name: 'Chocolate Sprinkle Donut', quantity: 1, price: 90, image: 'https://via.placeholder.com/80x80/f7d6e0/ffffff?text=🍩' }
-                        ]
-                    }
-                ];
-            }
+            const response = await fetch(`${API_URL}/orders`);
+            if (!response.ok) throw new Error('Failed to load orders');
+            const data = await response.json();
+            let allOrders = Array.isArray(data) ? data : (Array.isArray(data.orders) ? data.orders : []);
+            const userId = user.id || user._id;
+            const userOrders = allOrders.filter(o =>
+                String(o.userId) === String(userId) || o.email === user.email
+            );
 
             allOrdersData = userOrders;
             spinner.style.display = 'none';
@@ -511,8 +506,10 @@
 
     // ----- INIT -----
     document.addEventListener('DOMContentLoaded', function() {
+        loadNavCategories();
         updateCounts();
         loadOrders();
+        console.log('📦 My Orders Page Loaded');
     });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

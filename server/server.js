@@ -75,17 +75,13 @@ app.use("/users", express.static(usersPath));
 app.use("/admin", express.static(adminPath));
 
 // ============================
-// ADMIN API ROUTES (Placed FIRST for priority)
+// ADMIN LOGIN
 // ============================
 app.post("/api/admin/login", async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        console.log("=====================================");
-        console.log("🔐 ADMIN LOGIN ATTEMPT");
-        console.log("📧 Username:", username);
-        console.log("🕒 Time:", new Date().toLocaleString());
-        console.log("=====================================");
+        console.log("🔐 ADMIN LOGIN ATTEMPT -", username);
 
         if (!username || !password) {
             return res.status(400).json({
@@ -94,13 +90,8 @@ app.post("/api/admin/login", async (req, res) => {
             });
         }
 
-        // ⭐ ADMIN CREDENTIALS
-        const ADMIN_USERNAME = "admin";
-        const ADMIN_PASSWORD = "admin123";
-
-        if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        if (username === "admin" && password === "admin123") {
             console.log("✅ Admin login SUCCESSFUL");
-
             return res.json({
                 success: true,
                 message: "Admin login successful",
@@ -113,7 +104,7 @@ app.post("/api/admin/login", async (req, res) => {
             });
         }
 
-        console.log("❌ Admin login FAILED - Wrong credentials");
+        console.log("❌ Admin login FAILED");
         return res.status(401).json({
             success: false,
             message: "Invalid admin credentials"
@@ -121,42 +112,30 @@ app.post("/api/admin/login", async (req, res) => {
 
     } catch (error) {
         console.error("❌ Admin Login Error:", error);
-        res.status(500).json({
-            success: false,
-            message: "Server error during login"
-        });
+        res.status(500).json({ success: false, message: "Server error" });
     }
 });
 
 // ============================
-// HOME & PAGE ROUTES
+// HOME ROUTE
 // ============================
 app.get("/", (req, res) => {
     const usersIndex = path.join(usersPath, "index.html");
     if (fs.existsSync(usersIndex)) {
         return res.sendFile(usersIndex);
     }
-
     const serverIndex = path.join(__dirname, "index.html");
     if (fs.existsSync(serverIndex)) {
         return res.sendFile(serverIndex);
     }
-
-    res.send(`
-        <h1>🍰 AV Sweet House</h1>
-        <p>Server is running!</p>
-        <p>Visit: <a href="/users/index.html">/users/index.html</a></p>
-    `);
+    res.send(`<h1>🍰 AV Sweet House</h1><p>Server is running!</p>`);
 });
 
 // ============================
-// OTP STORAGE
+// OTP + EMAIL
 // ============================
 let otpStore = {};
 
-// ============================
-// EMAIL TRANSPORTER
-// ============================
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -165,19 +144,10 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-// ============================
-// SEND OTP
-// ============================
 app.post("/api/send-otp", async (req, res) => {
     try {
         const { email } = req.body;
-
-        if (!email) {
-            return res.status(400).json({
-                success: false,
-                message: "Email required"
-            });
-        }
+        if (!email) return res.status(400).json({ success: false, message: "Email required" });
 
         const otp = Math.floor(100000 + Math.random() * 900000).toString();
         otpStore[email] = otp;
@@ -192,195 +162,114 @@ app.post("/api/send-otp", async (req, res) => {
                 html: `
                     <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; background: #fff5f8; padding: 30px; border-radius: 20px;">
                         <h2 style="color: #ff4d8d; text-align: center;">🍰 AV Sweet House</h2>
-                        <h3 style="text-align: center; color: #333;">Reset Your Password</h3>
-                        <p style="color: #666; text-align: center;">Use the OTP below to reset your password:</p>
+                        <h3 style="text-align: center;">Reset Your Password</h3>
                         <div style="background: #ff4d8d; color: white; padding: 20px; border-radius: 15px; text-align: center; font-size: 40px; font-weight: 800; letter-spacing: 10px; margin: 20px 0;">
                             ${otp}
                         </div>
-                        <p style="color: #666; text-align: center; font-size: 13px;">This OTP is valid for 5 minutes.</p>
+                        <p style="color: #666; text-align: center; font-size: 13px;">Valid for 5 minutes.</p>
                     </div>
                 `
             });
-            console.log("✅ Email sent");
-        } catch (emailError) {
-            console.log("⚠️ Email failed but OTP is:", otp);
-        }
+        } catch (e) { console.log("Email failed but OTP:", otp); }
 
-        return res.json({
-            success: true,
-            message: "OTP sent successfully!",
-            otp: otp
-        });
-
+        return res.json({ success: true, message: "OTP sent!", otp });
     } catch (err) {
-        console.log("❌ ERROR:", err);
-        return res.status(500).json({
-            success: false,
-            message: err.message
-        });
+        return res.status(500).json({ success: false, message: err.message });
     }
 });
 
-// ============================
-// VERIFY OTP
-// ============================
 app.post("/api/verify-otp", (req, res) => {
     const { email, otp } = req.body;
-
-    if (!otpStore[email]) {
-        return res.json({
-            success: false,
-            message: "OTP expired or not found. Please request a new OTP."
-        });
-    }
-
-    if (String(otpStore[email]) !== String(otp)) {
-        return res.json({
-            success: false,
-            message: "Invalid OTP. Please try again."
-        });
-    }
-
+    if (!otpStore[email]) return res.json({ success: false, message: "OTP expired" });
+    if (String(otpStore[email]) !== String(otp)) return res.json({ success: false, message: "Invalid OTP" });
     delete otpStore[email];
-    res.json({
-        success: true,
-        message: "OTP verified successfully!"
-    });
+    res.json({ success: true, message: "OTP verified!" });
 });
 
-// ============================
-// RESET PASSWORD
-// ============================
 app.post("/api/reset-password", async (req, res) => {
     try {
         const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).json({
-                success: false,
-                message: "Email and password are required"
-            });
-        }
+        if (!email || !password) return res.status(400).json({ success: false, message: "Required fields missing" });
 
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.json({
-                success: false,
-                message: "User not found with this email"
-            });
-        }
+        if (!user) return res.json({ success: false, message: "User not found" });
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        user.password = hashedPassword;
+        user.password = await bcrypt.hash(password, 10);
         await user.save();
-
-        res.json({
-            success: true,
-            message: "Password reset successfully!"
-        });
-
+        res.json({ success: true, message: "Password reset successfully!" });
     } catch (error) {
-        console.error("❌ Reset Password Error:", error);
-        res.status(500).json({
-            success: false,
-            message: "Failed to reset password."
-        });
+        res.status(500).json({ success: false, message: "Failed to reset password" });
     }
 });
 
-// ===== REGISTER USER =====
+// ============================
+// AUTH: REGISTER + LOGIN
+// ============================
 app.post("/api/register", async (req, res) => {
     try {
         const { firstName, lastName, email, phone, password } = req.body;
         const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.json({ success: false, message: "Email already registered" });
-        }
+        if (existingUser) return res.json({ success: false, message: "Email already registered" });
 
-        const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({
-            firstName,
-            lastName,
+            firstName, lastName,
             email: email.trim().toLowerCase(),
             phone,
-            password: hashedPassword
+            password: await bcrypt.hash(password, 10)
         });
         await user.save();
-
         res.json({ success: true, message: "User Registered Successfully" });
     } catch (err) {
-        console.log(err);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 
-// ===== LOGIN USER =====
 app.post("/api/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log("LOGIN REQUEST - Email:", email);
-
-        if (!email || !password) {
-            return res.status(400).json({ success: false, message: "Please enter email and password" });
-        }
+        if (!email || !password) return res.status(400).json({ success: false, message: "Enter email and password" });
 
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.json({ success: false, message: "Invalid email or password" });
-        }
+        if (!user) return res.json({ success: false, message: "Invalid email or password" });
 
         const match = await bcrypt.compare(password, user.password);
-        if (!match) {
-            return res.json({ success: false, message: "Invalid email or password" });
-        }
+        if (!match) return res.json({ success: false, message: "Invalid email or password" });
 
         res.json({
             success: true,
             message: "Login Successful",
             user: {
-                id: user._id,
-                _id: user._id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                phone: user.phone
+                id: user._id, _id: user._id,
+                firstName: user.firstName, lastName: user.lastName,
+                email: user.email, phone: user.phone
             }
         });
     } catch (error) {
-        console.error("LOGIN ERROR:", error);
-        res.status(500).json({ success: false, message: "Server error. Please try again." });
+        res.status(500).json({ success: false, message: "Server error" });
     }
 });
 
 // ============================
-// ADMIN - GET ALL ORDERS
+// ADMIN ROUTES
 // ============================
 app.get("/api/admin/orders", async (req, res) => {
     try {
         const orders = await Order.find().sort({ createdAt: -1 });
         res.json({ success: true, orders });
     } catch (error) {
-        console.error("Admin Get Orders Error:", error);
         res.status(500).json({ success: false, message: "Failed to load orders" });
     }
 });
 
-// ============================
-// ADMIN - GET ALL CUSTOMERS
-// ============================
 app.get("/api/admin/customers", async (req, res) => {
     try {
         const customers = await User.find().select("-password").sort({ createdAt: -1 });
         res.json({ success: true, customers });
     } catch (error) {
-        console.error("Admin Get Customers Error:", error);
         res.status(500).json({ success: false, message: "Failed to load customers" });
     }
 });
 
-// ============================
-// ADMIN - DASHBOARD STATS
-// ============================
 app.get("/api/admin/stats", async (req, res) => {
     try {
         const totalOrders = await Order.countDocuments();
@@ -388,62 +277,44 @@ app.get("/api/admin/stats", async (req, res) => {
         const pendingOrders = await Order.countDocuments({ status: "Pending" });
         const deliveredOrders = await Order.countDocuments({ status: "Delivered" });
 
-        // Calculate total revenue from Delivered + Processing + Shipped orders
-        const revenueOrders = await Order.find({
-            status: { $in: ["Delivered", "Shipped", "Processing"] }
-        });
+        const revenueOrders = await Order.find({ status: { $in: ["Delivered", "Shipped", "Processing"] } });
         const totalRevenue = revenueOrders.reduce((sum, o) => sum + (Number(o.totalAmount) || 0), 0);
 
-        // Today's orders
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        const todayOrders = await Order.countDocuments({
-            createdAt: { $gte: today }
-        });
+        const todayOrders = await Order.countDocuments({ createdAt: { $gte: today } });
 
         res.json({
             success: true,
-            stats: {
-                totalOrders,
-                totalCustomers,
-                pendingOrders,
-                deliveredOrders,
-                totalRevenue,
-                todayOrders
-            }
+            stats: { totalOrders, totalCustomers, pendingOrders, deliveredOrders, totalRevenue, todayOrders }
         });
     } catch (error) {
-        console.error("Admin Stats Error:", error);
         res.status(500).json({ success: false, message: "Failed to load stats" });
     }
 });
 
-// ===== GET ALL PRODUCTS =====
+// ============================
+// PRODUCTS API
+// ============================
 app.get("/api/products", async (req, res) => {
     try {
         const products = await Product.find();
         res.json(products);
     } catch (error) {
-        console.error("Get Products Error:", error);
         res.status(500).json({ message: "Server Error" });
     }
 });
 
-// ===== GET SINGLE PRODUCT =====
 app.get("/api/products/:id", async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
-        if (!product) {
-            return res.status(404).json({ success: false, message: "Product not found" });
-        }
+        if (!product) return res.status(404).json({ success: false, message: "Not found" });
         res.json(product);
     } catch (error) {
-        console.error("Get Product Error:", error);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 
-// ===== ADD PRODUCT =====
 app.post("/api/products", async (req, res) => {
     try {
         const product = new Product({
@@ -453,17 +324,15 @@ app.post("/api/products", async (req, res) => {
             category: req.body.category
         });
         await product.save();
-        res.json({ success: true, message: "Product Added Successfully" });
+        res.json({ success: true, message: "Product Added" });
     } catch (error) {
-        console.log(error);
         res.status(500).json({ message: "Add Product Failed" });
     }
 });
 
-// ===== UPDATE PRODUCT =====
 app.put("/api/products/:id", async (req, res) => {
     try {
-        const updatedProduct = await Product.findByIdAndUpdate(
+        const updated = await Product.findByIdAndUpdate(
             req.params.id,
             {
                 name: req.body.name,
@@ -471,25 +340,15 @@ app.put("/api/products/:id", async (req, res) => {
                 image: req.body.image,
                 category: req.body.category
             },
-            { new: true }
+            { returnDocument: 'after' }
         );
-
-        if (!updatedProduct) {
-            return res.status(404).json({ success: false, message: "Product not found" });
-        }
-
-        res.json({
-            success: true,
-            message: "Product Updated Successfully",
-            product: updatedProduct
-        });
+        if (!updated) return res.status(404).json({ success: false, message: "Not found" });
+        res.json({ success: true, message: "Product Updated", product: updated });
     } catch (error) {
-        console.error("Update Product Error:", error);
         res.status(500).json({ success: false, message: "Update Failed" });
     }
 });
 
-// ===== DELETE PRODUCT =====
 app.delete("/api/products/:id", async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
@@ -512,14 +371,16 @@ app.post("/api/cart/add", async (req, res) => {
             return res.status(400).json({ success: false, message: "User ID and Product ID required" });
         }
 
-        let existingItem = await Cart.findOne({
+        const findQuery = {
             userId: String(userId),
-            productId: String(productId),
-            weight: weight || "",
-            flavor: flavor || "",
-            packSize: packSize || "",
-            bottleSize: bottleSize || ""
-        });
+            productId: String(productId)
+        };
+        if (weight && weight !== '') findQuery.weight = weight;
+        if (flavor && flavor !== '') findQuery.flavor = flavor;
+        if (packSize && packSize !== '') findQuery.packSize = packSize;
+        if (bottleSize && bottleSize !== '') findQuery.bottleSize = bottleSize;
+
+        let existingItem = await Cart.findOne(findQuery);
 
         if (existingItem) {
             existingItem.quantity += quantity || 1;
@@ -532,7 +393,11 @@ app.post("/api/cart/add", async (req, res) => {
             productId: String(productId),
             name, price, image, category,
             quantity: quantity || 1,
-            weight, flavor, message, packSize, bottleSize
+            weight: weight || '',
+            flavor: flavor || '',
+            message: message || '',
+            packSize: packSize || '',
+            bottleSize: bottleSize || ''
         });
 
         await cartItem.save();
@@ -550,7 +415,6 @@ app.get("/api/cart/:userId", async (req, res) => {
         const cartItems = await Cart.find({ userId: String(req.params.userId) }).sort({ createdAt: -1 });
         res.json(cartItems);
     } catch (error) {
-        console.error("Get Cart Error:", error);
         res.status(500).json({ success: false, message: "Failed to load cart" });
     }
 });
@@ -561,7 +425,6 @@ app.get("/api/cart/count/:userId", async (req, res) => {
         const count = await Cart.countDocuments({ userId: String(req.params.userId) });
         res.json({ count });
     } catch (error) {
-        console.error("Cart Count Error:", error);
         res.json({ count: 0 });
     }
 });
@@ -575,7 +438,6 @@ app.delete("/api/cart/:userId/:productId", async (req, res) => {
         });
         res.json({ success: true, message: "Removed from cart" });
     } catch (error) {
-        console.error("Remove Cart Error:", error);
         res.status(500).json({ success: false, message: "Failed to remove" });
     }
 });
@@ -585,25 +447,44 @@ app.put("/api/cart/update", async (req, res) => {
     try {
         const { userId, productId, quantity, weight, flavor, packSize, bottleSize } = req.body;
 
-        const item = await Cart.findOne({
+        console.log("🔄 Update cart request:");
+        console.log("   userId:", userId);
+        console.log("   productId:", productId);
+        console.log("   quantity:", quantity);
+
+        if (!userId || !productId || !quantity) {
+            return res.status(400).json({
+                success: false,
+                message: "userId, productId, and quantity are required"
+            });
+        }
+
+        const findQuery = {
             userId: String(userId),
-            productId: String(productId),
-            weight: weight || "",
-            flavor: flavor || "",
-            packSize: packSize || "",
-            bottleSize: bottleSize || ""
-        });
+            productId: String(productId)
+        };
+
+        if (weight && weight !== '') findQuery.weight = weight;
+        if (flavor && flavor !== '') findQuery.flavor = flavor;
+        if (packSize && packSize !== '') findQuery.packSize = packSize;
+        if (bottleSize && bottleSize !== '') findQuery.bottleSize = bottleSize;
+
+        console.log("🔍 Query:", JSON.stringify(findQuery));
+
+        const item = await Cart.findOne(findQuery);
 
         if (item) {
-            item.quantity = quantity;
+            item.quantity = Number(quantity);
             await item.save();
-            res.json({ success: true, message: "Quantity updated" });
+            console.log(`✅ Quantity updated to ${quantity} for "${item.name}"`);
+            res.json({ success: true, message: "Quantity updated", cartItem: item });
         } else {
-            res.status(404).json({ success: false, message: "Item not found" });
+            console.log("❌ Item not found in cart");
+            res.status(404).json({ success: false, message: "Item not found in cart" });
         }
     } catch (error) {
         console.error("Update Cart Error:", error);
-        res.status(500).json({ success: false, message: "Update failed" });
+        res.status(500).json({ success: false, message: "Update failed: " + error.message });
     }
 });
 
@@ -625,7 +506,7 @@ app.post("/api/cart/clear-items", async (req, res) => {
             productId: { $in: stringIds }
         });
 
-        console.log(`🗑️ Cleared ${result.deletedCount} items from cart for user ${userId}`);
+        console.log(`🗑️ Cleared ${result.deletedCount} items`);
         res.json({
             success: true,
             message: `Cleared ${result.deletedCount} items`,
@@ -633,7 +514,6 @@ app.post("/api/cart/clear-items", async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Clear Cart Error:", error);
         res.status(500).json({ success: false, message: "Failed to clear cart" });
     }
 });
@@ -644,9 +524,7 @@ app.post("/api/cart/clear-items", async (req, res) => {
 app.post("/api/payment/create-order", async (req, res) => {
     try {
         const { amount } = req.body;
-        if (!amount) {
-            return res.status(400).json({ error: "Amount is required" });
-        }
+        if (!amount) return res.status(400).json({ error: "Amount required" });
 
         const options = {
             amount: amount,
@@ -656,7 +534,6 @@ app.post("/api/payment/create-order", async (req, res) => {
 
         const order = await razorpayInstance.orders.create(options);
         res.json(order);
-
     } catch (error) {
         console.error("Razorpay Order Error:", error);
         res.status(500).json({ error: "Failed to create order" });
@@ -666,7 +543,6 @@ app.post("/api/payment/create-order", async (req, res) => {
 app.post("/api/payment/verify-signature", (req, res) => {
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
-
         const body = razorpay_order_id + "|" + razorpay_payment_id;
 
         const expectedSignature = crypto
@@ -675,13 +551,11 @@ app.post("/api/payment/verify-signature", (req, res) => {
             .digest('hex');
 
         if (expectedSignature === razorpay_signature) {
-            res.json({ success: true, message: "Payment verified successfully" });
+            res.json({ success: true, message: "Payment verified" });
         } else {
             res.status(400).json({ success: false, message: "Invalid signature" });
         }
-
     } catch (error) {
-        console.error("Razorpay Verify Error:", error);
         res.status(500).json({ success: false, message: "Verification failed" });
     }
 });
@@ -695,7 +569,6 @@ app.post("/api/orders", async (req, res) => {
         await order.save();
         res.json({ success: true, message: "Order Placed Successfully", order });
     } catch (error) {
-        console.log(error);
         res.status(500).json({ success: false, message: "Order Failed" });
     }
 });
@@ -709,17 +582,11 @@ app.get("/api/orders", async (req, res) => {
     }
 });
 
-// ===== ORDERS - GET BY USER =====
 app.get("/api/orders/user/:userId", async (req, res) => {
     try {
-        const orders = await Order.find({
-            userId: String(req.params.userId)
-        }).sort({ createdAt: -1 });
-
-        console.log(`📦 Found ${orders.length} orders for user ${req.params.userId}`);
+        const orders = await Order.find({ userId: String(req.params.userId) }).sort({ createdAt: -1 });
         res.json(orders);
     } catch (error) {
-        console.error("Get User Orders Error:", error);
         res.status(500).json({ success: false, message: "Failed to load orders" });
     }
 });
@@ -727,104 +594,66 @@ app.get("/api/orders/user/:userId", async (req, res) => {
 app.get("/api/orders/:id", async (req, res) => {
     try {
         const order = await Order.findById(req.params.id);
-        if (!order) {
-            return res.status(404).json({ success: false, message: "Order not found" });
-        }
+        if (!order) return res.status(404).json({ success: false, message: "Not found" });
         res.json(order);
     } catch (error) {
-        console.error("Get Order Error:", error);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 
-// ===== ORDERS - UPDATE STATUS =====
 app.put("/api/orders/:id/status", async (req, res) => {
     try {
         const { status } = req.body;
-        const allowedStatuses = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"];
+        const allowed = ["Pending", "Confirmed", "Processing", "Shipped", "Delivered", "Cancelled"];
 
-        if (!allowedStatuses.includes(status)) {
-            return res.status(400).json({ success: false, message: "Invalid order status" });
+        if (!allowed.includes(status)) {
+            return res.status(400).json({ success: false, message: "Invalid status" });
         }
 
-        const updatedOrder = await Order.findByIdAndUpdate(
+        const updated = await Order.findByIdAndUpdate(
             req.params.id,
             { status: status },
-            { new: true }
+            { returnDocument: 'after' }
         );
 
-        if (!updatedOrder) {
-            return res.status(404).json({ success: false, message: "Order not found" });
-        }
-
-        console.log(`✅ Order ${req.params.id} status updated to "${status}"`);
-
-        res.json({
-            success: true,
-            message: "Order status updated successfully",
-            order: updatedOrder
-        });
+        if (!updated) return res.status(404).json({ success: false, message: "Not found" });
+        res.json({ success: true, message: "Status updated", order: updated });
     } catch (error) {
-        console.error("Status Update Error:", error);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 
-// ===== ORDERS - CANCEL (DELETE) =====
 app.delete("/api/orders/:id", async (req, res) => {
     try {
-        const orderId = req.params.id;
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ success: false, message: "Not found" });
 
-        const order = await Order.findById(orderId);
-        if (!order) {
-            return res.status(404).json({ success: false, message: "Order not found" });
-        }
-
-        const nonCancellableStatuses = ["Delivered", "Cancelled"];
-        if (nonCancellableStatuses.includes(order.status)) {
-            return res.status(400).json({
-                success: false,
-                message: `Order cannot be cancelled because it is ${order.status}`
-            });
+        if (["Delivered", "Cancelled"].includes(order.status)) {
+            return res.status(400).json({ success: false, message: `Cannot cancel ${order.status} order` });
         }
 
         order.status = "Cancelled";
         await order.save();
-
-        console.log(`✅ Order ${orderId} cancelled successfully`);
-        res.json({ success: true, message: "Order cancelled successfully", order });
+        res.json({ success: true, message: "Order cancelled", order });
     } catch (error) {
-        console.error("Cancel Order Error:", error);
-        res.status(500).json({ success: false, message: "Failed to cancel order" });
+        res.status(500).json({ success: false, message: "Failed to cancel" });
     }
 });
 
-// ===== ORDERS - CANCEL (PUT) =====
 app.put("/api/orders/:id/cancel", async (req, res) => {
     try {
-        const orderId = req.params.id;
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ success: false, message: "Not found" });
 
-        const order = await Order.findById(orderId);
-        if (!order) {
-            return res.status(404).json({ success: false, message: "Order not found" });
-        }
-
-        const nonCancellableStatuses = ["Delivered", "Cancelled"];
-        if (nonCancellableStatuses.includes(order.status)) {
-            return res.status(400).json({
-                success: false,
-                message: `Order cannot be cancelled because it is ${order.status}`
-            });
+        if (["Delivered", "Cancelled"].includes(order.status)) {
+            return res.status(400).json({ success: false, message: `Cannot cancel ${order.status} order` });
         }
 
         order.status = "Cancelled";
         await order.save();
-
-        console.log(`✅ Order ${orderId} cancelled successfully (PUT)`);
-        res.json({ success: true, message: "Order cancelled successfully", order });
+        res.json({ success: true, message: "Order cancelled", order });
     } catch (error) {
-        console.error("Cancel Order Error:", error);
-        res.status(500).json({ success: false, message: "Failed to cancel order" });
+        res.status(500).json({ success: false, message: "Failed to cancel" });
     }
 });
 
@@ -835,18 +664,14 @@ app.post("/api/wishlist", async (req, res) => {
     try {
         const { userId, productId, name, price, image, category } = req.body;
 
-        if (!userId || !productId) {
-            return res.json({ success: false, message: "User and Product required" });
-        }
+        if (!userId || !productId) return res.json({ success: false, message: "Required fields missing" });
 
-        const existingWishlist = await Wishlist.findOne({
+        const existing = await Wishlist.findOne({
             userId: String(userId),
             productId: String(productId)
         });
 
-        if (existingWishlist) {
-            return res.json({ success: false, message: "Already in Wishlist ❤️" });
-        }
+        if (existing) return res.json({ success: false, message: "Already in Wishlist ❤️" });
 
         const wishlist = new Wishlist({
             userId: String(userId),
@@ -857,19 +682,15 @@ app.post("/api/wishlist", async (req, res) => {
         await wishlist.save();
         res.json({ success: true, message: "Added to Wishlist ❤️", wishlist });
     } catch (error) {
-        console.error("Wishlist Error:", error);
         res.status(500).json({ success: false, message: "Wishlist failed" });
     }
 });
 
 app.get("/api/wishlist/:userId", async (req, res) => {
     try {
-        const wishlist = await Wishlist.find({
-            userId: String(req.params.userId)
-        }).sort({ createdAt: -1 });
+        const wishlist = await Wishlist.find({ userId: String(req.params.userId) }).sort({ createdAt: -1 });
         res.json(wishlist);
     } catch (error) {
-        console.error("Get Wishlist Error:", error);
         res.status(500).json({ success: false, message: "Failed to load wishlist" });
     }
 });
@@ -895,82 +716,44 @@ app.delete("/api/wishlist/:userId/:productId", async (req, res) => {
         }
 
         if (result) {
-            res.json({
-                success: true,
-                message: `Removed "${result.name}" from Wishlist`,
-                deleted: true,
-                item: result
-            });
+            res.json({ success: true, message: `Removed "${result.name}"`, item: result });
         } else {
-            res.json({
-                success: false,
-                message: "Item not found in wishlist",
-                deleted: false
-            });
+            res.json({ success: false, message: "Not found in wishlist" });
         }
-
     } catch (error) {
-        console.error("❌ Remove Wishlist Error:", error);
-        res.status(500).json({
-            success: false,
-            message: error.message || "Remove failed"
-        });
+        res.status(500).json({ success: false, message: "Remove failed" });
     }
-});
-
-// ============================
-// WILDCARD PAGE ROUTE (MUST BE LAST)
-// ============================
-app.get("/:page.html", (req, res) => {
-    const page = req.params.page;
-
-    let filePath = path.join(__dirname, `${page}.html`);
-    if (fs.existsSync(filePath)) {
-        return res.sendFile(filePath);
-    }
-
-    filePath = path.join(usersPath, `${page}.html`);
-    if (fs.existsSync(filePath)) {
-        return res.sendFile(filePath);
-    }
-
-    res.status(404).send(`Page "${page}.html" not found`);
 });
 
 // ============================
 // CATEGORIES API
 // ============================
-
-// GET ALL CATEGORIES
 app.get("/api/categories", async (req, res) => {
     try {
         const categories = await Category.find().sort({ createdAt: 1 });
         res.json(categories);
     } catch (error) {
-        console.error("Get Categories Error:", error);
         res.status(500).json({ success: false, message: "Failed to load categories" });
     }
 });
 
-// GET SINGLE CATEGORY
 app.get("/api/categories/:id", async (req, res) => {
     try {
         const category = await Category.findById(req.params.id);
-        if (!category) return res.status(404).json({ success: false, message: "Category not found" });
+        if (!category) return res.status(404).json({ success: false, message: "Not found" });
         res.json(category);
     } catch (error) {
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 
-// ADD CATEGORY
 app.post("/api/categories", async (req, res) => {
     try {
         const { name, icon, type, parent, description } = req.body;
-        if (!name) return res.status(400).json({ success: false, message: "Category name required" });
+        if (!name) return res.status(400).json({ success: false, message: "Name required" });
 
         const existing = await Category.findOne({ name: name.trim() });
-        if (existing) return res.status(400).json({ success: false, message: "Category already exists" });
+        if (existing) return res.status(400).json({ success: false, message: "Already exists" });
 
         const category = new Category({
             name: name.trim(),
@@ -981,44 +764,117 @@ app.post("/api/categories", async (req, res) => {
         });
 
         await category.save();
-        res.json({ success: true, message: "Category added successfully", category });
+        res.json({ success: true, message: "Category added", category });
     } catch (error) {
-        console.error("Add Category Error:", error);
         res.status(500).json({ success: false, message: "Failed to add category" });
     }
 });
 
-// UPDATE CATEGORY
+// =========================================================
+// ✅ CASCADE UPDATE: Renaming a category also updates
+//    all products + sub-categories + cart items that
+//    reference the old name
+// =========================================================
 app.put("/api/categories/:id", async (req, res) => {
     try {
         const { name, icon, type, parent, description, isActive } = req.body;
 
+        // 1. Get existing category (to know its OLD name)
+        const existing = await Category.findById(req.params.id);
+        if (!existing) {
+            return res.status(404).json({ success: false, message: "Category not found" });
+        }
+
+        const oldName = existing.name;
+        const newName = (name || '').trim();
+
+        // 2. Prevent duplicate names (exclude self)
+        if (newName && newName !== oldName) {
+            const duplicate = await Category.findOne({
+                name: newName,
+                _id: { $ne: req.params.id }
+            });
+            if (duplicate) {
+                return res.status(400).json({
+                    success: false,
+                    message: `Category "${newName}" already exists`
+                });
+            }
+        }
+
+        // 3. Update the category
         const updated = await Category.findByIdAndUpdate(
             req.params.id,
-            { name, icon, type, parent, description, isActive },
-            { new: true }
+            {
+                name: newName || oldName,
+                icon, type, parent, description, isActive
+            },
+            { returnDocument: 'after' }
         );
 
-        if (!updated) return res.status(404).json({ success: false, message: "Category not found" });
-        res.json({ success: true, message: "Category updated", category: updated });
+        // 4. 🔥 CASCADE if the name changed
+        let affectedProducts = 0;
+        let affectedSubCategories = 0;
+        let affectedCartItems = 0;
+
+        if (oldName !== newName && newName) {
+            // (a) Update PRODUCTS that have the old category name
+            const productResult = await Product.updateMany(
+                { category: oldName },
+                { $set: { category: newName } }
+            );
+            affectedProducts = productResult.modifiedCount;
+
+            // (b) Update SUB-CATEGORIES whose parent is oldName
+            const subCatResult = await Category.updateMany(
+                { parent: oldName },
+                { $set: { parent: newName } }
+            );
+            affectedSubCategories = subCatResult.modifiedCount;
+
+            // (c) Update CART items (so carts stay consistent)
+            try {
+                const cartResult = await Cart.updateMany(
+                    { category: oldName },
+                    { $set: { category: newName } }
+                );
+                affectedCartItems = cartResult.modifiedCount;
+            } catch (e) {
+                console.log("Cart cascade skipped:", e.message);
+            }
+
+            console.log(`✅ Category renamed: "${oldName}" → "${newName}"`);
+            console.log(`   📦 ${affectedProducts} products updated`);
+            console.log(`   📁 ${affectedSubCategories} sub-categories updated`);
+            console.log(`   🛒 ${affectedCartItems} cart items updated`);
+        }
+
+        res.json({
+            success: true,
+            message: "Category updated successfully",
+            category: updated,
+            affectedProducts,
+            affectedSubCategories,
+            affectedCartItems,
+            renamed: oldName !== newName
+        });
+
     } catch (error) {
         console.error("Update Category Error:", error);
-        res.status(500).json({ success: false, message: "Failed to update category" });
+        res.status(500).json({ success: false, message: "Failed to update" });
     }
 });
 
-// DELETE CATEGORY
 app.delete("/api/categories/:id", async (req, res) => {
     try {
         const category = await Category.findByIdAndDelete(req.params.id);
-        if (!category) return res.status(404).json({ success: false, message: "Category not found" });
-        res.json({ success: true, message: "Category deleted successfully" });
+        if (!category) return res.status(404).json({ success: false, message: "Not found" });
+        res.json({ success: true, message: "Deleted successfully" });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Failed to delete category" });
+        res.status(500).json({ success: false, message: "Failed to delete" });
     }
 });
 
-// SEED DEFAULT CATEGORIES (One-time)
 app.post("/api/categories/seed", async (req, res) => {
     try {
         const count = await Category.countDocuments();
@@ -1059,11 +915,24 @@ app.post("/api/categories/seed", async (req, res) => {
         const result = await Category.insertMany(defaults);
         res.json({ success: true, message: `${result.length} categories seeded`, count: result.length });
     } catch (error) {
-        console.error("Seed Error:", error);
         res.status(500).json({ success: false, message: "Failed to seed" });
     }
 });
 
+// ============================
+// WILDCARD PAGE ROUTE (MUST BE LAST)
+// ============================
+app.get("/:page.html", (req, res) => {
+    const page = req.params.page;
+
+    let filePath = path.join(__dirname, `${page}.html`);
+    if (fs.existsSync(filePath)) return res.sendFile(filePath);
+
+    filePath = path.join(usersPath, `${page}.html`);
+    if (fs.existsSync(filePath)) return res.sendFile(filePath);
+
+    res.status(404).send(`Page "${page}.html" not found`);
+});
 
 // ============================
 // ERROR HANDLING

@@ -51,9 +51,7 @@
             text-decoration: none;
         }
 
-        .logo-icon {
-            font-size: 30px;
-        }
+        .logo-icon { font-size: 30px; }
 
         .logo-text h1 {
             font-size: 24px;
@@ -84,9 +82,7 @@
             font-size: 14px;
         }
 
-        .nav-links a:hover {
-            color: #ff4d6d;
-        }
+        .nav-links a:hover { color: #ff4d6d; }
 
         .nav-links .cart-link {
             background: #ff4d6d;
@@ -94,11 +90,7 @@
             padding: 6px 18px;
             border-radius: 30px;
         }
-
-        .nav-links .cart-link:hover {
-            background: #ff2f5a;
-            color: white;
-        }
+        .nav-links .cart-link:hover { background: #ff2f5a; color: white; }
 
         /* ===== MAIN CONTAINER ===== */
         .cart-container {
@@ -168,11 +160,7 @@
             transition: .3s;
             font-size: 13px;
         }
-
-        .clear-btn:hover {
-            background: #ff4d6d;
-            color: white;
-        }
+        .clear-btn:hover { background: #ff4d6d; color: white; }
 
         .continue-shopping {
             border: none;
@@ -186,15 +174,13 @@
             font-size: 13px;
             text-decoration: none;
         }
-
-        .continue-shopping:hover {
-            background: #fff0f3;
-        }
+        .continue-shopping:hover { background: #fff0f3; }
 
         /* ============================================
-           DELIVERY DATE CARD - STYLISH
-           ============================================ */
-        .delivery-date-card {
+           DELIVERY INFO CARD - HONEST MESSAGE
+           (No specific date - just info)
+        ============================================ */
+        .delivery-info-card {
             background: linear-gradient(135deg, #fff0f3, #ffe5ec);
             border-radius: 18px;
             padding: 18px 22px;
@@ -207,58 +193,45 @@
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.08);
             transition: .3s;
         }
-
-        .delivery-date-card:hover {
+        .delivery-info-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(255, 77, 109, 0.12);
         }
 
-        .delivery-date-card .delivery-icon {
+        .delivery-info-card .delivery-icon {
             font-size: 36px;
             animation: truckMove 2s ease-in-out infinite;
         }
 
         @keyframes truckMove {
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-            50% {
-                transform: translateX(8px);
-            }
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(8px); }
         }
 
-        .delivery-date-card .delivery-info {
+        .delivery-info-card .delivery-info {
             flex: 1;
         }
 
-        .delivery-date-card .delivery-info h5 {
+        .delivery-info-card .delivery-info h5 {
             font-weight: 700;
             color: #333;
             font-size: 15px;
             margin: 0;
         }
 
-        .delivery-date-card .delivery-info .delivery-date-text {
+        .delivery-info-card .delivery-info p {
             color: #555;
             font-size: 14px;
             margin: 2px 0 0 0;
             font-weight: 500;
         }
 
-        .delivery-date-card .delivery-info .delivery-date-text strong {
+        .delivery-info-card .delivery-info .highlight {
             color: #ff4d6d;
             font-weight: 700;
         }
 
-        .delivery-date-card .delivery-info .delivery-countdown {
-            color: #ff4d6d;
-            font-size: 12px;
-            font-weight: 600;
-            margin-top: 2px;
-        }
-
-        .delivery-date-card .delivery-badge {
+        .delivery-info-card .delivery-badge {
             background: #28a745;
             color: white;
             padding: 5px 18px;
@@ -268,7 +241,7 @@
             white-space: nowrap;
         }
 
-        .delivery-date-card .delivery-badge.express {
+        .delivery-info-card .delivery-badge.express {
             background: #ffc107;
             color: #333;
         }
@@ -284,16 +257,12 @@
             transition: .4s;
             border: 1px solid rgba(255, 77, 109, 0.05);
         }
-
         .cart-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 20px 50px rgba(255, 77, 109, 0.08);
         }
 
-        .product {
-            display: flex;
-            gap: 18px;
-        }
+        .product { display: flex; gap: 18px; }
 
         .product-image {
             width: 120px;
@@ -303,7 +272,6 @@
             overflow: hidden;
             flex-shrink: 0;
         }
-
         .product-image img {
             width: 100%;
             height: 100%;
@@ -311,9 +279,7 @@
             border-radius: 20px;
         }
 
-        .product-content {
-            flex: 1;
-        }
+        .product-content { flex: 1; }
 
         .product-title-row {
             display: flex;
@@ -358,9 +324,7 @@
             font-style: italic;
         }
 
-        .price {
-            margin-top: 10px;
-        }
+        .price { margin-top: 10px; }
 
         .new-price {
             color: #ff4d6d;
@@ -399,11 +363,7 @@
             cursor: pointer;
             transition: .3s;
         }
-
-        .qty-btn:hover {
-            background: #ff4d6d;
-            color: white;
-        }
+        .qty-btn:hover { background: #ff4d6d; color: white; }
 
         .qty {
             font-size: 15px;
@@ -423,15 +383,9 @@
             transition: .3s;
             font-size: 12px;
         }
+        .remove-btn:hover { background: #ff4d6d; color: white; }
 
-        .remove-btn:hover {
-            background: #ff4d6d;
-            color: white;
-        }
-
-        /* ============================================
-           ORDER SUMMARY
-           ============================================ */
+        /* ===== ORDER SUMMARY ===== */
         .cart-summary {
             background: rgba(255, 255, 255, 0.90);
             backdrop-filter: blur(14px);
@@ -470,10 +424,7 @@
             align-items: center;
         }
 
-        .summary-total h3 {
-            font-size: 18px;
-            font-weight: 700;
-        }
+        .summary-total h3 { font-size: 18px; font-weight: 700; }
 
         .summary-total span {
             font-size: 28px;
@@ -481,7 +432,7 @@
             color: #ff4d6d;
         }
 
-        /* ===== DELIVERY IN SUMMARY ===== */
+        /* ===== DELIVERY INFO IN SUMMARY ===== */
         .delivery-summary {
             margin-top: 16px;
             background: #fff0f3;
@@ -498,9 +449,7 @@
             padding: 4px 0;
         }
 
-        .delivery-summary .delivery-row strong {
-            color: #ff4d6d;
-        }
+        .delivery-summary .delivery-row strong { color: #ff4d6d; }
 
         .delivery-summary .delivery-row .status {
             color: #28a745;
@@ -525,7 +474,6 @@
             transition: .3s;
             min-width: 120px;
         }
-
         .coupon-section input:focus {
             border-color: #ff4d6d;
             box-shadow: 0 0 0 4px rgba(255, 77, 109, 0.08);
@@ -543,7 +491,6 @@
             font-size: 13px;
             white-space: nowrap;
         }
-
         .coupon-section button:hover {
             background: #ff2f5a;
             transform: translateY(-2px);
@@ -559,10 +506,7 @@
             font-weight: 600;
             display: none;
         }
-
-        .coupon-applied.show {
-            display: block;
-        }
+        .coupon-applied.show { display: block; }
 
         /* ===== GIFT & TRUST ===== */
         .gift {
@@ -611,12 +555,10 @@
             cursor: pointer;
             transition: .3s;
         }
-
         .checkout-btn:hover:not(:disabled) {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(255, 77, 109, 0.3);
         }
-
         .checkout-btn:disabled {
             background: #ccc;
             cursor: not-allowed;
@@ -632,21 +574,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
         }
 
-        .empty-cart .empty-icon {
-            font-size: 70px;
-            margin-bottom: 16px;
-        }
-
-        .empty-cart h2 {
-            font-size: 26px;
-            color: #333;
-            margin-bottom: 8px;
-        }
-
-        .empty-cart p {
-            color: #777;
-            margin-bottom: 18px;
-        }
+        .empty-cart .empty-icon { font-size: 70px; margin-bottom: 16px; }
+        .empty-cart h2 { font-size: 26px; color: #333; margin-bottom: 8px; }
+        .empty-cart p { color: #777; margin-bottom: 18px; }
 
         .empty-cart .shop-btn {
             display: inline-block;
@@ -658,18 +588,13 @@
             font-weight: 700;
             transition: .3s;
         }
-
         .empty-cart .shop-btn:hover {
             background: #ff2f5a;
             transform: translateY(-3px);
         }
 
         /* ===== LOADING ===== */
-        .loading-spinner {
-            text-align: center;
-            padding: 50px 0;
-        }
-
+        .loading-spinner { text-align: center; padding: 50px 0; }
         .loading-spinner .spinner {
             width: 45px;
             height: 45px;
@@ -679,37 +604,16 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 12px;
         }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         /* ===== TOAST ===== */
         @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
-
         @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
         }
 
         .toast-message {
@@ -726,68 +630,27 @@
             max-width: 400px;
             font-size: 14px;
         }
-
-        .toast-message.success {
-            background: #28a745;
-        }
-
-        .toast-message.error {
-            background: #dc3545;
-        }
-
-        .toast-message.info {
-            background: #17a2b8;
-        }
+        .toast-message.success { background: #28a745; }
+        .toast-message.error { background: #dc3545; }
+        .toast-message.info { background: #17a2b8; }
 
         /* ============================================
            RESPONSIVE
-           ============================================ */
-
+        ============================================ */
         @media(max-width: 992px) {
-            .cart-container {
-                grid-template-columns: 1fr;
-                padding: 25px 18px 40px;
-            }
-
-            .cart-summary {
-                position: static;
-            }
-
-            .navbar {
-                padding: 10px 20px;
-            }
-
-            .logo-text h1 {
-                font-size: 20px;
-            }
-
-            .cart-title {
-                font-size: 36px;
-            }
+            .cart-container { grid-template-columns: 1fr; padding: 25px 18px 40px; }
+            .cart-summary { position: static; }
+            .navbar { padding: 10px 20px; }
+            .logo-text h1 { font-size: 20px; }
+            .cart-title { font-size: 36px; }
         }
 
         @media(max-width: 768px) {
-            body {
-                padding-top: 70px;
-            }
-
-            .navbar {
-                padding: 8px 15px;
-                gap: 8px;
-            }
-
-            .logo-icon {
-                font-size: 24px;
-            }
-
-            .logo-text h1 {
-                font-size: 17px;
-            }
-
-            .logo-text p {
-                font-size: 8px;
-            }
-
+            body { padding-top: 70px; }
+            .navbar { padding: 8px 15px; gap: 8px; }
+            .logo-icon { font-size: 24px; }
+            .logo-text h1 { font-size: 17px; }
+            .logo-text p { font-size: 8px; }
             .nav-links {
                 gap: 10px;
                 width: 100%;
@@ -795,162 +658,155 @@
                 padding-top: 5px;
                 border-top: 1px solid #f0f0f0;
             }
-
-            .nav-links a {
-                font-size: 12px;
-            }
-
-            .nav-links .cart-link {
-                padding: 4px 14px;
-                font-size: 12px;
-            }
-
-            .cart-title {
-                font-size: 30px;
-            }
-
-            .product {
-                flex-direction: column;
-            }
-
-            .product-image {
-                width: 100%;
-                height: 180px;
-            }
-
-            .cart-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-
-            .delivery-date-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 16px;
-            }
-
-            .delivery-date-card .delivery-icon {
-                font-size: 30px;
-            }
-
-            .delivery-summary .delivery-row {
-                flex-direction: column;
-                text-align: center;
-                gap: 2px;
-            }
-
-            .trust-badges {
-                gap: 10px;
-            }
-
-            .trust-badges .badge-item {
-                font-size: 10px;
-            }
+            .nav-links a { font-size: 12px; }
+            .nav-links .cart-link { padding: 4px 14px; font-size: 12px; }
+            .cart-title { font-size: 30px; }
+            .product { flex-direction: column; }
+            .product-image { width: 100%; height: 180px; }
+            .cart-bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .delivery-info-card { flex-direction: column; text-align: center; padding: 16px; }
+            .delivery-info-card .delivery-icon { font-size: 30px; }
+            .delivery-summary .delivery-row { flex-direction: column; text-align: center; gap: 2px; }
+            .trust-badges { gap: 10px; }
+            .trust-badges .badge-item { font-size: 10px; }
         }
 
         @media(max-width: 480px) {
-            body {
-                padding-top: 60px;
-            }
-
-            .navbar {
-                padding: 6px 10px;
-            }
-
-            .logo-icon {
-                font-size: 20px;
-            }
-
-            .logo-text h1 {
-                font-size: 14px;
-            }
-
-            .logo-text p {
-                display: none;
-            }
-
-            .nav-links a {
-                font-size: 10px;
-            }
-
-            .cart-title {
-                font-size: 24px;
-            }
-
-            .cart-container {
-                padding: 16px 10px 30px;
-                gap: 16px;
-            }
-
-            .product-image {
-                height: 140px;
-            }
-
-            .product-content h3 {
-                font-size: 14px;
-            }
-
-            .new-price {
-                font-size: 19px;
-            }
-
-            .cart-summary {
-                padding: 16px;
-            }
-
-            .cart-summary h2 {
-                font-size: 18px;
-            }
-
-            .summary-total span {
-                font-size: 20px;
-            }
-
-            .delivery-date-card .delivery-info h5 {
-                font-size: 13px;
-            }
-
-            .delivery-date-card .delivery-info .delivery-date-text {
-                font-size: 12px;
-            }
-
-            .delivery-date-card .delivery-badge {
-                font-size: 10px;
-                padding: 3px 12px;
-            }
-
-            .checkout-btn {
-                font-size: 13px;
-                padding: 10px;
-            }
-
+            body { padding-top: 60px; }
+            .navbar { padding: 6px 10px; }
+            .logo-icon { font-size: 20px; }
+            .logo-text h1 { font-size: 14px; }
+            .logo-text p { display: none; }
+            .nav-links a { font-size: 10px; }
+            .cart-title { font-size: 24px; }
+            .cart-container { padding: 16px 10px 30px; gap: 16px; }
+            .product-image { height: 140px; }
+            .product-content h3 { font-size: 14px; }
+            .new-price { font-size: 19px; }
+            .cart-summary { padding: 16px; }
+            .cart-summary h2 { font-size: 18px; }
+            .summary-total span { font-size: 20px; }
+            .delivery-info-card .delivery-info h5 { font-size: 13px; }
+            .delivery-info-card .delivery-info p { font-size: 12px; }
+            .delivery-info-card .delivery-badge { font-size: 10px; padding: 3px 12px; }
+            .checkout-btn { font-size: 13px; padding: 10px; }
             .toast-message {
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                font-size: 12px;
-                padding: 12px 18px;
-                max-width: none;
+                bottom: 20px; right: 20px; left: 20px;
+                font-size: 12px; padding: 12px 18px; max-width: none;
             }
-
-            .empty-cart {
-                padding: 24px 14px;
-            }
-
-            .empty-cart .empty-icon {
-                font-size: 40px;
-            }
-
-            .empty-cart h2 {
-                font-size: 18px;
-            }
-
-            .empty-cart .shop-btn {
-                padding: 8px 22px;
-                font-size: 12px;
-            }
+            .empty-cart { padding: 24px 14px; }
+            .empty-cart .empty-icon { font-size: 40px; }
+            .empty-cart h2 { font-size: 18px; }
+            .empty-cart .shop-btn { padding: 8px 22px; font-size: 12px; }
         }
+
+        /* =========================================================
+   FIX: CART PRODUCT IMAGES CUT OFF ON MOBILE
+========================================================= */
+@media (max-width: 575.98px) {
+    
+    /* Product card: give more breathing room */
+    .cart-card {
+        padding: 14px !important;
+        border-radius: 20px !important;
+    }
+    
+    .product {
+        gap: 12px !important;
+        align-items: flex-start !important;
+    }
+    
+    /* Product image: show FULL image, no crop */
+    .product-image {
+        width: 90px !important;
+        height: 90px !important;
+        border-radius: 16px !important;
+        flex-shrink: 0 !important;
+    }
+    
+    .product-image img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: center !important;
+        border-radius: 16px !important;
+    }
+    
+    /* Product content: fits nicely */
+    .product-content h3 {
+        font-size: 14px !important;
+        line-height: 1.3 !important;
+    }
+    
+    .product-details {
+        font-size: 11px !important;
+    }
+    
+    .product-details span {
+        font-size: 10px !important;
+        padding: 2px 8px !important;
+        margin: 1px 3px 1px 0 !important;
+    }
+    
+    .product-message {
+        font-size: 11px !important;
+    }
+    
+    .new-price {
+        font-size: 18px !important;
+        margin-top: 6px !important;
+    }
+    
+    /* Bottom actions: stack properly */
+    .cart-bottom {
+        margin-top: 10px !important;
+        gap: 8px !important;
+    }
+    
+    /* Quantity box: smaller */
+    .qty-box {
+        padding: 3px 10px !important;
+        gap: 8px !important;
+    }
+    
+    .qty-btn {
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 14px !important;
+    }
+    
+    .qty {
+        font-size: 13px !important;
+    }
+    
+    .remove-btn {
+        padding: 6px 14px !important;
+        font-size: 11px !important;
+    }
+}
+
+/* =========================================================
+   EXTRA SMALL (below 380px) - even tighter
+========================================================= */
+@media (max-width: 380px) {
+    .product-image {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    
+    .product-content h3 {
+        font-size: 13px !important;
+    }
+    
+    .new-price {
+        font-size: 16px !important;
+    }
+    
+    .remove-btn {
+        padding: 5px 12px !important;
+        font-size: 10px !important;
+    }
+}
     </style>
 </head>
 
@@ -992,20 +848,18 @@
             </div>
 
             <!-- ============================================
-            DELIVERY DATE CARD - STYLISH
+            DELIVERY INFO CARD - HONEST MESSAGE
             ============================================ -->
-            <div class="delivery-date-card" id="deliveryDateCard">
+            <div class="delivery-info-card" id="deliveryInfoCard">
                 <span class="delivery-icon">🚚</span>
                 <div class="delivery-info">
-                    <h5>📦 Estimated Delivery Date</h5>
-                    <p class="delivery-date-text">
-                        <strong id="deliveryDateDisplay">Loading...</strong>
-                    </p>
-                    <p class="delivery-countdown" id="deliveryCountdown">
-                        ⏰ Order within <strong>2 hours</strong> for same-day delivery
+                    <h5>📦 Fresh Delivery Available</h5>
+                    <p><span class="highlight">Choose your preferred delivery date</span> at checkout</p>
+                    <p style="font-size: 12px; color: #888; margin-top: 4px;">
+                        ⏰ Typically delivered within 2-3 days
                     </p>
                 </div>
-                <span class="delivery-badge" id="deliveryBadge">⚡ Free Delivery</span>
+                <span class="delivery-badge" id="deliveryBadge">⚡ Free Delivery Over ₹500</span>
             </div>
 
             <div id="cartItems"></div>
@@ -1035,19 +889,19 @@
                 <span id="discount">₹0</span>
             </div>
 
-            <!-- ===== DELIVERY DATE IN SUMMARY ===== -->
+            <!-- ===== DELIVERY INFO IN SUMMARY ===== -->
             <div class="delivery-summary">
                 <div class="delivery-row">
-                    <span>📦 Delivered by</span>
-                    <span><strong id="deliveryDateSummary">Loading...</strong></span>
+                    <span>📦 Delivery Date</span>
+                    <span><strong>Select at Checkout</strong></span>
                 </div>
                 <div class="delivery-row">
                     <span>🚚 Delivery Status</span>
-                    <span class="status">✅ On Time</span>
+                    <span class="status">✅ Available</span>
                 </div>
                 <div class="delivery-row">
                     <span>⏰ Estimated Time</span>
-                    <span id="estimatedTime">30-45 mins</span>
+                    <span>2-3 Days</span>
                 </div>
             </div>
 
@@ -1081,105 +935,19 @@
 
     <script>
         // ============================================
-        // DELIVERY DATE FUNCTIONS
-        // ============================================
-
-        function getDeliveryDate(days = 3) {
-            const today = new Date();
-            const deliveryDate = new Date(today);
-            deliveryDate.setDate(today.getDate() + days);
-
-            const options = {
-                weekday: 'short',
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-            };
-
-            return deliveryDate.toLocaleDateString('en-IN', options);
-        }
-
-        function getFullDeliveryDate(days = 3) {
-            const today = new Date();
-            const deliveryDate = new Date(today);
-            deliveryDate.setDate(today.getDate() + days);
-
-            const options = {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            };
-
-            return deliveryDate.toLocaleDateString('en-IN', options);
-        }
-
-        function getDayName(days = 3) {
-            const today = new Date();
-            const deliveryDate = new Date(today);
-            deliveryDate.setDate(today.getDate() + days);
-            return deliveryDate.toLocaleDateString('en-IN', { weekday: 'long' });
-        }
-
-        function updateDeliveryDates() {
-            const display1 = document.getElementById('deliveryDateDisplay');
-            const display2 = document.getElementById('deliveryDateSummary');
-            const countdown = document.getElementById('deliveryCountdown');
-            const badge = document.getElementById('deliveryBadge');
-
-            const fullDate = getFullDeliveryDate();
-            const shortDate = getDeliveryDate();
-            const dayName = getDayName();
-
-            if (display1) {
-                display1.textContent = fullDate;
-            }
-
-            if (display2) {
-                display2.textContent = shortDate;
-            }
-
-            if (countdown) {
-                const hours = new Date().getHours();
-                if (hours < 20) {
-                    countdown.textContent = `⏰ Order within ${20 - hours} hours for delivery on ${dayName}`;
-                } else {
-                    countdown.textContent = `⏰ Order now for delivery on ${getDayName(4)}`;
-                }
-            }
-
-            if (badge) {
-                const itemCount = cartData ? cartData.length : 0;
-                if (itemCount > 0 && document.querySelector('.delivery-date-card')) {
-                    badge.textContent = '🚀 Express Delivery';
-                    badge.className = 'delivery-badge express';
-                } else {
-                    badge.textContent = '⚡ Free Delivery';
-                    badge.className = 'delivery-badge';
-                }
-            }
-        }
-
-        // ============================================
         // GET USER
         // ============================================
-
         function getUser() {
             try {
                 const userData = localStorage.getItem('user');
-                if (userData) {
-                    return JSON.parse(userData);
-                }
+                if (userData) return JSON.parse(userData);
                 return null;
-            } catch (e) {
-                return null;
-            }
+            } catch (e) { return null; }
         }
 
         // ============================================
         // SHOW TOAST
         // ============================================
-
         function showToast(message, type = 'success') {
             const existing = document.querySelector('.toast-message');
             if (existing) existing.remove();
@@ -1198,7 +966,6 @@
         // ============================================
         // COUPON
         // ============================================
-
         function applyCoupon() {
             const input = document.getElementById('couponInput');
             const applied = document.getElementById('couponApplied');
@@ -1230,7 +997,6 @@
         // ============================================
         // LOAD CART
         // ============================================
-
         let cartData = [];
 
         async function loadCart() {
@@ -1239,29 +1005,27 @@
 
             if (!user) {
                 container.innerHTML = `
-                        <div class="empty-cart">
-                            <div class="empty-icon">🔒</div>
-                            <h2>Please Login First</h2>
-                            <p>Login to view your cart items</p>
-                            <a href="login.html" class="shop-btn">Login Now</a>
-                        </div>
-                    `;
+                    <div class="empty-cart">
+                        <div class="empty-icon">🔒</div>
+                        <h2>Please Login First</h2>
+                        <p>Login to view your cart items</p>
+                        <a href="login.html" class="shop-btn">Login Now</a>
+                    </div>
+                `;
                 updateSummary();
-                updateDeliveryDates();
                 return;
             }
 
             container.innerHTML = `
-                    <div class="loading-spinner">
-                        <div class="spinner"></div>
-                        <p style="color:#888;">Loading your cart...</p>
-                    </div>
-                `;
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p style="color:#888;">Loading your cart...</p>
+                </div>
+            `;
 
             try {
                 const userId = user.id || user._id;
                 const response = await fetch(`http://localhost:5000/api/cart/${userId}`);
-
                 if (!response.ok) throw new Error('Failed to load cart');
 
                 cartData = await response.json();
@@ -1269,15 +1033,14 @@
 
                 if (cartData.length === 0) {
                     container.innerHTML = `
-                            <div class="empty-cart">
-                                <div class="empty-icon">🛒</div>
-                                <h2>Your Cart is Empty</h2>
-                                <p>Add some delicious cakes and desserts from our collection.</p>
-                                <a href="/" class="shop-btn">Start Shopping</a>
-                            </div>
-                        `;
+                        <div class="empty-cart">
+                            <div class="empty-icon">🛒</div>
+                            <h2>Your Cart is Empty</h2>
+                            <p>Add some delicious cakes and desserts from our collection.</p>
+                            <a href="/" class="shop-btn">Start Shopping</a>
+                        </div>
+                    `;
                     updateSummary();
-                    updateDeliveryDates();
                     return;
                 }
 
@@ -1286,20 +1049,19 @@
             } catch (error) {
                 console.error("❌ Load Cart Error:", error);
                 container.innerHTML = `
-                        <div class="empty-cart">
-                            <div class="empty-icon">⚠️</div>
-                            <h2>Failed to Load Cart</h2>
-                            <p>${error.message}</p>
-                            <button onclick="loadCart()" class="shop-btn">🔄 Retry</button>
-                        </div>
-                    `;
+                    <div class="empty-cart">
+                        <div class="empty-icon">⚠️</div>
+                        <h2>Failed to Load Cart</h2>
+                        <p>${error.message}</p>
+                        <button onclick="loadCart()" class="shop-btn">🔄 Retry</button>
+                    </div>
+                `;
             }
         }
 
         // ============================================
         // RENDER CART ITEMS
         // ============================================
-
         function renderCartItems() {
             const container = document.getElementById("cartItems");
             container.innerHTML = "";
@@ -1308,59 +1070,57 @@
                 const isSelected = item.selected !== false;
 
                 container.innerHTML += `
-                        <div class="cart-card">
-                            <div class="product">
-                                <div class="product-image">
-                                    <img src="${item.image || 'https://via.placeholder.com/150?text=No+Image'}" 
-                                         alt="${item.name}" 
-                                         onerror="this.src='https://via.placeholder.com/150?text=No+Image'">
+                    <div class="cart-card">
+                        <div class="product">
+                            <div class="product-image">
+                                <img src="${item.image || ''}" 
+                                     alt="${item.name}" 
+                                     onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#fff0f3;font-size:50px;\\'>🍰</div>';">
+                            </div>
+                            <div class="product-content">
+                                <div class="product-title-row">
+                                    <input type="checkbox" class="product-check" 
+                                           ${isSelected ? 'checked' : ''} 
+                                           onchange="toggleProductSelection(${index})">
+                                    <h3>${item.name || 'Product'}</h3>
                                 </div>
-                                <div class="product-content">
-                                    <div class="product-title-row">
-                                        <input type="checkbox" class="product-check" 
-                                               ${isSelected ? 'checked' : ''} 
-                                               onchange="toggleProductSelection(${index})">
-                                        <h3>${item.name || 'Product'}</h3>
-                                    </div>
 
-                                    <div class="product-details">
-                                        ${item.weight ? `<span>🎂 ${item.weight}</span>` : ''}
-                                        ${item.flavor ? `<span>🍫 ${item.flavor}</span>` : ''}
-                                        ${item.packSize ? `<span>📦 ${item.packSize}</span>` : ''}
-                                        ${item.bottleSize ? `<span>🥤 ${item.bottleSize}</span>` : ''}
-                                    </div>
+                                <div class="product-details">
+                                    ${item.weight ? `<span>🎂 ${item.weight}</span>` : ''}
+                                    ${item.flavor ? `<span>🍫 ${item.flavor}</span>` : ''}
+                                    ${item.packSize ? `<span>📦 ${item.packSize}</span>` : ''}
+                                    ${item.bottleSize ? `<span>🥤 ${item.bottleSize}</span>` : ''}
+                                </div>
 
-                                    ${item.message ? `<div class="product-message">✍️ "${item.message}"</div>` : ''}
+                                ${item.message ? `<div class="product-message">✍️ "${item.message}"</div>` : ''}
 
-                                    <div class="price">
-                                        <div class="new-price">₹${Number(item.price).toFixed(0)}</div>
-                                    </div>
+                                <div class="price">
+                                    <div class="new-price">₹${Number(item.price).toFixed(0)}</div>
+                                </div>
 
-                                    <div class="cart-bottom">
-                                        <div class="qty-box">
-                                            <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
-                                            <div class="qty">${item.quantity || 1}</div>
-                                            <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
-                                        </div>
-                                        <button class="remove-btn" onclick="removeItem(${index})">
-                                            🗑️ Remove
-                                        </button>
+                                <div class="cart-bottom">
+                                    <div class="qty-box">
+                                        <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                                        <div class="qty">${item.quantity || 1}</div>
+                                        <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
                                     </div>
+                                    <button class="remove-btn" onclick="removeItem(${index})">
+                                        🗑️ Remove
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    `;
+                    </div>
+                `;
             });
 
             updateSelectAllState();
             updateSummary();
-            updateDeliveryDates();
         }
 
         // ============================================
         // QUANTITY
         // ============================================
-
         async function updateQuantity(index, change) {
             const user = getUser();
             if (!user) return;
@@ -1404,7 +1164,6 @@
         // ============================================
         // REMOVE ITEM
         // ============================================
-
         async function removeItem(index) {
             const user = getUser();
             if (!user) return;
@@ -1423,7 +1182,6 @@
                 if (response.ok) {
                     cartData.splice(index, 1);
                     renderCartItems();
-                    updateCartCount();
                     showToast('✅ Item removed from cart');
                 } else {
                     showToast('Failed to remove item', 'error');
@@ -1437,7 +1195,6 @@
         // ============================================
         // CLEAR CART
         // ============================================
-
         async function clearCart() {
             const user = getUser();
             if (!user) return;
@@ -1459,7 +1216,6 @@
 
                 cartData = [];
                 renderCartItems();
-                updateCartCount();
                 showToast('🗑️ Cart cleared successfully');
 
             } catch (error) {
@@ -1471,7 +1227,6 @@
         // ============================================
         // SELECTION
         // ============================================
-
         function toggleProductSelection(index) {
             const item = cartData[index];
             if (!item) return;
@@ -1506,7 +1261,6 @@
         // ============================================
         // UPDATE SUMMARY
         // ============================================
-
         function updateSummary() {
             const selectedItems = cartData.filter(item => item.selected !== false);
 
@@ -1521,7 +1275,7 @@
 
             let delivery = 0;
             if (selectedSubtotal > 0 && selectedSubtotal < 500) {
-                delivery = 40;
+                delivery = 50;
             }
 
             const couponInput = document.getElementById('couponInput');
@@ -1563,7 +1317,10 @@
                     badge.textContent = '🚀 Free Delivery';
                     badge.className = 'delivery-badge';
                 } else if (selectedSubtotal > 0) {
-                    badge.textContent = '💰 ₹40 Delivery';
+                    badge.textContent = '💰 ₹50 Delivery';
+                    badge.className = 'delivery-badge';
+                } else {
+                    badge.textContent = '⚡ Free Delivery Over ₹500';
                     badge.className = 'delivery-badge';
                 }
             }
@@ -1572,7 +1329,6 @@
         // ============================================
         // CHECKOUT
         // ============================================
-
         function proceedToCheckout() {
             const selectedItems = cartData.filter(item => item.selected !== false);
 
@@ -1586,33 +1342,12 @@
         }
 
         // ============================================
-        // UPDATE CART COUNT
-        // ============================================
-
-        async function updateCartCount() {
-            const user = getUser();
-            if (!user) return;
-
-            try {
-                const userId = user.id || user._id;
-                const response = await fetch(`http://localhost:5000/api/cart/count/${userId}`);
-                const result = await response.json();
-            } catch (error) {
-                console.error('Cart Count Error:', error);
-            }
-        }
-
-        // ============================================
         // INIT
         // ============================================
-
         document.addEventListener('DOMContentLoaded', function() {
             loadCart();
-            updateCartCount();
-            updateDeliveryDates();
             console.log('🛒 AV Sweet House - Cart Page Loaded');
             console.log('📌 User:', getUser() ? 'Logged In' : 'Guest');
-            console.log('📦 Delivery Date:', getFullDeliveryDate());
         });
     </script>
 
