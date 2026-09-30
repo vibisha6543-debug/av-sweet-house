@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories | AV Sweet House Admin</title>
+     
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #fff5f8; min-height: 100vh; overflow-x: hidden; }
+
+        /* ============ SIDEBAR ============ */
+        .sidebar {
+            position: fixed; left: 0; top: 0;
+            width: 250px; height: 100vh;
+            background: linear-gradient(180deg, #ff4d8d, #ff7eaa);
+            color: white; padding: 25px 15px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+        }
+        .sidebar.open { transform: translateX(0); }
+        .logo { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 35px; }
+        .logo span { display: block; font-size: 13px; font-weight: 400; margin-top: 5px; opacity: .9; }
+        .menu { list-style: none; padding: 0; }
+        .menu li { margin-bottom: 8px; }
+        .menu a {
+            display: flex; align-items: center; gap: 15px;
+            padding: 13px 16px; color: white; text-decoration: none;
+            border-radius: 12px; font-size: 14px;
+            transition: .3s; cursor: pointer;
+        }
+        .menu a:hover, .menu a.active { background: rgba(255, 255, 255, .20); }
+        .menu i { width: 20px; text-align: center; }
+
+        .sidebar-toggle {
+            display: none; position: fixed; top: 15px; left: 15px;
+            z-index: 1001; background: #ff4d8d; color: white; border: none;
+            border-radius: 10px; padding: 10px 14px;
+            font-size: 20px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 77, 141, 0.3);
+        }
+        .sidebar-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.4); z-index: 999;
+        }
+        .sidebar-overlay.show { display: block; }
+
+        /* ============ MAIN ============ */
+        .main { margin-left: 250px; padding: 30px; transition: all 0.3s ease; }
+
+        .top-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 25px; flex-wrap: wrap; gap: 15px;
+        }
+        .top-header h1 { font-size: 26px; font-weight: 700; color: #333; }
+        .top-header p { margin: 5px 0 0; color: #777; font-size: 14px; }
+
+        .add-btn {
+            background: linear-gradient(135deg, #ff4d8d, #ff7eaa);
+            color: white; border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600; font-size: 14px;
+            cursor: pointer; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(255, 77, 141, 0.25);
+        }
+        .add-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(255, 77, 141, 0.35); color: white; }
+
+        /* ============ SUMMARY CARDS ============ */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .summary-card {
+            background: white; padding: 22px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .06);
+            display: flex; align-items: center; gap: 18px;
+            transition: 0.3s;
+        }
+        .summary-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08); }
+        .summary-card .icon {
+            width: 55px; height: 55px;
+            border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            background: #ffe1ec;
+            flex-shrink: 0;
+        }
+        .summary-card h3 { font-size: 24px; color: #333; font-weight: 700; margin: 0; }
+        .summary-card p { color: #888; margin-top: 3px; font-size: 13px; }
+
+        /* ============ TABLE ============ */
+        .table-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, .06);
+            overflow-x: auto;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            background: #fff5f8; color: #555;
+            font-size: 12px; padding: 14px;
+            text-align: left; white-space: nowrap;
+            font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #f5e0e6;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+        tbody tr:hover { background: #fff9fb; }
+        tbody tr:last-child td { border-bottom: none; }
+
+        .category-icon {
+            font-size: 24px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .category-name { font-weight: 600; color: #333; font-size: 14px; }
+
+        .category-type {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            display: inline-block;
+        }
+        .category-type.main { background: #ffe0eb; color: #ff4d8d; }
+        .category-type.sub { background: #eee7ff; color: #7048d8; }
+
+        .parent-name {
+            font-size: 12px;
+            color: #888;
+            background: #f5f5f5;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+
+        .action-btn {
+            border: none;
+            padding: 7px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .action-btn.edit { background: #dbeafe; color: #1e40af; }
+        .action-btn.edit:hover { background: #1e40af; color: white; }
+        .action-btn.delete { background: #fde8e8; color: #991b1b; }
+        .action-btn.delete:hover { background: #991b1b; color: white; }
+
+        /* ============ MODAL ============ */
+        .modal-overlay {
+            display: none;
+            position: fixed; inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.show { display: flex; }
+
+        .modal-box {
+            background: white;
+            border-radius: 22px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlide 0.3s ease;
+        }
+        @keyframes modalSlide {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 22px;
+        }
+        .modal-header h3 {
+            font-size: 20px; font-weight: 700;
+            color: #ff4d8d;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .modal-close {
+            background: none; border: none;
+            font-size: 22px;
+            color: #999;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-close:hover { color: #dc3545; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #444;
+        }
+        .form-group label .required { color: #dc3545; margin-left: 3px; }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #f0e0e6;
+            border-radius: 12px;
+            background: #faf8f9;
+            font-size: 14px;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            transition: 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #ff4d8d;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 77, 141, 0.08);
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+        .modal-actions button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .modal-actions .cancel-btn {
+            background: #f5f5f5; color: #666;
+        }
+        .modal-actions .cancel-btn:hover { background: #e0e0e0; }
+        .modal-actions .save-modal-btn {
+            background: linear-gradient(135deg, #ff4d8d, #ff7eaa);
+            color: white;
+        }
+        .modal-actions .save-modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 77, 141, 0.3);
+        }
+
+        /* ============ LOADING & EMPTY ============ */
+        .loading { text-align: center; padding: 60px 20px; color: #888; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff4d8d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+        }
+        .empty-state i { font-size: 50px; color: #ffd2dc; display: block; margin-bottom: 15px; }
+        .empty-state h3 { color: #333; margin-bottom: 8px; }
+
+        /* ============ TOAST ============ */
+        .toast-notification {
+            position: fixed; top: 20px; right: 20px;
+            background: white; padding: 15px 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #ff4d8d;
+            z-index: 9999;
+            display: none;
+            min-width: 280px; max-width: 400px;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+        }
+        .toast-notification.show { display: block; }
+        .toast-notification.success { border-left-color: #28a745; }
+        .toast-notification.error { border-left-color: #dc3545; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media(max-width: 768px) {
+            .sidebar-toggle { display: block; }
+            .sidebar { transform: translateX(-100%); width: 280px; }
+            .sidebar.open { transform: translateX(0); }
+            .main { margin-left: 0; padding: 20px 15px; padding-top: 70px; }
+            .top-header h1 { font-size: 20px; }
+            .summary-grid { grid-template-columns: 1fr; }
+            .table-wrapper { padding: 15px; }
+            th, td { padding: 10px 8px; font-size: 12px; }
+            .row-2 { grid-template-columns: 1fr; }
+            .modal-box { padding: 22px 18px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="logo">
+            🍰 AV Sweet House
+            <span>Admin Panel</span>
+        </div>
+
+        <ul class="menu">
+            <li><a href="admin-dashboard.html"><i class="fa-solid fa-gauge"></i><span>Dashboard</span></a></li>
+            <li><a href="manage-orders.html"><i class="fa-solid fa-box"></i><span>Manage Orders</span></a></li>
+            <li><a href="manage-products.html"><i class="fa-solid fa-cake-candles"></i><span>Manage Products</span></a></li>
+            <li><a href="manage-categories.html" class="active"><i class="fa-solid fa-tags"></i><span>Categories</span></a></li>
+            <li><a href="add-product.html"><i class="fa-solid fa-plus"></i><span>Add Product</span></a></li>
+            <li><a href="customers.html"><i class="fa-solid fa-users"></i><span>Customers</span></a></li>
+            <li><a href="sales-reports.html"><i class="fa-solid fa-chart-line"></i><span>Sales Report</span></a></li>
+            <li style="margin-top:25px;">
+                <a href="admin-login.html" onclick="logoutAdmin(event)">
+                    <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- ============ TOAST ============ -->
+    <div class="toast-notification" id="toast">
+        <span id="toastMessage">Success!</span>
+    </div>
+
+    <!-- ============ MAIN ============ -->
+    <main class="main">
+
+        <div class="top-header">
+            <div>
+                <h1>🏷️ Manage Categories</h1>
+                <p id="pageSubtitle">Organize your product categories</p>
+            </div>
+            <button class="add-btn" onclick="openAddModal()">
+                <i class="fa-solid fa-plus"></i> Add Category
+            </button>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="icon">🏷️</div>
+                <div>
+                    <h3 id="totalCategories">0</h3>
+                    <p>Total Categories</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="icon">⭐</div>
+                <div>
+                    <h3 id="mainCategories">0</h3>
+                    <p>Main Categories</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="icon">📎</div>
+                <div>
+                    <h3 id="subCategories">0</h3>
+                    <p>Subcategories</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrapper">
+            <div id="loadingState" class="loading">
+                <div class="spinner"></div>
+                <p>Loading categories...</p>
+            </div>
+
+            <table id="categoriesTable" style="display:none;">
+                <thead>
+                    <tr>
+                        <th>Icon</th>
+                        <th>Category Name</th>
+                        <th>Type</th>
+                        <th>Parent</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="categoriesBody"></tbody>
+            </table>
+
+            <div id="emptyState" class="empty-state" style="display:none;">
+                <i class="fa-solid fa-tags"></i>
+                <h3>No Categories Found</h3>
+                <p>Click "Add Category" to create your first one.</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============ MODAL ============ -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fa-solid fa-plus"></i> Add Category</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <div class="form-group">
+                <label>Category Name <span class="required">*</span></label>
+                <input type="text" id="catName" placeholder="e.g. Birthday Cakes" maxlength="50">
+            </div>
+
+            <div class="row-2">
+                <div class="form-group">
+                    <label>Icon (Emoji)</label>
+                    <input type="text" id="catIcon" placeholder="🎂" maxlength="4">
+                </div>
+                <div class="form-group">
+                    <label>Type <span class="required">*</span></label>
+                    <select id="catType" onchange="handleTypeChange()">
+                        <option value="main">Main Category</option>
+                        <option value="sub">Subcategory</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" id="parentGroup" style="display:none;">
+                <label>Parent Category <span class="required">*</span></label>
+                <select id="catParent">
+                    <option value="">Select Parent</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Description (Optional)</label>
+                <textarea id="catDescription" placeholder="Short description..."></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="save-modal-btn" id="modalSaveBtn" onclick="saveCategory()">
+                    <i class="fa-solid fa-save"></i> Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "/api";
+        let allCategories = [];
+        let editingId = null;
+
+        /* ============ AUTH CHECK ============ */
+        function checkAdminLogin() {
+            const isLoggedIn = localStorage.getItem("adminLoggedIn");
+            const adminUser = localStorage.getItem("adminUser");
+            if (isLoggedIn !== "true" || !adminUser) {
+                alert("⚠️ Please login first.");
+                window.location.href = "admin-login.html";
+                return false;
+            }
+            return true;
+        }
+
+        /* ============ SIDEBAR ============ */
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebarOverlay').classList.toggle('show');
+        }
+
+        /* ============ LOGOUT ============ */
+        function logoutAdmin(e) {
+            if (e) e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem("adminLoggedIn");
+                localStorage.removeItem("adminUser");
+                localStorage.removeItem("adminName");
+                localStorage.removeItem("adminLoginTime");
+                window.location.href = "admin-login.html";
+            }
+            return false;
+        }
+
+        /* ============ TOAST ============ */
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.className = 'toast-notification show ' + type;
+            clearTimeout(toast._timeout);
+            toast._timeout = setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        function escapeHtml(v) {
+            return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        /* ============ LOAD CATEGORIES ============ */
+        async function loadCategories() {
+            const loading = document.getElementById('loadingState');
+            const table = document.getElementById('categoriesTable');
+            const empty = document.getElementById('emptyState');
+
+            loading.style.display = 'block';
+            table.style.display = 'none';
+            empty.style.display = 'none';
+
+            try {
+                const response = await fetch(`${API_URL}/categories`);
+                if (!response.ok) throw new Error("Failed to load categories");
+
+                allCategories = await response.json();
+                if (!Array.isArray(allCategories)) allCategories = [];
+
+                console.log("🏷️ Categories loaded:", allCategories.length);
+
+                loading.style.display = 'none';
+                renderCategories();
+                updateSummary();
+
+            } catch (error) {
+                console.error("Load Categories Error:", error);
+                loading.innerHTML = `
+                    <div style="color:#dc3545;text-align:center;">
+                        <i class="fa-solid fa-circle-exclamation fa-2x d-block mb-3"></i>
+                        ❌ Failed to load categories
+                        <br><br>
+                        <button onclick="loadCategories()" style="padding:10px 25px;border:none;border-radius:20px;background:#ff4d8d;color:white;cursor:pointer;font-weight:600;">
+                            <i class="fa-solid fa-sync"></i> Retry
+                        </button>
+                    </div>`;
+            }
+        }
+
+        /* ============ UPDATE SUMMARY ============ */
+        function updateSummary() {
+            const mainCount = allCategories.filter(c => c.type === 'main').length;
+            const subCount = allCategories.filter(c => c.type === 'sub').length;
+
+            document.getElementById('totalCategories').textContent = allCategories.length;
+            document.getElementById('mainCategories').textContent = mainCount;
+            document.getElementById('subCategories').textContent = subCount;
+            document.getElementById('pageSubtitle').textContent = `${allCategories.length} categories total`;
+        }
+
+        /* ============ RENDER ============ */
+        function renderCategories() {
+            const tbody = document.getElementById('categoriesBody');
+            const table = document.getElementById('categoriesTable');
+            const empty = document.getElementById('emptyState');
+
+            if (allCategories.length === 0) {
+                table.style.display = 'none';
+                empty.style.display = 'block';
+                return;
+            }
+
+            empty.style.display = 'none';
+            table.style.display = 'table';
+
+            // Sort: main first, then sub grouped by parent
+            const sorted = [...allCategories].sort((a, b) => {
+                if (a.type === 'main' && b.type === 'sub') return -1;
+                if (a.type === 'sub' && b.type === 'main') return 1;
+                if (a.type === 'sub' && b.type === 'sub') {
+                    return (a.parent || '').localeCompare(b.parent || '');
+                }
+                return (a.name || '').localeCompare(b.name || '');
+            });
+
+            tbody.innerHTML = sorted.map(cat => `
+                <tr>
+                    <td style="font-size:24px;">${escapeHtml(cat.icon || '🍰')}</td>
+                    <td><span class="category-name">${escapeHtml(cat.name)}</span></td>
+                    <td><span class="category-type ${cat.type}">${cat.type === 'main' ? '⭐ Main' : '📎 Sub'}</span></td>
+                    <td>${cat.type === 'sub' && cat.parent ? `<span class="parent-name">${escapeHtml(cat.parent)}</span>` : '<span style="color:#ccc;">—</span>'}</td>
+                    <td>
+                        <button class="action-btn edit" onclick="openEditModal('${cat._id}')">
+                            <i class="fa-solid fa-pen"></i> Edit
+                        </button>
+                        <button class="action-btn delete" onclick="deleteCategory('${cat._id}', '${escapeHtml(cat.name).replace(/'/g, "\\'")}')">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        /* ============ MODAL ============ */
+        function openAddModal() {
+            editingId = null;
+            document.getElementById('modalTitle').innerHTML = '<i class="fa-solid fa-plus"></i> Add Category';
+            document.getElementById('catName').value = '';
+            document.getElementById('catIcon').value = '';
+            document.getElementById('catType').value = 'main';
+            document.getElementById('catParent').value = '';
+            document.getElementById('catDescription').value = '';
+            document.getElementById('parentGroup').style.display = 'none';
+            populateParentDropdown();
+            document.getElementById('modalOverlay').classList.add('show');
+            setTimeout(() => document.getElementById('catName').focus(), 100);
+        }
+
+        function openEditModal(id) {
+            const cat = allCategories.find(c => c._id === id);
+            if (!cat) return;
+
+            editingId = id;
+            document.getElementById('modalTitle').innerHTML = '<i class="fa-solid fa-pen"></i> Edit Category';
+            document.getElementById('catName').value = cat.name || '';
+            document.getElementById('catIcon').value = cat.icon || '';
+            document.getElementById('catType').value = cat.type || 'main';
+            document.getElementById('catDescription').value = cat.description || '';
+
+            populateParentDropdown();
+            if (cat.type === 'sub') {
+                document.getElementById('parentGroup').style.display = 'block';
+                document.getElementById('catParent').value = cat.parent || '';
+            } else {
+                document.getElementById('parentGroup').style.display = 'none';
+            }
+
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('show');
+            editingId = null;
+        }
+
+        function closeModalOnOverlay(e) {
+            if (e.target.id === 'modalOverlay') closeModal();
+        }
+
+        function handleTypeChange() {
+            const type = document.getElementById('catType').value;
+            document.getElementById('parentGroup').style.display = type === 'sub' ? 'block' : 'none';
+            if (type === 'sub') populateParentDropdown();
+        }
+
+        function populateParentDropdown() {
+            const parentSelect = document.getElementById('catParent');
+            const mainCats = allCategories.filter(c => c.type === 'main');
+            parentSelect.innerHTML = '<option value="">Select Parent</option>' +
+                mainCats.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.icon || '')} ${escapeHtml(c.name)}</option>`).join('');
+        }
+
+        /* ============================================================
+   SAVE CATEGORY — with rename warning + cascade support
+   ============================================================ */
+async function saveCategory() {
+    const btn = document.getElementById('modalSaveBtn');
+
+    const name = document.getElementById('catName').value.trim();
+    const icon = document.getElementById('catIcon').value.trim() || '🍰';
+    const type = document.getElementById('catType').value;
+    const parent = type === 'sub' ? document.getElementById('catParent').value : '';
+    const description = document.getElementById('catDescription').value.trim();
+
+    if (!name) {
+        showToast('⚠️ Category name required', 'error');
+        return;
+    }
+    if (type === 'sub' && !parent) {
+        showToast('⚠️ Please select a parent category', 'error');
+        return;
+    }
+
+    // ============ RENAME CHECK (only when editing) ============
+    if (editingId) {
+        const current = allCategories.find(c => c._id === editingId);
+        const oldName = current ? current.name : '';
+
+        if (oldName && oldName !== name) {
+            // Count how many products use this category
+            let affectedProducts = 0;
+            try {
+                const prodRes = await fetch(`${API_URL}/products`);
+                const products = await prodRes.json();
+                affectedProducts = products.filter(
+                    p => (p.category || '').trim().toLowerCase() === oldName.trim().toLowerCase()
+                ).length;
+            } catch (e) {
+                console.log("Could not pre-check products:", e.message);
+            }
+
+            // Confirm with the admin
+            const msg = affectedProducts > 0
+                ? `Rename "${oldName}" → "${name}"?\n\n⚠️ This will also update ${affectedProducts} product(s) that use this category.\n\nContinue?`
+                : `Rename "${oldName}" → "${name}"?\n\nNo products are affected.\n\nContinue?`;
+
+            if (!confirm(msg)) return;
+        }
+    }
+
+    // ============ SEND TO SERVER ============
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+
+    try {
+        const url = editingId ? `${API_URL}/categories/${editingId}` : `${API_URL}/categories`;
+        const method = editingId ? 'PUT' : 'POST';
+
+        const response = await fetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, icon, type, parent, description })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+            let msg = `✅ Category "${name}" ${editingId ? 'updated' : 'added'}!`;
+
+            if (data.renamed && (data.affectedProducts > 0 || data.affectedSubCategories > 0)) {
+                msg = `✅ Renamed to "${name}"`;
+                if (data.affectedProducts > 0)
+                    msg += ` • 📦 ${data.affectedProducts} products updated`;
+                if (data.affectedSubCategories > 0)
+                    msg += ` • 📁 ${data.affectedSubCategories} sub-cats updated`;
+            }
+
+            showToast(msg, 'success');
+            closeModal();
+            loadCategories();
+        } else {
+            showToast(`❌ ${data.message || 'Failed to save'}`, 'error');
+        }
+    } catch (error) {
+        console.error("Save Category Error:", error);
+        showToast(`❌ ${error.message}`, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-save"></i> Save';
+    }
+}
+        /* ============ DELETE CATEGORY ============ */
+        async function deleteCategory(id, name) {
+            if (!confirm(`Delete category "${name}"?\n\nThis won't delete products in this category.`)) return;
+
+            try {
+                const response = await fetch(`${API_URL}/categories/${id}`, { method: 'DELETE' });
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showToast(`✅ "${name}" deleted`, 'success');
+                    loadCategories();
+                } else {
+                    showToast(`❌ ${data.message || 'Failed to delete'}`, 'error');
+                }
+            } catch (error) {
+                showToast(`❌ ${error.message}`, 'error');
+            }
+        }
+
+        /* ============ KEYBOARD ============ */
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        /* ============ INIT ============ */
+        document.addEventListener('DOMContentLoaded', function () {
+            if (!checkAdminLogin()) return;
+            loadCategories();
+            console.log('✅ Manage Categories page ready');
+        });
+    </script>
+
+</body>
+</html>

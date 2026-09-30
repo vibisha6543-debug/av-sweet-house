@@ -1,0 +1,1899 @@
+[
+  {
+    "id": 1782975658334,
+    "name": "white forest",
+    "price": 650,
+    "image": "../users/images/products/white forest.jpg",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782976705888,
+    "name": "Black Forest Cake",
+    "price": 599,
+    "image": "../users/images/products/black-forest-cake.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782980799469,
+    "name": "Red Velvet Cake",
+    "price": 600,
+    "image": "../users/images/products/red-velvet.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782981580070,
+    "name": "Butterscotch Birthday Cake",
+    "price": 600,
+    "image": "../users/images/products/butterscotch-cake.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782981925469,
+    "name": " Chocolate Truffle Cake",
+    "price": 549,
+    "image": "../users/images/products/chocolate-cake.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782982405305,
+    "name": "Fresh Fruit Birthday Cake",
+    "price": 649,
+    "image": "../users/images/products/fruit cake.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782984902301,
+    "name": "Rainbow Birthday Cake",
+    "price": 720,
+    "image": "../users/images/products/Rainbow.jpg",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782985181170,
+    "name": "KitKat Birthday Cake",
+    "price": 649,
+    "image": "../users/images/products/kitkat-cake.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782985327723,
+    "name": "Oreo Birthday Cake",
+    "price": 1449,
+    "image": "../users/images/products/oreo-cake.webp",
+    "category": "Birthday Cakes"
+  },
+  {
+    "id": 1782986256611,
+    "name": "Heart Shape Anniversary Cake",
+    "price": 649,
+    "image": "../users/images/products/hearty-red-velvet-cake.webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1782987654638,
+    "name": "Couple Theme Anniversary Cake",
+    "price": 1479,
+    "image": "../users/images/products/couple cake.webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783014315604,
+    "name": "Romantic Anniversary Cake",
+    "price": 775,
+    "image": "../users/images/products/romantic anniversary .webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783014856943,
+    "name": "Rose Gold Anniversary Cake",
+    "price": 789,
+    "image": "../users/images/products/rose golden-anniversary.jpg",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783102543587,
+    "name": " Heartbeat of Love Cake",
+    "price": 749,
+    "image": "../users/images/products/heartbeat-anniversary.webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783102980102,
+    "name": "Rosy Petals Heart Cake",
+    "price": 749,
+    "image": "../users/images/products/rosy-petals-anniversary.webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783103107398,
+    "name": "Happy Anniversary Camera Cakes",
+    "price": 1289,
+    "image": "../users/images/products/camera anniversary .webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783103252592,
+    "name": " Loving Year Cake",
+    "price": 729,
+    "image": "../users/images/products/loving-year-anniversary.webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783103524872,
+    "name": "Passionate Love Chocolate Cake",
+    "price": 699,
+    "image": "../users/images/products/passionate-love-chocolate-anniversary.webp",
+    "category": "Anniversary Cakes"
+  },
+  {
+    "id": 1783146717270,
+    "name": "Baby shower Cake",
+    "price": 729,
+    "image": "../users/images/products/baby-shower-occasion cake.webp",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783183969756,
+    "name": "Christmas Cake",
+    "price": 790,
+    "image": "../users/images/products/santa-claus-occasion.webp",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783185141582,
+    "name": "New Year Cake",
+    "price": 689,
+    "image": "../users/images/products/new year-occasion.webp",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783185866934,
+    "name": "Congratulations Cake",
+    "price": 578,
+    "image": "../users/images/products/congrats- occasion.jpg",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783186181567,
+    "name": "Housewarming Cake ",
+    "price": 899,
+    "image": "../users/images/products/house warming-occasion.jpg",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783186579478,
+    "name": "Mother's Day Cake",
+    "price": 699,
+    "image": "../users/images/products/mothersday-occasion.jpg",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783186745945,
+    "name": "Women's Day Cake",
+    "price": 799,
+    "image": "../users/images/products/womens-occasion.jpg",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783190132864,
+    "name": "Fathers Day Cake",
+    "price": 689,
+    "image": "../users/images/products/fathers day-occasion.webp",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783190448309,
+    "name": " Independence Day Cake",
+    "price": 509,
+    "image": "../users/images/products/independence-day occasion-.webp",
+    "category": "Occasion Cakes"
+  },
+  {
+    "id": 1783191817587,
+    "name": "Hearty Just Married Cake",
+    "price": 1099,
+    "image": "../users/images/products/just married wedding.webp",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783192762499,
+    "name": "Pretty Prince N Princess Round Cake",
+    "price": 788,
+    "image": "../users/images/products/prince-princess-wedding-.webp",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783192947969,
+    "name": " Blushing Three Tier Rose Cake",
+    "price": 6577,
+    "image": "../users/images/products/3 tier-wedding.jpg",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783193435052,
+    "name": "Golden Rose Wedding Cake",
+    "price": 1289,
+    "image": "../users/images/products/golden-rose-wedding.webp",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783193886306,
+    "name": " Donut Couple Wedding Cake",
+    "price": 1799,
+    "image": "../users/images/products/donut-wedding-cake.webp",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783194085669,
+    "name": "Bride To Be Wedding Loading Cake",
+    "price": 419,
+    "image": "../users/images/products/bride-to-be-loading-wedding.webp",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783194628517,
+    "name": "South Indian Wedding Cake",
+    "price": 990,
+    "image": "../users/images/products/indian wedding.png",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783194980145,
+    "name": "wedding reception cake ",
+    "price": 1340,
+    "image": "../users/images/products/reception wedding.jpg",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783195488281,
+    "name": "Proppose Wedding cake",
+    "price": 790,
+    "image": "../users/images/products/proppose wedding.jpg",
+    "category": "Wedding Cakes"
+  },
+  {
+    "id": 1783271348223,
+    "name": "Spiderman Kids Cake",
+    "price": 899,
+    "image": "../users/images/products/spider-kids cake.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783271921691,
+    "name": "Frozen Princess Cake",
+    "price": 980,
+    "image": "../users/images/products/elsa-kids cake.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783272249389,
+    "name": "Car Cake",
+    "price": 588,
+    "image": "../users/images/products/car-kids cake.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783272690467,
+    "name": "Mickey Mouse Cake",
+    "price": 980,
+    "image": "../users/images/products/mickey-mouse-kids.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783273025339,
+    "name": " Dreamy Barbie Cake",
+    "price": 677,
+    "image": "../users/images/products/barbie-kids.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783330271110,
+    "name": "Teddy Bear Cake",
+    "price": 938,
+    "image": "../users/images/products/teddy-half-kids cake.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783331167528,
+    "name": "Unicorn Fantasy Cake ",
+    "price": 849,
+    "image": "../users/images/products/Unicorn-kids cake.jpg",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783331359861,
+    "name": "Jungle Safari Cake",
+    "price": 784,
+    "image": "../users/images/products/jungle-kids cake.jpg",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783331592559,
+    "name": "Train Cake",
+    "price": 976,
+    "image": "../users/images/products/train-kids cake.webp",
+    "category": "Kids Cakes"
+  },
+  {
+    "id": 1783332507470,
+    "name": "Vanilla Cup Cake",
+    "price": 40,
+    "image": "../users/images/products/vanilla-cup cakes.webp",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783332665869,
+    "name": "Chocolate Cup Cake",
+    "price": 70,
+    "image": "../users/images/products/choco-cupcake.webp",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783332962756,
+    "name": "Red Velvet Cupcakes",
+    "price": 80,
+    "image": "../users/images/products/RedVelvetCupcakes.webp",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783333250265,
+    "name": "Blueberry Cup Cake",
+    "price": 92,
+    "image": "../users/images/products/Blueberry-cup cakes.jpg",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783333400085,
+    "name": "Oreo Cup Cake",
+    "price": 64,
+    "image": "../users/images/products/Oreo-cupcake.jpg",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783361985931,
+    "name": "Butterscotch Cup Cake",
+    "price": 50,
+    "image": "../users/images/products/butterscotch-cupcake-.jpg",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783362212145,
+    "name": "Rainbow Cup Cake",
+    "price": 70,
+    "image": "../users/images/products/Rainow-cupcake.jpg",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783362485128,
+    "name": " Hearty Cupcakes Set Of Four",
+    "price": 345,
+    "image": "../users/images/products/Caramel Cup Cake.webp",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783362668812,
+    "name": "Black Forest Cup Cake",
+    "price": 87,
+    "image": "../users/images/products/black-forest-cupcakes.webp",
+    "category": "Cup Cakes"
+  },
+  {
+    "id": 1783364169190,
+    "name": "Classic Chocolate Brownie",
+    "price": 119,
+    "image": "../users/images/products/chocolate-brownies.jpg",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783365182853,
+    "name": "Fudge Brownie",
+    "price": 202,
+    "image": "../users/images/products/Fudge Brownie.webp",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783365316346,
+    "name": "Walnut Brownie",
+    "price": 231,
+    "image": "../users/images/products/Walnut Brownie.webp",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783365490319,
+    "name": "Oreo Brownie",
+    "price": 115,
+    "image": "../users/images/products/Oreo Brownie.png",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783365665293,
+    "name": "Nutella Brownie",
+    "price": 234,
+    "image": "../users/images/products/Nutella Brownie.webp",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783365843024,
+    "name": "Caramel Brownie",
+    "price": 67,
+    "image": "../users/images/products/Caramel Brownie.webp",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783365981897,
+    "name": "Choco Chip Brownie",
+    "price": 178,
+    "image": "../users/images/products/Choco Chip Brownie.jpg",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783366151521,
+    "name": "Red Velvet Brownie",
+    "price": 89,
+    "image": "../users/images/products/Red Velvet Brownie.png",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783366318914,
+    "name": "White Chocolate Brownie",
+    "price": 98,
+    "image": "../users/images/products/White Chocolate Brownie.webp",
+    "category": "Brownies"
+  },
+  {
+    "id": 1783598853836,
+    "name": "Classic Glazed Donut",
+    "price": 76,
+    "image": "../users/images/products/classic_glazed_donuts.jpg",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783661228208,
+    "name": "Chocolate Sprinkle Donut",
+    "price": 90,
+    "image": "../users/images/products/chocolate-donuts.png",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783661310407,
+    "name": "Strawberry Glazed Donut",
+    "price": 98,
+    "image": "../users/images/products/Strawberry Glazed Donut.webp",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783661624835,
+    "name": "Oreo Crunch Donut",
+    "price": 87,
+    "image": "../users/images/products/Oreo Crunch Donut.jpg",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783661865152,
+    "name": "Nutella Filled Donut",
+    "price": 121,
+    "image": "../users/images/products/Nutella Filled Donut.png",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783661971805,
+    "name": "Rainbow Sprinkle Donut",
+    "price": 75,
+    "image": "../users/images/products/Rainbow Sprinkle Donut.webp",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783662148125,
+    "name": "Caramel Crunch Donut",
+    "price": 98,
+    "image": "../users/images/products/Caramel Crunch Donut.jpg",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783662231024,
+    "name": "Red Velvet Donut",
+    "price": 74,
+    "image": "../users/images/products/Red Velvet Donut.png",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783662414272,
+    "name": "Blueberry Cream Donut",
+    "price": 98,
+    "image": "../users/images/products/Blueberry Cream Donut.jpg",
+    "category": "Donuts"
+  },
+  {
+    "id": 1783663064062,
+    "name": "Classic New York Cheesecake",
+    "price": 213,
+    "image": "../users/images/products/Classic New York Cheesecake.webp",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783663213427,
+    "name": "Blueberry Cheesecake",
+    "price": 232,
+    "image": "../users/images/products/Blueberry Cheesecake.webp",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783663408395,
+    "name": "Strawberry Cheesecake",
+    "price": 254,
+    "image": "../users/images/products/Strawberry Cheesecake.png",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783663528049,
+    "name": "Chocolate Cheesecake",
+    "price": 232,
+    "image": "../users/images/products/Chocolate Cheesecake.jpg",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783663654469,
+    "name": "Mango Cheesecake",
+    "price": 265,
+    "image": "../users/images/products/Mango Cheesecake.webp",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783663824949,
+    "name": "Oreo Cheesecake",
+    "price": 274,
+    "image": "../users/images/products/Oreo Cheesecake.webp",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783663928325,
+    "name": "Raspberry Cheesecake",
+    "price": 211,
+    "image": "../users/images/products/Raspberry Cheesecake.webp",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783664038046,
+    "name": "Lotus Biscoff Cheesecake",
+    "price": 232,
+    "image": "../users/images/products/Lotus Biscoff Cheesecake.jpg",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783664116507,
+    "name": "Caramel Cheesecake",
+    "price": 287,
+    "image": "../users/images/products/Caramel Cheesecake.webp",
+    "category": "Cheesecakes"
+  },
+  {
+    "id": 1783678976543,
+    "name": "Chocolate Pastry",
+    "price": 99,
+    "image": "../users/images/products/Chocolate Pastry.png",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680235384,
+    "name": "Black Forest Pastry",
+    "price": 122,
+    "image": "../users/images/products/Black Forest Pastry.webp",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680427480,
+    "name": "Pineapple Pastry",
+    "price": 134,
+    "image": "../users/images/products/Pineapple Pastry.jpg",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680531618,
+    "name": "Blueberry Pastry",
+    "price": 178,
+    "image": "../users/images/products/Blueberry Pastry.webp",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680645850,
+    "name": "Coffee Mocha Pastry",
+    "price": 134,
+    "image": "../users/images/products/Coffee Mocha Pastry.webp",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680794451,
+    "name": "Vanilla Cream Pastry",
+    "price": 187,
+    "image": "../users/images/products/Vanilla Cream Pastry.jpg",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680924279,
+    "name": "Mango Pastry",
+    "price": 154,
+    "image": "../users/images/products/Mango Pastry.webp",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783680998027,
+    "name": "Strawberry Pastry",
+    "price": 145,
+    "image": "../users/images/products/Strawberry Pastry.png",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783681127437,
+    "name": "Butterscotch Pastry",
+    "price": 122,
+    "image": "../users/images/products/Butterscotch Pastry.webp",
+    "category": "Pastry"
+  },
+  {
+    "id": 1783686729513,
+    "name": "Vanilla Macaron",
+    "price": 123,
+    "image": "../users/images/products/Vanilla Macaron.webp",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687100334,
+    "name": "Chocolate Macaron",
+    "price": 132,
+    "image": "../users/images/products/Chocolate Macaron.jpg",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687245237,
+    "name": "Strawberry Macaron",
+    "price": 98,
+    "image": "../users/images/products/Strawberry Macaron.webp",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687511489,
+    "name": "Pistachio Macaron",
+    "price": 123,
+    "image": "../users/images/products/Pistachio Macaron.webp",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687600582,
+    "name": "Blueberry Macaron",
+    "price": 165,
+    "image": "../users/images/products/Blueberry Macaron.png",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687701605,
+    "name": "Mango Macaron",
+    "price": 97,
+    "image": "../users/images/products/Mango Macaron.webp",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687781291,
+    "name": "Raspberry Macaron",
+    "price": 123,
+    "image": "../users/images/products/Raspberry Macaron.png",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783687874997,
+    "name": "Coffee Macaron",
+    "price": 102,
+    "image": "../users/images/products/Coffee Macaron.webp",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783688049215,
+    "name": "Rainbow Macaron Box",
+    "price": 231,
+    "image": "../users/images/products/Rainbow Macaron Box.webp",
+    "category": "Macarons"
+  },
+  {
+    "id": 1783688626263,
+    "name": "Chocolate Chip Cookies",
+    "price": 109,
+    "image": "../users/images/products/Chocolate Chip Cookies.webp",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783689417879,
+    "name": "Double Chocolate Cookies",
+    "price": 127,
+    "image": "../users/images/products/Double Chocolate Cookies.webp",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783689592048,
+    "name": "Butter Cookies",
+    "price": 109,
+    "image": "../users/images/products/Butter Cookies.jpeg",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783689754955,
+    "name": "Oatmeal Raisin Cookies",
+    "price": 127,
+    "image": "../users/images/products/Oatmeal Raisin Cookies.webp",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783690039192,
+    "name": "Red Velvet Cookies",
+    "price": 165,
+    "image": "../users/images/products/Red Velvet Cookies.jpg",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783690133029,
+    "name": "Almond Cookies",
+    "price": 185,
+    "image": "../users/images/products/Almond Cookies.jpg",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783690260367,
+    "name": "Rainbow Sprinkle Cookies",
+    "price": 199,
+    "image": "../users/images/products/Rainbow Sprinkle Cookies.png",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783690387612,
+    "name": "Choco Lava Cookies",
+    "price": 165,
+    "image": "../users/images/products/Choco Lava Cookies.webp",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783690586575,
+    "name": "Peanut Butter Cookie",
+    "price": 122,
+    "image": "../users/images/products/Peanut Butter Cookies.webp",
+    "category": "Cookies"
+  },
+  {
+    "id": 1783753487785,
+    "name": "Classic Dark Chocolate",
+    "price": 210,
+    "image": "../users/images/products/Classic Dark Chocolate.webp",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783753936923,
+    "name": "Belgian Dark Chocolate",
+    "price": 232,
+    "image": "../users/images/products/Belgian Dark Chocolate.jpg",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783754540701,
+    "name": "cocoa dark chocolate",
+    "price": 132,
+    "image": "../users/images/products/cocoa dark chocolate.webp",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783754750600,
+    "name": "Cocoa Dark Chocolate bar",
+    "price": 232,
+    "image": "../users/images/products/Cocoa Dark Chocolate bar.jpg",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783754870778,
+    "name": "Almond Dark Chocolate",
+    "price": 198,
+    "image": "../users/images/products/Almond Dark Chocolate.jpeg",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783754977056,
+    "name": "Hazelnut Dark Chocolate",
+    "price": 167,
+    "image": "../users/images/products/Hazelnut Dark -Chocolate.jpg",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783755290307,
+    "name": "Orange Dark Chocolate",
+    "price": 231,
+    "image": "../users/images/products/Orange Dark Chocolate.jpg",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783755479735,
+    "name": "Mint Dark Chocolate",
+    "price": 178,
+    "image": "../users/images/products/Mint Dark Chocolate.avif",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783755557183,
+    "name": "Dark Chocolate Truffles",
+    "price": 236,
+    "image": "../users/images/products/Dark Chocolate Truffles.jpg",
+    "category": "Dark Chocolates"
+  },
+  {
+    "id": 1783768866999,
+    "name": "Classic Milk Chocolate",
+    "price": 134,
+    "image": "../users/images/products/Classic Milk Chocolate.jfif",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783771140591,
+    "name": "Creamy Milk Chocolate",
+    "price": 122,
+    "image": "../users/images/products/Creamy Milk Chocolate.jpeg",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783771303229,
+    "name": "Almond Milk Chocolate",
+    "price": 213,
+    "image": "../users/images/products/Almond Milk Chocolate.webp",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783787505495,
+    "name": "Belgian Milk Chocolate",
+    "price": 122,
+    "image": "../users/images/products/Belgian Milk Chocolate.webp",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783787584895,
+    "name": "Swiss Milk Chocolate",
+    "price": 135,
+    "image": "../users/images/products/Swiss Milk Chocolate.jpg",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783787817568,
+    "name": "Cashew Milk Chocolate",
+    "price": 57,
+    "image": "../users/images/products/Cashew Milk Chocolate.jfif",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783788013978,
+    "name": "Roasted Peanut Milk Chocolate",
+    "price": 134,
+    "image": "../users/images/products/Roasted Peanut Milk Chocolate.jpg",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783788111260,
+    "name": "Premium Milk Chocolate Box",
+    "price": 243,
+    "image": "../users/images/products/Premium Milk Chocolate Box.webp",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783788227140,
+    "name": "Cocoa Bliss Milk Chocolate",
+    "price": 187,
+    "image": "../users/images/products/Cocoa Bliss Milk Chocolate.png",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783791614192,
+    "name": "white chocolate",
+    "price": 123,
+    "image": "../users/images/products/white chocolate.webp",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783791712688,
+    "name": "Vanilla White Chocolate",
+    "price": 212,
+    "image": "../users/images/products/Vanilla White Chocolate.webp",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783791856850,
+    "name": "Creamy White Chocolate",
+    "price": 125,
+    "image": "../users/images/products/Creamy White Chocolate.jpg",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783791956254,
+    "name": "White Chocolate Truffles",
+    "price": 178,
+    "image": "../users/images/products/White Chocolate Truffles.jpg",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783792185578,
+    "name": "Almond White Chocolate",
+    "price": 178,
+    "image": "../users/images/products/Almond White Chocolate.jpg",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783792400412,
+    "name": "Cookies & Cream White Chocolate",
+    "price": 145,
+    "image": "../users/images/products/Cookies & Cream White Chocolate.jpg",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783792486113,
+    "name": "Strawberry White Chocolate",
+    "price": 134,
+    "image": "../users/images/products/Strawberry White Chocolate.jpg",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783792614993,
+    "name": "White Chocolate Bar",
+    "price": 157,
+    "image": "../users/images/products/White Chocolate Bar.jpeg",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783792684762,
+    "name": "Premium White Chocolate Box",
+    "price": 232,
+    "image": "../users/images/products/Premium White Chocolate Box.avif",
+    "category": "White Chocolates"
+  },
+  {
+    "id": 1783795792142,
+    "name": "Almond Chocolate Bar",
+    "price": 178,
+    "image": "../users/images/products/Almond Chocolate Bar.jpg",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796036713,
+    "name": "Hazelnut Chocolate",
+    "price": 198,
+    "image": "../users/images/products/Hazelnut Chocolate.avif",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796128226,
+    "name": "Cashew Crunch Chocolate",
+    "price": 234,
+    "image": "../users/images/products/Cashew Crunch Chocolate.jpg",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796251957,
+    "name": "Pistachio Chocolate",
+    "price": 165,
+    "image": "../users/images/products/Pistachio Chocolate.webp",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796442332,
+    "name": "Walnut Chocolate",
+    "price": 190,
+    "image": "../users/images/products/Walnut Chocolate.webp",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796654482,
+    "name": "Mixed Nut Chocolate",
+    "price": 234,
+    "image": "../users/images/products/Mixed Nut Chocolate.jpg",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796887899,
+    "name": "Peanut Crunch Chocolate",
+    "price": 97,
+    "image": "../users/images/products/Peanut Crunch Chocolate.webp",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783796963513,
+    "name": "Roasted Almond Truffles",
+    "price": 156,
+    "image": "../users/images/products/Roasted Almond Truffles.webp",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783797046938,
+    "name": "Dry Fruit Chocolate Bites",
+    "price": 178,
+    "image": "../users/images/products/Dry Fruit Chocolate Bites.avif",
+    "category": "Nut Chocolates"
+  },
+  {
+    "id": 1783797665058,
+    "name": "Premium Chocolate Gift Box",
+    "price": 234,
+    "image": "../users/images/products/Premium Chocolate Gift Box.avif",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783797773182,
+    "name": "Luxury Chocolate Hamper",
+    "price": 455,
+    "image": "../users/images/products/Luxury Chocolate Hamper.jpg",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783797871060,
+    "name": "Assorted Chocolate Box",
+    "price": 567,
+    "image": "../users/images/products/Assorted Chocolate Box.webp",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783797991334,
+    "name": "Celebration Gift Box",
+    "price": 678,
+    "image": "../users/images/products/Celebration Gift Box.jfif",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783798079127,
+    "name": "Valentine's Chocolate Box",
+    "price": 899,
+    "image": "../users/images/products/Valentine's Chocolate Box.jpg",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783798194190,
+    "name": "Birthday Chocolate Gift Pack",
+    "price": 789,
+    "image": "../users/images/products/Birthday Chocolate Gift Pack.jpg",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783798695861,
+    "name": "Family Chocolate Hamper",
+    "price": 788,
+    "image": "../users/images/products/Family Chocolate Hamper.jpg",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783798783440,
+    "name": "Royal Chocolate Treasure Box",
+    "price": 987,
+    "image": "../users/images/products/Royal Chocolate Treasure Box.webp",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783798880748,
+    "name": "Deluxe Chocolate Basket",
+    "price": 675,
+    "image": "../users/images/products/Deluxe Chocolate Basket.jpg",
+    "category": "Gift Boxes"
+  },
+  {
+    "id": 1783878780470,
+    "name": "Diwali Chocolate Box",
+    "price": 278,
+    "image": "../users/images/products/Diwali Chocolate Box.webp",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783879840601,
+    "name": "Christmas Chocolate Collection",
+    "price": 435,
+    "image": "../users/images/products/Christmas Chocolate Collection.webp",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783880324786,
+    "name": "New Year Celebration Box",
+    "price": 345,
+    "image": "../users/images/products/New Year Celebration Box.jpg",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783880510214,
+    "name": "Valentine's Special Chocolate Box",
+    "price": 234,
+    "image": "../users/images/products/Valentine's Special Chocolate Box.webp",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783880767754,
+    "name": "Eid Delight Chocolate Box",
+    "price": 234,
+    "image": "../users/images/products/Eid Delight Chocolate Box.jpg",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783881016379,
+    "name": "Holi Sweet Chocolate Collection",
+    "price": 278,
+    "image": "../users/images/products/Holi Sweet Chocolate Collection.webp",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783881260452,
+    "name": "Mother's Day Chocolate Hamper",
+    "price": 324,
+    "image": "../users/images/products/Mother's Day Chocolate Hamper.jpg",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783881356850,
+    "name": "Father's Day Chocolate Gift Box",
+    "price": 435,
+    "image": "../users/images/products/Father's Day Chocolate Gift Box.jfif",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783881569286,
+    "name": "Anniversary Celebration Chocolate Box",
+    "price": 234,
+    "image": "../users/images/products/Anniversary Celebration Chocolate Box.webp",
+    "category": "Festival Specials"
+  },
+  {
+    "id": 1783959435129,
+    "name": "Fresh Orange Juice",
+    "price": 78,
+    "image": "../users/images/products/Fresh Orange Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783959566093,
+    "name": "Mango Delight Juice",
+    "price": 89,
+    "image": "../users/images/products/Mango Delight Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783959720896,
+    "name": "Watermelon Cooler",
+    "price": 98,
+    "image": "../users/images/products/Watermelon Cooler.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783959882963,
+    "name": "Pineapple Fresh Juice",
+    "price": 109,
+    "image": "../users/images/products/Pineapple Fresh Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783960283678,
+    "name": "Apple-juice",
+    "price": 122,
+    "image": "../users/images/products/apple-juice.avif",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783960510389,
+    "name": "Grape Blast Juice",
+    "price": 99,
+    "image": "../users/images/products/Grape Blast Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783960589808,
+    "name": "Pomegranate Juice",
+    "price": 122,
+    "image": "../users/images/products/Pomegranate Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783960656214,
+    "name": "Lemon Mint Juice.",
+    "price": 56,
+    "image": "../users/images/products/Lemon Mint Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783960729763,
+    "name": "Mixed Fruit Juice",
+    "price": 123,
+    "image": "../users/images/products/Mixed Fruit Juice.jpg",
+    "category": "Fresh Juices"
+  },
+  {
+    "id": 1783961372688,
+    "name": "vanilla-milkshake",
+    "price": 125,
+    "image": "../users/images/products/vanilla-milkshake.webp",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783961515886,
+    "name": "Chocolate Milkshake",
+    "price": 143,
+    "image": "../users/images/products/Chocolate Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783961656234,
+    "name": "Strawberry Milkshake",
+    "price": 122,
+    "image": "../users/images/products/Strawberry Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783961762042,
+    "name": "Oreo Milkshake",
+    "price": 134,
+    "image": "../users/images/products/Oreo Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783961840233,
+    "name": "Banana Milkshake",
+    "price": 109,
+    "image": "../users/images/products/Banana Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783962016426,
+    "name": "KitKat Milkshake",
+    "price": 122,
+    "image": "../users/images/products/KitKat Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783962135042,
+    "name": "Butterscotch Milkshake",
+    "price": 134,
+    "image": "../users/images/products/Butterscotch Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783962245061,
+    "name": "Coffee Milkshake",
+    "price": 134,
+    "image": "../users/images/products/Coffee Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783962371313,
+    "name": "Dry Fruit Milkshake",
+    "price": 156,
+    "image": "../users/images/products/Dry Fruit Milkshake.jpg",
+    "category": "Milk Chocolates"
+  },
+  {
+    "id": 1783962413662,
+    "name": "Dry Fruit Milkshake",
+    "price": 122,
+    "image": "../users/images/products/Dry Fruit Milkshake.jpg",
+    "category": "Milkshakes"
+  },
+  {
+    "id": 1783965774904,
+    "name": "Strawberry Smoothie",
+    "price": 123,
+    "image": "../users/images/products/Strawberry-Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783966753291,
+    "name": "Mango_Smoothie",
+    "price": 156,
+    "image": "../users/images/products/Mango_Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783966882789,
+    "name": "Blueberry_Smoothie",
+    "price": 124,
+    "image": "../users/images/products/Blueberry_Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783966974512,
+    "name": "Banana_Smoothie",
+    "price": 109,
+    "image": "../users/images/products/Banana_Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783967308525,
+    "name": "Kiwi-Smoothie",
+    "price": 145,
+    "image": "../users/images/products/Kiwi-Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783967496862,
+    "name": "Pineapple_Smoothie",
+    "price": 167,
+    "image": "../users/images/products/Pineapple_Smoothie.webp",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783967608233,
+    "name": "Mixed_Berry_Smoothie",
+    "price": 145,
+    "image": "../users/images/products/Mixed_Berry_Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783967684255,
+    "name": "Avocado_Smoothie",
+    "price": 178,
+    "image": "../users/images/products/Avocado_Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783967795920,
+    "name": "Chocolate_Smoothi",
+    "price": 134,
+    "image": "../users/images/products/Chocolate_Smoothie.jpg",
+    "category": "Smoothies"
+  },
+  {
+    "id": 1783968503723,
+    "name": "Virgin Mojito",
+    "price": 167,
+    "image": "../users/images/products/Virgin Mojito.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783968582038,
+    "name": "Blue Lagoon Mocktail",
+    "price": 178,
+    "image": "../users/images/products/Blue Lagoon Mocktail.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783968677784,
+    "name": "Strawberry Mint Mocktail",
+    "price": 189,
+    "image": "../users/images/products/Strawberry Mint Mocktail.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783968802043,
+    "name": "Watermelon Cooler Mocktail",
+    "price": 156,
+    "image": "../users/images/products/Watermelon Cooler Mocktail.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783969028035,
+    "name": "Pineapple Paradise",
+    "price": 167,
+    "image": "../users/images/products/Pineapple Paradise.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783969172147,
+    "name": "Kiwi Lime Mocktail",
+    "price": 178,
+    "image": "../users/images/products/Kiwi Lime Mocktail.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783969306472,
+    "name": "Green Apple Fizz",
+    "price": 190,
+    "image": "../users/images/products/Green Apple Fizz.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783969460036,
+    "name": "Tropical Sunset Mocktail",
+    "price": 190,
+    "image": "../users/images/products/Tropical Sunset Mocktail.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1783969587337,
+    "name": "Orange Spark Mocktail",
+    "price": 157,
+    "image": "../users/images/products/Orange Spark Mocktail.jpg",
+    "category": "Mocktails"
+  },
+  {
+    "id": 1784046730385,
+    "name": "Classic Cold Coffee",
+    "price": 128,
+    "image": "../users/images/products/Classic Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784047092147,
+    "name": "Chocolate _Cold _Coffee",
+    "price": 156,
+    "image": "../users/images/products/Chocolate _Cold _Coffee.avif",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784047258427,
+    "name": "Caramel Cold Coffee",
+    "price": 190,
+    "image": "../users/images/products/Caramel Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784047389903,
+    "name": "Mocha Cold Coffee",
+    "price": 114,
+    "image": "../users/images/products/Mocha Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784047493139,
+    "name": "Vanilla Cold Coffee",
+    "price": 154,
+    "image": "../users/images/products/Vanilla Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784047633448,
+    "name": "Hazelnut Cold Coffee",
+    "price": 169,
+    "image": "../users/images/products/Hazelnut Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784047714108,
+    "name": "Oreo Cold Coffee",
+    "price": 212,
+    "image": "../users/images/products/Oreo Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784048025501,
+    "name": "Irish _ cold-Coffee",
+    "price": 179,
+    "image": "../users/images/products/Irish _ cold-Coffee.webp",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784048145637,
+    "name": "Ice Cream Cold Coffee",
+    "price": 146,
+    "image": "../users/images/products/Ice Cream Cold Coffee.jpg",
+    "category": "Cold Coffee"
+  },
+  {
+    "id": 1784048755974,
+    "name": "Tender Coconut Water",
+    "price": 90,
+    "image": "../users/images/products/Tender Coconut Water.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784048866235,
+    "name": "Green Detox Juice",
+    "price": 212,
+    "image": "../users/images/products/Green Detox Juice.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784048937378,
+    "name": "Beetroot Energy Drink",
+    "price": 135,
+    "image": "../users/images/products/Beetroot Energy Drink.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784049032221,
+    "name": "Carrot Orange Juice",
+    "price": 134,
+    "image": "../users/images/products/Carrot Orange Juice.webp",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784049154603,
+    "name": "Spinach Apple Smoothie",
+    "price": 125,
+    "image": "../users/images/products/Spinach Apple Smoothie.webp",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784049286503,
+    "name": "Aloe Vera Drink",
+    "price": 98,
+    "image": "../users/images/products/Aloe Vera Drink.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784049358774,
+    "name": "Lemon Honey Detox",
+    "price": 68,
+    "image": "../users/images/products/Lemon Honey Detox.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784049443392,
+    "name": "Chia Seed Health Drink",
+    "price": 129,
+    "image": "../users/images/products/Chia Seed Health Drink.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784049694013,
+    "name": "Mixed Veg Health Juice",
+    "price": 146,
+    "image": "../users/images/products/Mixed Veg Health Juice.jpg",
+    "category": "Healthy Drinks"
+  },
+  {
+    "id": 1784189505111,
+    "name": "Butter Murukku",
+    "price": 135,
+    "image": "../users/images/products/Butter Murukku.webp",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784189601094,
+    "name": "Kai Murukku",
+    "price": 167,
+    "image": "../users/images/products/Kai Murukku.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784189700040,
+    "name": "Thenkuzhal Murukku",
+    "price": 142,
+    "image": "../users/images/products/Thenkuzhal Murukku.webp",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784189808028,
+    "name": "Ribbon Pakoda",
+    "price": 98,
+    "image": "../users/images/products/Ribbon Pakoda.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784189995858,
+    "name": "Mullu Murukku",
+    "price": 95,
+    "image": "../users/images/products/Mullu Murukku.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784190084244,
+    "name": "Spicy Murukku",
+    "price": 124,
+    "image": "../users/images/products/Spicy Murukku.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784190416265,
+    "name": "Ring Murukku",
+    "price": 67,
+    "image": "../users/images/products/ring Murukku.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784190507827,
+    "name": "Achu Murukku",
+    "price": 89,
+    "image": "../users/images/products/Achu Murukku.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784190673547,
+    "name": "Ragi Murukku",
+    "price": 134,
+    "image": "../users/images/products/Ragi Murukku.jpg",
+    "category": "Murukku"
+  },
+  {
+    "id": 1784191202369,
+    "name": "Laddu",
+    "price": 134,
+    "image": "../users/images/products/Laddu.webp",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784191320316,
+    "name": "Mysore Pak",
+    "price": 135,
+    "image": "../users/images/products/Mysore Pak.jpg",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784191391612,
+    "name": "Gulab Jamun",
+    "price": 123,
+    "image": "../users/images/products/Gulab Jamun.jpg",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784191502358,
+    "name": "Rasgulla",
+    "price": 169,
+    "image": "../users/images/products/Rasgulla.webp",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784191587662,
+    "name": "Jalebi",
+    "price": 123,
+    "image": "../users/images/products/Jalebi.jpg",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784191840139,
+    "name": "Halwa",
+    "price": 267,
+    "image": "../users/images/products/halwa.jpg",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784192016034,
+    "name": "Ahirasam",
+    "price": 98,
+    "image": "../users/images/products/Ahirasam.jpg",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784192147672,
+    "name": "Coconut Burfi",
+    "price": 134,
+    "image": "../users/images/products/Coconut Burfi.jpg",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784192275057,
+    "name": "Soan Papdi",
+    "price": 135,
+    "image": "../users/images/products/Soan Papdi.webp",
+    "category": "Traditional Sweets"
+  },
+  {
+    "id": 1784192911739,
+    "name": "Bombay Mixture",
+    "price": 134,
+    "image": "../users/images/products/Bombay Mixture.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784193034157,
+    "name": "Kara Mixture",
+    "price": 145,
+    "image": "../users/images/products/Kara Mixture.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784193219759,
+    "name": "Omapodi",
+    "price": 145,
+    "image": "../users/images/products/Omapodi.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784193280664,
+    "name": "Kara Sev",
+    "price": 134,
+    "image": "../users/images/products/Kara Sev.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784193422916,
+    "name": "Masala Peanuts",
+    "price": 156,
+    "image": "../users/images/products/Masala Peanuts.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784193690146,
+    "name": "Aval Mixture",
+    "price": 123,
+    "image": "../users/images/products/Aval Mixture.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784194086095,
+    "name": "Corn Mixture",
+    "price": 157,
+    "image": "../users/images/products/Corn Mixture.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784194396372,
+    "name": "sweet Mixture",
+    "price": 168,
+    "image": "../users/images/products/sweet Mixture.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784194583162,
+    "name": "green gram Mixture",
+    "price": 168,
+    "image": "../users/images/products/green gram Mixture.jpg",
+    "category": "Mixtures & Namkeen"
+  },
+  {
+    "id": 1784630425938,
+    "name": "Butter Biscuits",
+    "price": 123,
+    "image": "../users/images/products/Butter Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784630554848,
+    "name": "Milk Biscuits",
+    "price": 89,
+    "image": "../users/images/products/Milk Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784630681711,
+    "name": "Jeera Biscuits",
+    "price": 79,
+    "image": "../users/images/products/Jeera Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784630857723,
+    "name": "Cashew Biscuits",
+    "price": 156,
+    "image": "../users/images/products/Cashew Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784631377914,
+    "name": "Almond Biscuits",
+    "price": 134,
+    "image": "../users/images/products/Almond Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784631455518,
+    "name": "Coconut Biscuits",
+    "price": 96,
+    "image": "../users/images/products/Coconut Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784631540042,
+    "name": "Ragi Biscuits",
+    "price": 78,
+    "image": "../users/images/products/Ragi Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784631662934,
+    "name": "Oats Biscuits",
+    "price": 58,
+    "image": "../users/images/products/Oats Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784631722828,
+    "name": "Chocolate Biscuits",
+    "price": 96,
+    "image": "../users/images/products/Chocolate Biscuits.jpg",
+    "category": "Biscuits"
+  },
+  {
+    "id": 1784632167648,
+    "name": "Banana Chips",
+    "price": 168,
+    "image": "../users/images/products/Banana Chips.webp",
+    "category": "Chips"
+  },
+  {
+    "id": 1784632364609,
+    "name": "Potato Chips",
+    "price": 146,
+    "image": "../users/images/products/Potato Chips.jpg",
+    "category": "Chips"
+  },
+  {
+    "id": 1784632582991,
+    "name": "Jackfruit Chips",
+    "price": 167,
+    "image": "../users/images/products/Jackfruit Chips.jpg",
+    "category": "Chips"
+  },
+  {
+    "id": 1784632683322,
+    "name": "Sweet Potato Chips",
+    "price": 134,
+    "image": "../users/images/products/Sweet Potato Chips.jpg",
+    "category": "Chips"
+  },
+  {
+    "id": 1784632829294,
+    "name": "Cheese Corn Chips",
+    "price": 135,
+    "image": "../users/images/products/Cheese Corn Chips.jpg",
+    "category": "Chips"
+  },
+  {
+    "id": 1784633113834,
+    "name": "Tapioca_chips",
+    "price": 124,
+    "image": "../users/images/products/Tapioca_chips.webp",
+    "category": "Chips"
+  },
+  {
+    "id": 1784633290087,
+    "name": "Onion Rings Chips",
+    "price": 124,
+    "image": "../users/images/products/Onion Rings Chips.jpg",
+    "category": "Chips"
+  },
+  {
+    "id": 1784634022496,
+    "name": "Carrot Chips",
+    "price": 97,
+    "image": "../users/images/products/Carrot Chips.webp",
+    "category": "Chips"
+  },
+  {
+    "id": 1784634386653,
+    "name": "Masala Banana Chips",
+    "price": 135,
+    "image": "../users/images/products/Masala Banana Chips.jpg",
+    "category": "Chips"
+  },
+  {
+    "id": 1784635036995,
+    "name": "Egg Puff",
+    "price": 25,
+    "image": "../users/images/products/Egg Puff.jpg",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784646356654,
+    "name": "vegetable-samosa",
+    "price": 18,
+    "image": "../users/images/products/vegetable-samosa.avif",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784646609656,
+    "name": "Veg Sandwich",
+    "price": 80,
+    "image": "../users/images/products/Veg Sandwich.JPG",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784646710805,
+    "name": "Mini Pizza",
+    "price": 94,
+    "image": "../users/images/products/Mini Pizza.webp",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784646806417,
+    "name": "Chicken Burger",
+    "price": 80,
+    "image": "../users/images/products/Chicken Burger.avif",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784646892947,
+    "name": "French Fries",
+    "price": 78,
+    "image": "../users/images/products/French Fries.jpg",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784646981087,
+    "name": "chicken cutlet",
+    "price": 56,
+    "image": "../users/images/products/chicken cutlet.JPG",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784647112100,
+    "name": "chilli-bajji",
+    "price": 20,
+    "image": "../users/images/products/chilli-bajji.jpg",
+    "category": "Evening Snacks"
+  },
+  {
+    "id": 1784647625651,
+    "name": "Rusk",
+    "price": 45,
+    "image": "../users/images/products/rusk.webp",
+    "category": "Evening Snacks"
+  }
+]

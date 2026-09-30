@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order | AV Sweet House</title>
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: radial-gradient(circle at top left, #ffd6e0 0%, transparent 30%),
+                radial-gradient(circle at bottom right, #d6f6ff 0%, transparent 30%),
+                linear-gradient(135deg, #fff0f5, #fffaf7);
+            padding-top: 70px;
+            position: relative;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff4d8d !important;
+        }
+
+        .navbar-brand:hover { color: #ff2f78 !important; }
+
+        .nav-link {
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 14px;
+            color: #555 !important;
+        }
+
+        .nav-link:hover, .nav-link.active { color: #ff4d8d !important; }
+
+        .btn-pink {
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 22px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn-pink:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.3);
+        }
+
+        .badge-count {
+            background: #ff4d8d;
+            color: white;
+            border-radius: 50%;
+            padding: 1px 7px;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+            margin-left: 3px;
+        }
+
+        /* ===== FLOATING PARTICLES ===== */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .5);
+            animation: float 10s linear infinite;
+        }
+
+        .p1 { width: 120px; height: 120px; left: 10%; top: 10%; }
+        .p2 { width: 80px; height: 80px; right: 10%; top: 25%; }
+        .p3 { width: 150px; height: 150px; left: 20%; bottom: 10%; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* ===== MAIN ===== */
+        .main {
+            max-width: 1300px;
+            margin: auto;
+            padding: 30px 20px 50px;
+            display: grid;
+            grid-template-columns: 1.4fr .8fr;
+            gap: 30px;
+        }
+
+        /* ===== GLASS CARD ===== */
+        .glass {
+            background: rgba(255, 255, 255, .35);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, .3);
+            border-radius: 35px;
+            padding: 35px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ===== TITLE ===== */
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff85a2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sub { color: #666; margin-top: 10px; font-size: 17px; }
+
+        /* ===== ETA ===== */
+        .eta {
+            margin-top: 30px;
+            background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+            color: white;
+            padding: 22px;
+            border-radius: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .eta h2 { font-size: 24px; margin-top: 4px; }
+        .eta p { font-size: 13px; opacity: 0.9; }
+
+        .timer {
+            background: white;
+            color: #ff4d6d;
+            padding: 12px 20px;
+            border-radius: 18px;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: right;
+        }
+
+        /* ===== TRACKER ===== */
+        .tracker {
+            margin-top: 40px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .line {
+            position: absolute;
+            top: 35px;
+            left: 50px;
+            width: 78%;
+            height: 8px;
+            background: #ffd2dc;
+            border-radius: 20px;
+        }
+
+        .active-line {
+            position: absolute;
+            top: 35px;
+            left: 50px;
+            width: 0%;
+            height: 8px;
+            background: linear-gradient(90deg, #ff4d6d, #ff85a2);
+            border-radius: 20px;
+            transition: width 0.8s ease;
+        }
+
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: white;
+            border: 5px solid #ffd2dc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            color: #ffd2dc;
+            margin: auto;
+            transition: 0.4s;
+        }
+
+        .done .circle {
+            background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+            border: 5px solid #ff4d6d;
+            color: white;
+        }
+
+        .current .circle {
+            background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+            border: 5px solid #ff4d6d;
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, .5); }
+            70% { box-shadow: 0 0 0 22px rgba(255, 77, 109, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        }
+
+        .step p {
+            margin-top: 12px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ===== MAP ===== */
+        .map {
+            margin-top: 50px;
+            height: 280px;
+            border-radius: 30px;
+            background: linear-gradient(rgba(255, 255, 255, .2), rgba(255, 255, 255, .2)), #fff0f5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(#ffd2dc 2px, transparent 2px),
+                linear-gradient(90deg, #ffd2dc 2px, transparent 2px);
+            background-size: 50px 50px;
+            opacity: .5;
+        }
+
+        .location {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #ff4d6d;
+            box-shadow: 0 0 0 12px rgba(255, 77, 109, .2);
+        }
+
+        .shop { top: 18%; left: 12%; }
+        .home { right: 12%; bottom: 18%; }
+
+        .road {
+            position: absolute;
+            width: 65%;
+            height: 6px;
+            background: #ff85a2;
+            top: 50%;
+            left: 16%;
+            transform: rotate(18deg);
+            border-radius: 20px;
+        }
+
+        .bike {
+            position: absolute;
+            font-size: 50px;
+            top: 42%;
+            left: 12%;
+            animation: moveBike 5s linear infinite;
+        }
+
+        @keyframes moveBike {
+            0% { left: 12%; top: 42%; }
+            100% { left: 72%; top: 62%; }
+        }
+
+        /* ===== PRODUCT ===== */
+        .product-item {
+            margin-top: 35px;
+            background: rgba(255, 255, 255, .5);
+            border-radius: 30px;
+            padding: 25px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .product-item .product-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 25px;
+            background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: white;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .product-item .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+
+        .product-item h2 { font-size: 18px; color: #333; margin-bottom: 5px; }
+        .product-item p { color: #666; line-height: 1.8; font-size: 14px; }
+        .product-item .price { font-size: 26px; font-weight: 800; color: #ff4d6d; }
+
+        /* ===== RIGHT SIDE ===== */
+        .side-title {
+            font-size: 30px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff85a2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, .45);
+            border-radius: 25px;
+            padding: 22px;
+            margin-bottom: 20px;
+        }
+
+        .box h3 { color: #ff4d6d; margin-bottom: 12px; font-size: 18px; }
+        .box p { color: #666; line-height: 1.9; font-size: 14px; }
+
+        /* ===== RIDER ===== */
+        .rider { display: flex; gap: 16px; align-items: center; }
+
+        .avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-call {
+            width: 100%;
+            border: none;
+            padding: 14px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4d6d, #ff85a2);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: .3s;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, .25);
+        }
+
+        .btn-call:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(255, 77, 109, .35);
+        }
+
+        .continue-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(255, 77, 109, 0.25);
+            transition: 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            width: 100%;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 77, 109, 0.35);
+            color: white;
+        }
+
+        /* ===== SUMMARY ROWS ===== */
+        .row-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .total {
+            border-top: 2px dashed #ffd2dc;
+            margin-top: 12px;
+            padding-top: 15px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .total span:last-child { color: #ff4d6d; }
+
+        /* ===== LOADING ===== */
+        .loading-spinner { text-align: center; padding: 50px 0; }
+
+        .loading-spinner .spinner {
+            width: 45px;
+            height: 45px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff4d8d;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+                   RESPONSIVE
+                   ============================================ */
+
+        @media(max-width: 992px) {
+            .main { grid-template-columns: 1fr; }
+            .title { font-size: 38px; }
+        }
+
+        @media(max-width: 768px) {
+            body { padding-top: 60px; }
+            .navbar-brand { font-size: 20px; }
+            .main { padding: 20px 15px 40px; gap: 20px; }
+            .glass { padding: 25px 20px; border-radius: 25px; }
+            .title { font-size: 30px; }
+            .sub { font-size: 15px; }
+            .eta { padding: 18px; }
+            .eta h2 { font-size: 20px; }
+            .timer { font-size: 15px; padding: 10px 16px; }
+
+            .tracker {
+                flex-direction: row;
+                gap: 5px;
+                align-items: flex-start;
+            }
+
+            .line { top: 27px; left: 30px; width: calc(100% - 60px); height: 6px; }
+            .active-line { top: 27px; left: 30px; height: 6px; }
+
+            .step p { font-size: 11px; }
+            .circle { width: 55px; height: 55px; font-size: 20px; border-width: 4px; }
+
+            .map { height: 200px; margin-top: 30px; }
+            .bike { font-size: 40px; }
+
+            .product-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            .product-item .product-img { width: 80px; height: 80px; font-size: 40px; }
+            .product-item h2 { font-size: 16px; }
+            .product-item .price { font-size: 22px; }
+
+            .side-title { font-size: 26px; }
+            .box { padding: 18px; }
+            .box h3 { font-size: 16px; }
+            .box p { font-size: 13px; }
+
+            .rider { gap: 12px; }
+            .avatar { width: 55px; height: 55px; font-size: 22px; }
+
+            .btn-call { font-size: 14px; padding: 12px; }
+            .continue-btn { font-size: 14px; padding: 12px 20px; }
+            .row-summary { font-size: 13px; }
+            .total { font-size: 17px; }
+        }
+
+        @media(max-width: 480px) {
+            body { padding-top: 56px; }
+            .navbar-brand { font-size: 17px; }
+            .glass { padding: 18px 14px; border-radius: 20px; }
+            .title { font-size: 22px; }
+            .sub { font-size: 12px; }
+
+            .eta { padding: 14px; flex-direction: column; align-items: flex-start; }
+            .eta h2 { font-size: 17px; }
+            .timer { font-size: 14px; padding: 8px 14px; }
+
+            .tracker { gap: 2px; }
+
+            .line { top: 23px; left: 25px; width: calc(100% - 50px); height: 5px; }
+            .active-line { top: 23px; left: 25px; height: 5px; }
+
+            .circle { width: 46px; height: 46px; font-size: 16px; border-width: 3px; }
+            .step p { font-size: 10px; margin-top: 8px; }
+
+            .map { height: 160px; }
+            .bike { font-size: 32px; }
+            .location { width: 18px; height: 18px; box-shadow: 0 0 0 8px rgba(255, 77, 109, .2); }
+
+            .product-item { padding: 15px; }
+            .product-item .product-img { width: 65px; height: 65px; font-size: 32px; }
+            .product-item h2 { font-size: 14px; }
+            .product-item p { font-size: 12px; }
+            .product-item .price { font-size: 18px; }
+
+            .side-title { font-size: 22px; }
+            .box { padding: 14px; }
+            .box h3 { font-size: 14px; }
+            .box p { font-size: 12px; }
+
+            .avatar { width: 48px; height: 48px; font-size: 18px; }
+            .btn-call { font-size: 13px; padding: 10px; }
+            .continue-btn { font-size: 13px; padding: 10px 16px; }
+            .row-summary { font-size: 12px; }
+            .total { font-size: 15px; }
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .premium-footer {
+            margin-top: 0;
+            padding: 70px 0 30px;
+            background: linear-gradient(135deg, #fff0f3, #ffe5ec, #fdf6ff, #eef7ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-footer::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #ffb3c1;
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .premium-footer::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #bde0fe;
+            border-radius: 50%;
+            bottom: -120px;
+            right: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            color: #666;
+            line-height: 1.9;
+            margin-top: 15px;
+            max-width: 350px;
+            font-size: 14px;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: #ff4d8d;
+            border-radius: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover { color: #ff4d6d; transform: translateX(8px); }
+
+        .contact-info p { color: #666; margin-bottom: 8px; font-size: 14px; }
+
+        .social-icons { display: flex; gap: 12px; margin-top: 20px; }
+
+        .social-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.4s;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .social-box:hover {
+            transform: translateY(-6px) scale(1.08);
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border-color: transparent;
+        }
+
+        .subscribe-box { margin-top: 20px; }
+
+        .subscribe-box input {
+            width: 100%;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+
+        .subscribe-box input:focus {
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.15);
+        }
+
+        .subscribe-box button {
+            width: 100%;
+            margin-top: 12px;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .subscribe-box button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(255, 77, 109, 0.35);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .footer-bottom p { color: #777; margin: 0; font-size: 14px; }
+    </style>
+</head>
+
+<body>
+
+    <!-- PARTICLES -->
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">🍰 AV Sweet House</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="About%20us.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="cakes.html">Cakes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dessert.html">Desserts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="chocolate.html">Chocolate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="juice.html">Juice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Snacks.html">Snacks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="d-flex gap-2">
+                    <a href="wishlist.html" class="btn btn-outline-danger btn-sm">
+                        ❤️ <span class="badge-count" id="wishlistCount">0</span>
+                    </a>
+                    <a href="cart.html" class="btn btn-pink btn-sm">
+                        🛒 <span class="badge-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN ===== -->
+    <div class="main">
+
+        <!-- LEFT -->
+        <div class="glass">
+
+            <h1 class="title">Track Your Sweet Order</h1>
+            <p class="sub">Fresh bakery items are on the way 🍰</p>
+
+            <!-- Loading Spinner -->
+            <div id="loadingSpinner" class="loading-spinner">
+                <div class="spinner"></div>
+                <p style="color:#888;">Loading order details...</p>
+            </div>
+
+            <!-- Order Content -->
+            <div id="orderContent" style="display:none;">
+
+                <!-- ETA -->
+                <div class="eta">
+                    <div>
+                        <p>Estimated Delivery</p>
+                        <h2 id="etaStatus">Loading...</h2>
+                    </div>
+                    <div class="timer" id="etaTimer">--:--</div>
+                </div>
+
+                <!-- TRACKER -->
+                <div class="tracker" id="trackerContainer">
+                    <div class="line"></div>
+                    <div class="active-line" id="activeLine"></div>
+
+                    <div class="step" id="step1">
+                        <div class="circle"><i class="fa-solid fa-check"></i></div>
+                        <p>Confirmed</p>
+                    </div>
+
+                    <div class="step" id="step2">
+                        <div class="circle"><i class="fa-solid fa-cake-candles"></i></div>
+                        <p>Baking</p>
+                    </div>
+
+                    <div class="step" id="step3">
+                        <div class="circle"><i class="fa-solid fa-motorcycle"></i></div>
+                        <p>On The Way</p>
+                    </div>
+
+                    <div class="step" id="step4">
+                        <div class="circle"><i class="fa-solid fa-gift"></i></div>
+                        <p>Delivered</p>
+                    </div>
+                </div>
+
+                <!-- MAP -->
+                <div class="map">
+                    <div class="location shop"></div>
+                    <div class="road"></div>
+                    <div class="location home"></div>
+                    <div class="bike">🛵</div>
+                </div>
+
+                <!-- PRODUCT -->
+                <div id="productContainer"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="glass" id="orderContentRight" style="display:none;">
+
+            <h2 class="side-title">Order Details</h2>
+
+            <div class="box">
+                <h3>🧾 Order Info</h3>
+                <p id="orderInfo"></p>
+            </div>
+
+            <div class="box">
+                <h3>📍 Delivery Address</h3>
+                <p id="deliveryAddress"></p>
+            </div>
+
+            <div class="box">
+                <h3>📅 Delivery Slot</h3>
+                <p id="deliverySlot" style="color:#ff4d6d;font-weight:700;"></p>
+            </div>
+
+            <div class="box">
+                <h3>🚚 Delivery Partner</h3>
+                <div class="rider">
+                    <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                    <div>
+                        <strong id="riderName">Rahul Kumar</strong>
+                        <p>Delivery Executive</p>
+                    </div>
+                </div>
+                <button class="btn-call" onclick="window.location.href='tel:+919930403727'">
+                    📞 Call Rider
+                </button>
+            </div>
+
+            <div class="box">
+                <h3>💳 Payment Summary</h3>
+                <div class="row-summary">
+                    <span>Subtotal</span>
+                    <span id="subtotal">₹0</span>
+                </div>
+                <div class="row-summary">
+                    <span>Discount</span>
+                    <span id="discount">₹0</span>
+                </div>
+                <div class="row-summary">
+                    <span>Delivery Fee</span>
+                    <span id="deliveryFee">₹50</span>
+                </div>
+                <div class="row-summary total">
+                    <span>Total</span>
+                    <span id="total">₹0</span>
+                </div>
+            </div>
+
+            <a href="/" class="continue-btn">🛍️ Continue Shopping</a>
+        </div>
+
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4 text-center text-md-start">
+                    <h2 class="footer-logo">🍰 AV Sweet House</h2>
+                    <p class="footer-text mx-auto mx-md-0">
+                        Fresh Cakes & Desserts Made Daily. Bringing sweetness to every celebration with love,
+                        happiness and premium bakery experience.
+                    </p>
+                    <div class="social-icons justify-content-center justify-content-md-start">
+                        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="About%20us.html">Our Story</a>
+                        <a href="cakes.html">Special Cakes</a>
+                        <a href="dessert.html">Fresh Desserts</a>
+                        <a href="#">Online Delivery</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="contact.html">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91 9930403727</p>
+                        <p><i class="fas fa-envelope"></i> avsweethouse@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Kerala, India</p>
+                    </div>
+                    <div class="subscribe-box">
+                        <input type="email" placeholder="Subscribe for offers">
+                        <button onclick="alert('Thank you for subscribing! 🎉')">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AV Sweet House. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // GET USER
+        // ============================================
+        function getUser() {
+            try {
+                let userData = localStorage.getItem('user');
+                if (userData) return JSON.parse(userData);
+
+                userData = localStorage.getItem('currentUser');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.removeItem('currentUser');
+                    return user;
+                }
+                return null;
+            } catch (e) { return null; }
+        }
+
+        // ============================================
+        // UPDATE COUNTS
+        // ============================================
+        async function updateCounts() {
+            const user = getUser();
+            if (!user) return;
+
+            const userId = user.id || user._id;
+
+            try {
+                const wishlistRes = await fetch(`/api/wishlist/${userId}`);
+                const wishlist = await wishlistRes.json();
+                document.getElementById('wishlistCount').innerText = Array.isArray(wishlist) ? wishlist.length : 0;
+
+                const cartRes = await fetch(`/api/cart/count/${userId}`);
+                const cart = await cartRes.json();
+                document.getElementById('cartCount').innerText = cart.count || 0;
+            } catch (e) { console.error('Count Error:', e); }
+        }
+
+        // ============================================
+        // FORMAT DELIVERY DATE & TIME (FIXED!)
+        // ============================================
+        function formatDeliveryDateTime(dateStr, timeStr) {
+            if (!dateStr) return { date: 'To be confirmed', time: '' };
+
+            try {
+                // ⭐ FIX: Parse date manually to avoid timezone shift
+                // dateStr comes as "2026-09-13" from the HTML date input
+                const datePart = String(dateStr).split('T')[0]; // Remove any time part
+                const parts = datePart.split('-');
+
+                if (parts.length !== 3) {
+                    return { date: dateStr, time: timeStr || '' };
+                }
+
+                const year = parseInt(parts[0]);
+                const month = parseInt(parts[1]) - 1; // JS months are 0-indexed
+                const day = parseInt(parts[2]);
+
+                // Create date in LOCAL timezone (not UTC)
+                const dateObj = new Date(year, month, day);
+
+                const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+                const formattedDate = dateObj.toLocaleDateString('en-IN', options);
+
+                // Format time: "01:30" → "1:30 AM"
+                let formattedTime = '';
+                if (timeStr) {
+                    const timeParts = String(timeStr).split(':');
+                    const h = parseInt(timeParts[0]);
+                    const minutes = timeParts[1] || '00';
+                    const ampm = h >= 12 ? 'PM' : 'AM';
+                    const h12 = h % 12 || 12;
+                    formattedTime = `${h12}:${minutes} ${ampm}`;
+                }
+
+                return { date: formattedDate, time: formattedTime };
+            } catch (e) {
+                console.error("Date format error:", e);
+                return { date: dateStr, time: timeStr || '' };
+            }
+        }
+
+        // ============================================
+        // GET STATUS STEP (0-4)
+        // ============================================
+        function getStatusStep(status) {
+            const steps = {
+                'Pending': 0,      // Nothing completed
+                'Confirmed': 1,    // Confirmed done
+                'Processing': 2,   // Confirmed + Baking done
+                'Shipped': 3,      // + On the way done
+                'Out for Delivery': 3,
+                'Delivered': 4,    // All done
+                'Cancelled': -1    // Special
+            };
+            return steps[status] !== undefined ? steps[status] : 0;
+        }
+
+        // ============================================
+        // UPDATE TRACKER BASED ON STATUS
+        // ============================================
+        function updateTracker(status) {
+            const completedCount = getStatusStep(status);
+
+            // Reset all steps
+            document.querySelectorAll('.step').forEach(el => {
+                el.classList.remove('done', 'current');
+            });
+
+            const steps = ['step1', 'step2', 'step3', 'step4'];
+
+            if (status === 'Cancelled') {
+                document.getElementById('step1').classList.add('done');
+                document.getElementById('etaStatus').innerText = 'Order Cancelled ❌';
+                document.getElementById('etaTimer').innerText = 'Cancelled';
+                document.getElementById('activeLine').style.width = '0%';
+                return;
+            }
+
+            for (let i = 0; i < completedCount; i++) {
+                document.getElementById(steps[i]).classList.add('done');
+            }
+
+            if (completedCount < steps.length) {
+                document.getElementById(steps[completedCount]).classList.add('current');
+            }
+
+            const progressPercent = (completedCount / 3) * 100;
+            document.getElementById('activeLine').style.width = Math.min(progressPercent, 78) + '%';
+        }
+
+        // ============================================
+        // GET ETA TEXT
+        // ============================================
+        function getEtaText(status) {
+            const map = {
+                'Pending': 'Processing Soon',
+                'Confirmed': 'Order Confirmed ✅',
+                'Processing': 'Baking In Progress 🎂',
+                'Shipped': 'On The Way 🛵',
+                'Out for Delivery': 'Arriving Soon 🛵',
+                'Delivered': 'Delivered 🎉',
+                'Cancelled': 'Order Cancelled ❌'
+            };
+            return map[status] || 'Processing';
+        }
+
+        // ============================================
+        // LOAD ORDER
+        // ============================================
+        async function loadOrder() {
+            const spinner = document.getElementById('loadingSpinner');
+            const contentLeft = document.getElementById('orderContent');
+            const contentRight = document.getElementById('orderContentRight');
+
+            const params = new URLSearchParams(window.location.search);
+            const orderId = params.get('id');
+
+            if (!orderId) {
+                spinner.innerHTML = `
+                    <div style="text-align:center;padding:30px 0;">
+                        <i class="fa-solid fa-exclamation-circle" style="font-size:50px;color:#ff4d8d;"></i>
+                        <h3 style="margin-top:15px;">No Order ID Found</h3>
+                        <p style="color:#888;">Please go back to your orders and try again.</p>
+                        <a href="My%20Order.html" class="btn btn-pink mt-3">Go to My Orders</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/orders');
+                const data = await response.json();
+
+                let allOrders = [];
+                if (Array.isArray(data)) allOrders = data;
+                else if (Array.isArray(data.orders)) allOrders = data.orders;
+
+                const order = allOrders.find(o => String(o._id) === String(orderId));
+
+                if (!order) {
+                    spinner.innerHTML = `
+                        <div style="text-align:center;padding:30px 0;">
+                            <i class="fa-solid fa-search" style="font-size:50px;color:#ff4d8d;"></i>
+                            <h3 style="margin-top:15px;">Order Not Found</h3>
+                            <p style="color:#888;">We couldn't find this order.</p>
+                            <a href="My%20Order.html" class="btn btn-pink mt-3">Go to My Orders</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                console.log('✅ Order found:', order);
+                console.log('📅 Raw deliveryDate:', order.deliveryDate);
+                console.log('🕐 Raw deliveryTime:', order.deliveryTime);
+
+                spinner.style.display = 'none';
+                contentLeft.style.display = 'block';
+                contentRight.style.display = 'block';
+
+                const status = order.status || 'Pending';
+
+                // Show ETA based on status
+                document.getElementById('etaStatus').innerText = getEtaText(status);
+
+                // Show REAL delivery date/time
+                const delivery = formatDeliveryDateTime(order.deliveryDate, order.deliveryTime);
+                document.getElementById('etaTimer').innerText = delivery.time || 'Today';
+
+                updateTracker(status);
+
+                // ORDER INFO
+                const orderDate = order.createdAt ?
+                    new Date(order.createdAt).toLocaleDateString('en-IN', {
+                        day: '2-digit', month: 'short', year: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    }) : 'N/A';
+
+                document.getElementById('orderInfo').innerHTML = `
+                    <strong>Order ID:</strong> #${String(order._id).slice(-8)}<br>
+                    <strong>Placed On:</strong> ${orderDate}<br>
+                    <strong>Payment:</strong> ${order.paymentMethod || 'UPI'} ${order.paymentStatus === 'Paid' ? '✅' : ''}<br>
+                    <strong>Items:</strong> ${order.products ? order.products.length : 0}<br>
+                    <strong>Status:</strong> <span style="color:#ff4d6d;font-weight:700;">${status}</span>
+                `;
+
+                // ADDRESS
+                const address = order.address || 'AV Sweet House, Kollam, Kerala';
+                const city = order.city || '';
+                const pincode = order.pincode || '';
+                document.getElementById('deliveryAddress').innerHTML = `
+                    ${address}<br>
+                    ${city}${city && pincode ? ', ' : ''}${pincode}<br>
+                    India
+                `;
+
+                // DELIVERY SLOT
+                const slotInfo = formatDeliveryDateTime(order.deliveryDate, order.deliveryTime);
+                document.getElementById('deliverySlot').innerHTML = `
+                    📅 <strong>${slotInfo.date}</strong><br>
+                    🕐 <strong>${slotInfo.time || 'Time not set'}</strong><br>
+                    <span style="font-size:12px;color:#888;">${order.deliveryOption || 'Home Delivery'}</span>
+                `;
+
+                // RIDER NAME
+                const riders = ['Rahul Kumar', 'Sneha Raj', 'Vijay Menon', 'Anitha Krishnan'];
+                document.getElementById('riderName').innerText = riders[Math.floor(Math.random() * riders.length)];
+
+                // PRODUCTS
+                const productContainer = document.getElementById('productContainer');
+                productContainer.innerHTML = '';
+                let subtotal = 0;
+
+                if (Array.isArray(order.products) && order.products.length > 0) {
+                    order.products.forEach(product => {
+                        const quantity = Number(product.quantity || 1);
+                        const price = Number(product.price || 0);
+                        const productTotal = price * quantity;
+                        subtotal += productTotal;
+
+                        productContainer.innerHTML += `
+                            <div class="product-item">
+                                <div class="product-img">
+                                    ${product.image ?
+                                        `<img src="${product.image}" alt="${product.name}" onerror="this.style.display='none'">` :
+                                        `🎂`
+                                    }
+                                </div>
+                                <div>
+                                    <h2>${product.name || 'Product'}</h2>
+                                    <p>Qty: ${quantity} ${product.weight ? '• ' + product.weight : ''} ${product.flavor ? '• ' + product.flavor : ''}</p>
+                                    <div class="price">₹${productTotal.toFixed(0)}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+
+                // PAYMENT SUMMARY
+                let discount = Number(order.discount) || 0;
+                const deliveryFee = Number(order.delivery) || 50;
+                const finalTotal = Number(order.totalAmount) || (subtotal - discount + deliveryFee);
+
+                document.getElementById('subtotal').innerText = '₹' + subtotal.toFixed(0);
+                document.getElementById('discount').innerText = '- ₹' + discount.toFixed(0);
+                document.getElementById('deliveryFee').innerText = '₹' + deliveryFee.toFixed(0);
+                document.getElementById('total').innerText = '₹' + finalTotal.toFixed(0);
+
+            } catch (error) {
+                console.error('Load Order Error:', error);
+                spinner.innerHTML = `
+                    <div style="text-align:center;padding:30px 0;">
+                        <i class="fa-solid fa-wifi" style="font-size:50px;color:#ff4d8d;"></i>
+                        <h3 style="margin-top:15px;">Connection Error</h3>
+                        <p style="color:#888;">${error.message}</p>
+                        <button onclick="loadOrder()" class="btn btn-pink mt-3">🔄 Retry</button>
+                    </div>
+                `;
+            }
+        }
+
+        // ============================================
+        // INIT
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounts();
+            loadOrder();
+            console.log('📍 Track Order Page Loaded');
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rosette Birthday Cake - AV Sweet House</title>
+
+  <!-- ===== FAVICON ===== -->
+<link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:#fff6fb;
+    }
+
+    header{
+      background:white;
+      padding:15px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .logo{
+      font-size:26px;
+      font-weight:700;
+      color:#d63384;
+    }
+
+    /* CONTAINER */
+
+    .container{
+      padding:40px 8%;
+      display:flex;
+      gap:40px;
+      flex-wrap:wrap;
+    }
+
+    /* IMAGE */
+
+    .img{
+      flex:1;
+      min-width:300px;
+    }
+
+    .img img{
+      width:100%;
+      border-radius:20px;
+      box-shadow:0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    /* DETAILS */
+
+    .details{
+      flex:1;
+      min-width:300px;
+    }
+
+    h1{
+      font-size:32px;
+      color:#333;
+      margin-bottom:5px;
+    }
+
+    .rating{
+      color:#f4b400;
+      font-weight:600;
+      margin-bottom:10px;
+    }
+
+    .price{
+      font-size:28px;
+      color:#d63384;
+      font-weight:700;
+      margin:10px 0;
+    }
+
+    .desc{
+      color:#666;
+      line-height:1.7;
+      margin-bottom:20px;
+    }
+
+    label{
+      font-weight:600;
+      color:#444;
+      margin-top:10px;
+      display:block;
+    }
+
+    select, textarea, input{
+      width:100%;
+      padding:12px;
+      border-radius:10px;
+      border:1px solid #ddd;
+      margin-top:6px;
+      outline:none;
+      margin-bottom:12px;
+    }
+
+    textarea{
+      resize:none;
+      height:80px;
+    }
+
+    /* REVIEWS */
+
+    .reviews{
+      background:white;
+      padding:15px;
+      border-radius:15px;
+      box-shadow:0 4px 15px rgba(0,0,0,0.05);
+      margin-top:15px;
+    }
+
+    .review{
+      font-size:14px;
+      color:#555;
+      margin-bottom:8px;
+      border-bottom:1px solid #eee;
+      padding-bottom:6px;
+    }
+
+    /* BUTTONS */
+
+    .btn{
+      display:block;
+      text-align:center;
+      padding:14px;
+      border-radius:30px;
+      font-weight:600;
+      text-decoration:none;
+      margin-top:12px;
+    }
+
+    .buy{
+      background:#d63384;
+      color:white;
+    }
+
+    .cart{
+      border:2px solid #d63384;
+      color:#d63384;
+      background:white;
+    }
+
+    .cart:hover{
+      background:#d63384;
+      color:white;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+      .container{
+        flex-direction:column;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <div class="logo">AV SWEET HOUSE</div>
+
+  </header>
+
+  <!-- PRODUCT -->
+
+  <div class="container">
+
+    <!-- IMAGE -->
+
+    <div class="img">
+
+      <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e"
+        alt="Rosette Cake">
+
+    </div>
+
+    <!-- DETAILS -->
+
+    <div class="details">
+
+      <h1>Rosette Birthday Cake</h1>
+
+      <div class="rating">⭐ 4.9 (183 Reviews)</div>
+
+      <div class="price">₹549</div>
+
+      <p class="desc">
+        Adorned with creamy rosettes, bringing a touch of elegance and joy to every birthday party 🎂
+      </p>
+
+      <!-- OPTIONS -->
+
+      <label>Select Weight</label>
+      <select>
+        <option>0.5 Kg</option>
+        <option>1 Kg</option>
+        <option>1.5 Kg</option>
+        <option>2 Kg</option>
+      </select>
+
+      <label>Cake Message</label>
+      <input type="text" placeholder="Happy Birthday!">
+
+      <label>Delivery Location</label>
+      <input type="text" placeholder="Enter your address">
+
+      <!-- BUTTONS -->
+
+      <a href="checkout.html" class="btn buy">
+        BUY NOW
+      </a>
+
+      <a href="cart.html" class="btn cart">
+        ADD TO CART
+      </a>
+
+      <!-- REVIEWS -->
+
+      <div class="reviews">
+
+        <h3 style="color:#d63384;margin-bottom:10px;">Ratings & Reviews</h3>
+
+        <div class="review">⭐ "Cake looked pretty and tasted yumm…"</div>
+        <div class="review">⭐ "Taste very good"</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>

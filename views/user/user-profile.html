@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | AV Sweet House</title>
+
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* =========================
+           GLOBAL
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #fff5f8;
+            color: #222;
+            padding-top: 70px;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 800;
+            color: #ff4d8d !important;
+        }
+
+        .navbar-brand:hover { color: #ff2f78 !important; }
+
+        .nav-link {
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 14px;
+            color: #555 !important;
+        }
+
+        .nav-link:hover,
+        .nav-link.active { color: #ff4d8d !important; }
+
+        .btn-pink {
+            background: #ff4d8d;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-pink:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 77, 141, 0.3);
+        }
+
+        .btn-outline-pink {
+            border: 2px solid #ff4d8d;
+            color: #ff4d8d;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .btn-outline-pink:hover {
+            background: #ff4d8d;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .badge-count {
+            background: #ff4d8d;
+            color: white;
+            border-radius: 50%;
+            padding: 1px 7px;
+            font-size: 11px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+            display: inline-block;
+            margin-left: 3px;
+        }
+
+        /* =========================
+           PROFILE HERO
+        ========================= */
+        .profile-hero {
+            background: linear-gradient(135deg, rgba(255, 77, 141, .95), rgba(255, 158, 198, .92));
+            padding: 60px 20px 120px;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-hero::before {
+            content: '👤';
+            position: absolute;
+            font-size: 180px;
+            right: -30px;
+            bottom: -40px;
+            opacity: 0.08;
+        }
+
+        .profile-hero h1 {
+            font-size: 40px;
+            font-weight: 800;
+            position: relative;
+        }
+
+        .profile-hero p {
+            margin-top: 10px;
+            font-size: 17px;
+            opacity: .95;
+            position: relative;
+        }
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+        .profile-wrapper {
+            margin-top: -90px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .profile-main-card {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: 0 15px 45px rgba(255, 77, 141, .15);
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .profile-top {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .profile-avatar {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff4d8d, #ff9ec6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 55px;
+            border: 6px solid white;
+            box-shadow: 0 8px 25px rgba(255, 77, 141, .25);
+            flex-shrink: 0;
+        }
+
+        .profile-info h2 {
+            font-size: 30px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .profile-info .email {
+            color: #777;
+            margin-bottom: 12px;
+        }
+
+        .member-badge {
+            display: inline-block;
+            background: #fff0f6;
+            color: #ff4d8d;
+            padding: 7px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================= */
+        .quick-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quick-btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: .3s;
+        }
+
+        .btn-order {
+            background: #ff4d8d;
+            color: white;
+        }
+        .btn-order:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           STATS
+        ========================= */
+        .stats-section { margin-top: 30px; }
+
+        .stat-card {
+            background: white;
+            padding: 20px 15px;
+            border-radius: 22px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+            transition: .3s;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+            height: 100%;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 77, 141, .12);
+        }
+
+        .stat-icon { font-size: 28px; margin-bottom: 5px; }
+        .stat-number { font-size: 28px; font-weight: 800; color: #ff4d8d; }
+        .stat-label { color: #777; font-size: 13px; font-weight: 500; }
+
+        /* =========================
+           SECTION
+        ========================= */
+        .profile-section { margin-top: 40px; }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        /* =========================
+           INFORMATION CARD
+        ========================= */
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+            height: 100%;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f3e3e8;
+        }
+        .info-row:last-child { border-bottom: none; }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #fff0f6;
+            color: #ff4d8d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .info-content small {
+            display: block;
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 2px;
+        }
+        .info-content strong { font-size: 15px; color: #333; }
+
+        /* =========================
+           ADDRESS
+        ========================= */
+        .address-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+            height: 100%;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .address-box {
+            background: #fff5f8;
+            padding: 20px;
+            border-radius: 18px;
+        }
+
+        .address-box h5 {
+            color: #ff4d8d;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .address-box p {
+            color: #555;
+            line-height: 1.8;
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .manage-address-btn {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #ff4d8d;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: .3s;
+            border: none;
+        }
+        .manage-address-btn:hover {
+            background: #ff2f78;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           ACCOUNT OPTIONS
+        ========================= */
+        .option-card {
+            background: white;
+            border-radius: 22px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+            transition: .3s;
+            text-decoration: none;
+            color: #222;
+            display: block;
+            height: 100%;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+        .option-card:hover {
+            transform: translateY(-5px);
+            color: #222;
+            box-shadow: 0 12px 30px rgba(255, 77, 141, .12);
+        }
+
+        .option-icon {
+            width: 50px;
+            height: 50px;
+            background: #fff0f6;
+            color: #ff4d8d;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .option-card h5 { font-weight: 700; margin-bottom: 4px; font-size: 17px; }
+        .option-card p { color: #888; font-size: 13px; margin: 0; }
+
+        /* =========================
+           HELP CARD
+        ========================= */
+        .help-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .06);
+            height: 100%;
+            text-align: center;
+            border: 1px solid rgba(255, 77, 141, 0.05);
+        }
+
+        .help-card h4 { font-weight: 700; font-size: 20px; }
+        .help-card p { color: #777; line-height: 1.7; font-size: 14px; }
+
+        /* =========================
+           LOGOUT
+        ========================= */
+        .logout-section {
+            margin-top: 40px;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .logout-btn {
+            border: 2px solid #dc3545;
+            color: #dc3545;
+            background: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: .3s;
+            font-size: 15px;
+        }
+        .logout-btn:hover {
+            background: #dc3545;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+        .premium-footer {
+            margin-top: 60px;
+            padding: 70px 0 30px;
+            background: linear-gradient(135deg, #fff0f3, #ffe5ec, #fdf6ff, #eef7ff);
+            position: relative;
+            overflow: hidden;
+        }
+        .premium-footer::before {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #ffb3c1;
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+        .premium-footer::after {
+            content: '';
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: #bde0fe;
+            border-radius: 50%;
+            bottom: -120px;
+            right: -100px;
+            filter: blur(120px);
+            opacity: 0.4;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ff4d6d, #ff758f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            color: #666;
+            line-height: 1.9;
+            margin-top: 15px;
+            max-width: 350px;
+            font-size: 14px;
+        }
+
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+            font-size: 18px;
+            position: relative;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 30px;
+            height: 3px;
+            background: #ff4d8d;
+            border-radius: 10px;
+        }
+
+        .footer-links { display: flex; flex-direction: column; gap: 10px; }
+        .footer-links a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .footer-links a:hover { color: #ff4d6d; transform: translateX(8px); }
+
+        .contact-info p { color: #666; margin-bottom: 8px; font-size: 14px; }
+
+        .social-icons { display: flex; gap: 12px; margin-top: 20px; }
+        .social-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.4s;
+            font-size: 18px;
+            text-decoration: none;
+            color: #333;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .social-box:hover {
+            transform: translateY(-6px) scale(1.08);
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            border-color: transparent;
+        }
+
+        .subscribe-box { margin-top: 20px; }
+        .subscribe-box input {
+            width: 100%;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 50px;
+            outline: none;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            font-size: 14px;
+        }
+        .subscribe-box input:focus {
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.15);
+        }
+        .subscribe-box button {
+            width: 100%;
+            margin-top: 12px;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff4d6d, #ff758f);
+            color: white;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .subscribe-box button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(255, 77, 109, 0.35);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        .footer-bottom p { color: #777; margin: 0; font-size: 14px; }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media(max-width: 992px) {
+            .profile-hero h1 { font-size: 34px; }
+        }
+
+        @media(max-width: 768px) {
+            body { padding-top: 60px; }
+            .navbar-brand { font-size: 20px; }
+            .profile-hero { padding: 50px 15px 100px; }
+            .profile-hero h1 { font-size: 28px; }
+            .profile-hero p { font-size: 15px; }
+            .profile-wrapper { margin-top: -75px; }
+            .profile-main-card { padding: 25px 20px; }
+            .profile-top { flex-direction: column; text-align: center; }
+            .profile-avatar { width: 100px; height: 100px; font-size: 40px; }
+            .profile-info h2 { font-size: 24px; }
+            .quick-actions { justify-content: center; }
+            .stat-number { font-size: 24px; }
+            .section-title { font-size: 20px; text-align: center; }
+            .info-card { padding: 20px; }
+            .address-card { padding: 20px; }
+            .option-card { padding: 20px; text-align: center; }
+            .option-icon { margin: 0 auto 12px; }
+            .premium-footer { text-align: center; padding: 50px 0 25px; }
+            .footer-text { margin: 15px auto 0; max-width: 100%; }
+            .footer-title::after { left: 50%; transform: translateX(-50%); }
+            .social-icons { justify-content: center; }
+            .footer-links { align-items: center; }
+            .contact-info { text-align: center; }
+        }
+
+        @media(max-width: 480px) {
+            body { padding-top: 56px; }
+            .navbar-brand { font-size: 17px; }
+            .profile-hero h1 { font-size: 24px; }
+            .profile-hero p { font-size: 13px; }
+            .profile-main-card { padding: 20px 15px; }
+            .profile-avatar { width: 80px; height: 80px; font-size: 32px; border-width: 4px; }
+            .profile-info h2 { font-size: 20px; }
+            .profile-info .email { font-size: 13px; }
+            .quick-btn { font-size: 12px; padding: 8px 15px; }
+            .stat-card { padding: 15px 10px; }
+            .stat-number { font-size: 20px; }
+            .stat-label { font-size: 11px; }
+            .stat-icon { font-size: 22px; }
+            .section-title { font-size: 18px; }
+            .info-row { padding: 12px 0; gap: 12px; }
+            .info-icon { width: 38px; height: 38px; font-size: 15px; }
+            .info-content strong { font-size: 13px; }
+            .option-card { padding: 16px; }
+            .option-icon { width: 42px; height: 42px; font-size: 18px; }
+            .option-card h5 { font-size: 15px; }
+            .option-card p { font-size: 12px; }
+            .help-card { padding: 20px; }
+            .help-card h4 { font-size: 17px; }
+            .help-card p { font-size: 13px; }
+            .logout-btn { padding: 10px 25px; font-size: 13px; }
+            .footer-logo { font-size: 26px; }
+            .social-box { width: 38px; height: 38px; font-size: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         DYNAMIC NAVBAR
+    ========================= -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                🍰 AV Sweet House
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto" id="dynamicNavList">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/users/About%20us.html">About</a></li>
+                    <!-- Dynamic categories injected here -->
+                    <li class="nav-item"><a class="nav-link" href="/users/contact.html">Contact</a></li>
+                </ul>
+
+                <div class="d-flex gap-2">
+                    <a href="/users/wishlist.html" class="btn btn-outline-danger btn-sm">
+                        ❤️ <span class="badge-count" id="wishlistCount">0</span>
+                    </a>
+                    <a href="/users/cart.html" class="btn btn-pink btn-sm">
+                        🛒 <span class="badge-count" id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- =========================
+         HERO
+    ========================= -->
+    <section class="profile-hero">
+        <h1>My Profile 👋</h1>
+        <p>Welcome to your AV Sweet House account</p>
+    </section>
+
+    <!-- =========================
+         PROFILE
+    ========================= -->
+    <div class="container profile-wrapper">
+        <div class="profile-main-card">
+            <div class="profile-top">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-info">
+                    <h2 id="profileName">Loading...</h2>
+                    <p class="email" id="profileEmail">Loading...</p>
+                    <span class="member-badge">⭐ AV Sweet House Customer</span>
+                    <div class="quick-actions">
+                        <a href="My Order.html" class="quick-btn btn-order">📦 My Orders</a>
+                        <a href="wishlist.html" class="quick-btn btn-outline-pink">❤️ Wishlist</a>
+                        <a href="cart.html" class="quick-btn btn-outline-pink">🛒 My Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================
+             STATS
+        ========================= -->
+        <section class="stats-section">
+            <div class="row g-4">
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-number" id="orderCount">0</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">❤️</div>
+                        <div class="stat-number" id="wishlistStat">0</div>
+                        <div class="stat-label">Wishlist Items</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">🛒</div>
+                        <div class="stat-number" id="cartStat">0</div>
+                        <div class="stat-label">Cart Items</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">🎁</div>
+                        <div class="stat-number" id="rewardPoints">250</div>
+                        <div class="stat-label">Reward Points</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             PERSONAL INFORMATION
+        ========================= -->
+        <section class="profile-section">
+            <h2 class="section-title">👤 Personal Information</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <div class="info-row">
+                            <div class="info-icon">👤</div>
+                            <div class="info-content">
+                                <small>Full Name</small>
+                                <strong id="fullName">-</strong>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">📧</div>
+                            <div class="info-content">
+                                <small>Email Address</small>
+                                <strong id="emailAddress">-</strong>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon">📱</div>
+                            <div class="info-content">
+                                <small>Phone Number</small>
+                                <strong id="phoneNumber">-</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="address-card">
+                        <div class="address-box">
+                            <h5>🏠 Home Address</h5>
+                            <p id="profileAddress">No address saved yet.</p>
+                        </div>
+                        <a href="manage-address.html" class="manage-address-btn">📍 Manage Address</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             ACCOUNT OPTIONS
+        ========================= -->
+        <section class="profile-section">
+            <h2 class="section-title">⚙️ Account & Orders</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <a href="My Order.html" class="option-card">
+                        <div class="option-icon">📦</div>
+                        <h5>My Orders</h5>
+                        <p>View your previous orders and order status.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="wishlist.html" class="option-card">
+                        <div class="option-icon">❤️</div>
+                        <h5>My Wishlist</h5>
+                        <p>View products you saved for later.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="cart.html" class="option-card">
+                        <div class="option-icon">🛒</div>
+                        <h5>Shopping Cart</h5>
+                        <p>Continue shopping and checkout.</p>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <a href="/" class="option-card">
+                        <div class="option-icon">🏠</div>
+                        <h5>Continue Shopping</h5>
+                        <p>Explore cakes, desserts and chocolates.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             HELP
+        ========================= -->
+        <section class="profile-section">
+            <div class="row g-4">
+                <div class="col-lg-6 mx-auto">
+                    <div class="help-card">
+                        <h4>💬 Need Help?</h4>
+                        <p>Have a question about your order, delivery, payment or account? Our support team is here to help you.</p>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            <a href="contact.html" class="btn btn-pink">Contact Us</a>
+                            <a href="My Order.html" class="btn btn-outline-danger rounded-pill">Track My Order</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========================
+             LOGOUT
+        ========================= -->
+        <section class="logout-section">
+            <button class="logout-btn" onclick="logoutUser()">🚪 Logout from Account</button>
+        </section>
+    </div>
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+    <footer class="premium-footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4 text-center text-md-start">
+                    <h2 class="footer-logo">🍰 AV Sweet House</h2>
+                    <p class="footer-text mx-auto mx-md-0">
+                        Fresh Cakes & Desserts Made Daily. Bringing sweetness to every celebration with love,
+                        happiness and premium bakery experience.
+                    </p>
+                    <div class="social-icons justify-content-center justify-content-md-start">
+                        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <div class="footer-links">
+                        <a href="/users/About%20us.html">Our Story</a>
+                        <a href="/users/category.html?name=Cakes">Special Cakes</a>
+                        <a href="/users/category.html?name=Desserts">Fresh Desserts</a>
+                        <a href="#">Online Delivery</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="/users/contact.html">Contact Us</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4 text-center text-md-start">
+                    <h4 class="footer-title">Contact Us</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91 9930403727</p>
+                        <p><i class="fas fa-envelope"></i> avsweethouse@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Kerala, India</p>
+                    </div>
+                    <div class="subscribe-box">
+                        <input type="email" placeholder="Subscribe for offers">
+                        <button onclick="alert('Thank you for subscribing! 🎉')">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AV Sweet House. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const API_URL = '/api';
+
+        // =========================
+        // GET USER
+        // =========================
+        function getUser() {
+            try {
+                let userData = localStorage.getItem('user');
+                if (userData) return JSON.parse(userData);
+                userData = localStorage.getItem('currentUser');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    localStorage.setItem('user', JSON.stringify(user));
+                    localStorage.removeItem('currentUser');
+                    return user;
+                }
+                return null;
+            } catch (e) { return null; }
+        }
+
+        const currentUser = getUser();
+        if (!currentUser) {
+            window.location.href = "login.html";
+        }
+
+        // =========================
+        // USER INFORMATION
+        // =========================
+        let firstName = currentUser.firstName || "";
+        let lastName = currentUser.lastName || "";
+        let fullName = (firstName + " " + lastName).trim();
+        if (!fullName) fullName = "AV Sweet House Customer";
+
+        document.getElementById("profileName").innerText = fullName;
+        document.getElementById("fullName").innerText = fullName;
+        document.getElementById("profileEmail").innerText = currentUser.email || "Email not available";
+        document.getElementById("emailAddress").innerText = currentUser.email || "Email not available";
+        document.getElementById("phoneNumber").innerText = currentUser.phone || "Phone not available";
+
+        // =========================
+        // LOAD SAVED ADDRESS
+        // =========================
+        let savedAddresses = JSON.parse(localStorage.getItem("savedAddresses")) || [];
+        const profileAddress = document.getElementById("profileAddress");
+
+        if (savedAddresses.length > 0) {
+            const address = savedAddresses[0];
+            profileAddress.innerHTML = `
+                ${address.address || ''}<br>
+                ${address.city || ''},<br>
+                ${address.state || ''},<br>
+                India - ${address.pincode || ''}<br>
+                📞 ${address.phone || ''}
+            `;
+        } else {
+            profileAddress.innerHTML = "No address saved yet.";
+        }
+
+        // =========================
+        // LOAD DYNAMIC NAV CATEGORIES
+        // =========================
+        async function loadNavCategories() {
+            try {
+                const response = await fetch(`${API_URL}/categories`);
+                const categories = await response.json();
+                if (!Array.isArray(categories)) return;
+
+                const mainCats = categories.filter(c => c.type === 'main');
+                const navList = document.getElementById("dynamicNavList");
+                const contactItem = navList.querySelector('a[href="/users/contact.html"]').parentElement;
+
+                mainCats.forEach(cat => {
+                    const li = document.createElement("li");
+                    li.className = "nav-item";
+                    li.innerHTML = `<a class="nav-link" href="/users/category.html?name=${encodeURIComponent(cat.name)}">${cat.name}</a>`;
+                    navList.insertBefore(li, contactItem);
+                });
+            } catch (error) {
+                console.error("Nav load error:", error);
+            }
+        }
+
+        // =========================
+        // UPDATE COUNTS (USING API)
+        // =========================
+        async function updateCounts() {
+            if (!currentUser) return;
+            const userId = currentUser.id || currentUser._id;
+
+            try {
+                // Orders
+                const ordersResponse = await fetch(`${API_URL}/orders`);
+                const orders = await ordersResponse.json();
+                const userOrders = orders.filter(order => String(order.userId) === String(userId));
+                document.getElementById("orderCount").innerText = userOrders.length;
+
+                // Wishlist
+                const wishlistResponse = await fetch(`${API_URL}/wishlist/${userId}`);
+                const wishlist = await wishlistResponse.json();
+                const wishlistCount = Array.isArray(wishlist) ? wishlist.length : 0;
+                document.getElementById("wishlistCount").innerText = wishlistCount;
+                document.getElementById("wishlistStat").innerText = wishlistCount;
+
+                // Cart
+                const cartResponse = await fetch(`${API_URL}/cart/count/${userId}`);
+                const cartResult = await cartResponse.json();
+                document.getElementById("cartCount").innerText = cartResult.count || 0;
+                document.getElementById("cartStat").innerText = cartResult.count || 0;
+
+            } catch (error) {
+                console.error("Update Counts Error:", error);
+            }
+        }
+
+        // =========================
+        // LOGOUT
+        // =========================
+        function logoutUser() {
+            if (confirm("Are you sure you want to logout?")) {
+                localStorage.removeItem("user");
+                localStorage.removeItem("currentUser");
+                window.location.href = "login.html";
+            }
+        }
+
+        // =========================
+        // INIT
+        // =========================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadNavCategories();
+            updateCounts();
+            console.log('👤 User Profile Page Loaded');
+        });
+    </script>
+
+</body>
+</html>

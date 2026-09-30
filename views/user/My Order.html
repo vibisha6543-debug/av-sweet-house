@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders · AV Sweet House</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+        body { background:#fff5f8; min-height:100vh; padding-top:70px; }
+
+        .navbar { background:rgba(255,255,255,0.95) !important; backdrop-filter:blur(14px); box-shadow:0 4px 20px rgba(0,0,0,0.06); padding:10px 0; }
+        .navbar-brand { font-size:24px; font-weight:800; color:#ff4d8d !important; letter-spacing:-0.3px; }
+        .navbar-brand:hover { color:#ff2f78 !important; }
+        .nav-link { font-weight:500; transition:0.2s; font-size:14px; color:#555 !important; }
+        .nav-link:hover, .nav-link.active { color:#ff4d8d !important; }
+        .btn-pink { background:#ff4d8d; color:#fff; border:none; border-radius:30px; padding:10px 22px; font-weight:600; transition:0.3s; }
+        .btn-pink:hover { background:#ff2f78; color:#fff; transform:translateY(-3px); box-shadow:0 8px 25px rgba(255,77,141,0.3); }
+        .badge-count { background:#ff4d8d; color:#fff; border-radius:50%; padding:1px 7px; font-size:11px; font-weight:700; min-width:20px; text-align:center; display:inline-block; margin-left:3px; }
+
+        .hero { background:linear-gradient(135deg,#ff4d8d,#ff9ec6); padding:60px 20px 50px; text-align:center; color:#fff; border-radius:0 0 50px 50px; position:relative; overflow:hidden; }
+        .hero::before { content:'📦'; position:absolute; font-size:160px; right:-20px; bottom:-40px; opacity:0.1; }
+        .hero h1 { font-size:40px; font-weight:700; position:relative; }
+        .hero p { font-size:17px; margin-top:10px; opacity:0.95; position:relative; }
+
+        .search-box { max-width:550px; margin:30px auto 35px; }
+        .search-box .input-group { background:#fff; border-radius:50px; box-shadow:0 8px 25px rgba(0,0,0,0.06); overflow:hidden; border:2px solid #f0e0e0; transition:0.3s; }
+        .search-box .input-group:focus-within { border-color:#ff4d8d; box-shadow:0 0 0 4px rgba(255,77,141,0.08); }
+        .search-box input { border:none; padding:14px 20px; font-size:15px; border-radius:50px 0 0 50px; outline:none; background:transparent; flex:1; }
+        .search-box input::placeholder { color:#aaa; }
+        .search-box .btn-search { background:#ff4d8d; color:#fff; border:none; padding:14px 25px; border-radius:0 50px 50px 0; font-weight:600; transition:0.3s; white-space:nowrap; }
+        .search-box .btn-search:hover { background:#ff2f78; }
+
+        .result-wrapper { text-align:center; margin-bottom:20px; }
+        .result-count { background:#fff; border-radius:30px; display:inline-block; padding:8px 24px; box-shadow:0 4px 15px rgba(0,0,0,0.04); font-weight:500; font-size:14px; }
+        .result-count span { font-weight:700; color:#ff4d8d; }
+
+        .search-loading { display:none; text-align:center; padding:20px 0; }
+        .mini-spinner { width:30px; height:30px; border:3px solid #f3f3f3; border-top:3px solid #ff4d8d; border-radius:50%; animation:spin 0.8s linear infinite; margin:0 auto 8px; }
+        @keyframes spin { 0%{transform:rotate(0deg);} 100%{transform:rotate(360deg);} }
+
+        .stats-card { background:#fff; padding:25px; border-radius:20px; text-align:center; box-shadow:0 8px 20px rgba(0,0,0,.06); border:1px solid rgba(255,77,141,0.05); transition:0.3s; height:100%; }
+        .stats-card:hover { transform:translateY(-5px); box-shadow:0 12px 30px rgba(255,77,141,0.12); }
+        .stats-card h2 { color:#ff4d8d; font-weight:700; font-size:32px; }
+        .stats-card p { color:#777; font-weight:500; }
+
+        .order-card { background:#fff; border-radius:25px; padding:25px; box-shadow:0 8px 20px rgba(0,0,0,.06); margin-bottom:25px; border:1px solid rgba(255,77,141,0.05); transition:0.25s; }
+        .order-card:hover { transform:translateY(-3px); box-shadow:0 12px 30px rgba(255,77,141,0.10); }
+        .order-card .order-title { font-size:22px; font-weight:700; color:#222; }
+        .order-card .order-id { color:#777; font-size:14px; }
+        .order-card .order-date { color:#999; font-size:13px; }
+        .order-card img { width:75px; height:75px; border-radius:15px; object-fit:cover; background:#f8e8ec; }
+        .order-card .product-name { font-weight:600; font-size:15px; color:#222; }
+        .order-card .product-qty { color:#777; font-size:13px; }
+        .order-card .product-price { color:#ff4d8d; font-weight:700; }
+
+        .status { padding:6px 16px; border-radius:30px; font-size:13px; font-weight:600; display:inline-block; }
+        .status-delivered { background:#d4edda; color:#155724; }
+        .status-shipped { background:#d1ecf1; color:#0c5460; }
+        .status-processing { background:#fff3cd; color:#856404; }
+        .status-pending { background:#f8d7da; color:#721c24; }
+        .status-cancelled { background:#e2e3e5; color:#383d41; }
+
+        .no-results { text-align:center; padding:40px 20px; background:#fff; border-radius:25px; box-shadow:0 8px 20px rgba(0,0,0,0.04); }
+        .no-results .icon { font-size:50px; margin-bottom:15px; display:block; }
+        .no-results h4 { font-weight:700; color:#333; }
+        .empty-state { text-align:center; padding:60px 20px; background:#fff; border-radius:25px; box-shadow:0 8px 20px rgba(0,0,0,0.04); border:1px solid rgba(255,77,141,0.05); }
+        .empty-state .empty-icon { font-size:70px; margin-bottom:15px; display:block; }
+        .empty-state h3 { font-weight:700; color:#222; }
+        .loading-spinner { text-align:center; padding:50px 0; }
+        .loading-spinner .spinner { width:45px; height:45px; border:4px solid #f3f3f3; border-top:4px solid #ff4d8d; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 12px; }
+
+        .premium-footer { margin-top:80px; padding:70px 0 30px; background:linear-gradient(135deg,#fff0f3,#ffe5ec,#fdf6ff,#eef7ff); position:relative; overflow:hidden; }
+        .premium-footer::before { content:''; position:absolute; width:350px; height:350px; background:#ffb3c1; border-radius:50%; top:-100px; left:-100px; filter:blur(120px); opacity:0.4; }
+        .premium-footer::after { content:''; position:absolute; width:350px; height:350px; background:#bde0fe; border-radius:50%; bottom:-120px; right:-100px; filter:blur(120px); opacity:0.4; }
+        .footer-logo { font-size:32px; font-weight:800; background:linear-gradient(90deg,#ff4d6d,#ff758f); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+        .footer-text { color:#666; line-height:1.9; margin-top:15px; max-width:350px; font-size:14px; }
+        .footer-title { font-weight:700; margin-bottom:20px; color:#222; font-size:18px; position:relative; }
+        .footer-title::after { content:''; position:absolute; bottom:-8px; left:0; width:30px; height:3px; background:#ff4d8d; border-radius:10px; }
+        .footer-links { display:flex; flex-direction:column; gap:10px; }
+        .footer-links a { text-decoration:none; color:#666; transition:0.3s; font-weight:500; font-size:14px; }
+        .footer-links a:hover { color:#ff4d6d; transform:translateX(8px); }
+        .contact-info p { color:#666; margin-bottom:8px; font-size:14px; }
+        .social-icons { display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
+        .social-box { width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.7); backdrop-filter:blur(12px); display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(0,0,0,0.06); transition:0.3s; font-size:18px; text-decoration:none; color:#333; border:1px solid rgba(255,255,255,0.5); }
+        .social-box:hover { transform:translateY(-6px) scale(1.06); background:linear-gradient(135deg,#ff4d6d,#ff758f); color:#fff; border-color:transparent; }
+        .subscribe-box { margin-top:20px; }
+        .subscribe-box input { width:100%; padding:12px 18px; border:none; border-radius:50px; outline:none; background:rgba(255,255,255,0.7); box-shadow:0 8px 20px rgba(0,0,0,0.05); font-size:14px; }
+        .subscribe-box input:focus { background:#fff; box-shadow:0 0 0 3px rgba(255,77,109,0.15); }
+        .subscribe-box button { width:100%; margin-top:12px; border:none; padding:12px; border-radius:50px; background:linear-gradient(135deg,#ff4d6d,#ff758f); color:#fff; font-weight:600; transition:0.3s; font-size:14px; }
+        .subscribe-box button:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(255,77,109,0.35); }
+        .footer-bottom { text-align:center; margin-top:40px; padding-top:25px; border-top:1px solid rgba(0,0,0,0.06); }
+        .footer-bottom p { color:#777; margin:0; font-size:14px; }
+
+        .btn-cancel { background:#fff; color:#dc3545; border:1.5px solid #dc3545; border-radius:30px; padding:6px 18px; font-weight:600; font-size:13px; transition:0.3s; }
+        .btn-cancel:hover { background:#dc3545; color:#fff; transform:scale(1.02); }
+        .btn-cancel:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
+        .toast-error { background:#f8d7da; color:#721c24; border-radius:12px; padding:12px 20px; border-left:6px solid #dc3545; box-shadow:0 8px 20px rgba(0,0,0,0.08); margin-bottom:20px; display:flex; align-items:center; gap:12px; font-size:14px; }
+        .toast-error i { font-size:22px; }
+
+        @media(max-width:992px){ .hero h1{font-size:34px;} }
+        @media(max-width:768px){
+            body{padding-top:60px;}
+            .hero{padding:50px 20px 40px;border-radius:0 0 40px 40px;}
+            .hero h1{font-size:28px;}
+            .hero p{font-size:15px;}
+            .search-box{margin:20px auto 25px;}
+            .search-box input{font-size:14px;padding:12px 16px;}
+            .search-box .btn-search{padding:12px 18px;font-size:14px;}
+            .stats-card h2{font-size:26px;}
+            .order-card{padding:20px;}
+            .order-card .order-title{font-size:18px;}
+            .order-card img{width:60px;height:60px;}
+            .premium-footer{text-align:center;padding:50px 0 25px;}
+            .footer-text{margin:15px auto 0;max-width:100%;}
+            .footer-title::after{left:50%;transform:translateX(-50%);}
+            .social-icons{justify-content:center;}
+            .footer-links{align-items:center;}
+            .contact-info{text-align:center;}
+        }
+        @media(max-width:480px){
+            body{padding-top:56px;}
+            .navbar-brand{font-size:17px;}
+            .hero h1{font-size:24px;}
+            .hero p{font-size:13px;}
+            .search-box input{font-size:12px;padding:10px 12px;}
+            .search-box .btn-search{font-size:12px;padding:10px 14px;}
+            .stats-card{padding:18px;}
+            .stats-card h2{font-size:22px;}
+            .order-card{padding:16px;}
+            .order-card .order-title{font-size:16px;}
+            .order-card img{width:50px;height:50px;}
+            .order-card .product-name{font-size:12px;}
+            .status{font-size:11px;padding:4px 12px;}
+            .empty-state .empty-icon{font-size:50px;}
+            .empty-state h3{font-size:20px;}
+            .footer-logo{font-size:26px;}
+            .social-box{width:38px;height:38px;font-size:15px;}
+        }
+    </style>
+</head>
+<body>
+<!-- ===== DYNAMIC NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">🍰 AV Sweet House</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto" id="dynamicNavList">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/users/About%20us.html">About</a></li>
+                <!-- Dynamic categories injected here -->
+                <li class="nav-item"><a class="nav-link" href="/users/contact.html">Contact</a></li>
+            </ul>
+            <div class="d-flex gap-2">
+                <a href="/users/wishlist.html" class="btn btn-outline-danger btn-sm">❤️ <span class="badge-count" id="wishlistCount">0</span></a>
+                <a href="/users/cart.html" class="btn btn-pink btn-sm">🛒 <span class="badge-count" id="cartCount">0</span></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>📦 My Orders</h1>
+    <p>Track and manage your AV Sweet House orders</p>
+</section>
+
+<!-- SEARCH + STATS + ORDERS -->
+<div class="container">
+    <div class="search-box">
+        <div class="input-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by Order ID or Product..." oninput="filterOrders()">
+            <button class="btn-search" onclick="filterOrders()"><i class="fas fa-search"></i> Search</button>
+        </div>
+    </div>
+
+    <div class="search-loading" id="searchLoading"><div class="mini-spinner"></div><p>Searching orders...</p></div>
+    <div class="result-wrapper" id="resultWrapper" style="display:none;">
+        <div class="result-count"><i class="fas fa-list"></i> Found <span id="resultCountText">0</span> orders</div>
+    </div>
+
+    <!-- stats -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4"><div class="stats-card"><h2 id="totalOrders">0</h2><p>Total Orders</p></div></div>
+        <div class="col-md-4"><div class="stats-card"><h2 id="deliveredOrders">0</h2><p>Delivered</p></div></div>
+        <div class="col-md-4"><div class="stats-card"><h2 id="pendingOrders">0</h2><p>Pending</p></div></div>
+    </div>
+
+    <!-- orders container -->
+    <div id="loadingSpinner" class="loading-spinner"><div class="spinner"></div><p style="color:#888;">Loading your orders...</p></div>
+    <div id="ordersContainer"></div>
+</div>
+
+<!-- FOOTER -->
+<footer class="premium-footer">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-md-4 text-center text-md-start">
+                <h2 class="footer-logo">🍰 AV Sweet House</h2>
+                <p class="footer-text mx-auto mx-md-0">Fresh Cakes & Desserts Made Daily. Bringing sweetness to every celebration with love, happiness and premium bakery experience.</p>
+                <div class="social-icons justify-content-center justify-content-md-start">
+                    <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-box"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-box"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center text-md-start">
+                <h4 class="footer-title">Quick Links</h4>
+                <div class="footer-links">
+                    <a href="/users/About%20us.html">Our Story</a>
+                    <a href="/users/category.html?name=Cakes">Special Cakes</a>
+                    <a href="/users/category.html?name=Desserts">Fresh Desserts</a>
+                    <a href="#">Online Delivery</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="/users/contact.html">Contact Us</a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center text-md-start">
+                <h4 class="footer-title">Contact Us</h4>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +91 9930403727</p>
+                    <p><i class="fas fa-envelope"></i> avsweethouse@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Kerala, India</p>
+                </div>
+                <div class="subscribe-box">
+                    <input type="email" placeholder="Subscribe for offers">
+                    <button onclick="alert('Thank you for subscribing! 🎉')">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 AV Sweet House. All Rights Reserved.</p></div>
+    </div>
+</footer>
+
+<script>
+    const API_URL = '/api';
+
+    // ----- HELPERS -----
+    function getUser() {
+        try {
+            let user = localStorage.getItem('user');
+            if (user) return JSON.parse(user);
+            user = localStorage.getItem('currentUser');
+            if (user) {
+                const u = JSON.parse(user);
+                localStorage.setItem('user', JSON.stringify(u));
+                localStorage.removeItem('currentUser');
+                return u;
+            }
+            return null;
+        } catch { return null; }
+    }
+
+    // ----- DYNAMIC NAVBAR -----
+    async function loadNavCategories() {
+        try {
+            const response = await fetch(`${API_URL}/categories`);
+            const categories = await response.json();
+            if (!Array.isArray(categories)) return;
+
+            const mainCats = categories.filter(c => c.type === 'main');
+            const navList = document.getElementById("dynamicNavList");
+            const contactItem = navList.querySelector('a[href="/users/contact.html"]').parentElement;
+
+            mainCats.forEach(cat => {
+                const li = document.createElement("li");
+                li.className = "nav-item";
+                li.innerHTML = `<a class="nav-link" href="/users/category.html?name=${encodeURIComponent(cat.name)}">${cat.name}</a>`;
+                navList.insertBefore(li, contactItem);
+            });
+
+            console.log("✅ Nav categories loaded:", mainCats.length);
+        } catch (error) {
+            console.error("Nav load error:", error);
+        }
+    }
+
+    async function updateCounts() {
+        const user = getUser();
+        if (!user) return;
+        const userId = user.id || user._id;
+        try {
+            const w = await fetch(`${API_URL}/wishlist/${userId}`);
+            const wishlist = await w.json();
+            document.getElementById('wishlistCount').innerText = Array.isArray(wishlist) ? wishlist.length : 0;
+            const c = await fetch(`${API_URL}/cart/count/${userId}`);
+            const cart = await c.json();
+            document.getElementById('cartCount').innerText = cart.count || 0;
+        } catch {}
+    }
+
+    // ----- CANCEL ORDER -----
+    async function cancelOrder(orderId) {
+        if (!orderId) return;
+        if (!confirm('Are you sure you want to cancel this order?')) return;
+        try {
+            const res = await fetch(`${API_URL}/orders/${orderId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+            await loadOrders();
+            filterOrders();
+        } catch (error) {
+            console.error('Cancel error:', error);
+            const container = document.getElementById('ordersContainer');
+            const old = container.querySelector('.toast-error');
+            if (old) old.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast-error';
+            toast.innerHTML = `<i class="fas fa-exclamation-circle"></i> <span><strong>Error cancelling order:</strong> ${error.message}</span>`;
+            container.prepend(toast);
+            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 6000);
+        }
+    }
+
+    // ----- SEARCH / FILTER -----
+    let allOrdersData = [];
+    let searchTimeout = null;
+
+    function filterOrders() {
+        const keyword = document.getElementById('searchInput').value.toLowerCase().trim();
+        const container = document.getElementById('ordersContainer');
+        const loadingEl = document.getElementById('searchLoading');
+        const resultWrapper = document.getElementById('resultWrapper');
+        const resultCountText = document.getElementById('resultCountText');
+
+        loadingEl.style.display = 'block';
+        resultWrapper.style.display = 'none';
+        container.innerHTML = '';
+        if (searchTimeout) clearTimeout(searchTimeout);
+
+        searchTimeout = setTimeout(() => {
+            if (keyword === '') {
+                loadingEl.style.display = 'none';
+                resultWrapper.style.display = 'none';
+                renderOrders(allOrdersData);
+                return;
+            }
+            const filtered = allOrdersData.filter(order => {
+                const idMatch = order._id && order._id.toLowerCase().includes(keyword);
+                const productMatch = order.products && Array.isArray(order.products) && order.products.some(p => p.name && p.name.toLowerCase().includes(keyword));
+                const customerMatch = order.customerName && order.customerName.toLowerCase().includes(keyword);
+                return idMatch || productMatch || customerMatch;
+            });
+            loadingEl.style.display = 'none';
+            if (filtered.length > 0) {
+                resultWrapper.style.display = 'block';
+                resultCountText.innerText = filtered.length;
+            } else {
+                resultWrapper.style.display = 'none';
+            }
+            renderOrders(filtered);
+        }, 300);
+    }
+
+    // ----- RENDER -----
+    function renderOrders(orders) {
+        const container = document.getElementById('ordersContainer');
+        const keyword = document.getElementById('searchInput').value.trim();
+
+        const oldToast = container.querySelector('.toast-error');
+        if (oldToast) oldToast.remove();
+
+        if (orders.length === 0) {
+            if (keyword !== '') {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <span class="icon">🔍</span>
+                        <h4>No Orders Found</h4>
+                        <p>We couldn't find any orders matching "<strong>${keyword}</strong>"</p>
+                        <button onclick="document.getElementById('searchInput').value=''; filterOrders();" class="btn btn-pink mt-3"><i class="fas fa-times"></i> Clear Search</button>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <span class="empty-icon">📦</span>
+                        <h3>No Orders Yet</h3>
+                        <p>You haven't placed any orders yet. Start shopping!</p>
+                        <a href="/" class="btn btn-pink mt-3">Start Shopping</a>
+                    </div>
+                `;
+            }
+            return;
+        }
+
+        container.innerHTML = '';
+        orders.forEach(order => {
+            const statusMap = { 'Delivered':'status-delivered', 'Shipped':'status-shipped', 'Processing':'status-processing', 'Pending':'status-pending', 'Cancelled':'status-cancelled' };
+            const statusClass = statusMap[order.status] || 'status-pending';
+            const orderDate = order.createdAt ? new Date(order.createdAt).toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }) : 'N/A';
+            const isCancelled = order.status === 'Cancelled';
+            const isDelivered = order.status === 'Delivered';
+            const canCancel = !isCancelled && !isDelivered;
+
+            let productsHTML = '';
+            if (Array.isArray(order.products) && order.products.length) {
+                order.products.slice(0,2).forEach(p => {
+                    const qty = p.quantity || p.qty || 1;
+                    const price = Number(p.price) || 0;
+                    const imgUrl = p.image || '';
+                    const imgTag = imgUrl
+                        ? `<img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.onerror=null; this.style.display='none'; this.parentElement.innerHTML='<div style=\\'width:75px;height:75px;border-radius:15px;background:#f8e8ec;display:flex;align-items:center;justify-content:center;font-size:30px;\\'>🍰</div>';">`
+                        : `<div style="width:75px;height:75px;border-radius:15px;background:#f8e8ec;display:flex;align-items:center;justify-content:center;font-size:30px;">🍰</div>`;
+
+                    productsHTML += `
+                        <div class="d-flex align-items-center gap-3 mb-3 pb-3 border-bottom">
+                            ${imgTag}
+                            <div class="flex-grow-1">
+                                <div class="product-name">${p.name || 'Product'}</div>
+                                <div class="product-qty">Qty: ${qty}</div>
+                                <div class="product-price">₹${(price * qty).toFixed(0)}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                if (order.products.length > 2) productsHTML += `<small class="text-muted">+ ${order.products.length-2} more items</small>`;
+            }
+
+            container.innerHTML += `
+                <div class="order-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <div class="order-title">Order #${String(order._id).slice(-8)}</div>
+                            <div class="order-id">📅 ${orderDate}</div>
+                            <div class="order-id">👤 ${order.customerName || order.name || 'Customer'}</div>
+                            <div class="order-id">📧 ${order.email || ''}</div>
+                            <hr>${productsHTML}
+                        </div>
+                        <div class="col-md-4 text-md-end text-start mt-3 mt-md-0">
+                            <h4 style="color:#ff4d8d; font-weight:700;">₹${(Number(order.totalAmount) || 0).toFixed(0)}</h4>
+                            <span class="status ${statusClass} mt-2">${order.status || 'Pending'}</span>
+                            <br><br>
+                            <div class="d-flex flex-wrap gap-2 justify-content-md-end">
+                                <a href="track-order.html?id=${order._id}" class="btn btn-pink btn-sm">Track</a>
+                                ${canCancel ? `<button class="btn-cancel btn-sm" onclick="cancelOrder('${order._id}')"><i class="fas fa-times-circle"></i> Cancel</button>` : ''}
+                                ${isCancelled ? '<span class="text-muted small fw-bold"><i class="fas fa-ban"></i> Cancelled</span>' : ''}
+                                ${isDelivered ? '<span class="text-muted small fw-bold"><i class="fas fa-check-circle text-success"></i> Delivered</span>' : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // ----- LOAD ORDERS -----
+    async function loadOrders() {
+        const user = getUser();
+        const container = document.getElementById('ordersContainer');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (!user) {
+            spinner.style.display = 'none';
+            container.innerHTML = `
+                <div class="empty-state">
+                    <span class="empty-icon">🔒</span>
+                    <h3>Please Login First</h3>
+                    <p>Login to view your orders</p>
+                    <a href="login.html" class="btn btn-pink mt-3">Login Now</a>
+                </div>
+            `;
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/orders`);
+            if (!response.ok) throw new Error('Failed to load orders');
+            const data = await response.json();
+            let allOrders = Array.isArray(data) ? data : (Array.isArray(data.orders) ? data.orders : []);
+            const userId = user.id || user._id;
+            const userOrders = allOrders.filter(o =>
+                String(o.userId) === String(userId) || o.email === user.email
+            );
+
+            allOrdersData = userOrders;
+            spinner.style.display = 'none';
+
+            const delivered = userOrders.filter(o => o.status === 'Delivered').length;
+            const pending = userOrders.filter(o => o.status !== 'Delivered' && o.status !== 'Cancelled').length;
+            document.getElementById('totalOrders').innerText = userOrders.length;
+            document.getElementById('deliveredOrders').innerText = delivered;
+            document.getElementById('pendingOrders').innerText = pending;
+
+            renderOrders(userOrders);
+        } catch (error) {
+            spinner.style.display = 'none';
+            container.innerHTML = `
+                <div class="empty-state">
+                    <span class="empty-icon">⚠️</span>
+                    <h3>Failed to Load Orders</h3>
+                    <p>${error.message}</p>
+                    <button onclick="loadOrders()" class="btn btn-pink mt-3">🔄 Retry</button>
+                </div>
+            `;
+        }
+    }
+
+    // ----- INIT -----
+    document.addEventListener('DOMContentLoaded', function() {
+        loadNavCategories();
+        updateCounts();
+        loadOrders();
+        console.log('📦 My Orders Page Loaded');
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
