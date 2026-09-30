@@ -934,7 +934,7 @@
     // ============================================
     async function clearServerCart(userId, productIds) {
         try {
-            const res = await fetch("http://localhost:5000/api/cart/clear-items", {
+            const res = await fetch("http://localhost:5100/api/cart/clear-items", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId, productIds })
@@ -1035,7 +1035,7 @@
                 order.paymentStatus = "Pending";
                 order.paymentId = "";
 
-                const orderRes = await fetch("http://localhost:5000/api/orders", {
+                const orderRes = await fetch("http://localhost:5100/api/orders", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(order)
@@ -1065,7 +1065,7 @@
             // =========================
             // RAZORPAY FLOW (UPI / CARD)
             // =========================
-            const rpResponse = await fetch("http://localhost:5000/api/payment/create-order", {
+            const rpResponse = await fetch("http://localhost:5100/api/payment/create-order", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: amountInPaise })
@@ -1082,7 +1082,7 @@
                 description: "Order Payment",
                 order_id: rpOrder.id,
                 handler: async function (response) {
-                    const verifyRes = await fetch("http://localhost:5000/api/payment/verify-signature", {
+                    const verifyRes = await fetch("http://localhost:5100/api/payment/verify-signature", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(response)
@@ -1093,7 +1093,7 @@
                         order.paymentId = response.razorpay_payment_id;
                         order.paymentStatus = "Paid";
 
-                        const orderRes = await fetch("http://localhost:5000/api/orders", {
+                        const orderRes = await fetch("http://localhost:5100/api/orders", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(order)

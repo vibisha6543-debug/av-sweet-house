@@ -302,7 +302,7 @@
                 console.log('🔐 Verifying OTP for:', email);
                 console.log('🔐 OTP:', otp);
 
-                const response = await fetch('http://localhost:5000/api/verify-otp', {
+                const response = await fetch('http://localhost:5100/api/verify-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, otp: otp })
@@ -349,7 +349,7 @@
             link.style.pointerEvents = 'none';
 
             try {
-                const response = await fetch('http://localhost:5000/api/send-otp', {
+                const response = await fetch('http://localhost:5100/api/send-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email })

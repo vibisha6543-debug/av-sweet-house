@@ -1832,7 +1832,7 @@
 
                 console.log("Loading product ID:", productId);
 
-                const response = await fetch(`http://localhost:5000/api/products/${productId}`);
+                const response = await fetch(`http://localhost:5100/api/products/${productId}`);
                 if (!response.ok) throw new Error("Product not found");
 
                 currentProduct = await response.json();
@@ -2007,7 +2007,7 @@
 
             try {
                 const userId = user.id || user._id || user.userId;
-                const response = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+                const response = await fetch(`http://localhost:5100/api/wishlist/${userId}`);
                 const wishlist = await response.json();
                 const exists = wishlist.some(item => String(item.productId) === String(currentProduct._id));
                 if (exists) {
@@ -2096,7 +2096,7 @@
             try {
                 console.log("Cart Item:", cartItem);
 
-                const response = await fetch("http://localhost:5000/api/cart/add", {
+                const response = await fetch("http://localhost:5100/api/cart/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(cartItem)
@@ -2139,7 +2139,7 @@
             }
 
             try {
-                const response = await fetch("http://localhost:5000/api/wishlist", {
+                const response = await fetch("http://localhost:5100/api/wishlist", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -2186,7 +2186,7 @@
             }
 
             try {
-                const response = await fetch(`http://localhost:5000/api/cart/count/${userId}`);
+                const response = await fetch(`http://localhost:5100/api/cart/count/${userId}`);
                 const result = await response.json();
                 document.getElementById("cartCount").innerText = result.count || 0;
             } catch (error) {
@@ -2202,7 +2202,7 @@
             const container = document.getElementById("relatedProducts");
 
             try {
-                const response = await fetch("http://localhost:5000/api/products");
+                const response = await fetch("http://localhost:5100/api/products");
                 const products = await response.json();
 
                 let html = "";

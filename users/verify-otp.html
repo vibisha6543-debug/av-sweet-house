@@ -633,7 +633,7 @@
                     return;
                 }
 
-                const response = await fetch('http://localhost:5000/api/send-otp', {
+                const response = await fetch('http://localhost:5100/api/send-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: signupData.email })
@@ -693,7 +693,7 @@
                 }
 
                 // Verify OTP
-                const otpResponse = await fetch('http://localhost:5000/api/verify-otp', {
+                const otpResponse = await fetch('http://localhost:5100/api/verify-otp', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -720,7 +720,7 @@
                 // OTP Verified - Register User
                 showToast('✅ OTP Verified! Creating account...', 'info');
 
-                const registerResponse = await fetch('http://localhost:5000/api/register', {
+                const registerResponse = await fetch('http://localhost:5100/api/register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(signupData)

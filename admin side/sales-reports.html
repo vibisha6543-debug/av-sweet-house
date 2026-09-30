@@ -372,7 +372,7 @@
     </main>
 
     <script>
-        const API_URL = "http://localhost:5000/api";
+        const API_URL = "http://localhost:5100/api";
         let orders = [];
         let products = [];
         let salesChartInstance = null;
@@ -650,7 +650,7 @@
 
             } catch (error) {
                 console.error("❌ SALES REPORT ERROR:", error);
-                alert("Unable to load sales report. Make sure the server is running on port 5000.");
+                alert("Unable to load sales report. Make sure the server is running on port 5100.");
             }
         }
 

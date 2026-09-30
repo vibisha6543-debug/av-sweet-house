@@ -863,7 +863,7 @@
             btn.innerHTML = `<span class="spinner"></span> Creating Account...`;
 
             try {
-                const response = await fetch("http://localhost:5000/api/send-otp", {
+                const response = await fetch("http://localhost:5100/api/send-otp", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

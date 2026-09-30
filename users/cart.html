@@ -1025,7 +1025,7 @@
 
             try {
                 const userId = user.id || user._id;
-                const response = await fetch(`http://localhost:5000/api/cart/${userId}`);
+                const response = await fetch(`http://localhost:5100/api/cart/${userId}`);
                 if (!response.ok) throw new Error('Failed to load cart');
 
                 cartData = await response.json();
@@ -1135,7 +1135,7 @@
 
             try {
                 const userId = user.id || user._id;
-                const response = await fetch('http://localhost:5000/api/cart/update', {
+                const response = await fetch('http://localhost:5100/api/cart/update', {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -1175,7 +1175,7 @@
 
             try {
                 const userId = user.id || user._id;
-                const response = await fetch(`http://localhost:5000/api/cart/${userId}/${item.productId}`, {
+                const response = await fetch(`http://localhost:5100/api/cart/${userId}/${item.productId}`, {
                     method: 'DELETE'
                 });
 
@@ -1209,7 +1209,7 @@
             try {
                 const userId = user.id || user._id;
                 for (const item of cartData) {
-                    await fetch(`http://localhost:5000/api/cart/${userId}/${item.productId}`, {
+                    await fetch(`http://localhost:5100/api/cart/${userId}/${item.productId}`, {
                         method: 'DELETE'
                     });
                 }

@@ -888,11 +888,11 @@
             const userId = user.id || user._id;
 
             try {
-                const wishlistRes = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+                const wishlistRes = await fetch(`http://localhost:5100/api/wishlist/${userId}`);
                 const wishlist = await wishlistRes.json();
                 document.getElementById('wishlistCount').innerText = Array.isArray(wishlist) ? wishlist.length : 0;
 
-                const cartRes = await fetch(`http://localhost:5000/api/cart/count/${userId}`);
+                const cartRes = await fetch(`http://localhost:5100/api/cart/count/${userId}`);
                 const cart = await cartRes.json();
                 document.getElementById('cartCount').innerText = cart.count || 0;
 
