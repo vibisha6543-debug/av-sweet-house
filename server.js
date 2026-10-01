@@ -137,11 +137,11 @@ app.use((req, res) => {
 // ============================
 // START SERVER
 // ============================
-const PORT = 5100;
+const PORT = process.env.PORT || 5100;
 app.listen(PORT, () => {
     console.log(`✅ Server running on http://localhost:${PORT}`);
     console.log(`📁 Users folder: ${usersPath}`);
-    console.log(`🌐 Visit: http://localhost:5100`);
-    console.log(`🔑 API Base: http://localhost:5100/api`);
-    console.log(`👤 Admin Login: POST http://localhost:5100/api/admin/login`);
+    console.log(`🌐 Visit: http://localhost:${PORT}`);
+    console.log(`🔑 API Base: http://localhost:${PORT}/api`);
+    console.log(`👤 Admin Login: POST http://localhost:${PORT}/api/admin/login`);
 });
